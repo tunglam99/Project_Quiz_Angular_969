@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "~hamburgers/dist/hamburgers.min.css";
+@import "~select2/dist/css/select2.min.css";
+@import "~animate.css/animate.min.css";
