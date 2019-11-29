@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {User} from '../model/user';
 
@@ -12,13 +12,14 @@ export class RegisterComponent implements OnInit {
   successMessage = '';
   failMessage = '';
   registerForm: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    gender: new FormControl(''),
-    email: new FormControl(''),
-    phoneNumber: new FormControl(''),
+    username: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    gender: new FormControl(true, Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber: new FormControl('', Validators.required),
   });
 
   constructor(private userService: UserService) {
@@ -36,6 +37,7 @@ export class RegisterComponent implements OnInit {
         id: this.registerForm.value.id,
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
+        confirmPassword: this.registerForm.value.confirmPassword,
         firstName: this.registerForm.value.firstName,
         lastName: this.registerForm.value.lastName,
         gender: this.registerForm.value.gender,

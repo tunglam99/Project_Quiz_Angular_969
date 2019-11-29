@@ -13,6 +13,15 @@
                 <input class="input--style-5" type="text" formControlName="username">
               </div>
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
+              Tên đăng nhập phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('username').hasError('minlength') && registerForm.get('username').touched">
+              Tên đăng nhập phải có nhiều hơn 6 ký tự
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('username').hasError('maxlength') && registerForm.get('username').touched">
+              Tên đăng nhập phải có ít hơn 12 ký tự
+            </div>
           </div>
           <div class="form-row m-b-55">
             <div class="name">Mật khẩu</div>
@@ -20,6 +29,26 @@
               <div class="input-group">
                 <input class="input--style-5" type="password" formControlName="password">
               </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+              Mật khẩu phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+              Mật khẩu phải có nhiều hơn 6 ký tự
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+              Mật khẩu phải có ít hơn 12 ký tự
+            </div>
+          </div>
+          <div class="form-row m-b-55">
+            <div class="name">Nhập lại mật khẩu</div>
+            <div class="value">
+              <div class="input-group">
+                <input class="input--style-5" type="password" formControlName="confirmPassword">
+              </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('confirmPassword').hasError('passwordnotmatch') && registerForm.get('confirmPassword').touched">
+              Nhập lại mật khẩu không đúng
             </div>
           </div>
           <div class="form-row m-b-55">
@@ -31,11 +60,23 @@
                     <input class="input--style-5" type="text" formControlName="lastName">
                     <label class="label--desc">Họ</label>
                   </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('lastName').hasError('required') && registerForm.get('lastName').touched">
+                    Họ người dùng phải được điền
+                  </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('lastName').hasError('minlength') && registerForm.get('lastName').touched">
+                    Họ người dùng phải có ít nhất 2 kí tự
+                  </div>
                 </div>
                 <div class="col-7">
                   <div class="input-group-desc">
                     <input class="input--style-5" type="text" formControlName="firstName">
                     <label class="label--desc">Tên</label>
+                  </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('firstName').hasError('required') && registerForm.get('firstName').touched">
+                    Tên người dùng phải được điền
+                  </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('firstName').hasError('minlength') && registerForm.get('firstName').touched">
+                    Tên người dùng phải có ít nhất 2 kí tự
                   </div>
                 </div>
               </div>
@@ -56,6 +97,9 @@
                   </label>
                 </div>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('gender').hasError('required') && registerForm.get('gender').touched">
+                Chọn giới tính
+              </div>
             </div>
           </div>
           <div class="form-row m-b-55">
@@ -65,6 +109,12 @@
                 <input class="input--style-5" type="email" formControlName="email">
               </div>
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+              Email phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">
+              Không đúng định dạng email
+            </div>
           </div>
           <div class="form-row m-b-55">
             <div class="name">Điện thoại</div>
@@ -72,6 +122,9 @@
               <div class="input-group-desc">
                 <input class="input--style-5" type="text" formControlName="phoneNumber">
               </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('phoneNumber').hasError('required') && registerForm.get('phoneNumber').touched">
+              Số điện thoại phải được điền
             </div>
           </div>
           <div class="text-center">
