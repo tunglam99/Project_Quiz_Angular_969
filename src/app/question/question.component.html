@@ -1,0 +1,13 @@
+<h2 class="title">Thêm mới câu hỏi</h2>
+<div *ngIf="successMessage" class="alert alert-success text-center">
+  <p>{{successMessage}}</p>
+</div>
+<div *ngIf="failMessage" class="alert alert-danger text-center">
+  <p>{{failMessage}}</p>
+</div>
+<div class="card-body">
+  <form [formGroup]="questionForm", (ngSubmit)="addQuestion()">
+
+  </form>
+</div>
+
