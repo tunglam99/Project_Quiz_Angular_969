@@ -1,0 +1,20 @@
+<div class="text-center">
+  <h2>Tạo mới danh mục</h2>
+</div>
+<div *ngIf="successMessage" class="alert alert-success">
+  <p>{{successMessage}}</p>
+</div>
+
+<div *ngIf="failMessage" class="alert alert-danger">
+  <p>{{failMessage}}</p>
+</div>
+
+<form #categoryForm="ngForm" (ngSubmit)="createCategory(categoryForm)">
+  <label class="col">
+    Tên danh mục:
+    <input type="text" name="name" ngModel class="form-control">
+  </label>
+  <div class="col">
+    <button class="btn btn-info" type="submit">Tạo mới</button>
+  </div>
+</form>

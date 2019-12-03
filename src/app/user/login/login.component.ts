@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {AuthenticationService} from '../../helper/authentication.service';
+import {AuthenticationService} from '../../service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          console.log(data);
+
           this.router.navigate([this.returnUrl]);
         },
         error => {
