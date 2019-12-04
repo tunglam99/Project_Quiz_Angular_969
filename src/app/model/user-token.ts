@@ -5,7 +5,7 @@ export interface UserToken {
   username: string;
   password: string;
   confirmPassword: string;
-  token?: string;
+  accessToken?: string;
   firstName: string;
   lastName: string;
   gender: string;

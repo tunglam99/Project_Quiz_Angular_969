@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Category} from '../model/category';
 import {Observable} from 'rxjs';
+import {AuthenticationService} from './authentication.service';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -10,11 +11,13 @@ const API_URL = `${environment.apiUrl}`;
   providedIn: 'root'
 })
 export class CategoryService {
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
   }
   listCategory(): Observable<Category[]> {
-    return this.http.get<Category[]>(API_URL + '/categories');
+    const currentUser = this.authenticationService.currentUserValue;
+    const headers = new HttpHeaders();
+    headers.append('Authorization', `Bearer ${currentUser.accessToken}`);
+    return this.http.get<Category[]>(API_URL + '/categories', { headers });
   }
 
   createCategory(category: Category): Observable<Category> {
