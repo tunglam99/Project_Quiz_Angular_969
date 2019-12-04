@@ -12,6 +12,7 @@ import {JwtInterceptor} from './helper/jwt-interceptor';
 import { HomeComponent } from './home/home.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
+import { QuestionComponent } from './question/question.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CategoryCreateComponent } from './category/category-create/category-cre
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    QuestionComponent,
     CategoryListComponent,
     CategoryCreateComponent
   ],
