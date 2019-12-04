@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {QuestionService} from "../service/question.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {QuestionService} from '../service/question.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Question} from '../model/question';
 
 @Component({
   selector: 'app-question',
@@ -8,21 +9,53 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-  questionForm: FormGroup = new FormGroup( {
-    quizForm: new FormControl('')
+  questionList: Question[] = [];
+  questionForm: FormGroup = new FormGroup({
+    quiz: new FormControl(''),
+    answerA: new FormControl(''),
+    answerB: new FormControl(''),
+    answerC: new FormControl(''),
+    answerD: new FormControl(''),
+    correctAnswer: new FormControl(''),
   });
-successMessage: string;
-failMessage: string;
-  constructor(private questionService: QuestionService) { }
+  successMessage: string;
+  failMessage: string;
+  formCreateStatus: boolean;
+
+  constructor(private questionService: QuestionService) {
+    this.formCreateStatus = false;
+    this.getQuestionList();
+  }
 
   ngOnInit() {
   }
-  addQuestion(questionForm) {
-    this.questionService.createQuestion(questionForm.value).subscribe(() => {
-      this.successMessage = 'Tao moi thanh cong';
+  onClickCreate() {
+    this.formCreateStatus = !this.formCreateStatus;
+  }
+  addQuestion() {
+    const question: Question = {
+      id: this.questionForm.value.id,
+      quiz: this.questionForm.value.quiz,
+      answerA: this.questionForm.value.answerA,
+      answerB: this.questionForm.value.answerB,
+      answerC: this.questionForm.value.answerC,
+      answerD: this.questionForm.value.answerD,
+      correctAnswer: this.questionForm.value.correctAnswer,
+    };
+    this.questionService.createQuestion(question).subscribe(() => {
+      this.successMessage = 'Tạo mới thành công';
+      this.questionList.push(question);
+      this.questionForm.reset();
+      this.getQuestionList();
+      this.formCreateStatus = false;
     }, () => {
-      this.failMessage = 'Tao moi that bai';
+      this.failMessage = 'Tạo mới thất bại';
     });
   }
 
+  getQuestionList() {
+    this.questionService.listQuestion().subscribe(result => {
+      this.questionList = result;
+    });
+  }
 }

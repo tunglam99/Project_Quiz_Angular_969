@@ -11,13 +11,10 @@ const API_URL = `${environment.apiUrl}`;
   providedIn: 'root'
 })
 export class CategoryService {
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
+  constructor(private http: HttpClient) {
   }
   listCategory(): Observable<Category[]> {
-    const currentUser = this.authenticationService.currentUserValue;
-    const headers = new HttpHeaders();
-    headers.append('Authorization', `Bearer ${currentUser.accessToken}`);
-    return this.http.get<Category[]>(API_URL + '/categories', { headers });
+    return this.http.get<Category[]>(API_URL + '/categories');
   }
 
   createCategory(category: Category): Observable<Category> {

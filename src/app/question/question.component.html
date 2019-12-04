@@ -1,13 +1,64 @@
-<h2 class="title">Thêm mới câu hỏi</h2>
-<div *ngIf="successMessage" class="alert alert-success text-center">
-  <p>{{successMessage}}</p>
+<br>
+<div class="text-center text-uppercase font-weight-bold">
+  <span style="font-size: 24px">Danh sách câu hỏi</span>
 </div>
-<div *ngIf="failMessage" class="alert alert-danger text-center">
-  <p>{{failMessage}}</p>
-</div>
-<div class="card-body">
-  <form [formGroup]="questionForm", (ngSubmit)="addQuestion()">
-
+<router-outlet></router-outlet>
+<br>
+<div class="mt-lg-4">
+  <table class="table table-hover table-dark">
+    <thead>
+    <tr>
+      <th>Câu hỏi</th>
+      <th>Đáp án A</th>
+      <th>Đáp án B</th>
+      <th>Đáp án C</th>
+      <th>Đáp án D</th>
+      <th>Đáp án chính xác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let question of questionList">
+      <td>{{question.quiz}}</td>
+      <td>{{question.answerA}}</td>
+      <td>{{question.answerB}}</td>
+      <td>{{question.answerC}}</td>
+      <td>{{question.answerD}}</td>
+      <td>{{question.correctAnswer}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="mt-lg-4" *ngIf="!formCreateStatus">
+    <button class="btn btn-outline-secondary" (click)="onClickCreate()">Tạo mới câu hỏi</button>
+  </div>
+  <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
+    <div>
+      <label class="col">
+        <span>Câu hỏi:</span>
+        <input type="text" formControlName="name" class="form-control">
+      </label>
+      <label class="col">
+        <span>Đáp án A:</span>
+        <input type="text" formControlName="answerA" class="form-control">
+      </label>
+      <label class="col">
+        <span>Đáp án B:</span>
+        <input type="text" formControlName="answerB" class="form-control">
+      </label>
+      <label class="col">
+        <span>Đáp án C:</span>
+        <input type="text" formControlName="answerC" class="form-control">
+      </label>
+      <label class="col">
+        <span>Đáp án D:</span>
+        <input type="text" formControlName="answerD" class="form-control">
+      </label>
+      <label class="col">
+        <span>Đáp án chính xác:</span>
+        <input type="text" formControlName="correctAnswer" class="form-control">
+      </label>
+      <label class="col">
+        <button class="btn btn-outline-secondary">Thêm mới</button>
+      </label>
+    </div>
   </form>
 </div>
-

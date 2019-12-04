@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Question} from "../model/question";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Question} from '../model/question';
+import {Observable} from 'rxjs';
 
 const API_URL = `${environment.apiUrl}`;
+
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
 
-  constructor(private http: HttpClient) { }
-createQuestion(question: Question): Observable<Question> {
-    return this.http.post<Question>( API_URL + ``, question);
-}
+  constructor(private http: HttpClient) {
+  }
+  listQuestion(): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/questions');
+  }
+  createQuestion(question: Question): Observable<Question> {
+    return this.http.post<Question>(API_URL + `/questions`, question);
+  }
 }

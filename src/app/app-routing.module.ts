@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {CategoryListComponent} from './category/category-list/category-list.component';
 import {CategoryCreateComponent} from './category/category-create/category-create.component';
 import {AuthGuard} from './helper/auth-guard';
+import {QuestionComponent} from './question/question.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,6 +24,10 @@ const routes: Routes = [{
 }, {
   path: 'create-category',
   component: CategoryCreateComponent,
+  canActivate: [AuthGuard]
+}, {
+  path: 'list-question',
+  component: QuestionComponent,
   canActivate: [AuthGuard]
 }, {
   path: '**',
