@@ -9,13 +9,15 @@
   <table class="table table-bordered">
     <tr>
       <th>Tên danh mục</th>
-      <th>Chỉnh sửa</th>
-      <th>Xóa</th>
     </tr>
     <tr *ngFor="let category of categoryList">
       <td>{{category.name}}</td>
-      <td><a [routerLink]="['edit-category',category.id]">Edit</a></td>
-      <td><a [routerLink]="['delete-category',category.id]">Delete</a></td>
+<!--      <td>-->
+<!--        <button class="btn btn-outline-info" (click)="onClickUpdate(quiz.id)">Chỉnh sửa</button>-->
+<!--      </td>-->
+      <td>
+        <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">Delete</button>
+      </td>
     </tr>
   </table>
 </div>

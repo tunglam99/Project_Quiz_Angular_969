@@ -14,9 +14,19 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCategoryList();
+  }
+
+  getCategoryList() {
     this.categoryService.listCategory().subscribe(next => {
       this.categoryList = next;
     });
   }
-
+  deleteCategory(id: number) {
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.getCategoryList();
+    }, () => {
+      console.log('Lỗi khi xóa danh mục có id = ' + id);
+    });
+  }
 }

@@ -7,11 +7,9 @@ import {CategoryListComponent} from './category/category-list/category-list.comp
 import {CategoryCreateComponent} from './category/category-create/category-create.component';
 import {AuthGuard} from './helper/auth-guard';
 
-
 const routes: Routes = [{
   path: '',
   component: HomeComponent
-  // canActivate: [AuthGuard] // AuthGuard de bao mat
 }, {
   path: 'register',
   component: RegisterComponent

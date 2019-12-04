@@ -23,4 +23,10 @@ export class CategoryService {
   createCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(API_URL + '/categories', category);
   }
+  deleteCategory(id: number): Observable<Category> {
+    return this.http.delete<Category>(API_URL + `/categories/${id}`);
+  }
+  getCategory(id: string): Observable<Category> {
+    return this.http.get<Category>(API_URL + `/categories/${id}`);
+  }
 }
