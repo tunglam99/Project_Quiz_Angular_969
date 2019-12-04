@@ -4,7 +4,7 @@
 </div>
 <router-outlet></router-outlet>
 <br>
-<div class="mt-lg-4">
+<div class="mt-lg-4 container">
   <table class="table table-hover table-dark">
     <thead>
     <tr>
@@ -27,7 +27,7 @@
     </tr>
     </tbody>
   </table>
-  <div class="mt-lg-4" *ngIf="!formCreateStatus">
+  <div class="text-center" *ngIf="!formCreateStatus">
     <button class="btn btn-outline-secondary" (click)="onClickCreate()">Tạo mới câu hỏi</button>
   </div>
   <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">

@@ -1,23 +1,25 @@
-<div class="text-center text-uppercase font-weight-bold">
-  <span style="font-size: 24px">Danh mục câu hỏi</span>
-</div>
-<router-outlet></router-outlet>
-<div class="mt-lg-4">
-  <a routerLink="/create-category">Tạo mới danh mục</a>
-</div>
-<div class="mt-lg-4">
-  <table class="table table-bordered">
-    <tr>
-      <th>Tên danh mục</th>
-    </tr>
-    <tr *ngFor="let category of categoryList">
-      <td>{{category.name}}</td>
-<!--      <td>-->
-<!--        <button class="btn btn-outline-info" (click)="onClickUpdate(quiz.id)">Chỉnh sửa</button>-->
-<!--      </td>-->
-      <td>
-        <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">Delete</button>
-      </td>
-    </tr>
-  </table>
+<div class="container">
+  <div class="text-center text-uppercase font-weight-bold">
+    <span style="font-size: 24px">Danh mục câu hỏi</span>
+  </div>
+  <router-outlet></router-outlet>
+  <div class="mt-lg-4">
+    <a routerLink="/create-category">Tạo mới danh mục</a>
+  </div>
+  <div class="mt-lg-4">
+    <table class="table table-bordered">
+      <tr>
+        <th>Tên danh mục</th>
+      </tr>
+      <tr *ngFor="let category of categoryList">
+        <td>{{category.name}}</td>
+        <!--      <td>-->
+        <!--        <button class="btn btn-outline-info" (click)="onClickUpdate(quiz.id)">Chỉnh sửa</button>-->
+        <!--      </td>-->
+        <td>
+          <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
