@@ -7,6 +7,7 @@ import {CategoryListComponent} from './category/category-list/category-list.comp
 import {CategoryCreateComponent} from './category/category-create/category-create.component';
 import {AuthGuard} from './helper/auth-guard';
 import {QuestionComponent} from './question/question.component';
+import {RegisterSuccessComponent} from './user/register-success/register-success.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,9 @@ const routes: Routes = [{
 }, {
   path: 'login',
   component: LoginComponent
+}, {
+  path: 'register-success',
+  component: RegisterSuccessComponent
 }, {
   path: 'list-category',
   component: CategoryListComponent,

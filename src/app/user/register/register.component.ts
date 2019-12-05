@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../service/user.service';
 import {User} from '../../model/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
     phoneNumber: new FormControl('', Validators.required),
   });
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class RegisterComponent implements OnInit {
     const passwordNotEmpty = username.trim() !== '';
     if (usernameNotEmpty && passwordNotEmpty) {
       const user: User = {
+        enabled: false,
         id: this.registerForm.value.id,
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
@@ -42,11 +45,12 @@ export class RegisterComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         gender: this.registerForm.value.gender,
         email: this.registerForm.value.email,
-        phoneNumber: this.registerForm.value.phoneNumber,
+        phoneNumber: this.registerForm.value.phoneNumber
       };
       this.userService.register(user).subscribe(() => {
         this.successMessage = 'Đăng ký thành công';
         this.registerForm.reset();
+        this.router.navigate(['register-success']);
       }, () => {
         this.failMessage = 'Đăng ký thất bại';
       });

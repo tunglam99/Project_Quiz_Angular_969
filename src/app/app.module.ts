@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { QuestionComponent } from './question/question.component';
+import { RegisterSuccessComponent } from './user/register-success/register-success.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { QuestionComponent } from './question/question.component';
     HomeComponent,
     QuestionComponent,
     CategoryListComponent,
-    CategoryCreateComponent
+    CategoryCreateComponent,
+    RegisterSuccessComponent
   ],
   imports: [
     BrowserModule,

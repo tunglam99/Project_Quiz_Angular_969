@@ -1,0 +1,8 @@
+<div class="alert alert-success" role="alert" *ngIf="flag">
+  Tài khoản đã được xác thực thành công!
+  <a routerLink="/">Nhấn vào đây để trở về trang chủ</a>
+</div>
+<div *ngIf="!flag">
+  Bạn đã đăng ký thành công!
+  <a href="https://mail.google.com/" target="_blank">Chuyển hướng đến Gmail</a>
+</div>

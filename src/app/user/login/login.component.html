@@ -8,6 +8,10 @@
 					<span class="login100-form-title">
 						Đăng nhập
 					</span>
+        <div *ngIf="error" class="alert alert-danger text-center">
+          <p>{{error}}</p>
+        </div>
+        <br>
         <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
           <input class="input100 form-control" type="text" formControlName="username" placeholder="tên đăng nhập">
           <span class="focus-input100"></span>
