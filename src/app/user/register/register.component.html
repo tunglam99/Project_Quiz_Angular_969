@@ -53,8 +53,8 @@
                 <input class="input--style-5" type="password" formControlName="confirmPassword">
               </div>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('confirmPassword').hasError('passwordnotmatch') && registerForm.get('confirmPassword').touched">
-              Nhập lại mật khẩu không đúng
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.value.password !== registerForm.value.confirmPassword">
+              Mật khẩu nhập lại không khớp.
             </div>
           </div>
           <div class="form-row m-b-55">
@@ -67,10 +67,10 @@
                     <label class="label--desc">Họ</label>
                   </div>
                   <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('lastName').hasError('required') && registerForm.get('lastName').touched">
-                    Họ người dùng phải được điền
+                    Ô này phải được điền
                   </div>
                   <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('lastName').hasError('minlength') && registerForm.get('lastName').touched">
-                    Họ người dùng phải có ít nhất 2 kí tự
+                    Nhập ít nhất 2 ký tự
                   </div>
                 </div>
                 <div class="col-7">

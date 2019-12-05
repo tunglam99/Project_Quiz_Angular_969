@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
     const passwordNotEmpty = username.trim() !== '';
     if (usernameNotEmpty && passwordNotEmpty) {
       const user: User = {
-        enabled: false,
         id: this.registerForm.value.id,
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
@@ -45,7 +44,8 @@ export class RegisterComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         gender: this.registerForm.value.gender,
         email: this.registerForm.value.email,
-        phoneNumber: this.registerForm.value.phoneNumber
+        phoneNumber: this.registerForm.value.phoneNumber,
+        enabled: false,
       };
       this.userService.register(user).subscribe(() => {
         this.successMessage = 'Đăng ký thành công';
