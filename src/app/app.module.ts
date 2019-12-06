@@ -9,7 +9,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorInterceptor} from './helper/error-interceptor';
 import {JwtInterceptor} from './helper/jwt-interceptor';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './user/home/home.component';
 import { QuestionComponent } from './question/question.component';
 import { RegisterSuccessComponent } from './user/register-success/register-success.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
@@ -21,7 +21,6 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    QuestionComponent,
     RegisterSuccessComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent
