@@ -22,10 +22,9 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   passwordForgot() {
-    console.log(this.forgotPasswordForm.value.email);
     this.userService.passwordForgot(this.forgotPasswordForm.value).subscribe(() => {
       this.forgotPasswordForm.reset();
-      this.router.navigate(['']);
+      this.router.navigate(['login']);
     }, () => {
       this.failMessage = 'Nhập sai email';
     });

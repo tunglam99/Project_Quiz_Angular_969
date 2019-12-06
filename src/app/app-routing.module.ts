@@ -9,6 +9,7 @@ import {AuthGuard} from './helper/auth-guard';
 import {QuestionComponent} from './question/question.component';
 import {RegisterSuccessComponent} from './user/register-success/register-success.component';
 import {ForgotPasswordComponent} from './user/forgot-password/forgot-password.component';
+import {ChangePasswordComponent} from './user/change-password/change-password.component';
 
 const routes: Routes = [{
   path: '',
@@ -25,6 +26,9 @@ const routes: Routes = [{
 }, {
   path: 'forgot-password',
   component: ForgotPasswordComponent
+}, {
+  path: 'new-password/:id',
+  component: ChangePasswordComponent
 }, {
   path: 'list-category',
   component: CategoryListComponent,

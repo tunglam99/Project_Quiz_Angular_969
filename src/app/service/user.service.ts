@@ -30,4 +30,12 @@ export class UserService {
   passwordForgot(forgotPassword: ForgotPassword): Observable<ForgotPassword> {
     return this.http.post<ForgotPassword>(API_URL + '/forgot-password', forgotPassword);
   }
+
+  newPassword(user: User, id: number, token: string): Observable<User> {
+    return this.http.post<User>(API_URL + `/new-password/${id}?token=` + token, user);
+  }
+
+  userDetail(id: string): Observable<User> {
+    return this.http.get<User>(API_URL + `/users/${id}`);
+  }
 }
