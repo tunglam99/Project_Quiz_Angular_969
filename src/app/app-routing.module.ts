@@ -8,6 +8,7 @@ import {CategoryCreateComponent} from './category/category-create/category-creat
 import {AuthGuard} from './helper/auth-guard';
 import {QuestionComponent} from './question/question.component';
 import {RegisterSuccessComponent} from './user/register-success/register-success.component';
+import {ForgotPasswordComponent} from './user/forgot-password/forgot-password.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,9 @@ const routes: Routes = [{
 }, {
   path: 'register-success',
   component: RegisterSuccessComponent
+}, {
+  path: 'forgot-password',
+  component: ForgotPasswordComponent
 }, {
   path: 'list-category',
   component: CategoryListComponent,

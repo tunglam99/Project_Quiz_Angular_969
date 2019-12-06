@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  successMessage = '';
   failMessage = '';
   registerForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
@@ -48,7 +47,6 @@ export class RegisterComponent implements OnInit {
         enabled: false,
       };
       this.userService.register(user).subscribe(() => {
-        this.successMessage = 'Đăng ký thành công';
         this.registerForm.reset();
         this.router.navigate(['register-success']);
       }, () => {

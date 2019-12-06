@@ -14,6 +14,7 @@ import { CategoryListComponent } from './category/category-list/category-list.co
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { QuestionComponent } from './question/question.component';
 import { RegisterSuccessComponent } from './user/register-success/register-success.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegisterSuccessComponent } from './user/register-success/register-succe
     QuestionComponent,
     CategoryListComponent,
     CategoryCreateComponent,
-    RegisterSuccessComponent
+    RegisterSuccessComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

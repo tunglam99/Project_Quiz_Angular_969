@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {User} from '../model/user';
+import {ForgotPassword} from '../model/forgot-password';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -24,5 +25,9 @@ export class UserService {
 
   login(user: User): Observable<User> {
     return this.http.post<User>(API_URL + '/login', user);
+  }
+
+  passwordForgot(forgotPassword: ForgotPassword): Observable<ForgotPassword> {
+    return this.http.post<ForgotPassword>(API_URL + '/forgot-password', forgotPassword);
   }
 }
