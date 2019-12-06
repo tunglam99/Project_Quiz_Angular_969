@@ -1,11 +1,11 @@
 <br>
-<div class="text-center text-uppercase font-weight-bold">
+<div class="text-center text-uppercase font-weight-bold" *ngIf="!formCreateStatus">
   <span style="font-size: 24px">Danh sách câu hỏi</span>
 </div>
 <router-outlet></router-outlet>
 <br>
 <div class="mt-lg-4 container">
-  <table class="table table-hover table-dark">
+  <table class="table table-hover table-dark" *ngIf="!formCreateStatus">
     <thead>
     <tr>
       <th>Câu hỏi</th>
@@ -30,35 +30,76 @@
   <div class="text-center" *ngIf="!formCreateStatus" (click)="onClickCreate()">
     <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới câu hỏi</button>
   </div>
-  <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
-    <div class="container-sm">
-      <label class="col">
-        <span>Câu hỏi:</span>
-        <input type="text" formControlName="quiz" class="form-control">
-      </label>
-      <label class="col">
-        <span>Đáp án A:</span>
-        <input type="text" formControlName="answerA" class="form-control">
-      </label>
-      <label class="col">
-        <span>Đáp án B:</span>
-        <input type="text" formControlName="answerB" class="form-control">
-      </label>
-      <label class="col">
-        <span>Đáp án C:</span>
-        <input type="text" formControlName="answerC" class="form-control">
-      </label>
-      <label class="col">
-        <span>Đáp án D:</span>
-        <input type="text" formControlName="answerD" class="form-control">
-      </label>
-      <label class="col">
-        <span>Đáp án chính xác:</span>
-        <input type="text" formControlName="correctAnswer" class="form-control">
-      </label>
-      <div class="text-center">
-        <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
+  <div [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+      <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+          <div class="card-heading">
+            <h2 class="title">Tạo mới câu hỏi</h2>
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success">
+            <p>{{successMessage}}</p>
+          </div>
+          <div *ngIf="failMessage" class="alert alert-danger">
+            <p>{{failMessage}}</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
+              <div class="form-row m-b-55">
+                <div class="name">Câu hỏi:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <input class="input--style-5 form-control" type="text" formControlName="quiz">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <div class="name">Đáp án A:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <input class="input--style-5 form-control" type="text" name="answerA" ngModel>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <div class="name">Đáp án B:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <input class="input--style-5 form-control" type="text" name="answerB" ngModel>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <div class="name">Đáp án C:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <input class="input--style-5 form-control" type="text" name="answerC" ngModel>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <div class="name">Đáp án D:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <input class="input--style-5 form-control" type="text" name="answerD" ngModel>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <div class="name">Đáp án chính xác:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <input class="input--style-5 form-control" type="text" name="correctAnswer" ngModel>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </form>
+  </div>
 </div>
