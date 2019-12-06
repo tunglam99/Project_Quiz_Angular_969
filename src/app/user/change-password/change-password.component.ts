@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../service/user.service';
 import {User} from '../../model/user';
 import {Subscription} from 'rxjs';
@@ -12,8 +12,8 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup({
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
   });
   user: User;
   token: string;
