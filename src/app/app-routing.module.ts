@@ -30,12 +30,8 @@ const routes: Routes = [{
   path: 'new-password/:id',
   component: ChangePasswordComponent
 }, {
-  path: 'list-category',
-  component: CategoryListComponent,
-  canActivate: [AuthGuard]
-}, {
-  path: 'create-category',
-  component: CategoryCreateComponent,
+  path: 'category',
+  loadChildren: './category/category.module#CategoryModule',
   canActivate: [AuthGuard]
 }, {
   path: 'list-question',

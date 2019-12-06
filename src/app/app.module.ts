@@ -10,8 +10,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorInterceptor} from './helper/error-interceptor';
 import {JwtInterceptor} from './helper/jwt-interceptor';
 import { HomeComponent } from './home/home.component';
-import { CategoryListComponent } from './category/category-list/category-list.component';
-import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { QuestionComponent } from './question/question.component';
 import { RegisterSuccessComponent } from './user/register-success/register-success.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
@@ -24,8 +22,6 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
     RegisterComponent,
     HomeComponent,
     QuestionComponent,
-    CategoryListComponent,
-    CategoryCreateComponent,
     RegisterSuccessComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent
