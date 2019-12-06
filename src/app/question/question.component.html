@@ -27,11 +27,11 @@
     </tr>
     </tbody>
   </table>
-  <div class="text-center" *ngIf="!formCreateStatus">
-    <button class="btn btn-outline-secondary" (click)="onClickCreate()">Tạo mới câu hỏi</button>
+  <div class="text-center" *ngIf="!formCreateStatus" (click)="onClickCreate()">
+    <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới câu hỏi</button>
   </div>
   <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
-    <div>
+    <div class="container-sm">
       <label class="col">
         <span>Câu hỏi:</span>
         <input type="text" formControlName="quiz" class="form-control">
@@ -56,9 +56,9 @@
         <span>Đáp án chính xác:</span>
         <input type="text" formControlName="correctAnswer" class="form-control">
       </label>
-      <label class="col">
-        <button class="btn btn-outline-secondary">Thêm mới</button>
-      </label>
+      <div class="text-center">
+        <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
+      </div>
     </div>
   </form>
 </div>

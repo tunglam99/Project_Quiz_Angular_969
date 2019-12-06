@@ -1,22 +1,30 @@
-<div class="container">
-  <div class="text-center">
-    <h2>Tạo mới danh mục</h2>
-  </div>
-  <div *ngIf="successMessage" class="alert alert-success">
-    <p>{{successMessage}}</p>
-  </div>
-
-  <div *ngIf="failMessage" class="alert alert-danger">
-    <p>{{failMessage}}</p>
-  </div>
-
-  <form #categoryForm="ngForm" (ngSubmit)="createCategory(categoryForm)">
-    <label class="col">
-      Tên danh mục:
-      <input type="text" name="name" ngModel class="form-control">
-    </label>
-    <div class="col">
-      <button class="btn btn-info" type="submit">Tạo mới</button>
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+  <div class="wrapper wrapper--w790">
+    <div class="card card-5">
+      <div class="card-heading">
+        <h2 class="title">Tạo mới danh mục</h2>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success">
+        <p>{{successMessage}}</p>
+      </div>
+      <div *ngIf="failMessage" class="alert alert-danger">
+        <p>{{failMessage}}</p>
+      </div>
+      <div class="card-body">
+        <form #categoryForm="ngForm" (ngSubmit)="createCategory(categoryForm)">
+          <div class="form-row m-b-55">
+            <div class="name">Tên danh mục:</div>
+            <div class="value">
+              <div class="input-group">
+                <input class="input--style-5 form-control" type="text" name="name" ngModel>
+              </div>
+            </div>
+          </div>
+            <div class="text-center">
+              <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới danh mục</button>
+            </div>
+        </form>
+      </div>
     </div>
-  </form>
+  </div>
 </div>
