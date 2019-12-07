@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './service/authentication.service';
 import {Router} from '@angular/router';
 import {UserToken} from './model/user-token';
@@ -8,17 +8,18 @@ import {UserToken} from './model/user-token';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  currentUser: UserToken;
+export class AppComponent implements OnInit{
+  isLogin: boolean;
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  constructor(private authenticationService: AuthenticationService) {
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
+  ngOnInit() {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
   }
 }

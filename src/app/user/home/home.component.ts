@@ -8,18 +8,5 @@ import {UserToken} from '../../model/user-token';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  isLogin: boolean;
-
-  constructor(private authenticationService: AuthenticationService) {
-  }
-
-  ngOnInit() {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
-      this.isLogin = true;
-    } else {
-      this.isLogin = false;
-    }
-  }
+export class HomeComponent{
 }

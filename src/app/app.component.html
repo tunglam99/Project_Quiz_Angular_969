@@ -1,12 +1,6 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/">Home</a>
-    <a class="nav-item nav-link" routerLink="question">Question</a>
-    <a class="nav-item nav-link" routerLink="category">Category</a>
-    <a class="nav-item nav-link" (click)="logout()">Logout</a>
-  </div>
-</nav>
-
+<div class="fixed-top">
+  <app-navbar></app-navbar>
+</div>
 <div class="select2-container--classic">
   <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <router-outlet></router-outlet>

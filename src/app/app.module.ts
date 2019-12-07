@@ -10,10 +10,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorInterceptor} from './helper/error-interceptor';
 import {JwtInterceptor} from './helper/jwt-interceptor';
 import { HomeComponent } from './user/home/home.component';
-import { QuestionComponent } from './question/question.component';
 import { RegisterSuccessComponent } from './user/register-success/register-success.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
