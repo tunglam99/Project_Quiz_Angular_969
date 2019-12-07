@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
   <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/">Home</a>
-    <a class="nav-item nav-link" routerLink="question">Question</a>
-    <a class="nav-item nav-link" routerLink="category">Category</a>
-    <a class="nav-item nav-link" *ngIf="!currentUser" routerLink="register">Register</a>
-    <a class="nav-item nav-link" *ngIf="!currentUser" routerLink="login">Login</a>
-    <a class="nav-item nav-link" *ngIf="currentUser" (click)="logout()">Logout</a>
+    <a class="nav-item nav-link" routerLink="/">Trang chủ</a>
+    <a class="nav-item nav-link" routerLink="question">Câu hỏi</a>
+    <a class="nav-item nav-link" routerLink="category">Danh mục</a>
+    <a class="nav-item nav-link" *ngIf="!currentUser" routerLink="register">Đăng ký</a>
+    <a class="nav-item nav-link" *ngIf="!currentUser" routerLink="login">Đăng nhập</a>
+    <a class="nav-item nav-link" *ngIf="currentUser" (click)="logout()">Đăng xuất</a>
   </div>
 </nav>
