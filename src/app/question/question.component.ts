@@ -18,10 +18,8 @@ export class QuestionComponent implements OnInit {
     answerD: new FormControl(''),
     correctAnswer: new FormControl(''),
   });
-  successMessage: string;
   failMessage: string;
   formCreateStatus: boolean;
-
   constructor(private questionService: QuestionService) {
     this.formCreateStatus = false;
     this.getQuestionList();
@@ -43,7 +41,6 @@ export class QuestionComponent implements OnInit {
       correctAnswer: this.questionForm.value.correctAnswer,
     };
     this.questionService.createQuestion(question).subscribe(() => {
-      this.successMessage = 'Tạo mới thành công';
       this.questionList.push(question);
       this.questionForm.reset();
       this.getQuestionList();

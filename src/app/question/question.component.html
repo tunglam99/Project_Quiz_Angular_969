@@ -37,9 +37,6 @@
           <div class="card-heading">
             <h2 class="title">Tạo mới câu hỏi</h2>
           </div>
-          <div *ngIf="successMessage" class="alert alert-success">
-            <p>{{successMessage}}</p>
-          </div>
           <div *ngIf="failMessage" class="alert alert-danger">
             <p>{{failMessage}}</p>
           </div>
@@ -54,42 +51,47 @@
                 </div>
               </div>
               <div class="form-row m-b-55">
-                <div class="name">Đáp án A:</div>
+                <label class="radio-container m-r-55">A:
+                  <input type="radio" name="defaultChecked" checked="checked" formControlName="correctAnswer" value="A">
+                  <span class="checkmark"></span>
+                </label>
                 <div class="value">
                   <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" name="answerA" ngModel>
+                    <input class="input--style-5 form-control" type="text" formControlName="answerA">
                   </div>
                 </div>
               </div>
               <div class="form-row m-b-55">
-                <div class="name">Đáp án B:</div>
+
+                <label class="radio-container m-r-55">B:
+                  <input type="radio" formControlName="correctAnswer" value="B">
+                  <span class="checkmark"></span>
+                </label>
                 <div class="value">
                   <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" name="answerB" ngModel>
+                    <input class="input--style-5 form-control" type="text" formControlName="answerB">
                   </div>
                 </div>
               </div>
               <div class="form-row m-b-55">
-                <div class="name">Đáp án C:</div>
+                <label class="radio-container m-r-55">C:
+                  <input type="radio" formControlName="correctAnswer" value="C">
+                  <span class="checkmark"></span>
+                </label>
                 <div class="value">
                   <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" name="answerC" ngModel>
+                    <input class="input--style-5 form-control" type="text" formControlName="answerC">
                   </div>
                 </div>
               </div>
               <div class="form-row m-b-55">
-                <div class="name">Đáp án D:</div>
+                <label class="radio-container m-r-55">D:
+                  <input type="radio" formControlName="correctAnswer" value="D">
+                  <span class="checkmark"></span>
+                </label>
                 <div class="value">
                   <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" name="answerD" ngModel>
-                  </div>
-                </div>
-              </div>
-              <div class="form-row m-b-55">
-                <div class="name">Đáp án chính xác:</div>
-                <div class="value">
-                  <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" name="correctAnswer" ngModel>
+                    <input class="input--style-5 form-control" type="text" formControlName="answerD">
                   </div>
                 </div>
               </div>
