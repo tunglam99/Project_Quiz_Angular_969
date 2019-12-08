@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../service/question.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Question} from '../model/question';
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 
 @Component({
   selector: 'app-question',
@@ -20,6 +21,7 @@ export class QuestionComponent implements OnInit {
   });
   failMessage: string;
   formCreateStatus: boolean;
+  backButton = faArrowLeft;
   constructor(private questionService: QuestionService) {
     this.formCreateStatus = false;
     this.getQuestionList();

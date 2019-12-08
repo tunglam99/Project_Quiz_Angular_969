@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 
 @Component({
   selector: 'app-category-list',
@@ -9,6 +10,7 @@ import {CategoryService} from '../../service/category.service';
 })
 export class CategoryListComponent implements OnInit {
   categoryList: Category[];
+  backButton = faArrowLeft;
 
   constructor(private categoryService: CategoryService) {
   }

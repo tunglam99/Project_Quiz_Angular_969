@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../service/category.service';
 import {Router} from '@angular/router';
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 
 @Component({
   selector: 'app-category-create',
@@ -9,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class CategoryCreateComponent implements OnInit {
   failMessage = '';
+  backButton = faArrowLeft;
 
   constructor(private categoryService: CategoryService,
               private router: Router) {
