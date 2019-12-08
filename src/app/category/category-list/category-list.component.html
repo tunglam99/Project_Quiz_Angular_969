@@ -1,15 +1,42 @@
 <br>
 <br>
-<a routerLink=""><fa-icon [icon]="backButton" size="3x"></fa-icon></a>
+<a routerLink="">
+  <fa-icon [icon]="backButton" size="3x"></fa-icon>
+</a>
 <div class="container">
   <div class="text-center text-uppercase font-weight-bold">
     <span style="font-size: 24px">Danh mục câu hỏi</span>
   </div>
   <router-outlet></router-outlet>
   <div class="mt-lg-4">
-    <a routerLink="create">
-      <button class="btn btn--radius-2 btn--red">Tạo mới danh mục</button>
-    </a>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Thêm mới danh mục</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
+          <div class="value">
+            <div class="input-group">
+              <div class="name">Tên danh mục:</div>
+              <input class="input--style-5 form-control" type="text" formControlName="name">
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn--radius-2 btn--red">Thêm mới</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+    <button class="btn btn--radius-2 btn--red" (click)="open(content)">Tạo mới danh mục</button>
+
+    <hr>
+
+    <pre>{{closeResult}}</pre>
   </div>
   <div class="mt-lg-4">
     <table class="table table-hover table-dark">
@@ -20,7 +47,9 @@
       <tr *ngFor="let category of categoryList">
         <th>{{category.name}}</th>
         <th>
-          <button class="btn btn-outline-info" (click)="deleteCategory(category.id)"><fa-icon [icon]="recycleButton" size="lg"></fa-icon></button>
+          <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">
+            <fa-icon [icon]="recycleButton" size="lg"></fa-icon>
+          </button>
         </th>
       </tr>
       </tbody>

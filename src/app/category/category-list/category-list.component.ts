@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
 import {faArrowLeft, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-category-list',
@@ -10,10 +12,17 @@ import {faArrowLeft, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 })
 export class CategoryListComponent implements OnInit {
   categoryList: Category[];
+  categoryForm: FormGroup = new FormGroup({
+    name: new FormControl('')
+  });
   backButton = faArrowLeft;
   recycleButton = faTrashAlt;
+  closeResult: string;
+  failMessage: string;
+  successMessage: string;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -25,11 +34,33 @@ export class CategoryListComponent implements OnInit {
       this.categoryList = next;
     });
   }
+
   deleteCategory(id: number) {
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategoryList();
     }, () => {
       console.log('Lỗi khi xóa danh mục có id = ' + id);
+    });
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
+    }, () => {
+    });
+  }
+
+  createCategory() {
+    const category: Category = {
+      id: this.categoryForm.value.id,
+      name: this.categoryForm.value.name,
+    };
+    this.categoryService.createCategory(category).subscribe(() => {
+      this.categoryList.push(category);
+      this.categoryForm.reset();
+      this.getCategoryList();
+      this.successMessage = 'Thành công';
+    }, () => {
+      this.failMessage = 'Thất bại';
     });
   }
 }
