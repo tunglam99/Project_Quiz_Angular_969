@@ -1,6 +1,11 @@
 <br>
 <br>
-<a routerLink=""><fa-icon [icon]="backButton" size="3x"></fa-icon></a>
+<a routerLink="" *ngIf="!formCreateStatus">
+  <fa-icon [icon]="backButton" size="3x"></fa-icon>
+</a>
+<a routerLink="/question" *ngIf="formCreateStatus" (click)="onClickCreate()">
+  <fa-icon [icon]="backButton" size="3x"></fa-icon>
+</a>
 <div class="text-center text-uppercase font-weight-bold" *ngIf="!formCreateStatus">
   <span style="font-size: 24px">Danh sách câu hỏi</span>
 </div>
