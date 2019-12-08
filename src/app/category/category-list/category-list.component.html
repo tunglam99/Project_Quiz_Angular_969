@@ -20,7 +20,7 @@
       <tr *ngFor="let category of categoryList">
         <th>{{category.name}}</th>
         <th>
-          <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">Delete</button>
+          <button class="btn btn-outline-info" (click)="deleteCategory(category.id)"><fa-icon [icon]="recycleButton" size="lg"></fa-icon></button>
         </th>
       </tr>
       </tbody>
