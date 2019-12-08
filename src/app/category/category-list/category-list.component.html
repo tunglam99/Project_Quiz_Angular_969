@@ -5,19 +5,23 @@
   </div>
   <router-outlet></router-outlet>
   <div class="mt-lg-4">
-    <a routerLink="create"><button class="btn btn--radius-2 btn--red">Tạo mới danh mục</button></a>
+    <a routerLink="create">
+      <button class="btn btn--radius-2 btn--red">Tạo mới danh mục</button>
+    </a>
   </div>
   <div class="mt-lg-4">
     <table class="table table-hover table-dark">
-      <tr>
-        <th>Tên danh mục</th>
-      </tr>
+      <thead class="text-center">
+      <tr>Tên danh mục</tr>
+      </thead>
+      <tbody>
       <tr *ngFor="let category of categoryList">
-        <td>{{category.name}}</td>
-        <td>
+        <th>{{category.name}}</th>
+        <th>
           <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">Delete</button>
-        </td>
+        </th>
       </tr>
+      </tbody>
     </table>
   </div>
 </div>
