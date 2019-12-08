@@ -28,12 +28,10 @@ const routes: Routes = [{
   component: ChangePasswordComponent
 }, {
   path: 'category',
-  loadChildren: './category/category.module#CategoryModule',
-  canActivate: [AuthGuard]
+  loadChildren: './category/category.module#CategoryModule'
 }, {
   path: 'question',
-  loadChildren: './question/question.module#QuestionModule',
-  canActivate: [AuthGuard]
+  loadChildren: './question/question.module#QuestionModule'
 }, {
   path: '**',
   redirectTo: ''

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
@@ -13,6 +13,7 @@ const API_URL = environment.apiUrl;
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserToken>;
   public currentUser: Observable<UserToken>;
+  update = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserToken>(JSON.parse(localStorage.getItem('currentUser')));
@@ -26,9 +27,9 @@ export class AuthenticationService {
   login(username: string, password: string) {
     return this.http.post<any>(API_URL + '/login', {username, password})
       .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
+        this.update.emit('login');
         return user;
       }));
   }
@@ -36,8 +37,5 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-  }
-  public get loggedIn(): boolean {
-    return (localStorage.getItem('access_token') !== null);
   }
 }

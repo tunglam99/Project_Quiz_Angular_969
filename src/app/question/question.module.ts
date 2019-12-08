@@ -4,10 +4,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {QuestionComponent} from './question.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {AuthGuard} from '../helper/auth-guard';
 
 const routing: Routes = [{
   path: '',
-  component: QuestionComponent
+  component: QuestionComponent,
+  canActivate: [AuthGuard]
 }];
 
 @NgModule({
