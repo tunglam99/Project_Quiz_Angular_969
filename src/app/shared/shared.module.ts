@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NavbarComponent} from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
-import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    NgbModule
   ],
   exports: [
     NavbarComponent

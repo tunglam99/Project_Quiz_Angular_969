@@ -8,8 +8,9 @@ import {AuthenticationService} from '../../service/authentication.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent{
+export class NavbarComponent {
   currentUser: UserToken;
+  public isMenuCollapsed = true;
 
   constructor(
     private router: Router,
