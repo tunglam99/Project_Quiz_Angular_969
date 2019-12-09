@@ -80,12 +80,6 @@ a.button {
   font-weight: 700;
 }
 
-.value {
-  width: -webkit-calc(100% - 150px);
-  width: -moz-calc(100% - 150px);
-  width: calc(100% - 150px);
-}
-
 .input--style-5 {
   background: #e5e5e5;
   line-height: 50px;
