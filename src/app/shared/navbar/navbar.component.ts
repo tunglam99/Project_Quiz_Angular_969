@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {UserToken} from '../../model/user-token';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
+import {faHome, faList, faQuestion} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,9 @@ import {AuthenticationService} from '../../service/authentication.service';
 export class NavbarComponent {
   currentUser: UserToken;
   public isMenuCollapsed = true;
+  homeIcon = faHome;
+  questionIcon = faQuestion;
+  categoryIcon = faList;
 
   constructor(
     private router: Router,

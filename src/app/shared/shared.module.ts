@@ -4,6 +4,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
     RouterModule,
     ReactiveFormsModule,
     NgbDropdownModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   exports: [
     NavbarComponent

@@ -5,14 +5,20 @@
   </button>
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="">Trang chủ<span class="sr-only">(current)</span></a>
+      <li class="nav-item active mr-sm-3">
+        <a class="nav-link" routerLink="">
+          <fa-icon [icon]="homeIcon" size="lg"></fa-icon>
+          Trang chủ<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item mr-sm-3">
+        <a class="nav-link" routerLink="/category">
+          <fa-icon [icon]="categoryIcon" size="lg"></fa-icon>
+          Danh mục</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/category">Danh mục</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/question">Câu hỏi</a>
+        <a class="nav-link" routerLink="/question">
+          <fa-icon [icon]="questionIcon" size="lg"></fa-icon>
+          Câu hỏi</a>
       </li>
     </ul>
     <div class="form-inline my-2 my-lg-0">
@@ -23,7 +29,8 @@
       </ul>
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" *ngIf="!currentUser" ngbDropdownToggle></button>
-        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngIf="!currentUser">
+        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1"
+             *ngIf="!currentUser">
           <a class="dropdown-item" routerLink="login">Đăng nhập</a>
           <a class="dropdown-item" routerLink="register">Đăng ký</a>
         </div>
