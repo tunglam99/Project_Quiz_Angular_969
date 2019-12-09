@@ -15,7 +15,6 @@ export class CategoryListComponent implements OnInit {
   categoryForm: FormGroup = new FormGroup({
     name: new FormControl('')
   });
-  backButton = faArrowLeft;
   recycleButton = faTrashAlt;
   closeResult: string;
   failMessage: string;

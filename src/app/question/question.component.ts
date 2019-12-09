@@ -21,7 +21,6 @@ export class QuestionComponent implements OnInit {
   });
   failMessage: string;
   formCreateStatus: boolean;
-  backButton = faArrowLeft;
   constructor(private questionService: QuestionService) {
     this.formCreateStatus = false;
     this.getQuestionList();
