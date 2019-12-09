@@ -48,6 +48,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   close() {
+    this.flagMessage = 0;
     this.modalService.dismissAll('');
     this.categoryForm.reset();
   }
