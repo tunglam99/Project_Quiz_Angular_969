@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../service/question.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../model/question';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 
 @Component({
   selector: 'app-question',
@@ -12,12 +11,12 @@ import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 export class QuestionComponent implements OnInit {
   questionList: Question[] = [];
   questionForm: FormGroup = new FormGroup({
-    quiz: new FormControl(''),
-    answerA: new FormControl(''),
-    answerB: new FormControl(''),
-    answerC: new FormControl(''),
-    answerD: new FormControl(''),
-    correctAnswer: new FormControl(''),
+    quiz: new FormControl('', Validators.required),
+    answerA: new FormControl('', Validators.required),
+    answerB: new FormControl('', Validators.required),
+    answerC: new FormControl('', Validators.required),
+    answerD: new FormControl('', Validators.required),
+    correctAnswer: new FormControl('', Validators.required),
   });
   failMessage: string;
   formCreateStatus: boolean;

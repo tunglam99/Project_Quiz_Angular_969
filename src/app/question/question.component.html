@@ -49,6 +49,9 @@
                     <input class="input--style-5 form-control" type="text" formControlName="quiz">
                   </div>
                 </div>
+                <div class="alert alert-danger" role="alert" *ngIf="questionForm.get('quiz').hasError('required') && questionForm.get('quiz').touched">
+                  Không được bỏ trống ô câu hỏi
+                </div>
               </div>
               <div class="form-row m-b-55">
                 <div class="name">
@@ -61,6 +64,9 @@
                   <div class="input-group">
                     <input class="input--style-5 form-control" type="text" formControlName="answerA">
                   </div>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="questionForm.get('answerA').hasError('required') && questionForm.get('answerA').touched">
+                  Không được bỏ trống ô này
                 </div>
               </div>
               <div class="form-row m-b-55">
@@ -75,6 +81,9 @@
                     <input class="input--style-5 form-control" type="text" formControlName="answerB">
                   </div>
                 </div>
+                <div class="alert alert-danger" role="alert" *ngIf="questionForm.get('answerB').hasError('required') && questionForm.get('answerB').touched">
+                  Không được bỏ trống ô này
+                </div>
               </div>
               <div class="form-row m-b-55">
                 <div class="name">
@@ -87,6 +96,9 @@
                   <div class="input-group">
                     <input class="input--style-5 form-control" type="text" formControlName="answerC">
                   </div>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="questionForm.get('answerC').hasError('required') && questionForm.get('answerC').touched">
+                  Không được bỏ trống ô này
                 </div>
               </div>
               <div class="form-row m-b-55">
@@ -101,6 +113,12 @@
                     <input class="input--style-5 form-control" type="text" formControlName="answerD">
                   </div>
                 </div>
+                <div class="alert alert-danger" role="alert" *ngIf="questionForm.get('answerD').hasError('required') && questionForm.get('answerD').touched">
+                  Không được bỏ trống ô này
+                </div>
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
+                Hãy chọn 1 đáp án đúng
               </div>
               <div class="text-center">
                 <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
