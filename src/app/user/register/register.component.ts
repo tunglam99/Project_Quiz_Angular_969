@@ -30,28 +30,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const username = this.registerForm.value.username;
-    const usernameNotEmpty = username.trim() !== '';
-    const passwordNotEmpty = username.trim() !== '';
-    if (usernameNotEmpty && passwordNotEmpty) {
-      const user: User = {
-        id: this.registerForm.value.id,
-        username: this.registerForm.value.username,
-        password: this.registerForm.value.password,
-        confirmPassword: this.registerForm.value.confirmPassword,
-        firstName: this.registerForm.value.firstName,
-        lastName: this.registerForm.value.lastName,
-        gender: this.registerForm.value.gender,
-        email: this.registerForm.value.email,
-        phoneNumber: this.registerForm.value.phoneNumber,
-        enabled: false,
-      };
-      this.userService.register(user).subscribe(() => {
-        this.registerForm.reset();
-        this.router.navigate(['register-success']);
-      }, () => {
-        this.failMessage = 'Đăng ký thất bại';
-      });
-    }
+    const user: User = {
+      id: this.registerForm.value.id,
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password,
+      confirmPassword: this.registerForm.value.confirmPassword,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      gender: this.registerForm.value.gender,
+      email: this.registerForm.value.email,
+      phoneNumber: this.registerForm.value.phoneNumber,
+      enabled: false,
+    };
+    this.userService.register(user).subscribe(() => {
+      this.registerForm.reset();
+      this.router.navigate(['register-success']);
+    }, () => {
+      this.failMessage = 'Đăng ký thất bại';
+    });
   }
 }
