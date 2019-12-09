@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../service/authentication.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {UserService} from '../../service/user.service';

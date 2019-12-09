@@ -5,31 +5,6 @@
 <router-outlet></router-outlet>
 <br>
 <div class="mt-lg-4 container">
-  <table class="table table-hover table-dark" *ngIf="!formCreateStatus">
-    <thead>
-    <tr>
-      <th>Câu hỏi</th>
-      <th>Đáp án A</th>
-      <th>Đáp án B</th>
-      <th>Đáp án C</th>
-      <th>Đáp án D</th>
-      <th>Đáp án chính xác</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let question of questionList">
-      <td>{{question.quiz}}</td>
-      <td>{{question.answerA}}</td>
-      <td>{{question.answerB}}</td>
-      <td>{{question.answerC}}</td>
-      <td>{{question.answerD}}</td>
-      <td>{{question.correctAnswer}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="text-center" *ngIf="!formCreateStatus" (click)="onClickCreate()">
-    <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới câu hỏi</button>
-  </div>
   <div *ngIf="formCreateStatus">
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <div class="wrapper wrapper--w790">
@@ -128,5 +103,30 @@
         </div>
       </div>
     </div>
+  </div>
+  <table class="table table-hover table-dark" *ngIf="!formCreateStatus">
+    <thead>
+    <tr>
+      <th>Câu hỏi</th>
+      <th>Đáp án A</th>
+      <th>Đáp án B</th>
+      <th>Đáp án C</th>
+      <th>Đáp án D</th>
+      <th>Đáp án chính xác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let question of questionList">
+      <td>{{question.quiz}}</td>
+      <td>{{question.answerA}}</td>
+      <td>{{question.answerB}}</td>
+      <td>{{question.answerC}}</td>
+      <td>{{question.answerD}}</td>
+      <td>{{question.correctAnswer}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center" *ngIf="!formCreateStatus" (click)="onClickCreate()">
+    <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới câu hỏi</button>
   </div>
 </div>
