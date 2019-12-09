@@ -15,7 +15,7 @@
         <a class="nav-link" routerLink="/question">Câu hỏi</a>
       </li>
     </ul>
-    <div class="form-inline my-2 my-lg-0 mr-sm-5">
+    <div class="form-inline my-2 my-lg-0">
       <ul class="navbar-nav mr-auto" *ngIf="currentUser">
         <li class="nav-item">
           <a class="nav-link" (click)="logout()">Đăng xuất</a>
@@ -23,7 +23,7 @@
       </ul>
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" *ngIf="!currentUser" ngbDropdownToggle></button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngIf="!currentUser">
+        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngIf="!currentUser">
           <a class="dropdown-item" routerLink="login">Đăng nhập</a>
           <a class="dropdown-item" routerLink="register">Đăng ký</a>
         </div>
