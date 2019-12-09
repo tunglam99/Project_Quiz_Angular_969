@@ -8,9 +8,14 @@
     <ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Thêm mới danh mục</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('')">
+        <button type="button" class="close" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success text-center">
+        <p>{{successMessage}}</p>
+      </div><div *ngIf="failMessage" class="alert alert-danger text-center">
+        <p>{{failMessage}}</p>
       </div>
       <div class="modal-body">
         <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
@@ -32,10 +37,7 @@
     </ng-template>
 
     <button class="btn btn--radius-2 btn--red" (click)="openVerticallyCentered(content)">Tạo mới danh mục</button>
-
     <hr>
-
-    <pre>{{closeResult}}</pre>
   </div>
   <div class="mt-lg-4">
     <table class="table table-hover table-dark">

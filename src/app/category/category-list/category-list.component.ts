@@ -16,7 +16,6 @@ export class CategoryListComponent implements OnInit {
     name: new FormControl('', Validators.required)
   });
   recycleButton = faTrashAlt;
-  closeResult: string;
   failMessage: string;
   successMessage: string;
 
@@ -38,12 +37,17 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategoryList();
     }, () => {
-      console.log('Lỗi khi xóa danh mục có id = ' + id);
+      this.failMessage = 'Lỗi khi xóa danh mục có id = ' + id;
     });
   }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, {centered: true});
+  }
+
+  close() {
+    this.modalService.dismissAll('');
+    this.categoryForm.reset();
   }
 
   createCategory() {
