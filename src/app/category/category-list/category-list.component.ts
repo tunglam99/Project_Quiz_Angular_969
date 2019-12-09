@@ -43,10 +43,8 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
-    }, () => {
-    });
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
   }
 
   createCategory() {
