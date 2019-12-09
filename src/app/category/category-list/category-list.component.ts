@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
-import {faArrowLeft, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup} from '@angular/forms';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-category-list',
@@ -13,7 +13,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class CategoryListComponent implements OnInit {
   categoryList: Category[];
   categoryForm: FormGroup = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl('', Validators.required)
   });
   recycleButton = faTrashAlt;
   closeResult: string;

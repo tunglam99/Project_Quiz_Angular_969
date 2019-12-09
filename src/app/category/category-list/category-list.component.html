@@ -20,6 +20,9 @@
               <input class="input--style-5 form-control" type="text" formControlName="name">
             </div>
           </div>
+          <div class="alert alert-danger" role="alert" *ngIf="categoryForm.get('name').hasError('required') && categoryForm.get('name').touched">
+            Không được bỏ trống ô câu hỏi
+          </div>
           <br>
           <div class="modal-footer">
             <button type="submit" class="btn btn--radius-2 btn--red">Thêm mới</button>
