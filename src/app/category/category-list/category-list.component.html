@@ -12,9 +12,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div *ngIf="successMessage" class="alert alert-success text-center">
+      <div *ngIf="flagMessage == 1" class="alert alert-success text-center">
         <p>{{successMessage}}</p>
-      </div><div *ngIf="failMessage" class="alert alert-danger text-center">
+      </div><div *ngIf="flagMessage == 2" class="alert alert-danger text-center">
         <p>{{failMessage}}</p>
       </div>
       <div class="modal-body">

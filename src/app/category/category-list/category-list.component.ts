@@ -18,12 +18,14 @@ export class CategoryListComponent implements OnInit {
   recycleButton = faTrashAlt;
   failMessage: string;
   successMessage: string;
+  flagMessage: number;
 
   constructor(private categoryService: CategoryService,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.flagMessage = 0;
     this.getCategoryList();
   }
 
@@ -56,11 +58,13 @@ export class CategoryListComponent implements OnInit {
       name: this.categoryForm.value.name,
     };
     this.categoryService.createCategory(category).subscribe(() => {
-      this.categoryList.push(category);
+      this.flagMessage = 1;
       this.categoryForm.reset();
+      this.categoryList.push(category);
       this.getCategoryList();
       this.successMessage = 'Thành công';
     }, () => {
+      this.flagMessage = 2;
       this.failMessage = 'Thất bại';
     });
   }
