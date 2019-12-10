@@ -73,24 +73,22 @@
       </div>
     </ng-template>
   </div>
-  <div class="mt-lg-4">
+  <div class="mt-lg-4 container-lg">
     <table class="table table-hover table-dark">
       <thead class="text-center">
       <tr>Tên danh mục</tr>
       </thead>
       <tbody>
       <tr *ngFor="let category of categoryList">
-        <th>{{category.name}}</th>
-        <th>
-          <button class="btn btn-outline-info" (click)="updateCategoryForm(category.id,update)">
+        <th class="text-center">{{category.name}}</th>
+        <div class="float-lg-right">
+          <button class="btn btn-outline-info mr-lg-4" (click)="updateCategoryForm(category.id,update)">
             <fa-icon [icon]="editButton" size="lg"></fa-icon>
           </button>
-        </th>
-        <th>
-          <button class="btn btn-outline-info" (click)="deleteCategory(category.id)">
+          <button class="btn btn-outline-info mr-lg-4" (click)="deleteCategory(category.id)">
             <fa-icon [icon]="recycleButton" size="lg"></fa-icon>
           </button>
-        </th>
+        </div>
       </tr>
       </tbody>
     </table>
