@@ -122,7 +122,7 @@
             <div class="form-row m-b-55">
               <div class="name">
                 <label class="radio-container m-r-55">A:
-                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='A')">
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -133,7 +133,7 @@
             <div class="form-row m-b-55">
               <div class="name">
                 <label class="radio-container m-r-55">B:
-                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='B')">
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -144,7 +144,7 @@
             <div class="form-row m-b-55">
               <div class="name">
                 <label class="radio-container m-r-55">C:
-                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='C')">
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -155,7 +155,7 @@
             <div class="form-row m-b-55">
               <div class="name">
                 <label class="radio-container m-r-55">D:
-                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='D')">
                   <span class="checkmark"></span>
                 </label>
               </div>
