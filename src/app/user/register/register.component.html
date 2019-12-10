@@ -50,7 +50,7 @@
                 <input class="input--style-5" type="password" formControlName="confirmPassword">
               </div>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.value.password !== registerForm.value.confirmPassword">
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.value.password !== registerForm.value.confirmPassword && registerForm.value.confirmPassword != ''">
               Mật khẩu nhập lại không khớp.
             </div>
           </div>
