@@ -1,7 +1,4 @@
 <br>
-<div class="text-center text-uppercase font-weight-bold" *ngIf="!formCreateStatus">
-  <span style="font-size: 24px">Danh sách câu hỏi</span>
-</div>
 <router-outlet></router-outlet>
 <br>
 <div class="mt-lg-4 container">
@@ -111,6 +108,9 @@
     </div>
   </div>
   <div *ngIf="!formCreateStatus">
+    <div class="text-center text-uppercase font-weight-bold">
+      <span style="font-size: 24px">Danh sách câu hỏi</span>
+    </div>
     <div *ngFor="let question of questionList; index as i">
           <div class="card-body">
             <div class="form-row m-b-55">
@@ -121,7 +121,10 @@
             </div>
             <div class="form-row m-b-55">
               <div class="name">
-                <label class="radio-container m-r-55">A:</label>
+                <label class="radio-container m-r-55">A:
+                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <span class="checkmark"></span>
+                </label>
               </div>
               <div class="value">
                 {{question.answerA}}
@@ -129,7 +132,10 @@
             </div>
             <div class="form-row m-b-55">
               <div class="name">
-                <label class="radio-container m-r-55">B:</label>
+                <label class="radio-container m-r-55">B:
+                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <span class="checkmark"></span>
+                </label>
               </div>
               <div class="value">
                 {{question.answerB}}
@@ -137,7 +143,10 @@
             </div>
             <div class="form-row m-b-55">
               <div class="name">
-                <label class="radio-container m-r-55">C:</label>
+                <label class="radio-container m-r-55">C:
+                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <span class="checkmark"></span>
+                </label>
               </div>
               <div class="value">
                 {{question.answerC}}
@@ -145,7 +154,10 @@
             </div>
             <div class="form-row m-b-55">
               <div class="name">
-                <label class="radio-container m-r-55">D:</label>
+                <label class="radio-container m-r-55">D:
+                  <input type="radio" name="correctAnswer{{i+1}}">
+                  <span class="checkmark"></span>
+                </label>
               </div>
               <div class="value">
                 {{question.answerD}}
