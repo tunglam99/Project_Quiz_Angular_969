@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faSave, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -16,9 +16,12 @@ export class CategoryListComponent implements OnInit {
     name: new FormControl('', Validators.required)
   });
   recycleButton = faTrashAlt;
+  editButton = faEdit;
+  saveButton = faSave;
   failMessage: string;
   successMessage: string;
   flagMessage: number;
+  currentCategory: Category;
 
   constructor(private categoryService: CategoryService,
               private modalService: NgbModal) {
@@ -68,5 +71,35 @@ export class CategoryListComponent implements OnInit {
       this.flagMessage = 2;
       this.failMessage = 'Thất bại';
     });
+  }
+
+  getCategoryDetail(id: number) {
+    this.categoryService.getCategory(id).subscribe(result => {
+      this.currentCategory = result;
+    }, () => {
+      this.flagMessage = 4;
+      this.failMessage = 'Lỗi không tìm thấy danh mục có id = ' + id;
+    });
+  }
+
+  updateCategory(id: number) {
+    const category: Category = {
+      id: this.currentCategory.id,
+      name: this.categoryForm.value.name
+    };
+    this.categoryService.updateCategory(category, id).subscribe(() => {
+      this.flagMessage = 3;
+      this.categoryForm.reset();
+      this.getCategoryList();
+      this.successMessage = 'Thành công';
+    }, () => {
+      this.flagMessage = 4;
+      this.failMessage = 'Thất bại';
+    });
+  }
+
+  updateCategoryForm(id: number, content) {
+    this.getCategoryDetail(id);
+    this.openVerticallyCentered(content);
   }
 }
