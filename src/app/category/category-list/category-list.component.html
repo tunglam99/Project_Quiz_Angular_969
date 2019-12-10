@@ -49,10 +49,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div *ngIf="flagMessage == 3" class="alert alert-success text-center">
-        <p>{{successMessage}}</p>
-      </div>
-      <div *ngIf="flagMessage == 4" class="alert alert-danger text-center">
+      <div *ngIf="flagMessage == 3" class="alert alert-danger text-center">
         <p>{{failMessage}}</p>
       </div>
       <div class="modal-body">

@@ -88,12 +88,11 @@ export class CategoryListComponent implements OnInit {
       name: this.categoryForm.value.name
     };
     this.categoryService.updateCategory(category, id).subscribe(() => {
-      this.flagMessage = 3;
       this.categoryForm.reset();
       this.getCategoryList();
-      this.successMessage = 'Thành công';
+      this.close();
     }, () => {
-      this.flagMessage = 4;
+      this.flagMessage = 3;
       this.failMessage = 'Thất bại';
     });
   }
