@@ -13,10 +13,16 @@ export class QuestionService {
 
   constructor(private http: HttpClient) {
   }
+
   listQuestion(): Observable<Question[]> {
     return this.http.get<Question[]>(API_URL + '/questions');
   }
+
   createQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(API_URL + `/questions`, question);
+  }
+
+  findAllQuestionByCategory(): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + 'questions');
   }
 }
