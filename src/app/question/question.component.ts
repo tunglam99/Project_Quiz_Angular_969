@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../model/question';
 import {TypeOfQuestionService} from '../service/type-of-question.service';
 import {TypeOfQuestion} from '../model/type-of-question';
+import {CategoryService} from '../service/category.service';
+import {Category} from '../model/category';
 
 @Component({
   selector: 'app-question',
@@ -13,6 +15,7 @@ import {TypeOfQuestion} from '../model/type-of-question';
 export class QuestionComponent implements OnInit {
   questionList: Question[] = [];
   typeOfQuestionList: TypeOfQuestion[] = [];
+  categoryList: Category[] = [];
   questionForm: FormGroup = new FormGroup({
     quiz: new FormControl('', Validators.required),
     answerA: new FormControl('', Validators.required),
@@ -27,10 +30,12 @@ export class QuestionComponent implements OnInit {
   formCreateStatus: boolean;
 
   constructor(private questionService: QuestionService,
-              private typeOfQuestionService: TypeOfQuestionService) {
+              private typeOfQuestionService: TypeOfQuestionService,
+              private categoryService: CategoryService) {
     this.formCreateStatus = false;
     this.getQuestionList();
     this.getTypeOfQuestionList();
+    this.getCategoryList();
   }
 
   ngOnInit() {
@@ -75,6 +80,12 @@ export class QuestionComponent implements OnInit {
   getTypeOfQuestionList() {
     this.typeOfQuestionService.listTypeOfQuestion().subscribe(result => {
       this.typeOfQuestionList = result;
+    });
+  }
+
+  getCategoryList() {
+    this.categoryService.listCategory().subscribe(result => {
+      this.categoryList = result;
     });
   }
 }
