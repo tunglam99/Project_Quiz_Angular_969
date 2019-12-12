@@ -1,5 +1,3 @@
-import {TypeOfQuestion} from './type-of-question';
-
 export interface Question {
 id: number;
 quiz: string;
@@ -9,4 +7,5 @@ answerC: string;
 answerD: string;
 correctAnswer: string;
 typeOfQuestion ?: any;
+category ?: any;
 }

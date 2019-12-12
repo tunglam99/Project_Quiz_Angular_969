@@ -20,7 +20,8 @@ export class QuestionComponent implements OnInit {
     answerC: new FormControl('', Validators.required),
     answerD: new FormControl('', Validators.required),
     correctAnswer: new FormControl('', Validators.required),
-    typeOfQuestion: new FormControl('')
+    typeOfQuestion: new FormControl(''),
+    category: new FormControl('')
   });
   failMessage: string;
   formCreateStatus: boolean;
@@ -50,6 +51,9 @@ export class QuestionComponent implements OnInit {
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
         id: this.questionForm.value.typeOfQuestion
+      },
+      category: {
+        id: this.questionForm.value.category
       }
     };
     this.questionService.createQuestion(question).subscribe(() => {
