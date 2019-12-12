@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../service/question.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../model/question';
+import {TypeOfQuestionService} from '../service/type-of-question.service';
+import {TypeOfQuestion} from '../model/type-of-question';
 
 @Component({
   selector: 'app-question',
@@ -10,6 +12,7 @@ import {Question} from '../model/question';
 })
 export class QuestionComponent implements OnInit {
   questionList: Question[] = [];
+  typeOfQuestionList: TypeOfQuestion[] = [];
   questionForm: FormGroup = new FormGroup({
     quiz: new FormControl('', Validators.required),
     answerA: new FormControl('', Validators.required),
@@ -17,19 +20,25 @@ export class QuestionComponent implements OnInit {
     answerC: new FormControl('', Validators.required),
     answerD: new FormControl('', Validators.required),
     correctAnswer: new FormControl('', Validators.required),
+    typeOfQuestion: new FormControl('')
   });
   failMessage: string;
   formCreateStatus: boolean;
-  constructor(private questionService: QuestionService) {
+
+  constructor(private questionService: QuestionService,
+              private typeOfQuestionService: TypeOfQuestionService) {
     this.formCreateStatus = false;
     this.getQuestionList();
+    this.getTypeOfQuestionList();
   }
 
   ngOnInit() {
   }
+
   onClickCreate() {
     this.formCreateStatus = !this.formCreateStatus;
   }
+
   addQuestion() {
     const question: Question = {
       id: this.questionForm.value.id,
@@ -39,6 +48,9 @@ export class QuestionComponent implements OnInit {
       answerC: this.questionForm.value.answerC,
       answerD: this.questionForm.value.answerD,
       correctAnswer: this.questionForm.value.correctAnswer,
+      typeOfQuestion: {
+        id: this.questionForm.value.typeOfQuestion
+      }
     };
     this.questionService.createQuestion(question).subscribe(() => {
       this.questionList.push(question);
@@ -53,6 +65,12 @@ export class QuestionComponent implements OnInit {
   getQuestionList() {
     this.questionService.listQuestion().subscribe(result => {
       this.questionList = result;
+    });
+  }
+
+  getTypeOfQuestionList() {
+    this.typeOfQuestionService.listTypeOfQuestion().subscribe(result => {
+      this.typeOfQuestionList = result;
     });
   }
 }
