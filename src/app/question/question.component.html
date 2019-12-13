@@ -14,14 +14,13 @@
           </div>
           <div class="card-body">
             <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
-
               <div class="form-row m-b-55">
                 <div class="col-6">
                   <div class="name">
                     Danh mục:
                   </div>
                   <div class="value">
-                    <select class="custom-select custom-select-sm" formControlName="typeOfQuestion">
+                    <select class="custom-select custom-select-sm" formControlName="category">
                       <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
@@ -139,7 +138,7 @@
         <div class="form-row m-b-55">
           <div class="name">Câu hỏi {{i + 1}}:</div>
           <div class="value">
-            {{question.quiz}}
+            <span [textContent]="question.quiz"></span>
           </div>
         </div>
         <div class="form-row m-b-55">
