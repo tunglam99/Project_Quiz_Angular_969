@@ -6,6 +6,8 @@ import {TypeOfQuestionService} from '../service/type-of-question.service';
 import {TypeOfQuestion} from '../model/type-of-question';
 import {CategoryService} from '../service/category.service';
 import {Category} from '../model/category';
+import {AnswerService} from '../service/answer.service';
+import {Answer} from '../model/answer';
 
 @Component({
   selector: 'app-question',
@@ -16,26 +18,30 @@ export class QuestionComponent implements OnInit {
   questionList: Question[] = [];
   typeOfQuestionList: TypeOfQuestion[] = [];
   categoryList: Category[] = [];
+  answerList: Answer[] = [];
   questionForm: FormGroup = new FormGroup({
     quiz: new FormControl('', Validators.required),
-    answerA: new FormControl('', Validators.required),
-    answerB: new FormControl('', Validators.required),
-    answerC: new FormControl('', Validators.required),
-    answerD: new FormControl('', Validators.required),
     correctAnswer: new FormControl('', Validators.required),
     typeOfQuestion: new FormControl(''),
     category: new FormControl('')
   });
+  answerForm: FormGroup = new FormGroup({
+    content: new FormControl('', Validators.required)
+  });
   failMessage: string;
   formCreateStatus: boolean;
+  showCreateAnswerForm: boolean;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private answerService: AnswerService) {
     this.formCreateStatus = false;
+    this.showCreateAnswerForm = false;
     this.getQuestionList();
     this.getTypeOfQuestionList();
     this.getCategoryList();
+    this.getAnswerList();
   }
 
   ngOnInit() {
@@ -45,14 +51,14 @@ export class QuestionComponent implements OnInit {
     this.formCreateStatus = !this.formCreateStatus;
   }
 
+  onClickShowAnswerForm() {
+    this.showCreateAnswerForm = !this.showCreateAnswerForm;
+  }
+
   addQuestion() {
     const question: Question = {
       id: this.questionForm.value.id,
       quiz: this.questionForm.value.quiz,
-      answerA: this.questionForm.value.answerA,
-      answerB: this.questionForm.value.answerB,
-      answerC: this.questionForm.value.answerC,
-      answerD: this.questionForm.value.answerD,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
         id: this.questionForm.value.typeOfQuestion
@@ -86,6 +92,26 @@ export class QuestionComponent implements OnInit {
   getCategoryList() {
     this.categoryService.listCategory().subscribe(result => {
       this.categoryList = result;
+    });
+  }
+
+  getAnswerList() {
+    this.answerService.listAnswer().subscribe(result => {
+      this.answerList = result;
+    });
+  }
+
+  addAnswer() {
+    const answer: Answer = {
+      id: this.answerForm.value.id,
+      content: this.answerForm.value.content
+    };
+    this.answerService.createAnswer(answer).subscribe(() => {
+      this.answerList.push(answer);
+      this.answerForm.reset();
+      this.showCreateAnswerForm = false;
+    }, () => {
+      this.failMessage = 'Tạo mới thất bại';
     });
   }
 }

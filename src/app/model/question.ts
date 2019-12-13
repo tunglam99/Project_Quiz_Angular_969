@@ -1,10 +1,7 @@
 export interface Question {
 id: number;
 quiz: string;
-answerA: string;
-answerB: string;
-answerC: string;
-answerD: string;
+answers ?: any[];
 correctAnswer: string;
 typeOfQuestion ?: any;
 category ?: any;
