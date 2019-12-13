@@ -26,7 +26,8 @@ export class QuestionComponent implements OnInit {
     category: new FormControl('')
   });
   answerForm: FormGroup = new FormGroup({
-    content: new FormControl('', Validators.required)
+    content: new FormControl('', Validators.required),
+    question: new FormControl('')
   });
   failMessage: string;
   formCreateStatus: boolean;
