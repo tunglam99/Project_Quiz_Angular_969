@@ -32,6 +32,7 @@ export class QuestionComponent implements OnInit {
   failMessage: string;
   formCreateStatus: boolean;
   showCreateAnswerForm: boolean;
+  currentId: number;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -46,6 +47,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentId = this.questionList.length + 1;
   }
 
   onClickCreate() {
@@ -54,11 +56,12 @@ export class QuestionComponent implements OnInit {
 
   onClickShowAnswerForm() {
     this.showCreateAnswerForm = !this.showCreateAnswerForm;
+    this.addQuestion();
   }
 
   addQuestion() {
     const question: Question = {
-      id: this.questionForm.value.id,
+      id: this.currentId,
       quiz: this.questionForm.value.quiz,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
@@ -70,9 +73,9 @@ export class QuestionComponent implements OnInit {
     };
     this.questionService.createQuestion(question).subscribe(() => {
       this.questionList.push(question);
-      this.questionForm.reset();
+      // this.questionForm.reset();
       this.getQuestionList();
-      this.formCreateStatus = false;
+      // this.formCreateStatus = false;
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
     });
@@ -105,7 +108,10 @@ export class QuestionComponent implements OnInit {
   addAnswer() {
     const answer: Answer = {
       id: this.answerForm.value.id,
-      content: this.answerForm.value.content
+      content: this.answerForm.value.content,
+      question: {
+        id: this.currentId
+      }
     };
     this.answerService.createAnswer(answer).subscribe(() => {
       this.answerList.push(answer);

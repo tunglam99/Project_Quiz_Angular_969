@@ -26,7 +26,11 @@ export class QuestionService {
     return this.http.get<Question>(API_URL + `questions/${id}`);
   }
 
-  findAllQuestionByCategory(): Observable<Question[]> {
-    return this.http.get<Question[]>(API_URL + 'questions');
+  updateQuestion(id: number, question: Question) {
+    return this.http.put<Question>(API_URL + `questions/${id}`, question);
+  }
+
+  deleteQuestion(id: number) {
+    return this.http.delete<Question>(API_URL + `questions/${id}`);
   }
 }
