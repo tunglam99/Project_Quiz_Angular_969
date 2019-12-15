@@ -32,7 +32,7 @@ export class QuestionComponent implements OnInit {
   failMessage: string;
   formCreateStatus: boolean;
   showCreateAnswerForm: boolean;
-  idAutoIncrease: number;
+  questionCurrentId: number;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -43,14 +43,13 @@ export class QuestionComponent implements OnInit {
     this.getQuestionList();
     this.getTypeOfQuestionList();
     this.getCategoryList();
-    this.getAnswerList();
   }
 
   ngOnInit() {
   }
 
   onClickCreate() {
-    this.idAutoIncrease = this.questionList.length + 1;
+    this.questionCurrentId = this.questionList.length + 1;
     this.formCreateStatus = !this.formCreateStatus;
   }
 
@@ -61,7 +60,7 @@ export class QuestionComponent implements OnInit {
 
   addQuestion() {
     const question: Question = {
-      id: this.idAutoIncrease,
+      id: this.questionCurrentId,
       quiz: this.questionForm.value.quiz,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
@@ -77,6 +76,7 @@ export class QuestionComponent implements OnInit {
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
     });
+    this.getAnswerList();
   }
 
   updateQuestion() {
@@ -86,6 +86,7 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestionList() {
+    console.log(this.questionCurrentId);
     this.questionService.listQuestion().subscribe(result => {
       this.questionList = result;
     });
@@ -104,7 +105,8 @@ export class QuestionComponent implements OnInit {
   }
 
   getAnswerList() {
-    this.answerService.listAnswer().subscribe(result => {
+    this.answerService.listAnswerByQuestion(this.questionCurrentId).subscribe(result => {
+      console.log(this.questionCurrentId);
       this.answerList = result;
     });
   }
@@ -114,7 +116,7 @@ export class QuestionComponent implements OnInit {
       id: this.answerForm.value.id,
       content: this.answerForm.value.content,
       question: {
-        id: this.idAutoIncrease
+        id: this.questionCurrentId
       }
     };
     this.answerService.createAnswer(answer).subscribe(() => {
