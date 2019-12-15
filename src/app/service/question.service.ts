@@ -22,8 +22,8 @@ export class QuestionService {
     return this.http.post<Question>(API_URL + `/questions`, question);
   }
 
-  getQuestion(quiz: string): Observable<Question> {
-    return this.http.get<Question>(API_URL + `questions/${quiz}`);
+  getQuestion(id: number): Observable<Question> {
+    return this.http.get<Question>(API_URL + `questions/${id}`);
   }
 
   findAllQuestionByCategory(): Observable<Question[]> {
