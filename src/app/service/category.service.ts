@@ -3,7 +3,6 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Category} from '../model/category';
 import {Observable} from 'rxjs';
-import {AuthenticationService} from './authentication.service';
 
 const API_URL = `${environment.apiUrl}`;
 

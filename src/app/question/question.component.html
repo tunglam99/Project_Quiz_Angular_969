@@ -13,12 +13,35 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion()" *ngIf="formCreateStatus">
+              <div class="form-row m-b-55">
+                <div class="col-6">
+                  <div class="name">
+                    Danh mục:
+                  </div>
+                  <div class="value">
+                    <select class="custom-select custom-select-sm" formControlName="category">
+                      <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="name">
+                    Loại câu hỏi:
+                  </div>
+                  <div class="value">
+                    <select class="custom-select custom-select-sm" formControlName="typeOfQuestion">
+                      <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                              [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div class="form-row m-b-55">
                 <div class="name">Câu hỏi:</div>
                 <div class="value">
                   <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" formControlName="quiz">
+                    <ejs-richtexteditor formControlName="quiz"></ejs-richtexteditor>
                   </div>
                 </div>
                 <div class="alert alert-danger" role="alert"
@@ -26,80 +49,73 @@
                   Không được bỏ trống ô câu hỏi
                 </div>
               </div>
-              <div class="form-row m-b-55">
+              <div class="form-row m-b-55" *ngFor="let answer of answerList">
                 <div class="name">
-                  <label class="radio-container m-r-55">A:
-                    <input type="radio" formControlName="correctAnswer" value="A">
+                  <label class="radio-container m-r-55">
+                    <input type="radio" formControlName="correctAnswer" [value]="answer.content">
                     <span class="checkmark"></span>
                   </label>
                 </div>
                 <div class="value">
                   <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" formControlName="answerA">
+                    <span>{{answer.content}}</span>
                   </div>
                 </div>
-                <div class="alert alert-danger" role="alert"
-                     *ngIf="questionForm.get('answerA').hasError('required') && questionForm.get('answerA').touched">
-                  Không được bỏ trống ô này
+              </div>
+              <div *ngIf="!showCreateAnswerForm">
+                <div class="form-row m-b-55">
+                  <div class="name">
+                    <label class="radio-container m-r-55">
+                      <input type="radio" [attr.disabled]="true">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="value row">
+                    <div class="input-group col-11">
+                      <input class="input--style-5" placeholder="câu trả lời" type="text" [attr.disabled]="true">
+                    </div>
+                    <div class="col-1 mt-sm-2">
+                      <button (click)="onClickShowAnswerForm()">
+                        <fa-icon [icon]="plusIcon" size="lg"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-row m-b-55">
-                <div class="name">
-                  <label class="radio-container m-r-55">B:
-                    <input type="radio" formControlName="correctAnswer" value="B">
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="value">
-                  <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" formControlName="answerB">
+                <form [formGroup]="answerForm" (ngSubmit)="addAnswer()" *ngIf="showCreateAnswerForm">
+                  <div class="form-row m-b-55">
+                    <div class="name">Đáp án:</div>
+                    <div class="value">
+                      <div class="input-group">
+                        <input class="input--style-5" type="text" formControlName="content">
+                      </div>
+                    </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="answerForm.get('content').hasError('required') && answerForm.get('content').touched">
+                      Điền đáp án
+                    </div>
                   </div>
-                </div>
-                <div class="alert alert-danger" role="alert"
-                     *ngIf="questionForm.get('answerB').hasError('required') && questionForm.get('answerB').touched">
-                  Không được bỏ trống ô này
-                </div>
-              </div>
-              <div class="form-row m-b-55">
-                <div class="name">
-                  <label class="radio-container m-r-55">C:
-                    <input type="radio" formControlName="correctAnswer" value="C">
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="value">
-                  <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" formControlName="answerC">
+                  <div class="text-center">
+                    <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
                   </div>
-                </div>
+                </form>
                 <div class="alert alert-danger" role="alert"
-                     *ngIf="questionForm.get('answerC').hasError('required') && questionForm.get('answerC').touched">
-                  Không được bỏ trống ô này
+                     *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
+                  Hãy chọn 1 đáp án đúng
                 </div>
               </div>
-              <div class="form-row m-b-55">
-                <div class="name">
-                  <label class="radio-container m-r-55">D:
-                    <input type="radio" formControlName="correctAnswer" value="D">
-                    <span class="checkmark"></span>
-                  </label>
+              <div class="row">
+                <div class="col-6 text-center">
+                  <button class="btn btn--radius-2 btn--red" type="submit">
+                    <fa-icon [icon]="saveIcon" size="lg"></fa-icon>
+                  </button>
                 </div>
-                <div class="value">
-                  <div class="input-group">
-                    <input class="input--style-5 form-control" type="text" formControlName="answerD">
-                  </div>
+                <div class="col-6 text-center">
+                  <button class="btn btn--radius-2 btn--red" (click)="deleteQuestion()">
+                    <fa-icon [icon]="crossIcon" size="lg"></fa-icon>
+                  </button>
                 </div>
-                <div class="alert alert-danger" role="alert"
-                     *ngIf="questionForm.get('answerD').hasError('required') && questionForm.get('answerD').touched">
-                  Không được bỏ trống ô này
-                </div>
-              </div>
-              <div class="alert alert-danger" role="alert"
-                   *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
-                Hãy chọn 1 đáp án đúng
-              </div>
-              <div class="text-center">
-                <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
               </div>
             </form>
           </div>
@@ -108,63 +124,67 @@
     </div>
   </div>
   <div *ngIf="!formCreateStatus">
-    <div class="text-center text-uppercase font-weight-bold">
-      <span style="font-size: 24px">Danh sách câu hỏi</span>
-    </div>
-    <div *ngFor="let question of questionList; index as i">
-          <div class="card-body">
-            <div class="form-row m-b-55">
-              <div class="name">Câu hỏi {{i + 1}}:</div>
-              <div class="value">
-                {{question.quiz}}
-              </div>
-            </div>
-            <div class="form-row m-b-55">
-              <div class="name">
-                <label class="radio-container m-r-55">A:
-                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='A')">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="value">
-                {{question.answerA}}
-              </div>
-            </div>
-            <div class="form-row m-b-55">
-              <div class="name">
-                <label class="radio-container m-r-55">B:
-                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='B')">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="value">
-                {{question.answerB}}
-              </div>
-            </div>
-            <div class="form-row m-b-55">
-              <div class="name">
-                <label class="radio-container m-r-55">C:
-                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='C')">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="value">
-                {{question.answerC}}
-              </div>
-            </div>
-            <div class="form-row m-b-55">
-              <div class="name">
-                <label class="radio-container m-r-55">D:
-                  <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true" [checked]="(question.correctAnswer=='D')">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="value">
-                {{question.answerD}}
-              </div>
-            </div>
-          </div>
-        </div>
+    <!--    <div class="text-center text-uppercase font-weight-bold">-->
+    <!--      <span style="font-size: 24px">Danh sách câu hỏi</span>-->
+    <!--    </div>-->
+    <!--    <div class="card-body">-->
+    <!--      <div *ngFor="let question of questionList; index as i">-->
+    <!--        <div class="form-row m-b-55">-->
+    <!--          <div class="name">Câu hỏi {{i + 1}}:</div>-->
+    <!--          <div class="value">-->
+    <!--            <span [textContent]="question.quiz"></span>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="form-row m-b-55">-->
+    <!--          <div class="name">-->
+    <!--            <label class="radio-container m-r-55">A:-->
+    <!--              <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true"-->
+    <!--                     [checked]="(question.correctAnswer=='A')">-->
+    <!--              <span class="checkmark"></span>-->
+    <!--            </label>-->
+    <!--          </div>-->
+    <!--          <div class="value">-->
+    <!--            {{question.answerA}}-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="form-row m-b-55">-->
+    <!--          <div class="name">-->
+    <!--            <label class="radio-container m-r-55">B:-->
+    <!--              <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true"-->
+    <!--                     [checked]="(question.correctAnswer=='B')">-->
+    <!--              <span class="checkmark"></span>-->
+    <!--            </label>-->
+    <!--          </div>-->
+    <!--          <div class="value">-->
+    <!--            {{question.answerB}}-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="form-row m-b-55">-->
+    <!--          <div class="name">-->
+    <!--            <label class="radio-container m-r-55">C:-->
+    <!--              <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true"-->
+    <!--                     [checked]="(question.correctAnswer=='C')">-->
+    <!--              <span class="checkmark"></span>-->
+    <!--            </label>-->
+    <!--          </div>-->
+    <!--          <div class="value">-->
+    <!--            {{question.answerC}}-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="form-row m-b-55">-->
+    <!--          <div class="name">-->
+    <!--            <label class="radio-container m-r-55">D:-->
+    <!--              <input type="radio" name="correctAnswer{{i+1}}" [attr.disabled]="true"-->
+    <!--                     [checked]="(question.correctAnswer=='D')">-->
+    <!--              <span class="checkmark"></span>-->
+    <!--            </label>-->
+    <!--          </div>-->
+    <!--          <div class="value">-->
+    <!--            {{question.answerD}}-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="text-center" *ngIf="!formCreateStatus" (click)="onClickCreate()">
       <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới câu hỏi</button>
     </div>
