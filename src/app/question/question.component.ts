@@ -8,6 +8,7 @@ import {CategoryService} from '../service/category.service';
 import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
+import {faPlus, faSave, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-question',
@@ -33,6 +34,9 @@ export class QuestionComponent implements OnInit {
   formCreateStatus: boolean;
   showCreateAnswerForm: boolean;
   questionCurrentId: number;
+  crossIcon = faTimes;
+  plusIcon = faPlus;
+  saveIcon = faSave;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -85,8 +89,17 @@ export class QuestionComponent implements OnInit {
     this.formCreateStatus = false;
   }
 
+  deleteQuestion() {
+    this.questionService.deleteQuestion(this.questionForm.value.id).subscribe(() => {
+      this.getQuestionList();
+      this.questionForm.reset();
+      this.formCreateStatus = false;
+    }, error => {
+      console.log(error);
+    });
+  }
+
   getQuestionList() {
-    console.log(this.questionCurrentId);
     this.questionService.listQuestion().subscribe(result => {
       this.questionList = result;
     });
@@ -106,7 +119,6 @@ export class QuestionComponent implements OnInit {
 
   getAnswerList() {
     this.answerService.listAnswerByQuestion(this.questionCurrentId).subscribe(result => {
-      console.log(this.questionCurrentId);
       this.answerList = result;
     });
   }
