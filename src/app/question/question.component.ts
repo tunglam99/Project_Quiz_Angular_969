@@ -32,7 +32,7 @@ export class QuestionComponent implements OnInit {
   failMessage: string;
   formCreateStatus: boolean;
   showCreateAnswerForm: boolean;
-  currentId: number;
+  idAutoIncrease: number;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -47,10 +47,10 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentId = this.questionList.length + 1;
   }
 
   onClickCreate() {
+    this.idAutoIncrease = this.questionList.length + 1;
     this.formCreateStatus = !this.formCreateStatus;
   }
 
@@ -61,7 +61,7 @@ export class QuestionComponent implements OnInit {
 
   addQuestion() {
     const question: Question = {
-      id: this.currentId,
+      id: this.idAutoIncrease,
       quiz: this.questionForm.value.quiz,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
@@ -73,12 +73,16 @@ export class QuestionComponent implements OnInit {
     };
     this.questionService.createQuestion(question).subscribe(() => {
       this.questionList.push(question);
-      // this.questionForm.reset();
       this.getQuestionList();
-      // this.formCreateStatus = false;
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
     });
+  }
+
+  updateQuestion() {
+    this.addQuestion();
+    this.questionForm.reset();
+    this.formCreateStatus = false;
   }
 
   getQuestionList() {
@@ -110,7 +114,7 @@ export class QuestionComponent implements OnInit {
       id: this.answerForm.value.id,
       content: this.answerForm.value.content,
       question: {
-        id: this.currentId
+        id: this.idAutoIncrease
       }
     };
     this.answerService.createAnswer(answer).subscribe(() => {

@@ -13,7 +13,7 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="addQuestion()" *ngIf="formCreateStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion()" *ngIf="formCreateStatus">
               <div class="form-row m-b-55">
                 <div class="col-6">
                   <div class="name">
