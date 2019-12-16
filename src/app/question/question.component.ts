@@ -149,4 +149,12 @@ export class QuestionComponent implements OnInit {
       this.failMessage = 'Tạo mới thất bại';
     });
   }
+
+  deleteAnswer(id: number) {
+    this.answerService.deleteAnswer(id).subscribe(() => {
+      this.getAnswerList();
+    }, () => {
+      this.failMessage = 'Lỗi khi xóa đáp án có id = ' + id;
+    });
+  }
 }

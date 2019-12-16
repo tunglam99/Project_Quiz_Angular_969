@@ -23,14 +23,14 @@ export class AnswerService {
   }
 
   updateAnswer(answer: Answer, id: number): Observable<Answer> {
-    return this.http.put<Answer>(API_URL + '/answers', answer);
+    return this.http.put<Answer>(API_URL + `/answers/${id}`, answer);
   }
 
   deleteAnswer(id: number): Observable<Answer> {
-    return this.http.delete<Answer>(API_URL + '/answers');
+    return this.http.delete<Answer>(API_URL + `/answers/${id}`);
   }
 
   getAnswer(id: number): Observable<Answer> {
-    return this.http.get<Answer>(API_URL + '/answers');
+    return this.http.get<Answer>(API_URL + `/answers/${id}`);
   }
 }
