@@ -8,7 +8,7 @@ import {CategoryService} from '../service/category.service';
 import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
-import {faPlus, faSave, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faPlus, faSave, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-question',
@@ -39,6 +39,7 @@ export class QuestionComponent implements OnInit {
   crossIcon = faTimes;
   plusIcon = faPlus;
   saveIcon = faSave;
+  editIcon = faEdit;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -62,7 +63,6 @@ export class QuestionComponent implements OnInit {
 
   onClickShowAnswerForm() {
     this.showCreateAnswerForm = !this.showCreateAnswerForm;
-    this.addQuestion();
   }
 
   addQuestion() {
@@ -133,6 +133,7 @@ export class QuestionComponent implements OnInit {
   }
 
   addAnswer() {
+    this.addQuestion();
     const answer: Answer = {
       id: this.answerForm.value.id,
       content: this.answerForm.value.content,
