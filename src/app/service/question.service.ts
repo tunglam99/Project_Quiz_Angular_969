@@ -18,6 +18,10 @@ export class QuestionService {
     return this.http.get<Question[]>(API_URL + '/questions');
   }
 
+  listQuestionStatusIsTrue(): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue');
+  }
+
   createQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(API_URL + `/questions`, question);
   }

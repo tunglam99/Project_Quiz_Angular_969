@@ -16,6 +16,7 @@ import {faPlus, faSave, faTimes} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
+  questionStatusIsTrueList: Question[] = [];
   questionList: Question[] = [];
   typeOfQuestionList: TypeOfQuestion[] = [];
   categoryList: Category[] = [];
@@ -47,6 +48,7 @@ export class QuestionComponent implements OnInit {
     this.getQuestionList();
     this.getTypeOfQuestionList();
     this.getCategoryList();
+    this.getQuestionStatusIsTrue();
   }
 
   ngOnInit() {
@@ -75,7 +77,7 @@ export class QuestionComponent implements OnInit {
       }
     };
     this.questionService.createQuestion(question).subscribe(() => {
-      this.questionList.push(question);
+      this.questionStatusIsTrueList.push(question);
       this.getQuestionList();
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
@@ -102,6 +104,12 @@ export class QuestionComponent implements OnInit {
   getQuestionList() {
     this.questionService.listQuestion().subscribe(result => {
       this.questionList = result;
+    });
+  }
+
+  getQuestionStatusIsTrue() {
+    this.questionService.listQuestionStatusIsTrue().subscribe(result => {
+      this.questionStatusIsTrueList = result;
     });
   }
 
