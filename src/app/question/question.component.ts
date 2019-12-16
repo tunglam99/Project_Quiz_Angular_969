@@ -41,7 +41,6 @@ export class QuestionComponent implements OnInit {
   plusIcon = faPlus;
   saveIcon = faSave;
   editIcon = faEdit;
-
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
@@ -83,7 +82,7 @@ export class QuestionComponent implements OnInit {
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
     });
-    this.getAnswerList();
+    this.getAnswerList(this.questionCurrentId);
   }
 
   updateQuestion() {
@@ -124,8 +123,8 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  getAnswerList() {
-    this.answerService.listAnswerByQuestion(this.questionCurrentId).subscribe(result => {
+  getAnswerList(id: number) {
+    this.answerService.listAnswerByQuestion(id).subscribe(result => {
       this.answerList = result;
     });
   }
@@ -142,7 +141,7 @@ export class QuestionComponent implements OnInit {
       };
       this.answerService.createAnswer(answer).subscribe(() => {
         this.answerList.push(answer);
-        this.getAnswerList();
+        this.getAnswerList(this.questionCurrentId);
         this.answerForm.reset();
         this.showCreateAnswerForm = false;
       }, () => {
@@ -154,7 +153,7 @@ export class QuestionComponent implements OnInit {
 
   deleteAnswer(id: number) {
     this.answerService.deleteAnswer(id).subscribe(() => {
-      this.getAnswerList();
+      this.getAnswerList(this.questionCurrentId);
     }, () => {
       this.failMessage = 'Lỗi khi xóa câu trả lời có id = ' + id;
     });
