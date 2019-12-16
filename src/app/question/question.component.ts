@@ -8,7 +8,6 @@ import {CategoryService} from '../service/category.service';
 import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
-import {faEdit, faPlus, faSave, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-question',
@@ -37,10 +36,6 @@ export class QuestionComponent implements OnInit {
   questionCurrentId: number;
   questionStatus: boolean;
   createFlag: boolean;
-  crossIcon = faTimes;
-  plusIcon = faPlus;
-  saveIcon = faSave;
-  editIcon = faEdit;
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
