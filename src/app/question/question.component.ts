@@ -35,6 +35,7 @@ export class QuestionComponent implements OnInit {
   formCreateStatus: boolean;
   showCreateAnswerForm: boolean;
   questionCurrentId: number;
+  questionStatus: boolean;
   crossIcon = faTimes;
   plusIcon = faPlus;
   saveIcon = faSave;
@@ -68,6 +69,7 @@ export class QuestionComponent implements OnInit {
     const question: Question = {
       id: this.questionCurrentId,
       quiz: this.questionForm.value.quiz,
+      status: this.questionStatus,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
         id: this.questionForm.value.typeOfQuestion
@@ -86,19 +88,18 @@ export class QuestionComponent implements OnInit {
   }
 
   updateQuestion() {
-    this.addQuestion();
-    this.questionForm.reset();
-    this.formCreateStatus = false;
+    this.questionStatus = true;
+
   }
 
   deleteQuestion() {
-    this.questionService.deleteQuestion(this.questionForm.value.id).subscribe(() => {
-      this.getQuestionList();
-      this.questionForm.reset();
-      this.formCreateStatus = false;
-    }, error => {
-      console.log(error);
-    });
+    this.questionStatus = false;
+  }
+
+  submitQuestion() {
+    this.addQuestion();
+    this.questionForm.reset();
+    this.formCreateStatus = false;
   }
 
   getQuestionList() {
