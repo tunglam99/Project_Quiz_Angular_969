@@ -65,7 +65,7 @@
           <br>
           <div class="modal-footer">
             <button type="submit" class="btn btn--radius-2 btn--red">
-              <fa-icon [icon]="saveButton" class="mr-sm-3" size="lg"></fa-icon>
+              <i class="fa fa-save fa-lg"></i>
               Lưu
             </button>
           </div>
@@ -83,10 +83,10 @@
         <th class="text-center">{{category.name}}</th>
         <div class="float-lg-right">
           <button class="btn btn-outline-info mr-lg-4" (click)="updateCategoryForm(category.id,update)">
-            <fa-icon [icon]="editButton" size="lg"></fa-icon>
+            <i class="fa fa-edit fa-lg"></i>
           </button>
           <button class="btn btn-outline-info mr-lg-4" (click)="deleteCategory(category.id)">
-            <fa-icon [icon]="recycleButton" size="lg"></fa-icon>
+            <i class="fa fa-trash fa-lg"></i>
           </button>
         </div>
       </tr>

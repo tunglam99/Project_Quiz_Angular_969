@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
-import {faEdit, faSave, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -15,9 +14,6 @@ export class CategoryListComponent implements OnInit {
   categoryForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required)
   });
-  recycleButton = faTrashAlt;
-  editButton = faEdit;
-  saveButton = faSave;
   failMessage: string;
   successMessage: string;
   flagMessage: number;
