@@ -36,6 +36,7 @@ export class QuestionComponent implements OnInit {
   showCreateAnswerForm: boolean;
   questionCurrentId: number;
   questionStatus: boolean;
+  createFlag: boolean;
   crossIcon = faTimes;
   plusIcon = faPlus;
   saveIcon = faSave;
@@ -54,16 +55,12 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createFlag = false;
   }
 
   onClickCreate() {
     this.questionCurrentId = this.questionList.length + 1;
     this.formCreateStatus = !this.formCreateStatus;
-  }
-
-  onClickShowAnswerForm() {
-    this.showCreateAnswerForm = !this.showCreateAnswerForm;
-    this.addQuestion();
   }
 
   addQuestion() {
@@ -80,6 +77,7 @@ export class QuestionComponent implements OnInit {
       }
     };
     this.questionService.createQuestion(question).subscribe(() => {
+      this.createFlag = true;
       this.questionStatusIsTrueList.push(question);
       this.getQuestionList();
     }, () => {
@@ -90,7 +88,6 @@ export class QuestionComponent implements OnInit {
 
   updateQuestion() {
     this.questionStatus = true;
-
   }
 
   deleteQuestion() {
@@ -134,27 +131,32 @@ export class QuestionComponent implements OnInit {
   }
 
   addAnswer() {
-    const answer: Answer = {
-      id: this.answerForm.value.id,
-      content: this.answerForm.value.content,
-      question: {
-        id: this.questionCurrentId
-      }
-    };
-    this.answerService.createAnswer(answer).subscribe(() => {
-      this.answerList.push(answer);
-      this.answerForm.reset();
-      this.showCreateAnswerForm = false;
-    }, () => {
-      this.failMessage = 'Tạo mới thất bại';
-    });
+    this.addQuestion();
+    if (this.createFlag) {
+      const answer: Answer = {
+        id: this.answerForm.value.id,
+        content: this.answerForm.value.content,
+        question: {
+          id: this.questionCurrentId
+        }
+      };
+      this.answerService.createAnswer(answer).subscribe(() => {
+        this.answerList.push(answer);
+        this.getAnswerList();
+        this.answerForm.reset();
+        this.showCreateAnswerForm = false;
+      }, () => {
+        this.failMessage = 'Tạo câu trả lời thất bại';
+      });
+    }
+
   }
 
   deleteAnswer(id: number) {
     this.answerService.deleteAnswer(id).subscribe(() => {
       this.getAnswerList();
     }, () => {
-      this.failMessage = 'Lỗi khi xóa đáp án có id = ' + id;
+      this.failMessage = 'Lỗi khi xóa câu trả lời có id = ' + id;
     });
   }
 }
