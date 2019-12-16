@@ -63,6 +63,7 @@ export class QuestionComponent implements OnInit {
 
   onClickShowAnswerForm() {
     this.showCreateAnswerForm = !this.showCreateAnswerForm;
+    this.addQuestion();
   }
 
   addQuestion() {
@@ -133,7 +134,6 @@ export class QuestionComponent implements OnInit {
   }
 
   addAnswer() {
-    this.addQuestion();
     const answer: Answer = {
       id: this.answerForm.value.id,
       content: this.answerForm.value.content,

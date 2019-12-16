@@ -74,25 +74,42 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row m-b-55">
-                <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
-                  <div class="form-row m-b-55">
-                    <div class="name col-1">
-                      <label class="radio-container m-r-55">
-                        <input type="radio" [attr.disabled]="true">
-                        <span class="checkmark"></span>
-                      </label>
+              <div *ngIf="!showCreateAnswerForm">
+                <div class="form-row m-b-55">
+                  <div class="name">
+                    <label class="radio-container m-r-55">
+                      <input type="radio" [attr.disabled]="true">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="value row">
+                    <div class="input-group col-11">
+                      <input class="input--style-5" placeholder="câu trả lời" type="text" [attr.disabled]="true">
                     </div>
-                    <div class="value col-10">
-                      <div class="input-group">
-                        <input class="input--style-5" placeholder="câu trả lời" type="text" formControlName="content">
-                      </div>
-                    </div>
-                    <div class="col-1">
-                      <button type="submit">
+                    <div class="col-1 mt-sm-2">
+                      <button (click)="onClickShowAnswerForm()">
                         <fa-icon [icon]="plusIcon" size="lg"></fa-icon>
                       </button>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <form [formGroup]="answerForm" (ngSubmit)="addAnswer()" *ngIf="showCreateAnswerForm">
+                  <div class="form-row m-b-55">
+                    <div class="name">Đáp án:</div>
+                    <div class="value">
+                      <div class="input-group">
+                        <input class="input--style-5" type="text" formControlName="content">
+                      </div>
+                    </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="answerForm.get('content').hasError('required') && answerForm.get('content').touched">
+                      Điền đáp án
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới</button>
                   </div>
                 </form>
                 <div class="alert alert-danger" role="alert"
