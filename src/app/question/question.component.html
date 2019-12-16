@@ -15,17 +15,7 @@
           <div class="card-body">
             <form [formGroup]="questionForm" (ngSubmit)="submitQuestion()" *ngIf="formCreateStatus">
               <div class="form-row m-b-55">
-                <div class="col-6">
-                  <div class="name">
-                    Danh mục:
-                  </div>
-                  <div class="value">
-                    <select class="custom-select custom-select-sm" formControlName="category">
-                      <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-6">
+                <div class="col-6 text-center">
                   <div class="name">
                     Loại câu hỏi:
                   </div>
@@ -33,6 +23,16 @@
                     <select class="custom-select custom-select-sm" formControlName="typeOfQuestion">
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
                               [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6 text-center">
+                  <div class="name">
+                    Danh mục:
+                  </div>
+                  <div class="value">
+                    <select class="custom-select custom-select-sm" formControlName="category">
+                      <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
                 </div>
