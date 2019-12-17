@@ -80,11 +80,11 @@ export class QuestionComponent implements OnInit {
     this.getAnswerList(this.questionCurrentId);
   }
 
-  updateQuestion() {
+  saveQuestionForm() {
     this.questionStatus = true;
   }
 
-  deleteQuestion() {
+  closeQuestionForm() {
     this.questionStatus = false;
   }
 
