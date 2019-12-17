@@ -9,6 +9,9 @@ import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
 
+const BEST_ANSWER = 'Chọn 1 đáp án đúng';
+const MULTI_ANSWER = 'Chọn nhiều đáp án';
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -37,6 +40,8 @@ export class QuestionComponent implements OnInit {
   questionStatus: boolean;
   createFlag: boolean;
   currentQuestion: Question;
+  currentTypeOfQuestion: TypeOfQuestion;
+  typeOfQuestionFlag: number;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -177,5 +182,22 @@ export class QuestionComponent implements OnInit {
     }, () => {
       this.failMessage = 'Lỗi khi xóa câu trả lời có id = ' + id;
     });
+  }
+
+  getTypeOfQuestion(id: number) {
+    this.typeOfQuestionService.getTypeOfQuestion(id).subscribe(result => {
+      this.currentTypeOfQuestion = result;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  typeOfQuestionForm(id: number) {
+    console.log(id);
+    if (id == 1) {
+      this.typeOfQuestionFlag = 1;
+    } else {
+      this.typeOfQuestionFlag = 2;
+    }
   }
 }
