@@ -4,6 +4,11 @@
     <span style="font-size: 24px">Danh mục câu hỏi</span>
   </div>
   <router-outlet></router-outlet>
+  <button class="btn btn-primary waves-effect waves-light" (click)="openVerticallyCentered(create)">
+    Tạo mới
+    <i class="fa fa-folder-plus fa-lg"></i>
+  </button>
+  <hr>
   <div class="mt-lg-4">
     <ng-template #create let-modal>
       <div class="modal-header">
@@ -32,14 +37,14 @@
           </div>
           <br>
           <div class="modal-footer">
-            <button type="submit" class="btn btn--radius-2 btn--red">Thêm mới</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">
+              <i class="fa fa-save fa-lg"></i>
+              Lưu
+            </button>
           </div>
         </form>
       </div>
     </ng-template>
-
-    <button class="btn btn--radius-2 btn--red" (click)="openVerticallyCentered(create)">Tạo mới danh mục</button>
-    <hr>
   </div>
   <div class="mt-lg-4">
     <ng-template #update let-modal>
