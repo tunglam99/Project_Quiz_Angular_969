@@ -18,7 +18,6 @@ export class CategoryListComponent implements OnInit {
   successMessage: string;
   flagMessage: number;
   currentCategory: Category;
-  deleteButtonFlag: boolean;
 
   constructor(private categoryService: CategoryService,
               private modalService: NgbModal) {
@@ -26,12 +25,12 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.flagMessage = 0;
-    this.deleteButtonFlag = false;
     this.getCategoryList();
   }
 
-  showDeleteConfirmButton() {
-    this.deleteButtonFlag = !this.deleteButtonFlag;
+  showDeleteCategoryForm(id: number, content) {
+    this.getCategoryDetail(id);
+    this.openVerticallyCentered(content);
   }
 
   getCategoryList() {
@@ -43,8 +42,9 @@ export class CategoryListComponent implements OnInit {
   deleteCategory(id: number) {
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategoryList();
-      this.deleteButtonFlag = false;
+      this.close();
     }, () => {
+      this.flagMessage = 5;
       this.failMessage = 'Lỗi khi xóa danh mục có id = ' + id;
     });
   }
@@ -72,7 +72,7 @@ export class CategoryListComponent implements OnInit {
       this.successMessage = 'Thành công';
     }, () => {
       this.flagMessage = 2;
-      this.failMessage = 'Thất bại';
+      this.failMessage = 'Lỗi trong quá trình tạo mới';
     });
   }
 
@@ -96,7 +96,7 @@ export class CategoryListComponent implements OnInit {
       this.close();
     }, () => {
       this.flagMessage = 3;
-      this.failMessage = 'Thất bại';
+      this.failMessage = 'Lỗi trong quá trình cập nhật';
     });
   }
 
