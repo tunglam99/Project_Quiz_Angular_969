@@ -18,6 +18,7 @@ export class CategoryListComponent implements OnInit {
   successMessage: string;
   flagMessage: number;
   currentCategory: Category;
+  deleteButtonFlag: boolean;
 
   constructor(private categoryService: CategoryService,
               private modalService: NgbModal) {
@@ -25,7 +26,12 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.flagMessage = 0;
+    this.deleteButtonFlag = false;
     this.getCategoryList();
+  }
+
+  showDeleteConfirmButton() {
+    this.deleteButtonFlag = !this.deleteButtonFlag;
   }
 
   getCategoryList() {
@@ -37,6 +43,7 @@ export class CategoryListComponent implements OnInit {
   deleteCategory(id: number) {
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategoryList();
+      this.deleteButtonFlag = false;
     }, () => {
       this.failMessage = 'Lỗi khi xóa danh mục có id = ' + id;
     });
