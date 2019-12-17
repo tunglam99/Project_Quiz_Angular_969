@@ -102,7 +102,13 @@
   <div class="mt-lg-4 container-lg">
     <div class="card">
       <div class="card-header">
-        <h5>Danh mục câu hỏi</h5>
+        <span>Danh mục câu hỏi</span>
+        <button type="button"
+                class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right"
+                (click)="openVerticallyCentered(create)">
+                <span
+                  class="fa fa-plus"></span>
+        </button>
       </div>
       <div class="card-block">
         <div class="table-responsive">
@@ -129,18 +135,6 @@
                       class="fa fa-trash"></span></button>
                   </div>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>
-                <button type="button"
-                        class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light ml-lg-4"
-                        (click)="openVerticallyCentered(create)">
-                <span
-                  class="fa fa-plus"></span>
-                </button>
               </td>
             </tr>
             </tbody>

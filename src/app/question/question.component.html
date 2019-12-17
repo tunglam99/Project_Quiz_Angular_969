@@ -118,7 +118,12 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Danh sách câu hỏi</h3>
+            <span>Danh sách câu hỏi</span>
+            <button type="button"
+                    class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right"
+                    *ngIf="!formCreateStatus" (click)="onClickCreate()">
+                <span class="fa fa-plus"></span>
+            </button>
           </div>
           <div class="card-body table-responsive p-0" style="height: 300px;">
             <table class="table table-hover">
@@ -146,17 +151,6 @@
                 </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td>
-                  <button type="button"
-                          class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light ml-lg-4"
-                          *ngIf="!formCreateStatus" (click)="onClickCreate()">
-                <span
-                  class="fa fa-plus"></span>
-                  </button>
-                </td>
-              </tr>
               </tbody>
             </table>
           </div>
