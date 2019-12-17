@@ -60,7 +60,7 @@ export class QuestionComponent implements OnInit {
   addQuestion() {
     const question: Question = {
       id: this.questionCurrentId,
-      quiz: this.questionForm.value.quiz,
+      content: this.questionForm.value.quiz,
       status: this.questionStatus,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {

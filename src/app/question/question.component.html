@@ -45,7 +45,7 @@
                   </div>
                 </div>
                 <div class="alert alert-danger" role="alert"
-                     *ngIf="questionForm.get('quiz').hasError('required') && questionForm.get('quiz').touched">
+                     *ngIf="questionForm.get('content').hasError('required') && questionForm.get('content').touched">
                   Không được bỏ trống ô câu hỏi
                 </div>
               </div>
@@ -136,7 +136,7 @@
               <tbody>
               <tr *ngFor="let question of questionStatusIsTrueList">
                 <td>{{question.id}}</td>
-                <td [innerHTML]="question.quiz"></td>
+                <td [innerHTML]="question.content"></td>
               </tr>
               </tbody>
             </table>
