@@ -21,7 +21,7 @@ export class QuestionComponent implements OnInit {
   categoryList: Category[] = [];
   answerList: Answer[] = [];
   questionForm: FormGroup = new FormGroup({
-    quiz: new FormControl('', Validators.required),
+    content: new FormControl('', Validators.required),
     correctAnswer: new FormControl('', Validators.required),
     typeOfQuestion: new FormControl(''),
     category: new FormControl('')
@@ -36,6 +36,8 @@ export class QuestionComponent implements OnInit {
   questionCurrentId: number;
   questionStatus: boolean;
   createFlag: boolean;
+  currentQuestion: Question;
+
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
@@ -92,6 +94,29 @@ export class QuestionComponent implements OnInit {
     this.addQuestion();
     this.questionForm.reset();
     this.formCreateStatus = false;
+  }
+
+  updateQuestion(id: number) {
+    const question: Question = {
+      status: true,
+      id: this.currentQuestion.id,
+      content: this.questionForm.value.content,
+      correctAnswer: this.questionForm.value.correctAnswer
+    };
+    this.questionService.updateQuestion(id, question).subscribe(() => {
+      this.questionForm.reset();
+      this.getCategoryList();
+    }, () => {
+      this.failMessage = 'Lỗi trong quá trình cập nhật';
+    });
+  }
+
+  getQuestionDetail(id: number) {
+    this.questionService.getQuestion(id).subscribe(result => {
+      this.currentQuestion = result;
+    }, () => {
+      this.failMessage = 'Lỗi không tìm thấy câu hỏi có id = ' + id;
+    });
   }
 
   getQuestionList() {
