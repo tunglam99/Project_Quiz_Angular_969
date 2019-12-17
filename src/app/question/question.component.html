@@ -44,10 +44,6 @@
                     <ejs-richtexteditor formControlName="quiz"></ejs-richtexteditor>
                   </div>
                 </div>
-                <div class="alert alert-danger" role="alert"
-                     *ngIf="questionForm.get('content').hasError('required') && questionForm.get('content').touched">
-                  Không được bỏ trống ô câu hỏi
-                </div>
               </div>
               <div class="form-row m-b-55" *ngFor="let answer of answerList">
                 <div class="name">
@@ -63,14 +59,13 @@
                     </div>
                   </div>
                   <div class="col-1">
-                    <button type="button">
-                      <i class="fa fa-edit fa-lg"></i>
-                    </button>
+                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                            style="float: none;margin: 5px;"><i class="fa fa-edit"></i></button>
                   </div>
                   <div class="col-1">
-                    <button type="button" (click)="deleteAnswer(answer.id)">
-                      <i class="fa fa-times fa-lg"></i>
-                    </button>
+                    <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                            style="float: none;margin: 5px;" (click)="deleteAnswer(answer.id)"><span
+                      class="fa fa-times"></span></button>
                   </div>
                 </div>
               </div>
@@ -89,7 +84,7 @@
                       </div>
                     </div>
                     <div class="col-1">
-                      <button>
+                      <button class="tabledit-edit-button btn btn-primary waves-effect waves-light">
                         <i class="fa fa-plus fa-lg"></i>
                       </button>
                     </div>
@@ -102,12 +97,12 @@
               </div>
               <div class="row">
                 <div class="col-6 text-center">
-                  <button class="btn btn--radius-2 btn--red" type="submit" (click)="updateQuestion()">
+                  <button class="btn btn-primary waves-effect waves-light" type="submit" (click)="updateQuestion()">
                     <i class="fa fa-save fa-lg"></i>
                   </button>
                 </div>
                 <div class="col-6 text-center">
-                  <button class="btn btn--radius-2 btn--red" type="submit" (click)="deleteQuestion()">
+                  <button class="btn btn-danger waves-effect waves-light" type="submit" (click)="deleteQuestion()">
                     <i class="fa fa-times fa-lg"></i>
                   </button>
                 </div>
@@ -137,15 +132,36 @@
               <tr *ngFor="let question of questionStatusIsTrueList">
                 <td>{{question.id}}</td>
                 <td [innerHTML]="question.content"></td>
+                <td style="white-space: nowrap; width: 1%;" class="tabledit-view-mode">
+                  <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                    <div class="btn-group btn-group-sm" style="float: none;">
+                      <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                              style="float: none;margin: 5px;"><span
+                        class="fa fa-edit"></span></button>
+                      <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                              style="float: none;margin: 5px;"><span
+                        class="fa fa-trash"></span></button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <button type="button"
+                          class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light ml-lg-4"
+                          *ngIf="!formCreateStatus" (click)="onClickCreate()">
+                <span
+                  class="fa fa-plus"></span>
+                  </button>
+                </td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div>
-    <div class="mt-sm-2" *ngIf="!formCreateStatus" (click)="onClickCreate()">
-      <button class="btn btn--radius-2 btn--red" type="submit">Tạo mới câu hỏi</button>
     </div>
   </div>
 </div>
