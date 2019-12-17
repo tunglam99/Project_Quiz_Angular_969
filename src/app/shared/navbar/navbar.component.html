@@ -7,32 +7,32 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active mr-sm-3">
         <a class="nav-link" routerLink="">
-          <fa-icon [icon]="homeIcon" size="lg"></fa-icon>
+          <i class="fa fa-home fa-lg"></i>
           Trang chủ<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item mr-sm-3">
         <a class="nav-link" routerLink="/category">
-          <fa-icon [icon]="categoryIcon" size="lg"></fa-icon>
+          <i class="fa fa-list"></i>
           Danh mục</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/question">
-          <fa-icon [icon]="questionIcon" size="lg"></fa-icon>
+          <i class="fa fa-question fa-lg"></i>
           Câu hỏi</a>
       </li>
     </ul>
     <div class="my-2 my-lg-0">
       <ul class="navbar-nav mr-auto" *ngIf="currentUser">
         <li class="nav-item">
-          <a class="nav-link" routerLink="#" (click)="logout()"><fa-icon [icon]="logoutIcon" size="lg"></fa-icon>Đăng xuất</a>
+          <a class="nav-link" routerLink="#" (click)="logout()"><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a>
         </li>
       </ul>
       <ul class="navbar-nav mr-auto" *ngIf="!currentUser">
         <li class="nav-item">
-          <a class="nav-link" routerLink="login"><fa-icon [icon]="loginIcon" size="lg"></fa-icon>Đăng nhập</a>
+          <a class="nav-link" routerLink="login"><i class="fa fa-sign-in fa-lg"></i> Đăng nhập</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="register"><fa-icon [icon]="registerIcon" size="lg"></fa-icon>Đăng ký</a>
+          <a class="nav-link" routerLink="register"><i class="fa fa-user-plus fa-lg"></i> Đăng ký</a>
         </li>
       </ul>
     </div>
