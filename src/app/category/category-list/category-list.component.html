@@ -1,13 +1,7 @@
 <br>
 <div class="container">
-  <div class="text-center text-uppercase font-weight-bold">
-    <span style="font-size: 24px">Danh mục câu hỏi</span>
-  </div>
   <router-outlet></router-outlet>
-  <button class="btn btn-primary waves-effect waves-light" (click)="openVerticallyCentered(create)">
-    Tạo mới
-    <i class="fa fa-folder-plus fa-lg"></i>
-  </button>
+
   <hr>
   <div class="mt-lg-4">
     <ng-template #create let-modal>
@@ -69,7 +63,7 @@
           </div>
           <br>
           <div class="modal-footer">
-            <button type="submit" class="btn btn--radius-2 btn--red">
+            <button type="submit" class="tabledit-edit-button btn btn-primary waves-effect waves-light">
               <i class="fa fa-save fa-lg"></i>
               Lưu
             </button>
@@ -112,6 +106,18 @@
                     class="fa fa-check"></span>
                   </button>
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <button type="button"
+                        class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light ml-lg-4"
+                        (click)="openVerticallyCentered(create)">
+                <span
+                  class="fa fa-plus"></span>
+                </button>
               </td>
             </tr>
             </tbody>
