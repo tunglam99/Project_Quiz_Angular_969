@@ -409,7 +409,6 @@ code {
 }
 
 .page-header.card h5 {
-  color: "Quicksand", sans-serif;
   margin-bottom: 0
 }
 
@@ -418,7 +417,6 @@ code {
 }
 
 .page-header.card .page-header-title i {
-  display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
   float: left;
@@ -461,17 +459,14 @@ code {
 
 .page-header.card .page-block .breadcrumb a {
   font-size: 14px;
-  color: "Quicksand", sans-serif
 }
 
 .page-header.card .page-block .breadcrumb .breadcrumb-item + .breadcrumb-item:before {
   font-family: feather;
   content: "\e844";
-  color: "Quicksand", sans-serif
 }
 
 .page-header.card .page-block .breadcrumb .breadcrumb-item:last-child a {
-  color: "Quicksand", sans-serif;
   font-weight: 600
 }
 
@@ -1059,7 +1054,6 @@ a.bg-danger:focus, a.bg-danger:hover {
   select {
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #fff url(../images/select-arrow.png) no-repeat 95% center
   }
 }
 
@@ -1533,7 +1527,6 @@ a.bg-danger:focus, a.bg-danger:hover {
 }
 
 .d-inline-flex {
-  display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex
 }
@@ -3499,7 +3492,6 @@ table tbody .border-bottom-info td, table tbody .border-bottom-info th, table th
   margin-right: 0;
   border-radius: 4px;
   width: 30px;
-  display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-box-align: center;
@@ -10571,15 +10563,6 @@ td.highlight {
 .search-api .checkbox-fade {
   display: block;
   text-align: center
-}
-
-td.details-control {
-  background: url(../images/details_open.png) no-repeat center center;
-  cursor: pointer
-}
-
-tr.shown td.details-control {
-  background: url(../images/details_close.png) no-repeat center center
 }
 
 #row-delete .selected, #row-select .selected {
