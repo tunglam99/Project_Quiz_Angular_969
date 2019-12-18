@@ -100,17 +100,12 @@
               </div>
               <div *ngIf="typeOfQuestionFlag===2">
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
-                  <div class="border-checkbox-group border-checkbox-group-success">
-                    <input class="border-checkbox" type="checkbox" id="checkbox2" formControlName="correctAnswer"
+                  <div class="row">
+                  <div class="border-checkbox-group border-checkbox-group-success col-10">
+                    <input class="border-checkbox" type="checkbox" id="checkbox2" formControlName="content"
                            [value]="answer.content">
-                    <label class="border-checkbox-label" for="checkbox2"></label>
+                    <label class="border-checkbox-label" for="checkbox2">{{answer.content}}</label>
                   </div>
-                  <div class="value row">
-                    <div class="col-10">
-                      <div class="input-group">
-                        <span>{{answer.content}}</span>
-                      </div>
-                    </div>
                     <div class="col-1">
                       <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                               style="float: none;margin: 5px;"><i class="fa fa-edit"></i></button>
