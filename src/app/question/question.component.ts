@@ -120,6 +120,14 @@ export class QuestionComponent implements OnInit {
     });
   }
 
+  deleteQuestion(id: number) {
+    this.questionService.deleteQuestion(id).subscribe(() => {
+      this.getQuestionStatusIsTrue();
+    }, error => {
+      console.log(error);
+    });
+  }
+
   getQuestionList() {
     this.questionService.listQuestion().subscribe(result => {
       this.questionList = result;
@@ -180,8 +188,8 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  typeOfQuestionForm(id: number) {
-    if (id == 1) {
+  typeOfQuestionForm(id: string) {
+    if (id === '1') {
       this.typeOfQuestionFlag = 1;
     } else {
       this.typeOfQuestionFlag = 2;
