@@ -100,11 +100,10 @@
               </div>
               <div *ngIf="typeOfQuestionFlag===2">
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
-                  <div class="name">
-                    <label class="radio-container m-r-55">
-                      <input type="checkbox" formControlName="correctAnswer" [value]="answer.content">
-                      <span class="checkmark"></span>
-                    </label>
+                  <div class="border-checkbox-group border-checkbox-group-success">
+                    <input class="border-checkbox" type="checkbox" id="checkbox2" formControlName="correctAnswer"
+                           [value]="answer.content">
+                    <label class="border-checkbox-label" for="checkbox2"></label>
                   </div>
                   <div class="value row">
                     <div class="col-10">
@@ -126,11 +125,16 @@
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
                     <div class="form-row m-b-55">
-                      <div class="name col-1">
+                      <div class="name col-1" *ngIf="typeOfQuestionFlag===1">
                         <label class="radio-container m-r-55">
-                          <input type="checkbox" [attr.disabled]="true">
+                          <input type="checkbox" [attr.disabled]="false">
                           <span class="checkmark"></span>
                         </label>
+                      </div>
+                      <div class="name col-1" *ngIf="typeOfQuestionFlag===2">
+                        <div class="border-checkbox-group border-checkbox-group-success">
+                          <input class="border-checkbox" type="checkbox" id="checkbox">
+                        </div>
                       </div>
                       <div class="value col-10">
                         <div class="input-group">

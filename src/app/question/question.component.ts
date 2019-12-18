@@ -9,9 +9,6 @@ import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
 
-const BEST_ANSWER = 'Chọn 1 đáp án đúng';
-const MULTI_ANSWER = 'Chọn nhiều đáp án';
-
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -40,7 +37,6 @@ export class QuestionComponent implements OnInit {
   questionStatus: boolean;
   createFlag: boolean;
   currentQuestion: Question;
-  currentTypeOfQuestion: TypeOfQuestion;
   typeOfQuestionFlag: number;
 
   constructor(private questionService: QuestionService,
@@ -67,7 +63,7 @@ export class QuestionComponent implements OnInit {
   addQuestion() {
     const question: Question = {
       id: this.questionCurrentId,
-      content: this.questionForm.value.quiz,
+      content: this.questionForm.value.content,
       status: this.questionStatus,
       correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
@@ -184,16 +180,7 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  getTypeOfQuestion(id: number) {
-    this.typeOfQuestionService.getTypeOfQuestion(id).subscribe(result => {
-      this.currentTypeOfQuestion = result;
-    }, error => {
-      console.log(error);
-    });
-  }
-
   typeOfQuestionForm(id: number) {
-    console.log(id);
     if (id == 1) {
       this.typeOfQuestionFlag = 1;
     } else {
