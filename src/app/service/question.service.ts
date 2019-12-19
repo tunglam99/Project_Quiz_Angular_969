@@ -27,14 +27,14 @@ export class QuestionService {
   }
 
   getQuestion(id: number): Observable<Question> {
-    return this.http.get<Question>(API_URL + `questions/${id}`);
+    return this.http.get<Question>(API_URL + `/questions/${id}`);
   }
 
   updateQuestion(id: number, question: Question): Observable<Question> {
-    return this.http.put<Question>(API_URL + `questions/${id}`, question);
+    return this.http.put<Question>(API_URL + `/questions/${id}`, question);
   }
 
   deleteQuestion(id: number): Observable<Question> {
-    return this.http.delete<Question>(API_URL + `questions/${id}`);
+    return this.http.delete<Question>(API_URL + `/questions/${id}`);
   }
 }
