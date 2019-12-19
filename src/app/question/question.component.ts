@@ -38,6 +38,8 @@ export class QuestionComponent implements OnInit {
   createFlag: boolean;
   currentQuestion: Question;
   typeOfQuestionFlag: number;
+  currentAnswer: Answer;
+  updateAnswerStatus: boolean;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -45,6 +47,7 @@ export class QuestionComponent implements OnInit {
               private answerService: AnswerService) {
     this.formCreateStatus = false;
     this.showCreateAnswerForm = false;
+    this.updateAnswerStatus = false;
     this.getQuestionList();
     this.getTypeOfQuestionList();
     this.getCategoryList();
@@ -177,7 +180,36 @@ export class QuestionComponent implements OnInit {
         this.failMessage = 'Tạo câu trả lời thất bại';
       });
     }
+  }
 
+  getAnswer(id: number) {
+    this.answerService.getAnswer(id).subscribe(result => {
+      this.currentAnswer = result;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  updateAnswerForm(id: number) {
+    this.getAnswer(id);
+    this.updateAnswerStatus = !this.updateAnswerStatus;
+  }
+
+  updateAnswer(id: number) {
+    const answer: Answer = {
+      id: this.currentAnswer.id,
+      content: this.answerForm.value.content,
+      question: {
+        id: this.questionCurrentId
+      }
+    };
+    this.answerService.updateAnswer(answer, id).subscribe(() => {
+      this.answerForm.reset();
+      this.getAnswerList(this.questionCurrentId);
+      this.updateAnswerStatus = false;
+    }, () => {
+      this.failMessage = 'Lỗi trong quá trình cập nhật';
+    });
   }
 
   deleteAnswer(id: number) {

@@ -31,6 +31,6 @@ export class AnswerService {
   }
 
   getAnswer(id: number): Observable<Answer> {
-    return this.http.get<Answer>(API_URL + `/answers/${id}`);
+    return this.http.get<Answer>(API_URL + `/getAnswer/${id}`);
   }
 }
