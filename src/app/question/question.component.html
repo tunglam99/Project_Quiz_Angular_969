@@ -51,7 +51,7 @@
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                     <div class="name">
                       <label class="radio-container m-r-55">
-                        <input type="radio"  formControlName="correctAnswer" [value]="answer.content">
+                        <input type="radio" formControlName="correctAnswer" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -216,17 +216,20 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(currentQuestion.id)" *ngIf="formUpdateQuestionStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(currentQuestion.id)"
+                  *ngIf="formUpdateQuestionStatus">
               <div class="form-row m-b-55">
                 <div class="col-6 text-center">
                   <div class="name">
                     Loại câu hỏi:
                   </div>
                   <div class="value">
-                    <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
+                    <select class="custom-select custom-select-sm" [value]="questionType"
+                            (click)="typeOfQuestionForm($event.target.value)"
                             formControlName="typeOfQuestion">
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
-                              [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
+                              [value]="typeOfQuestion.id"
+                              [selected]="typeOfQuestion.id === questionType">{{typeOfQuestion.name}}</option>
                     </select>
                   </div>
                 </div>
@@ -235,7 +238,8 @@
                     Danh mục:
                   </div>
                   <div class="value">
-                    <select class="custom-select custom-select-sm" formControlName="category">
+                    <select class="custom-select custom-select-sm" [value]="questionCategory"
+                            formControlName="category">
                       <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
@@ -397,7 +401,8 @@
                   </button>
                 </div>
                 <div class="col-6 text-center">
-                  <button class="btn btn-danger waves-effect waves-light" type="submit" (click)="onClickUpdate(currentQuestion.id)">
+                  <button class="btn btn-danger waves-effect waves-light" type="submit"
+                          (click)="onClickUpdate(currentQuestion.id)">
                     <i class="fa fa-times fa-lg"></i>
                   </button>
                 </div>
