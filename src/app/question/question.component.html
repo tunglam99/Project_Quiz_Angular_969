@@ -2,7 +2,7 @@
 <router-outlet></router-outlet>
 <br>
 <div class="mt-lg-4 container">
-  <div *ngIf="formCreateStatus">
+  <div *ngIf="formCreateQuestionStatus && !formUpdateQuestionStatus">
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <div class="wrapper wrapper--w790">
         <div class="card card-5">
@@ -13,7 +13,7 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="submitQuestion()" *ngIf="formCreateStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="submitQuestion()" *ngIf="formCreateQuestionStatus">
               <div class="form-row m-b-55">
                 <div class="col-6 text-center">
                   <div class="name">
@@ -205,7 +205,210 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!formCreateStatus">
+  <div *ngIf="!formCreateQuestionStatus && formUpdateQuestionStatus">
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+      <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+          <div class="card-heading">
+            <h2 class="title">Tạo mới câu hỏi</h2>
+          </div>
+          <div *ngIf="failMessage" class="alert alert-danger">
+            <p>{{failMessage}}</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(currentQuestion.id)" *ngIf="formUpdateQuestionStatus">
+              <div class="form-row m-b-55">
+                <div class="col-6 text-center">
+                  <div class="name">
+                    Loại câu hỏi:
+                  </div>
+                  <div class="value">
+                    <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
+                            formControlName="typeOfQuestion">
+                      <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                              [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6 text-center">
+                  <div class="name">
+                    Danh mục:
+                  </div>
+                  <div class="value">
+                    <select class="custom-select custom-select-sm" formControlName="category">
+                      <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row m-b-55">
+                <div class="name">Câu hỏi:</div>
+                <div class="value">
+                  <div class="input-group">
+                    <ejs-richtexteditor formControlName="content" [value]="questionContent"></ejs-richtexteditor>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="typeOfQuestionFlag===1">
+                <div *ngFor="let answer of answerList">
+                  <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
+                    <div class="name">
+                      <label class="radio-container m-r-55">
+                        <input type="radio" formControlName="correctAnswer" [value]="answer.content">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="value row">
+                      <div class="col-10">
+                        <div class="input-group">
+                          <span>{{answer.content}}</span>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                          class="fa fa-edit"></i></button>
+                      </div>
+                      <div class="col-1">
+                        <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                                style="float: none;margin: 5px;" (click)="deleteAnswer(answer.id)"><span
+                          class="fa fa-times"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="updateAnswerStatus">
+                    <form [formGroup]="answerForm" class="form-row m-b-55">
+                      <div class="name">
+                        <label class="radio-container m-r-55">
+                          <input type="radio" [attr.disabled]="false">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="value row">
+                        <div class="col-10">
+                          <div class="input-group">
+                            <input type="text" class="input--style-5" [value]="answer.content"
+                                   formControlName="content">
+                          </div>
+                        </div>
+                        <div class="col-1">
+                          <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                  style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
+                            class="fa fa-save"></i></button>
+                        </div>
+                        <div class="col-1">
+                          <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                                  style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
+                            class="fa fa-close"></span></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="form-row m-b-55">
+                  <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
+                    <div class="form-row m-b-55">
+                      <div class="name col-1">
+                        <label class="radio-container m-r-55">
+                          <input type="radio" [attr.disabled]="false">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="value col-10">
+                        <div class="input-group">
+                          <input class="input--style-5" placeholder="câu trả lời" type="text" formControlName="content">
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button class="tabledit-edit-button btn btn-primary waves-effect waves-light">
+                          <i class="fa fa-plus fa-lg"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="alert alert-danger" role="alert"
+                       *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
+                    Hãy chọn 1 đáp án đúng
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="typeOfQuestionFlag===2">
+                <div class="form-row m-b-55" *ngFor="let answer of answerList">
+                  <div class="name">
+                    <label class="radio-container m-r-55">
+                      <input type="checkbox" [value]="answer.content" formControlName="correctAnswer">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="value row">
+                    <div class="col-10">
+                      <div class="input-group">
+                        <span>{{answer.content}}</span>
+                      </div>
+                    </div>
+                    <div class="col-1">
+                      <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                              style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                        class="fa fa-edit"></i></button>
+                    </div>
+                    <div class="col-1">
+                      <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                              style="float: none;margin: 5px;" (click)="deleteAnswer(answer.id)"><span
+                        class="fa fa-times"></span></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row m-b-55">
+                  <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
+                    <div class="form-row m-b-55">
+                      <div class="name col-1" *ngIf="typeOfQuestionFlag===1">
+                        <label class="radio-container m-r-55">
+                          <input type="radio" [attr.disabled]="false">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="name col-1" *ngIf="typeOfQuestionFlag===2">
+                        <div class="border-checkbox-group border-checkbox-group-success">
+                          <input class="border-checkbox" type="checkbox" [attr.disabled]="false">
+                        </div>
+                      </div>
+                      <div class="value col-10">
+                        <div class="input-group">
+                          <input class="input--style-5" placeholder="câu trả lời" type="text" formControlName="content">
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button class="tabledit-edit-button btn btn-primary waves-effect waves-light">
+                          <i class="fa fa-plus fa-lg"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="alert alert-danger" role="alert"
+                       *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
+                    Hãy chọn 1 đáp án đúng
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-center">
+                  <button class="btn btn-primary waves-effect waves-light" type="submit">
+                    <i class="fa fa-save fa-lg"></i>
+                  </button>
+                </div>
+                <div class="col-6 text-center">
+                  <button class="btn btn-danger waves-effect waves-light" type="submit" (click)="onClickUpdate(currentQuestion.id)">
+                    <i class="fa fa-times fa-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!formCreateQuestionStatus && !formUpdateQuestionStatus">
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -213,7 +416,7 @@
             <span>Danh sách câu hỏi</span>
             <button type="button"
                     class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right"
-                    *ngIf="!formCreateStatus" (click)="onClickCreate()">
+                    *ngIf="!formCreateQuestionStatus" (click)="onClickCreate()">
               <span class="fa fa-plus"></span>
             </button>
           </div>
@@ -233,7 +436,7 @@
                   <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
                     <div class="btn-group btn-group-sm" style="float: none;">
                       <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                              style="float: none;margin: 5px;"><span
+                              style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)"><span
                         class="fa fa-edit"></span></button>
                       <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
                               style="float: none;margin: 5px;" (click)="deleteQuestion(question.id)"><span

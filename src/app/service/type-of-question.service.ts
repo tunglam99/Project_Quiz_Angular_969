@@ -19,6 +19,6 @@ export class TypeOfQuestionService {
   }
 
   getTypeOfQuestion(id: number): Observable<TypeOfQuestion> {
-    return this.http.get<TypeOfQuestion>(API_URL + `typeOfQuestions/${id}`);
+    return this.http.get<TypeOfQuestion>(API_URL + `/typeOfQuestions/${id}`);
   }
 }

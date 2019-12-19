@@ -31,7 +31,8 @@ export class QuestionComponent implements OnInit {
     question: new FormControl('')
   });
   failMessage: string;
-  formCreateStatus: boolean;
+  formCreateQuestionStatus: boolean;
+  formUpdateQuestionStatus: boolean;
   showCreateAnswerForm: boolean;
   questionCurrentId: number;
   questionStatus: boolean;
@@ -40,12 +41,14 @@ export class QuestionComponent implements OnInit {
   typeOfQuestionFlag: number;
   currentAnswer: Answer;
   updateAnswerStatus: boolean;
+  questionContent: string;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
               private answerService: AnswerService) {
-    this.formCreateStatus = false;
+    this.formCreateQuestionStatus = false;
+    this.formUpdateQuestionStatus = false;
     this.showCreateAnswerForm = false;
     this.updateAnswerStatus = false;
     this.getQuestionList();
@@ -60,7 +63,14 @@ export class QuestionComponent implements OnInit {
 
   onClickCreate() {
     this.questionCurrentId = this.questionList.length + 1;
-    this.formCreateStatus = !this.formCreateStatus;
+    this.formCreateQuestionStatus = !this.formCreateQuestionStatus;
+    this.questionForm.reset();
+  }
+
+  onClickUpdate(id: number) {
+    this.getQuestionDetail(id);
+    this.formUpdateQuestionStatus = !this.formUpdateQuestionStatus;
+    this.questionForm.reset();
   }
 
   addQuestion() {
@@ -97,7 +107,7 @@ export class QuestionComponent implements OnInit {
   submitQuestion() {
     this.addQuestion();
     this.questionForm.reset();
-    this.formCreateStatus = false;
+    this.formCreateQuestionStatus = false;
   }
 
   updateQuestion(id: number) {
@@ -108,8 +118,9 @@ export class QuestionComponent implements OnInit {
       correctAnswer: this.questionForm.value.correctAnswer
     };
     this.questionService.updateQuestion(id, question).subscribe(() => {
+      this.formUpdateQuestionStatus = false;
       this.questionForm.reset();
-      this.getCategoryList();
+      this.getQuestionStatusIsTrue();
     }, () => {
       this.failMessage = 'Lỗi trong quá trình cập nhật';
     });
@@ -118,6 +129,7 @@ export class QuestionComponent implements OnInit {
   getQuestionDetail(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
+      this.questionContent = this.currentQuestion.content;
     }, () => {
       this.failMessage = 'Lỗi không tìm thấy câu hỏi có id = ' + id;
     });

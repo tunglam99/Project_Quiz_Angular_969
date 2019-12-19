@@ -23,14 +23,14 @@ export class QuizService {
   }
 
   getQuiz(id: number): Observable<Quiz> {
-    return this.http.get<Quiz>(API_URL + `quizzes/${id}`);
+    return this.http.get<Quiz>(API_URL + `/quizzes/${id}`);
   }
 
   updateQuiz(id: number, quiz: Quiz): Observable<Quiz> {
-    return this.http.put<Quiz>(API_URL + `quizzes/${id}`, quiz);
+    return this.http.put<Quiz>(API_URL + `/quizzes/${id}`, quiz);
   }
 
   deleteQuiz(id: number): Observable<Quiz> {
-    return this.http.delete<Quiz>(API_URL + `quizzes/${id}`);
+    return this.http.delete<Quiz>(API_URL + `/quizzes/${id}`);
   }
 }
