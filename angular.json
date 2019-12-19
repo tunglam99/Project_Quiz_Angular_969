@@ -26,7 +26,14 @@
 
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/static/css/style.css",
+              "src/assets/static/css/feather.css",
+              "src/assets/static/css/fontawesome.css",
+              "src/assets/static/css/iconfont.css",
+              "src/assets/static/css/pages.css",
+              "src/assets/static/css/wave.min.css",
+              "src/assets/static/css/switchery.css"
             ],
             "scripts": []
           },

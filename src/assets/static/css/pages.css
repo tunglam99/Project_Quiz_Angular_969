@@ -5599,7 +5599,6 @@ span.value {
 }
 
 #task-container li.complete:before {
-  background: url("../images/complete.png") no-repeat;
   position: absolute;
   top: 5px;
   right: 5px;
@@ -6092,13 +6091,11 @@ button.close {
   margin: -7px 0 0 -15px;
   width: 30px;
   height: 20px;
-  background: url("../images/tooltip/tooltip1.svg") center center no-repeat;
   background-size: 100%
 }
 
 .tooltip-content3 {
   position: absolute;
-  background: url("../images/tooltip/shape1.svg") center bottom no-repeat;
   background-size: 100% 100%;
   z-index: 9999;
   width: 200px;
@@ -6273,10 +6270,6 @@ a.mytooltip {
 .card-block.tree-view ul li {
   display: inherit;
   float: none
-}
-
-.jstree-default > .jstree-container-ul .jstree-loading > .jstree-ocl {
-  background: url("../pages/treeview/throbber.gif") center center no-repeat
 }
 
 .jFiler-theme-default .jFiler-input-button {
