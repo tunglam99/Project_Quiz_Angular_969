@@ -51,7 +51,7 @@
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                     <div class="name">
                       <label class="radio-container m-r-55">
-                        <input type="radio">
+                        <input type="radio"  formControlName="correctAnswer" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -133,7 +133,7 @@
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
                   <div class="name">
                     <label class="radio-container m-r-55">
-                      <input type="checkbox">
+                      <input type="checkbox" [value]="answer.content" formControlName="correctAnswer">
                       <span class="checkmark"></span>
                     </label>
                   </div>
