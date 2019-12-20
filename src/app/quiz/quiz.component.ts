@@ -85,4 +85,18 @@ export class QuizComponent implements OnInit {
     this.getQuizDetail(id);
     this.openVerticallyCentered(content);
   }
+
+  deleteQuiz(id: number) {
+    this.quizService.deleteQuiz(id).subscribe(() => {
+      this.getQuizList();
+      this.close();
+    }, () => {
+      this.failMessage = 'Lỗi khi xóa đề thi có id = ' + id;
+    });
+  }
+
+  showDeleteQuizForm(id: number, content) {
+    this.getQuizDetail(id);
+    this.openVerticallyCentered(content);
+  }
 }
