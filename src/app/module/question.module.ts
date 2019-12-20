@@ -1,20 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../helper/auth-guard';
-import {QuizComponent} from './quiz.component';
+import {QuestionComponent} from '../question/question.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {AuthGuard} from '../helper/auth-guard';
 import {RichTextEditorAllModule} from '@syncfusion/ej2-angular-richtexteditor';
 
 const routing: Routes = [{
   path: '',
-  component: QuizComponent,
+  component: QuestionComponent,
   canActivate: [AuthGuard]
 }];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    QuestionComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routing),
@@ -24,4 +26,5 @@ const routing: Routes = [{
     RichTextEditorAllModule
   ]
 })
-export class QuizModule { }
+export class QuestionModule {
+}

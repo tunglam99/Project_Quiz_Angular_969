@@ -28,13 +28,13 @@ const routes: Routes = [{
   component: ChangePasswordComponent
 }, {
   path: 'category',
-  loadChildren: './category/category.module#CategoryModule'
+  loadChildren: './module/category.module#CategoryModule'
 }, {
   path: 'question',
-  loadChildren: './question/question.module#QuestionModule'
+  loadChildren: './module/question.module#QuestionModule'
 }, {
   path: 'quiz',
-  loadChildren: './quiz/quiz.module#QuizModule'
+  loadChildren: './module/quiz.module#QuizModule'
 }, {
   path: '**',
   redirectTo: ''
