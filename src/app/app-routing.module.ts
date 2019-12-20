@@ -33,6 +33,9 @@ const routes: Routes = [{
   path: 'question',
   loadChildren: './question/question.module#QuestionModule'
 }, {
+  path: 'quiz',
+  loadChildren: './quiz/quiz.module#QuizModule'
+}, {
   path: '**',
   redirectTo: ''
 }];
