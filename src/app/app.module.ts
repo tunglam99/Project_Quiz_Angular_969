@@ -13,8 +13,7 @@ import { HomeComponent } from './user/home/home.component';
 import { RegisterSuccessComponent } from './user/register-success/register-success.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
-import {SharedModule} from './shared/shared.module';
-import { QuizComponent } from './quiz/quiz.component';
+import {SharedModule} from './module/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { QuizComponent } from './quiz/quiz.component';
     RegisterSuccessComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
-    QuizComponent
   ],
   imports: [
     BrowserModule,

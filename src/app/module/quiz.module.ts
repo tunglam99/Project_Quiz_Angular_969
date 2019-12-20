@@ -14,7 +14,9 @@ const routing: Routes = [{
 }];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    QuizComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routing),
