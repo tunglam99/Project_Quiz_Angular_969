@@ -18,6 +18,7 @@ export class QuizComponent implements OnInit {
     }
   );
   failMessage: string;
+  currentQuiz: Quiz;
 
   constructor(private quizService: QuizService,
               private modalService: NgbModal) {
@@ -44,6 +45,14 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  getQuizDetail(id: number) {
+    this.quizService.getQuiz(id).subscribe(result => {
+      this.currentQuiz = result;
+    }, () => {
+      this.failMessage = 'Lỗi không tìm thấy đề thi có id = ' + id;
+    });
+  }
+
   createQuiz() {
     const quiz: Quiz = {
       id: this.quizForm.value.id,
@@ -56,5 +65,24 @@ export class QuizComponent implements OnInit {
     }, () => {
       this.failMessage = 'Lỗi trong quá trình tạo mới';
     });
+  }
+
+  updateQuiz(id: number) {
+    const quiz: Quiz = {
+      id: this.currentQuiz.id,
+      name: this.quizForm.value.name
+    };
+    this.quizService.updateQuiz(id, quiz).subscribe(() => {
+      this.quizForm.reset();
+      this.getQuizList();
+      this.close();
+    }, () => {
+      this.failMessage = 'Lỗi trong quá trình cập nhật';
+    });
+  }
+
+  updateQuizForm(id: number, content) {
+    this.getQuizDetail(id);
+    this.openVerticallyCentered(content);
   }
 }

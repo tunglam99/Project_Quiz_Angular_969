@@ -28,6 +28,35 @@
       </div>
     </ng-template>
   </div>
+  <div class="mt-lg-4">
+    <ng-template #update let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Chỉnh sửa thông tin bài thi</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="quizForm" (ngSubmit)="updateQuiz(currentQuiz.id)">
+          <div class="value">
+            <div class="input-group">
+              <div class="name">Tên bài thi:</div>
+              <input class="input--style-5 form-control"
+                     [value]="currentQuiz.name" type="text"
+                     formControlName="name">
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="submit" class="tabledit-edit-button btn btn-primary waves-effect waves-light">
+              <i class="fa fa-save fa-lg"></i>
+              Lưu
+            </button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
   <div class="mt-lg-4 container-lg">
     <div class="card">
       <div class="card-header">
@@ -53,18 +82,18 @@
               <th scope="row">{{quiz.id}}</th>
               <td class="tabledit-view-mode"><span class="tabledit-span">{{quiz.name}}</span>
               </td>
-<!--              <td style="white-space: nowrap; width: 1%;" class="tabledit-view-mode">-->
-<!--                <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">-->
-<!--                  <div class="btn-group btn-group-sm" style="float: none;">-->
-<!--                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"-->
-<!--                            style="float: none;margin: 5px;" (click)="updateCategoryForm(category.id,update)"><span-->
-<!--                      class="fa fa-edit"></span></button>-->
+              <td style="white-space: nowrap; width: 1%;" class="tabledit-view-mode">
+                <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                  <div class="btn-group btn-group-sm" style="float: none;">
+                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                            style="float: none;margin: 5px;" (click)="updateQuizForm(quiz.id,update)"><span
+                      class="fa fa-edit"></span></button>
 <!--                    <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"-->
 <!--                            style="float: none;margin: 5px;" (click)="showDeleteCategoryForm(category.id,delete)"><span-->
 <!--                      class="fa fa-trash"></span></button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </td>-->
+                  </div>
+                </div>
+              </td>
             </tr>
             </tbody>
           </table>
