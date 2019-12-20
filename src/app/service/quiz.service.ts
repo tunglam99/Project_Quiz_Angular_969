@@ -15,7 +15,7 @@ export class QuizService {
   }
 
   listQuiz(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(API_URL + 'quizzes');
+    return this.http.get<Quiz[]>(API_URL + '/quizzes');
   }
 
   createQuiz(quiz: Quiz): Observable<Quiz> {
