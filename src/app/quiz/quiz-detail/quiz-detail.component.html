@@ -1,11 +1,12 @@
 <br>
+<router-outlet></router-outlet>
 <div class="container-lg">
   <div class="card">
     <div class="card-header">
       <span>Đề thi {{quiz.name}}</span>
-      <button type="button" class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right">
+      <a routerLink="add-question-to-quiz"><button type="button" class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right">
         <span class="fa fa-plus"></span>
-      </button>
+      </button></a>
     </div>
     <div class="card-block">
       <div class="table-responsive">

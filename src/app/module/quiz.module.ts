@@ -18,7 +18,7 @@ const routing: Routes = [{
   component: QuizDetailComponent,
   canActivate: [AuthGuard]
 }, {
-  path: 'add-question-to-quiz',
+  path: 'detail-quiz/:id/add-question-to-quiz',
   component: AddQuestionToQuizComponent,
   canActivate: [AuthGuard]
 }];
