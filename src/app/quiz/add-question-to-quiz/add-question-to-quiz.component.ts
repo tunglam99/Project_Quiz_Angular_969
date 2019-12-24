@@ -35,7 +35,7 @@ export class AddQuestionToQuizComponent implements OnInit {
   }
 
   getQuestionList() {
-    this.questionService.findAllQuestionByQuiz().subscribe(result => {
+    this.questionService.findAllQuestionByQuizNull().subscribe(result => {
       this.questionList = result;
     }, error => {
       console.log(error);

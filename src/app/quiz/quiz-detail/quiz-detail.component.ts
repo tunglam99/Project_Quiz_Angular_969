@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Question} from '../../model/question';
 import {QuizService} from '../../service/quiz.service';
 import {QuestionService} from '../../service/question.service';
-import {Quiz} from '../../model/quiz';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 
