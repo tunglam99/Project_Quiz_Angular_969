@@ -127,7 +127,7 @@
             <tbody>
             <tr *ngFor="let quiz of quizList">
               <th scope="row">{{quiz.id}}</th>
-              <td class="tabledit-view-mode"><span class="tabledit-span">{{quiz.name}}</span>
+              <td class="tabledit-view-mode"><a [routerLink]="['detail-quiz',quiz.id]" class="tabledit-span">{{quiz.name}}</a>
               </td>
               <td style="white-space: nowrap; width: 1%;" class="tabledit-view-mode">
                 <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">

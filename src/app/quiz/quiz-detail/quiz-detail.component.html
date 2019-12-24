@@ -1,0 +1,43 @@
+<br>
+<div class="container-lg">
+  <div class="card">
+    <div class="card-header">
+      <span>Đề thi {{quiz.name}}</span>
+      <button type="button" class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right">
+        <span class="fa fa-plus"></span>
+      </button>
+    </div>
+    <div class="card-block">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="example-2">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Câu hỏi</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let question of questionList">
+            <th scope="row">{{question.id}}</th>
+            <td class="tabledit-view-mode">
+              <span class="tabledit-span">{{question.content}}</span>
+            </td>
+            <td style="white-space: nowrap; width: 1%;" class="tabledit-view-mode">
+              <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                <div class="btn-group btn-group-sm" style="float: none;">
+<!--                  <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"-->
+<!--                          style="float: none;margin: 5px;" (click)="updateQuizForm(quiz.id,update)"><span-->
+<!--                    class="fa fa-edit"></span></button>-->
+<!--                  <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"-->
+<!--                          style="float: none;margin: 5px;" (click)="showDeleteQuizForm(quiz.id,delete)"><span-->
+<!--                    class="fa fa-trash"></span></button>-->
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

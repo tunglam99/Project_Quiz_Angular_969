@@ -23,7 +23,7 @@ export class QuestionService {
     return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue');
   }
 
-  findAllQuestionByQuiz(quiz: Quiz): Observable<Question[]> {
+  findAllQuestionByQuiz(quiz?: Quiz): Observable<Question[]> {
     return this.http.get<Question[]>(API_URL + '/findAllQuestionByQuiz');
   }
 
