@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Question} from '../model/question';
 import {Observable} from 'rxjs';
+import {Quiz} from '../model/quiz';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -20,6 +21,10 @@ export class QuestionService {
 
   listQuestionStatusIsTrue(): Observable<Question[]> {
     return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue');
+  }
+
+  findAllQuestionByQuiz(quiz: Quiz): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/findAllQuestionByQuiz');
   }
 
   createQuestion(question: Question): Observable<Question> {
