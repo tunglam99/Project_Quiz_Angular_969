@@ -18,13 +18,16 @@ export class QuizComponent implements OnInit {
     }
   );
   failMessage: string;
+  successMessage: string;
   currentQuiz: Quiz;
+  flagMessage: number;
 
   constructor(private quizService: QuizService,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.flagMessage = 0;
     this.getQuizList();
   }
 
@@ -33,6 +36,7 @@ export class QuizComponent implements OnInit {
   }
 
   close() {
+    this.flagMessage = 0;
     this.modalService.dismissAll('');
     this.quizForm.reset();
   }
@@ -62,7 +66,10 @@ export class QuizComponent implements OnInit {
       this.quizForm.reset();
       this.quizList.push(quiz);
       this.getQuizList();
+      this.successMessage = 'Thành công';
+      this.flagMessage = 1;
     }, () => {
+      this.flagMessage = 2;
       this.failMessage = 'Lỗi trong quá trình tạo mới';
     });
   }
@@ -75,8 +82,10 @@ export class QuizComponent implements OnInit {
     this.quizService.updateQuiz(id, quiz).subscribe(() => {
       this.quizForm.reset();
       this.getQuizList();
+      this.successMessage = 'Thành công';
       this.close();
     }, () => {
+      this.flagMessage = 3;
       this.failMessage = 'Lỗi trong quá trình cập nhật';
     });
   }
