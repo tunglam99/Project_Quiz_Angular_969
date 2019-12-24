@@ -156,7 +156,7 @@
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
                     <div class="form-row m-b-55">
-                      <div class="name col-1">
+                      <div class="name col-1" *ngIf="typeOfQuestionFlag!==2">
                         <label class="radio-container m-r-55">
                           <input type="radio" [attr.disabled]="false">
                           <span class="checkmark"></span>
@@ -363,7 +363,7 @@
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
                     <div class="form-row m-b-55">
-                      <div class="name col-1">
+                      <div class="name col-1" *ngIf="typeOfQuestionFlag!==2">
                         <label class="radio-container m-r-55">
                           <input type="radio" [attr.disabled]="false">
                           <span class="checkmark"></span>
