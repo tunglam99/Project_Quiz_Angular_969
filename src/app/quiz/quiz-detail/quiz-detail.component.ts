@@ -13,28 +13,24 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 })
 export class QuizDetailComponent implements OnInit {
   questionList: Question[] = [];
-  quiz: Quiz;
+  quizId: number;
   sub: Subscription;
 
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
               private activatedRoute: ActivatedRoute) {
-    this.getQuestionList();
   }
 
   ngOnInit() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      const id = +paramMap.get('id');
-      this.quizService.getQuiz(id).subscribe(result => {
-        this.quiz = result;
-      }, error => {
-        console.log(error);
-      });
+      this.quizId = +paramMap.get('id');
+      this.getQuestionList();
     });
+
   }
 
   getQuestionList() {
-    this.questionService.findAllQuestionByQuiz(this.quiz).subscribe(result => {
+    this.questionService.findAllQuestionByQuiz(this.quizId).subscribe(result => {
       this.questionList = result;
     }, error => {
       console.log(error);
