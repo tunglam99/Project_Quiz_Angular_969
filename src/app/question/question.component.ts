@@ -237,9 +237,9 @@ export class QuestionComponent implements OnInit {
   }
 
   typeOfQuestionForm(id: string) {
-    if (id === '1') {
+    if (id == '1') {
       this.typeOfQuestionFlag = 1;
-    } else if (id === '2') {
+    } else if (id == '2') {
       this.typeOfQuestionFlag = 2;
     }
   }
