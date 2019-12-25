@@ -4,5 +4,6 @@ export interface Question {
   status: boolean;
   typeOfQuestion?: any;
   category?: any;
+  answers?: any[];
   quiz?: any;
 }

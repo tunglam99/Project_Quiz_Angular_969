@@ -1,0 +1,14 @@
+<br>
+<div class="container" *ngFor="let question of questionList; index as i">
+  <div *ngIf="question.typeOfQuestion === 1">
+    <p>Chọn đáp án chính xác nhất</p>
+  </div>
+  <div *ngIf="question.typeOfQuestion === 2">
+    <p>Chọn các đáp án chính xác</p>
+  </div>
+  Câu {{i + 1}}: <span [innerHTML]="question.content"></span>
+  <div *ngFor="let answer of question.answers">
+    <input type="radio" name="answer{{i}}">
+    <span>{{answer.content}}</span>
+  </div>
+</div>

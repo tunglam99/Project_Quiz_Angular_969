@@ -26,7 +26,6 @@ export class QuizDetailComponent implements OnInit {
       this.quizId = +paramMap.get('id');
       this.getQuestionList();
     });
-
   }
 
   getQuestionDetail(id: number) {

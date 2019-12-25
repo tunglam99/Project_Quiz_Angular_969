@@ -121,10 +121,6 @@
                       </div>
                     </div>
                   </form>
-                  <div class="alert alert-danger" role="alert"
-                       *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
-                    Hãy chọn 1 đáp án đúng
-                  </div>
                 </div>
               </div>
               <div *ngIf="typeOfQuestionFlag===2">

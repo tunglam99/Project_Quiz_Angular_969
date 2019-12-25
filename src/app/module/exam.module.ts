@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ExamComponent} from '../exam/exam.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../helper/auth-guard';
-import {DoExamComponent} from '../do-exam/do-exam.component';
+import {DoExamComponent} from '../exam/do-exam/do-exam.component';
 
 const routing: Routes = [{
   path: '',
