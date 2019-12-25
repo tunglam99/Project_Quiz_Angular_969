@@ -13,11 +13,19 @@ export class NavbarComponent {
   currentUser: UserToken;
   public isMenuCollapsed = true;
   quizIcon = faSpellCheck;
+  hasRoleAdmin = false;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    const roleList = this.currentUser.roles;
+    for (const role of roleList) {
+      if (role.authority === 'ROLE_ADMIN') {
+        this.hasRoleAdmin = true;
+        break;
+      }
+    }
   }
 
   logout() {

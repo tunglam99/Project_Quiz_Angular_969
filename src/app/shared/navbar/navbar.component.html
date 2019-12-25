@@ -10,17 +10,17 @@
           <i class="fa fa-home fa-lg"></i>
           Trang chủ<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item mr-sm-3">
+      <li class="nav-item mr-sm-3" *ngIf="hasRoleAdmin">
         <a class="nav-link" routerLink="/admin/category-management">
           <i class="fa fa-list"></i>
           Danh mục</a>
       </li>
-      <li class="nav-item mr-sm-3">
+      <li class="nav-item mr-sm-3" *ngIf="hasRoleAdmin">
         <a class="nav-link" routerLink="/admin/question-management">
           <i class="fa fa-question fa-lg"></i>
           Câu hỏi</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="hasRoleAdmin">
         <a class="nav-link" routerLink="/admin/quiz-management">
           <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
           Đề thi</a>
