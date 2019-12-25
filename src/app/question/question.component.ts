@@ -117,7 +117,13 @@ export class QuestionComponent implements OnInit {
       status: true,
       id: this.currentQuestion.id,
       content: this.questionForm.value.content,
-      correctAnswer: this.questionForm.value.correctAnswer
+      correctAnswer: this.questionForm.value.correctAnswer,
+      category: {
+        id: this.questionForm.value.category
+      },
+      typeOfQuestion: {
+        id: this.questionForm.value.typeOfQuestion
+      }
     };
     this.questionService.updateQuestion(id, question).subscribe(() => {
       this.formUpdateQuestionStatus = false;
