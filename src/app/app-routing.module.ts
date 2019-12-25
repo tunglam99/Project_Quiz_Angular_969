@@ -27,14 +27,8 @@ const routes: Routes = [{
   path: 'new-password/:id',
   component: ChangePasswordComponent
 }, {
-  path: 'category',
-  loadChildren: './module/category.module#CategoryModule'
-}, {
-  path: 'question',
-  loadChildren: './module/question.module#QuestionModule'
-}, {
-  path: 'quiz',
-  loadChildren: './module/quiz.module#QuizModule'
+  path: 'admin',
+  loadChildren: () => import('./module/admin.module').then(mod => mod.AdminModule)
 }, {
   path: '**',
   redirectTo: ''

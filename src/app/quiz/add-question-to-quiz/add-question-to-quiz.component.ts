@@ -58,7 +58,6 @@ export class AddQuestionToQuizComponent implements OnInit {
         content: this.currentQuestion.content,
         typeOfQuestion: this.currentQuestion.typeOfQuestion,
         category: this.currentQuestion.category,
-        correctAnswer: this.currentQuestion.correctAnswer,
         status: this.currentQuestion.status,
         quiz: {
           id: this.quiz.id,
