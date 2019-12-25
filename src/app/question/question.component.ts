@@ -22,12 +22,15 @@ export class QuestionComponent implements OnInit {
   answerList: Answer[] = [];
   questionForm: FormGroup = new FormGroup({
     content: new FormControl('', Validators.required),
-    correctAnswer: new FormControl('', Validators.required),
     typeOfQuestion: new FormControl(''),
     category: new FormControl('')
   });
   answerForm: FormGroup = new FormGroup({
     content: new FormControl('', Validators.required),
+    question: new FormControl('')
+  });
+  correctAnswerForm: FormGroup = new FormGroup({
+    content: new FormControl(''),
     question: new FormControl('')
   });
   failMessage: string;
@@ -80,7 +83,6 @@ export class QuestionComponent implements OnInit {
       id: this.questionCurrentId,
       content: this.questionForm.value.content,
       status: this.questionStatus,
-      correctAnswer: this.questionForm.value.correctAnswer,
       typeOfQuestion: {
         id: this.questionForm.value.typeOfQuestion
       },
@@ -117,7 +119,6 @@ export class QuestionComponent implements OnInit {
       status: true,
       id: this.currentQuestion.id,
       content: this.questionForm.value.content,
-      correctAnswer: this.questionForm.value.correctAnswer,
       category: {
         id: this.questionForm.value.category
       },
