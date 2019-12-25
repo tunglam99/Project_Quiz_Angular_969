@@ -28,7 +28,7 @@ export class AdminAuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let hasRoleAdmin = false;
-    if (!!this.currentUser) {
+    if (this.currentUser) {
       const roleList = this.currentUser.roles;
       for (const role of roleList) {
         if (role.authority === 'ROLE_ADMIN') {
@@ -50,7 +50,7 @@ export class AdminAuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
   }
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!!this.currentUser) {
+    if (this.currentUser) {
       const roleList = this.currentUser.roles;
       let hasRoleAdmin = false;
       for (const role of roleList) {
