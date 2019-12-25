@@ -25,6 +25,11 @@
           <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
           Đề thi</a>
       </li>
+      <li class="nav-item" *ngIf="!hasRoleAdmin">
+        <a class="nav-link" routerLink="/user/exam">
+          <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
+          Đề thi</a>
+      </li>
     </ul>
     <div class="my-2 my-lg-0">
       <ul class="navbar-nav mr-auto" *ngIf="currentUser">
