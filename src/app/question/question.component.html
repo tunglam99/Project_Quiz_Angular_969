@@ -13,7 +13,7 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="submitQuestion()" *ngIf="formCreateQuestionStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(questionCurrentId)" *ngIf="formCreateQuestionStatus">
               <div class="form-row m-b-55">
                 <div class="col-6">
                   <div class="name">
@@ -127,7 +127,7 @@
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
                   <div class="name">
                     <label class="radio-container m-r-55">
-                      <input type="checkbox" [value]="answer.content">
+                      <input type="checkbox" [value]="answer.content" >
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -413,7 +413,6 @@
               <tr>
                 <th>#</th>
                 <th>Nội dung câu hỏi</th>
-                <th></th>
               </tr>
               </thead>
               <tbody>
