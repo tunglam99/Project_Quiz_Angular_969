@@ -39,7 +39,6 @@ export class QuestionComponent implements OnInit {
   showCreateAnswerForm: boolean;
   questionCurrentId: number;
   questionStatus: boolean;
-  createFlag: boolean;
   currentQuestion: Question;
   typeOfQuestionFlag: number;
   currentAnswer: Answer;
@@ -63,12 +62,12 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createFlag = false;
   }
 
   onClickCreate() {
     this.questionCurrentId = this.questionList.length + 1;
     this.formCreateQuestionStatus = !this.formCreateQuestionStatus;
+    this.addQuestion();
     this.questionForm.reset();
   }
 
@@ -82,22 +81,15 @@ export class QuestionComponent implements OnInit {
     const question: Question = {
       id: this.questionCurrentId,
       content: this.questionForm.value.content,
-      status: this.questionStatus,
-      typeOfQuestion: {
-        id: this.questionForm.value.typeOfQuestion
-      },
-      category: {
-        id: this.questionForm.value.category
-      }
+      status: false
     };
     this.questionService.createQuestion(question).subscribe(() => {
-      this.createFlag = true;
       this.questionStatusIsTrueList.push(question);
       this.getQuestionList();
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
     });
-    this.getAnswerList(this.questionCurrentId);
+    // this.getAnswerList(this.questionCurrentId);
   }
 
   saveQuestionForm() {
@@ -111,17 +103,26 @@ export class QuestionComponent implements OnInit {
   updateQuestion(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
-      const question: Question = {
-        status: this.questionStatus,
-        id: this.currentQuestion.id,
-        content: this.questionForm.value.content,
-        category: {
-          id: this.questionForm.value.category
-        },
-        typeOfQuestion: {
-          id: this.questionForm.value.typeOfQuestion
-        }
-      };
+      let question: Question;
+      if (this.questionStatus) {
+        question = {
+          status: true,
+          id: this.currentQuestion.id,
+          content: this.questionForm.value.content,
+          category: {
+            id: this.questionForm.value.category
+          },
+          typeOfQuestion: {
+            id: this.questionForm.value.typeOfQuestion
+          }
+        };
+      } else {
+        question = {
+          status: false,
+          id: this.currentQuestion.id,
+          content: this.questionForm.value.content,
+        };
+      }
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.formUpdateQuestionStatus = false;
         this.formCreateQuestionStatus = false;
@@ -184,24 +185,21 @@ export class QuestionComponent implements OnInit {
   }
 
   addAnswer() {
-    this.addQuestion();
-    if (this.createFlag) {
-      const answer: Answer = {
-        id: this.answerForm.value.id,
-        content: this.answerForm.value.content,
-        question: {
-          id: this.questionCurrentId
-        }
-      };
-      this.answerService.createAnswer(answer).subscribe(() => {
-        this.answerList.push(answer);
-        this.getAnswerList(this.questionCurrentId);
-        this.answerForm.reset();
-        this.showCreateAnswerForm = false;
-      }, () => {
-        this.failMessage = 'Tạo câu trả lời thất bại';
-      });
-    }
+    const answer: Answer = {
+      id: this.answerForm.value.id,
+      content: this.answerForm.value.content,
+      question: {
+        id: this.questionCurrentId
+      }
+    };
+    this.answerService.createAnswer(answer).subscribe(() => {
+      this.answerList.push(answer);
+      this.getAnswerList(this.questionCurrentId);
+      this.answerForm.reset();
+      this.showCreateAnswerForm = false;
+    }, () => {
+      this.failMessage = 'Tạo câu trả lời thất bại';
+    });
   }
 
   getAnswer(id: number) {
