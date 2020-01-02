@@ -13,7 +13,7 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="submitQuestion()" *ngIf="formCreateQuestionStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(questionCurrentId)" *ngIf="formCreateQuestionStatus">
               <div class="form-row m-b-55">
                 <div class="col-6">
                   <div class="name">
@@ -179,7 +179,7 @@
               </div>
               <div class="row">
                 <div class="col-6 text-center">
-                  <button class="btn btn-primary waves-effect waves-light" type="button" (click)="updateQuestion(questionCurrentId)">
+                  <button class="btn btn-primary waves-effect waves-light" type="submit" (click)="saveQuestionForm()">
                     <i class="fa fa-save fa-lg"></i>
                   </button>
                 </div>

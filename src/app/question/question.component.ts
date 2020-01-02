@@ -108,17 +108,11 @@ export class QuestionComponent implements OnInit {
     this.questionStatus = false;
   }
 
-  submitQuestion() {
-    this.addQuestion();
-    this.questionForm.reset();
-    this.formCreateQuestionStatus = false;
-  }
-
   updateQuestion(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
       const question: Question = {
-        status: true,
+        status: this.questionStatus,
         id: this.currentQuestion.id,
         content: this.questionForm.value.content,
         category: {
@@ -130,6 +124,7 @@ export class QuestionComponent implements OnInit {
       };
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.formUpdateQuestionStatus = false;
+        this.formCreateQuestionStatus = false;
         this.questionForm.reset();
         this.getQuestionStatusIsTrue();
       }, () => {
