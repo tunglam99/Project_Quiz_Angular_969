@@ -103,10 +103,14 @@ export class QuestionComponent implements OnInit {
   updateQuestion(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
-      let question: Question;
+      let question: Question = {
+        status: this.questionStatus,
+        id: this.currentQuestion.id,
+        content: this.questionForm.value.content,
+      };
       if (this.questionStatus) {
         question = {
-          status: true,
+          status: this.questionStatus,
           id: this.currentQuestion.id,
           content: this.questionForm.value.content,
           category: {
@@ -115,12 +119,6 @@ export class QuestionComponent implements OnInit {
           typeOfQuestion: {
             id: this.questionForm.value.typeOfQuestion
           }
-        };
-      } else {
-        question = {
-          status: false,
-          id: this.currentQuestion.id,
-          content: this.questionForm.value.content,
         };
       }
       this.questionService.updateQuestion(id, question).subscribe(() => {
