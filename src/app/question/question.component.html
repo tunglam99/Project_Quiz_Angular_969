@@ -49,7 +49,7 @@
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                     <div class="name">
                       <label class="radio-container m-r-55">
-                        <input type="radio" formControlName="correctAnswer" [value]="answer.content">
+                        <input type="radio" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -127,7 +127,7 @@
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
                   <div class="name">
                     <label class="radio-container m-r-55">
-                      <input type="checkbox" [value]="answer.content" formControlName="correctAnswer">
+                      <input type="checkbox" [value]="answer.content" >
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -175,15 +175,11 @@
                       </div>
                     </div>
                   </form>
-                  <div class="alert alert-danger" role="alert"
-                       *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
-                    Hãy chọn 1 đáp án đúng
-                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6 text-center">
-                  <button class="btn btn-primary waves-effect waves-light" type="submit" (click)="saveQuestionForm()">
+                  <button class="btn btn-primary waves-effect waves-light" type="button" (click)="updateQuestion(questionCurrentId)">
                     <i class="fa fa-save fa-lg"></i>
                   </button>
                 </div>
@@ -252,7 +248,7 @@
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                     <div class="name">
                       <label class="radio-container m-r-55">
-                        <input type="radio" formControlName="correctAnswer" [value]="answer.content">
+                        <input type="radio" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -324,17 +320,13 @@
                       </div>
                     </div>
                   </form>
-                  <div class="alert alert-danger" role="alert"
-                       *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
-                    Hãy chọn 1 đáp án đúng
-                  </div>
                 </div>
               </div>
               <div *ngIf="typeOfQuestionFlag==2">
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
                   <div class="name">
                     <label class="radio-container m-r-55">
-                      <input type="checkbox" [value]="answer.content" formControlName="correctAnswer">
+                      <input type="checkbox" [value]="answer.content">
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -382,10 +374,6 @@
                       </div>
                     </div>
                   </form>
-                  <div class="alert alert-danger" role="alert"
-                       *ngIf="questionForm.get('correctAnswer').hasError('required') && questionForm.get('correctAnswer').touched">
-                    Hãy chọn 1 đáp án đúng
-                  </div>
                 </div>
               </div>
               <div class="row">

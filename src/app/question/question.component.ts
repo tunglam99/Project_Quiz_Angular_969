@@ -115,24 +115,28 @@ export class QuestionComponent implements OnInit {
   }
 
   updateQuestion(id: number) {
-    const question: Question = {
-      status: true,
-      id: this.currentQuestion.id,
-      content: this.questionForm.value.content,
-      category: {
-        id: this.questionForm.value.category
-      },
-      typeOfQuestion: {
-        id: this.questionForm.value.typeOfQuestion
-      }
-    };
-    this.questionService.updateQuestion(id, question).subscribe(() => {
-      this.formUpdateQuestionStatus = false;
-      this.questionForm.reset();
-      this.getQuestionStatusIsTrue();
-    }, () => {
-      this.failMessage = 'Lỗi trong quá trình cập nhật';
+    this.questionService.getQuestion(id).subscribe(result => {
+      this.currentQuestion = result;
+      const question: Question = {
+        status: true,
+        id: this.currentQuestion.id,
+        content: this.questionForm.value.content,
+        category: {
+          id: this.questionForm.value.category
+        },
+        typeOfQuestion: {
+          id: this.questionForm.value.typeOfQuestion
+        }
+      };
+      this.questionService.updateQuestion(id, question).subscribe(() => {
+        this.formUpdateQuestionStatus = false;
+        this.questionForm.reset();
+        this.getQuestionStatusIsTrue();
+      }, () => {
+        this.failMessage = 'Lỗi trong quá trình cập nhật';
+      });
     });
+
   }
 
   getQuestionDetail(id: number) {
