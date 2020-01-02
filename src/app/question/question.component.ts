@@ -144,14 +144,6 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  deleteQuestion(id: number) {
-    this.questionService.deleteQuestion(id).subscribe(() => {
-      this.getQuestionStatusIsTrue();
-    }, error => {
-      console.log(error);
-    });
-  }
-
   getQuestionList() {
     this.questionService.listQuestion().subscribe(result => {
       this.questionList = result;
