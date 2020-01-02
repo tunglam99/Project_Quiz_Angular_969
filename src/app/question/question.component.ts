@@ -89,7 +89,7 @@ export class QuestionComponent implements OnInit {
     }, () => {
       this.failMessage = 'Tạo mới thất bại';
     });
-    // this.getAnswerList(this.questionCurrentId);
+    this.getAnswerList(this.questionCurrentId);
   }
 
   saveQuestionForm() {
