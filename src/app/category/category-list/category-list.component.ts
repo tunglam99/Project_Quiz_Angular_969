@@ -66,6 +66,7 @@ export class CategoryListComponent implements OnInit {
     };
     this.categoryService.createCategory(category).subscribe(() => {
       this.flagMessage = 1;
+      this.modalService.dismissAll('');
       this.categoryForm.reset();
       this.categoryList.push(category);
       this.getCategoryList();
