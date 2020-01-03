@@ -9,6 +9,8 @@ import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CorrectAnswerService} from '../service/correct-answer.service';
+import {CorrectAnswer} from '../model/correct-answer';
 
 @Component({
   selector: 'app-question',
@@ -50,7 +52,8 @@ export class QuestionComponent implements OnInit {
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
               private answerService: AnswerService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private correctAnswerService: CorrectAnswerService) {
     this.formCreateQuestionStatus = false;
     this.formUpdateQuestionStatus = false;
     this.showCreateAnswerForm = false;
@@ -258,5 +261,18 @@ export class QuestionComponent implements OnInit {
     } else if (id === '2') {
       this.typeOfQuestionFlag = 2;
     }
+  }
+
+  addCorrectAnswer() {
+    const correctAnswer: CorrectAnswer = {
+      id: this.answerForm.value.id,
+      content: this.answerForm.value.content,
+      question: {
+        id: this.questionCurrentId
+      }
+    };
+    this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+      this.correctAnswerForm.reset();
+    });
   }
 }

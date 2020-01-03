@@ -49,12 +49,12 @@
               <div *ngIf="typeOfQuestionFlag===1">
                 <div *ngFor="let answer of answerList">
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
-                    <div class="name">
+                    <form [formGroup]="correctAnswerForm" class="name">
                       <label class="radio-container m-r-55">
-                        <input type="radio" [value]="answer.content">
+                        <input type="radio" (change)="addCorrectAnswer()" formControlName="content" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
-                    </div>
+                    </form>
                     <div class="value row">
                       <div class="col-10">
                         <div class="input-group">
