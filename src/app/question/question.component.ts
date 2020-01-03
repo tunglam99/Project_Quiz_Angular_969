@@ -205,7 +205,6 @@ export class QuestionComponent implements OnInit {
         }
         default: {
           return 0;
-
         }
       }
     });

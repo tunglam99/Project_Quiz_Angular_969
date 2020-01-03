@@ -8,6 +8,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {RichTextEditorAllModule} from '@syncfusion/ej2-angular-richtexteditor';
 import {QuizDetailComponent} from '../quiz/quiz-detail/quiz-detail.component';
 import {AddQuestionToQuizComponent} from '../quiz/add-question-to-quiz/add-question-to-quiz.component';
+import {MatSortModule} from '@angular/material';
 
 const routing: Routes = [{
   path: '',
@@ -35,7 +36,8 @@ const routing: Routes = [{
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    RichTextEditorAllModule
+    RichTextEditorAllModule,
+    MatSortModule
   ]
 })
 export class QuizModule {

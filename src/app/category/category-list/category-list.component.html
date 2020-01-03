@@ -127,11 +127,11 @@
       </div>
       <div class="card-block">
         <div class="table-responsive">
-          <table class="table table-striped table-bordered" id="example-2">
+          <table matSort (matSortChange)="sortCategory($event)" class="table table-striped table-bordered" id="example-2">
             <thead>
             <tr>
-              <th>#</th>
-              <th>Tên danh mục</th>
+              <th mat-sort-header="id">#</th>
+              <th mat-sort-header="name">Tên danh mục</th>
               <th></th>
             </tr>
             </thead>

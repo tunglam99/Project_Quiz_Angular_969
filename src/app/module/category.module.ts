@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthGuard} from '../helper/auth-guard';
+import {MatSortModule} from '@angular/material';
 
 const routing: Routes = [{
   path: '',
@@ -17,13 +18,14 @@ const routing: Routes = [{
   declarations: [
     CategoryListComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routing),
-    ReactiveFormsModule,
-    FontAwesomeModule,
-    NgbModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routing),
+        ReactiveFormsModule,
+        FontAwesomeModule,
+        NgbModule,
+        MatSortModule
+    ]
 })
 export class CategoryModule {
 }

@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../service/quiz.service';
-import {CategoryService} from '../service/category.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Quiz} from '../model/quiz';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Category} from '../model/category';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'app-quiz',
@@ -108,4 +107,31 @@ export class QuizComponent implements OnInit {
     this.getQuizDetail(id);
     this.openVerticallyCentered(content);
   }
+
+  sortQuiz(sort: Sort) {
+    const data = this.quizList.slice();
+    if (!sort.active || sort.direction === '') {
+      this.quizList = data;
+      return;
+    }
+    this.quizList = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': {
+          return compare(a.id, b.id, isAsc);
+        }
+        case 'name': {
+          return compare(a.name, b.name, isAsc);
+
+        }
+        default: {
+          return 0;
+        }
+      }
+    });
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

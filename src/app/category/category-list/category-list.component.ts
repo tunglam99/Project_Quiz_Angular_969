@@ -3,6 +3,7 @@ import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'app-category-list',
@@ -105,4 +106,31 @@ export class CategoryListComponent implements OnInit {
     this.getCategoryDetail(id);
     this.openVerticallyCentered(content);
   }
+
+  sortCategory(sort: Sort) {
+    const data = this.categoryList.slice();
+    if (!sort.active || sort.direction === '') {
+      this.categoryList = data;
+      return;
+    }
+    this.categoryList = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': {
+          return compare(a.id, b.id, isAsc);
+        }
+        case 'name': {
+          return compare(a.name, b.name, isAsc);
+
+        }
+        default: {
+          return 0;
+        }
+      }
+    });
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
