@@ -48,6 +48,7 @@ export class QuestionComponent implements OnInit {
   currentAnswer: Answer;
   updateAnswerStatus: boolean;
   currentQuestionContent: string;
+  currentAnswerContent: string;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -85,6 +86,11 @@ export class QuestionComponent implements OnInit {
 
   showDeleteQuestionForm(id: number, content) {
     this.getQuestionDetail(id);
+    this.openVerticallyCentered(content);
+  }
+
+  showDeleteAnswerForm(id: number, content) {
+    this.getAnswer(id);
     this.openVerticallyCentered(content);
   }
 
@@ -225,6 +231,7 @@ export class QuestionComponent implements OnInit {
   getAnswer(id: number) {
     this.answerService.getAnswer(id).subscribe(result => {
       this.currentAnswer = result;
+      this.currentAnswerContent = this.currentAnswer.content;
     }, error => {
       console.log(error);
     });
