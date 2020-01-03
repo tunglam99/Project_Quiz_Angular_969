@@ -139,6 +139,9 @@ export class QuestionComponent implements OnInit {
           }
         };
       }
+      if (!this.formUpdateQuestionStatus) {
+        this.addCorrectAnswer();
+    }
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.formUpdateQuestionStatus = false;
         this.formCreateQuestionStatus = false;

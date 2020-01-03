@@ -51,7 +51,7 @@
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                     <form [formGroup]="correctAnswerForm" class="name">
                       <label class="radio-container m-r-55">
-                        <input type="radio" (change)="addCorrectAnswer()" formControlName="content" [value]="answer.content">
+                        <input type="radio" formControlName="content" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
                     </form>
