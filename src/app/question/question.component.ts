@@ -265,8 +265,8 @@ export class QuestionComponent implements OnInit {
 
   addCorrectAnswer() {
     const correctAnswer: CorrectAnswer = {
-      id: this.answerForm.value.id,
-      content: this.answerForm.value.content,
+      id: this.correctAnswerForm.value.id,
+      content: this.correctAnswerForm.value.content,
       question: {
         id: this.questionCurrentId
       }
