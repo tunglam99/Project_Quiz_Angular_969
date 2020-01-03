@@ -22,6 +22,7 @@
                   <div class="value text-center">
                     <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
                             formControlName="typeOfQuestion">
+                      <option [ngValue]="null" disabled>Chọn loại câu hỏi</option>
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
                               [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
                     </select>
@@ -33,6 +34,7 @@
                   </div>
                   <div class="value text-center">
                     <select class="custom-select custom-select-sm" formControlName="category">
+                      <option [ngValue]="null" disabled>Chọn danh mục câu hỏi</option>
                       <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
@@ -216,6 +218,7 @@
                   <div class="value">
                     <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
                               formControlName="typeOfQuestion">
+                      <option [ngValue]="null" disabled>Chọn loại câu hỏi</option>
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
                               [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
                     </select>
@@ -227,6 +230,7 @@
                   </div>
                   <div class="value">
                     <select class="custom-select custom-select-sm" formControlName="category">
+                      <option [ngValue]="null" disabled>Chọn danh mục câu hỏi</option>
                       <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
