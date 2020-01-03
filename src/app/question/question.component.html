@@ -217,7 +217,7 @@
                   </div>
                   <div class="value">
                     <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
-                              formControlName="typeOfQuestion">
+                            formControlName="typeOfQuestion">
                       <option [ngValue]="null" disabled>Chọn loại câu hỏi</option>
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
                               [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
