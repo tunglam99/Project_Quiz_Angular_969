@@ -47,14 +47,15 @@
                 <ejs-richtexteditor formControlName="content"></ejs-richtexteditor>
               </div>
               <div *ngIf="typeOfQuestionFlag===1">
-                <div *ngFor="let answer of answerList">
+                <form [formGroup]="correctAnswerForm">
+                <div *ngFor="let answer of answerList; index as i">
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
-                    <form [formGroup]="correctAnswerForm" class="name">
+                    <div class="name">
                       <label class="radio-container m-r-55">
                         <input type="radio" formControlName="content" [value]="answer.content">
                         <span class="checkmark"></span>
                       </label>
-                    </form>
+                    </div>
                     <div class="value row">
                       <div class="col-10">
                         <div class="input-group">
@@ -103,6 +104,7 @@
                     </form>
                   </div>
                 </div>
+                </form>
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
                     <div class="form-row m-b-55">
@@ -248,15 +250,16 @@
                 </div>
               </div>
               <div *ngIf="typeOfQuestionFlag==1">
+                <form [formGroup]="correctAnswerForm">
                 <div *ngFor="let answer of answerList">
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
-                    <form [formGroup]="correctAnswerForm" class="name">
+                    <div class="name">
                       <label class="radio-container m-r-55" *ngFor="let correctAnswer of correctAnswerList">
                         <input type="radio" formControlName="content" [value]="answer.content"
                                [checked]="correctAnswer.content === answer.content">
                         <span class="checkmark"></span>
                       </label>
-                    </form>
+                    </div>
                     <div class="value row">
                       <div class="col-10">
                         <div class="input-group">
@@ -305,6 +308,7 @@
                     </form>
                   </div>
                 </div>
+                </form>
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
                     <div class="form-row m-b-55">
