@@ -248,12 +248,13 @@
               <div *ngIf="typeOfQuestionFlag==1">
                 <div *ngFor="let answer of answerList">
                   <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
-                    <div class="name">
-                      <label class="radio-container m-r-55">
-                        <input type="radio" [value]="answer.content">
+                    <form [formGroup]="correctAnswerForm" class="name">
+                      <label class="radio-container m-r-55" *ngFor="let correctAnswer of correctAnswerList">
+                        <input type="radio" formControlName="content" [value]="answer.content"
+                               [checked]="correctAnswer.content === answer.content">
                         <span class="checkmark"></span>
                       </label>
-                    </div>
+                    </form>
                     <div class="value row">
                       <div class="col-10">
                         <div class="input-group">
@@ -455,7 +456,8 @@
                               style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)"><span
                         class="fa fa-edit"></span></button>
                       <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                              style="float: none;margin: 5px;" (click)="showDeleteQuestionForm(question.id, delete)"><span
+                              style="float: none;margin: 5px;"
+                              (click)="showDeleteQuestionForm(question.id, delete)"><span
                         class="fa fa-trash"></span></button>
                     </div>
                   </div>

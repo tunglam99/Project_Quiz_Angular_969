@@ -23,6 +23,7 @@ export class QuestionComponent implements OnInit {
   typeOfQuestionList: TypeOfQuestion[] = [];
   categoryList: Category[] = [];
   answerList: Answer[] = [];
+  correctAnswerList: CorrectAnswer[] = [];
   questionForm: FormGroup = new FormGroup({
     content: new FormControl('', Validators.required),
     typeOfQuestion: new FormControl(''),
@@ -77,6 +78,7 @@ export class QuestionComponent implements OnInit {
   onClickUpdate(id: number) {
     this.getQuestionDetail(id);
     this.getAnswerList(id);
+    this.getCorrectAnswerList(id);
     this.formUpdateQuestionStatus = !this.formUpdateQuestionStatus;
     this.questionForm.reset();
   }
@@ -141,7 +143,7 @@ export class QuestionComponent implements OnInit {
       }
       if (!this.formUpdateQuestionStatus) {
         this.addCorrectAnswer();
-    }
+      }
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.formUpdateQuestionStatus = false;
         this.formCreateQuestionStatus = false;
@@ -276,6 +278,12 @@ export class QuestionComponent implements OnInit {
     };
     this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
       this.correctAnswerForm.reset();
+    });
+  }
+
+  getCorrectAnswerList(id: number) {
+    this.correctAnswerService.listCorrectAnswerByQuestion(id).subscribe(result => {
+      this.correctAnswerList = result;
     });
   }
 }
