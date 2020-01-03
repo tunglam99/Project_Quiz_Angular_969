@@ -216,7 +216,7 @@
                   </div>
                   <div class="value">
                     <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
-                              formControlName="typeOfQuestion" [(ngModel)]="currentQuestion.typeOfQuestion">
+                              formControlName="typeOfQuestion">
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
                               [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
                     </select>
@@ -227,7 +227,7 @@
                     Danh mục:
                   </div>
                   <div class="value">
-                    <select class="custom-select custom-select-sm" formControlName="category" [(ngModel)]="currentQuestion.category">
+                    <select class="custom-select custom-select-sm" formControlName="category">
                       <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
