@@ -48,62 +48,62 @@
               </div>
               <div *ngIf="typeOfQuestionFlag===1">
                 <form [formGroup]="correctAnswerForm">
-                <div *ngFor="let answer of answerList; index as i">
-                  <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
-                    <div class="name">
-                      <label class="radio-container m-r-55">
-                        <input type="radio" formControlName="content" [value]="answer.content">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-                    <div class="value row">
-                      <div class="col-10">
-                        <div class="input-group">
-                          <span>{{answer.content}}</span>
-                        </div>
-                      </div>
-                      <div class="col-1">
-                        <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
-                          class="fa fa-edit"></i></button>
-                      </div>
-                      <div class="col-1">
-                        <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                                style="float: none;margin: 5px;"
-                                (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
-                          class="fa fa-times"></span></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="updateAnswerStatus">
-                    <form [formGroup]="answerForm" class="form-row m-b-55">
+                  <div *ngFor="let answer of answerList; index as i">
+                    <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                       <div class="name">
                         <label class="radio-container m-r-55">
-                          <input type="radio" [attr.disabled]="false">
+                          <input type="radio" formControlName="content" [value]="answer.content">
                           <span class="checkmark"></span>
                         </label>
                       </div>
                       <div class="value row">
                         <div class="col-10">
                           <div class="input-group">
-                            <input type="text" class="input--style-5" [value]="answer.content"
-                                   formControlName="content">
+                            <span>{{answer.content}}</span>
                           </div>
                         </div>
                         <div class="col-1">
                           <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                  style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
-                            class="fa fa-save"></i></button>
+                                  style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                            class="fa fa-edit"></i></button>
                         </div>
                         <div class="col-1">
                           <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                                  style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
-                            class="fa fa-close"></span></button>
+                                  style="float: none;margin: 5px;"
+                                  (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
+                            class="fa fa-times"></span></button>
                         </div>
                       </div>
-                    </form>
+                    </div>
+                    <div *ngIf="updateAnswerStatus">
+                      <form [formGroup]="answerForm" class="form-row m-b-55">
+                        <div class="name">
+                          <label class="radio-container m-r-55">
+                            <input type="radio" [attr.disabled]="false">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                        <div class="value row">
+                          <div class="col-10">
+                            <div class="input-group">
+                              <input type="text" class="input--style-5" [value]="answer.content"
+                                     formControlName="content">
+                            </div>
+                          </div>
+                          <div class="col-1">
+                            <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                    style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
+                              class="fa fa-save"></i></button>
+                          </div>
+                          <div class="col-1">
+                            <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                                    style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
+                              class="fa fa-close"></span></button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
                 </form>
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
@@ -129,33 +129,33 @@
                 </div>
               </div>
               <div *ngIf="typeOfQuestionFlag===2">
-                <form [formGroup] = correctAnswerForm>
-                <div class="form-row m-b-55" *ngFor="let answer of answerList">
-                  <div class="name">
-                    <label class="radio-container m-r-55">
-                      <input type="radio" formControlName="content" [value]="answer.content">
-                      <span class="checkmark"></span>
-                    </label>
-                  </div>
-                  <div class="value row">
-                    <div class="col-10">
-                      <div class="input-group">
-                        <span>{{answer.content}}</span>
+                <form [formGroup]=correctAnswerForm>
+                  <div class="form-row m-b-55" *ngFor="let answer of answerList">
+                    <div class="name">
+                      <label class="radio-container m-r-55">
+                        <input type="radio" formControlName="content" [value]="answer.content">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="value row">
+                      <div class="col-10">
+                        <div class="input-group">
+                          <span>{{answer.content}}</span>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                          class="fa fa-edit"></i></button>
+                      </div>
+                      <div class="col-1">
+                        <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                                style="float: none;margin: 5px;"
+                                (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
+                          class="fa fa-times"></span></button>
                       </div>
                     </div>
-                    <div class="col-1">
-                      <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                              style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
-                        class="fa fa-edit"></i></button>
-                    </div>
-                    <div class="col-1">
-                      <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                              style="float: none;margin: 5px;"
-                              (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
-                        class="fa fa-times"></span></button>
-                    </div>
                   </div>
-                </div>
                 </form>
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
@@ -254,63 +254,63 @@
               </div>
               <div *ngIf="typeOfQuestionFlag==1">
                 <form [formGroup]="correctAnswerForm">
-                <div *ngFor="let answer of answerList">
-                  <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
-                    <div class="name">
-                      <label class="radio-container m-r-55" *ngFor="let correctAnswer of correctAnswerList">
-                        <input type="radio" formControlName="content" [value]="answer.content"
-                               [checked]="correctAnswer.content === answer.content">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-                    <div class="value row">
-                      <div class="col-10">
-                        <div class="input-group">
-                          <span>{{answer.content}}</span>
-                        </div>
-                      </div>
-                      <div class="col-1">
-                        <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
-                          class="fa fa-edit"></i></button>
-                      </div>
-                      <div class="col-1">
-                        <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                                style="float: none;margin: 5px;"
-                                (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
-                          class="fa fa-times"></span></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="updateAnswerStatus">
-                    <form [formGroup]="answerForm" class="form-row m-b-55">
+                  <div *ngFor="let answer of answerList">
+                    <div class="form-row m-b-55" *ngIf="!updateAnswerStatus">
                       <div class="name">
-                        <label class="radio-container m-r-55">
-                          <input type="radio" [attr.disabled]="false">
+                        <label class="radio-container m-r-55" *ngFor="let correctAnswer of correctAnswerList">
+                          <input type="radio" formControlName="content" [value]="answer.content"
+                                 [checked]="correctAnswer.content === answer.content">
                           <span class="checkmark"></span>
                         </label>
                       </div>
                       <div class="value row">
                         <div class="col-10">
                           <div class="input-group">
-                            <input type="text" class="input--style-5" [value]="answer.content"
-                                   formControlName="content">
+                            <span>{{answer.content}}</span>
                           </div>
                         </div>
                         <div class="col-1">
                           <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                  style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
-                            class="fa fa-save"></i></button>
+                                  style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                            class="fa fa-edit"></i></button>
                         </div>
                         <div class="col-1">
                           <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                                  style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
-                            class="fa fa-close"></span></button>
+                                  style="float: none;margin: 5px;"
+                                  (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
+                            class="fa fa-times"></span></button>
                         </div>
                       </div>
-                    </form>
+                    </div>
+                    <div *ngIf="updateAnswerStatus">
+                      <form [formGroup]="answerForm" class="form-row m-b-55">
+                        <div class="name">
+                          <label class="radio-container m-r-55">
+                            <input type="radio" [attr.disabled]="false">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                        <div class="value row">
+                          <div class="col-10">
+                            <div class="input-group">
+                              <input type="text" class="input--style-5" [value]="answer.content"
+                                     formControlName="content">
+                            </div>
+                          </div>
+                          <div class="col-1">
+                            <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                    style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
+                              class="fa fa-save"></i></button>
+                          </div>
+                          <div class="col-1">
+                            <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
+                                    style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
+                              class="fa fa-close"></span></button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
                 </form>
                 <div class="form-row m-b-55">
                   <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
@@ -474,11 +474,11 @@
             </button>
           </div>
           <div class="card-body table-responsive p-0" style="height: 300px;">
-            <table class="table table-hover">
+            <table matSort (matSortChange)="sortQuestion($event)" class="table table-hover">
               <thead>
               <tr>
-                <th>#</th>
-                <th>Nội dung câu hỏi</th>
+                <th mat-sort-header="id">#</th>
+                <th mat-sort-header="content">Nội dung câu hỏi</th>
                 <th></th>
               </tr>
               </thead>

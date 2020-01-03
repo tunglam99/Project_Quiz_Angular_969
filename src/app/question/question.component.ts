@@ -11,6 +11,7 @@ import {Answer} from '../model/answer';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CorrectAnswerService} from '../service/correct-answer.service';
 import {CorrectAnswer} from '../model/correct-answer';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'app-question',
@@ -186,6 +187,30 @@ export class QuestionComponent implements OnInit {
     });
   }
 
+  sortQuestion(sort: Sort) {
+    const data = this.questionStatusIsTrueList.slice();
+    if (!sort.active || sort.direction === '') {
+      this.questionStatusIsTrueList = data;
+      return;
+    }
+    this.questionStatusIsTrueList = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': {
+          return compare(a.id, b.id, isAsc);
+        }
+        case 'content': {
+          return compare(a.content, b.content, isAsc);
+
+        }
+        default: {
+          return 0;
+
+        }
+      }
+    });
+  }
+
   getQuestionStatusIsTrue() {
     this.questionService.listQuestionStatusIsTrue().subscribe(result => {
       this.questionStatusIsTrueList = result;
@@ -294,4 +319,8 @@ export class QuestionComponent implements OnInit {
       this.correctAnswerList = result;
     });
   }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
