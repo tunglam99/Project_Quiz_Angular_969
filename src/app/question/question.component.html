@@ -231,7 +231,7 @@
                   <div class="value">
                     <select class="custom-select custom-select-sm" formControlName="category">
                       <option [ngValue]="null" disabled>Chọn danh mục câu hỏi</option>
-                      <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
+                      <option *ngFor="let category of categoryList" [ngValue]="category.id">{{category.name}}</option>
                     </select>
                   </div>
                 </div>
@@ -241,7 +241,7 @@
                 <div class="value">
                   <div class="input-group">
                     <ejs-richtexteditor formControlName="content"
-                                        [(ngModel)]="currentQuestion.content"></ejs-richtexteditor>
+                                        [value]="this.currentQuestionContent"></ejs-richtexteditor>
                   </div>
                 </div>
               </div>

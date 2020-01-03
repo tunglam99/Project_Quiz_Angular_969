@@ -44,6 +44,7 @@ export class QuestionComponent implements OnInit {
   typeOfQuestionFlag: number;
   currentAnswer: Answer;
   updateAnswerStatus: boolean;
+  currentQuestionContent: string;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -72,6 +73,7 @@ export class QuestionComponent implements OnInit {
 
   onClickUpdate(id: number) {
     this.getQuestionDetail(id);
+    this.getAnswerList(id);
     this.formUpdateQuestionStatus = !this.formUpdateQuestionStatus;
     this.questionForm.reset();
   }
@@ -150,6 +152,7 @@ export class QuestionComponent implements OnInit {
   getQuestionDetail(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
+      this.currentQuestionContent = this.currentQuestion.content;
     }, () => {
       this.failMessage = 'Lỗi không tìm thấy câu hỏi có id = ' + id;
     });
