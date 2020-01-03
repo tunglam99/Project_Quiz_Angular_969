@@ -23,9 +23,9 @@
               "src/favicon.ico",
               "src/assets",
               "src/_redirects"
-
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css",
               "src/assets/static/css/style.css",
               "src/assets/static/css/feather.css",
@@ -68,29 +68,29 @@
               ]
             },
             "staging": {
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }
-            ],
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true,
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }
-            ]
-          }
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
           }
         },
         "serve": {
@@ -123,6 +123,7 @@
               "src/_redirects"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -154,6 +155,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "Project-Quiz-Angular-Team969"
 }

@@ -14,6 +14,7 @@ import { RegisterSuccessComponent } from './user/register-success/register-succe
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import {SharedModule} from './module/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {SharedModule} from './module/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
