@@ -21,7 +21,7 @@ const routing: Routes = [{
     CommonModule,
     RouterModule.forChild(routing),
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FontAwesomeModule,
     RichTextEditorAllModule
   ]

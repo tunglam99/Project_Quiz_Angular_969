@@ -43,9 +43,6 @@ export class QuestionComponent implements OnInit {
   typeOfQuestionFlag: number;
   currentAnswer: Answer;
   updateAnswerStatus: boolean;
-  questionContent: string;
-  questionType: any;
-  questionCategory: any;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -136,11 +133,16 @@ export class QuestionComponent implements OnInit {
   getQuestionDetail(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
-      this.questionContent = this.currentQuestion.content;
-      this.questionType = result.typeOfQuestion;
-      this.questionCategory = this.currentQuestion.category;
     }, () => {
       this.failMessage = 'Lỗi không tìm thấy câu hỏi có id = ' + id;
+    });
+  }
+
+  deleteQuestion(id: number) {
+    this.questionService.deleteQuestion(id).subscribe(() => {
+      this.getQuestionStatusIsTrue();
+    }, error => {
+      console.log(error);
     });
   }
 

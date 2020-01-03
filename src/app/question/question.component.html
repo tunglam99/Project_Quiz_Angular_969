@@ -13,7 +13,8 @@
             <p>{{failMessage}}</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(questionCurrentId)" *ngIf="formCreateQuestionStatus">
+            <form [formGroup]="questionForm" (ngSubmit)="updateQuestion(questionCurrentId)"
+                  *ngIf="formCreateQuestionStatus">
               <div class="form-row m-b-55">
                 <div class="col-6">
                   <div class="name">
@@ -127,7 +128,7 @@
                 <div class="form-row m-b-55" *ngFor="let answer of answerList">
                   <div class="name">
                     <label class="radio-container m-r-55">
-                      <input type="checkbox" [value]="answer.content" >
+                      <input type="checkbox" [value]="answer.content">
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -200,7 +201,7 @@
       <div class="wrapper wrapper--w790">
         <div class="card card-5">
           <div class="card-heading">
-            <h2 class="title">Tạo mới câu hỏi</h2>
+            <h2 class="title">Cập nhật câu hỏi</h2>
           </div>
           <div *ngIf="failMessage" class="alert alert-danger">
             <p>{{failMessage}}</p>
@@ -214,12 +215,10 @@
                     Loại câu hỏi:
                   </div>
                   <div class="value">
-                    <select class="custom-select custom-select-sm" [value]="questionType"
-                            (click)="typeOfQuestionForm($event.target.value)"
-                            formControlName="typeOfQuestion">
+                    <select class="custom-select custom-select-sm" (click)="typeOfQuestionForm($event.target.value)"
+                              formControlName="typeOfQuestion" [(ngModel)]="currentQuestion.typeOfQuestion">
                       <option *ngFor="let typeOfQuestion of typeOfQuestionList"
-                              [value]="typeOfQuestion.id"
-                              [selected]="typeOfQuestion.id === questionType">{{typeOfQuestion.name}}</option>
+                              [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
                     </select>
                   </div>
                 </div>
@@ -228,8 +227,7 @@
                     Danh mục:
                   </div>
                   <div class="value">
-                    <select class="custom-select custom-select-sm" [value]="questionCategory"
-                            formControlName="category">
+                    <select class="custom-select custom-select-sm" formControlName="category" [(ngModel)]="currentQuestion.category">
                       <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
                     </select>
                   </div>
@@ -239,7 +237,8 @@
                 <div class="name">Câu hỏi:</div>
                 <div class="value">
                   <div class="input-group">
-                    <ejs-richtexteditor formControlName="content" [value]="questionContent"></ejs-richtexteditor>
+                    <ejs-richtexteditor formControlName="content"
+                                        [(ngModel)]="currentQuestion.content"></ejs-richtexteditor>
                   </div>
                 </div>
               </div>
