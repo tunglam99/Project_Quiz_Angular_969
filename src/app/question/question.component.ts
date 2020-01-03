@@ -84,7 +84,6 @@ export class QuestionComponent implements OnInit {
   showDeleteQuestionForm(id: number, content) {
     this.getQuestionDetail(id);
     this.openVerticallyCentered(content);
-    this.close();
   }
 
   openVerticallyCentered(content) {
@@ -164,6 +163,7 @@ export class QuestionComponent implements OnInit {
   deleteQuestion(id: number) {
     this.questionService.deleteQuestion(id).subscribe(() => {
       this.getQuestionStatusIsTrue();
+      this.close();
     }, error => {
       console.log(error);
     });
