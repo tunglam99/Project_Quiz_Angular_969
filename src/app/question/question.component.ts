@@ -262,6 +262,7 @@ export class QuestionComponent implements OnInit {
   deleteAnswer(id: number) {
     this.answerService.deleteAnswer(id).subscribe(() => {
       this.getAnswerList(this.questionCurrentId);
+      this.close();
     }, () => {
       this.failMessage = 'Lỗi khi xóa câu trả lời có id = ' + id;
     });
