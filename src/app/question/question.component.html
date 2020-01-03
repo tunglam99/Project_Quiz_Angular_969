@@ -393,6 +393,32 @@
       </div>
     </div>
   </div>
+  <div>
+    <ng-template #delete let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Xóa thông tin câu hỏi</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="questionForm" (ngSubmit)="deleteQuestion(currentQuestion.id)">
+          <div class="value">
+            <div class="input-group">
+              <span [innerHTML]="currentQuestion.content"></span>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="submit" class="tabledit-edit-button btn btn-danger waves-effect waves-light">
+              <i class="fa fa-trash fa-lg"></i>
+              Xóa
+            </button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
   <div *ngIf="!formCreateQuestionStatus && !formUpdateQuestionStatus">
     <div class="row">
       <div class="col-12">
@@ -425,7 +451,7 @@
                               style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)"><span
                         class="fa fa-edit"></span></button>
                       <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                              style="float: none;margin: 5px;" (click)="deleteQuestion(question.id)"><span
+                              style="float: none;margin: 5px;" (click)="showDeleteQuestionForm(question.id, delete)"><span
                         class="fa fa-trash"></span></button>
                     </div>
                   </div>

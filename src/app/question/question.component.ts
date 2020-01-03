@@ -8,6 +8,7 @@ import {CategoryService} from '../service/category.service';
 import {Category} from '../model/category';
 import {AnswerService} from '../service/answer.service';
 import {Answer} from '../model/answer';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-question',
@@ -47,7 +48,8 @@ export class QuestionComponent implements OnInit {
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
-              private answerService: AnswerService) {
+              private answerService: AnswerService,
+              private modalService: NgbModal) {
     this.formCreateQuestionStatus = false;
     this.formUpdateQuestionStatus = false;
     this.showCreateAnswerForm = false;
@@ -71,6 +73,21 @@ export class QuestionComponent implements OnInit {
   onClickUpdate(id: number) {
     this.getQuestionDetail(id);
     this.formUpdateQuestionStatus = !this.formUpdateQuestionStatus;
+    this.questionForm.reset();
+  }
+
+  showDeleteQuestionForm(id: number, content) {
+    this.getQuestionDetail(id);
+    this.openVerticallyCentered(content);
+    this.close();
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, {centered: true});
+  }
+
+  close() {
+    this.modalService.dismissAll('');
     this.questionForm.reset();
   }
 
