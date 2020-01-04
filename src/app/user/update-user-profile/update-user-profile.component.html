@@ -1,0 +1,63 @@
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+  <div class="wrapper wrapper--w790">
+    <div class="card card-5">
+      <div class="card-heading">
+        <h2 class="title">Cập nhật thông tin</h2>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success text-center">
+        <p>{{successMessage}}</p>
+      </div>
+      <div *ngIf="failMessage" class="alert alert-danger text-center">
+        <p>{{failMessage}}</p>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
+          <div class="form-row m-b-55">
+            <div class="name">Họ</div>
+            <div class="value">
+              <div class="input-group">
+                <input class="input--style-5" type="text" formControlName="lastName">
+              </div>
+            </div>
+          </div>
+          <div class="form-row m-b-55 mt-4">
+            <div class="name">Tên</div>
+            <div class="value">
+              <div class="input-group">
+                <input class="input--style-5" type="text" formControlName="firstName">
+              </div>
+            </div>
+          </div>
+          <div class="form-row m-b-55 mt-4">
+            <div class="name">Số điện thoại</div>
+            <div class="value">
+              <div class="input-group">
+                <input class="input--style-5" type="text" formControlName="phoneNumber">
+              </div>
+            </div>
+          </div>
+          <div class="form-row m-b-55 mt-4">
+            <div class="name">Giới tính</div>
+            <div class="value">
+              <div class="form-row p-t-20">
+                <div class="p-t-15">
+                  <label class="radio-container m-r-55">Nam
+                    <input type="radio" checked="checked" formControlName="gender" value="Nam">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="radio-container">Nữ
+                    <input type="radio" formControlName="gender" value="Nữ">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary waves-effect waves-light" type="submit">Cập nhật</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

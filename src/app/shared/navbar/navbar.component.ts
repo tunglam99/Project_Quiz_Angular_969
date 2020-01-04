@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {UserToken} from '../../model/user-token';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
-import {faSpellCheck} from '@fortawesome/free-solid-svg-icons';
+import {faSpellCheck, faUserEdit} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +13,14 @@ export class NavbarComponent {
   currentUser: UserToken;
   public isMenuCollapsed = true;
   quizIcon = faSpellCheck;
+  updateUserIcon = faUserEdit;
   hasRoleAdmin = false;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    if (this.currentUser){
+    this.authenticationService.currentUser.subscribe(value => this.currentUser = value);
+    if (this.currentUser) {
       const roleList = this.currentUser.roles;
       for (const role of roleList) {
         if (role.authority === 'ROLE_ADMIN') {

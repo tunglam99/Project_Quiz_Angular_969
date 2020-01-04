@@ -13,6 +13,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class UpdateUserProfileComponent implements OnInit {
   currentUser: User;
   sub: Subscription;
+  failMessage = '';
+  successMessage = '';
   userForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -53,7 +55,9 @@ export class UpdateUserProfileComponent implements OnInit {
         };
         this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
           this.userForm.reset();
+          this.successMessage = 'Cập nhật thông tin thành công';
         }, error => {
+          this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
           console.log(error);
         });
       }, error => {

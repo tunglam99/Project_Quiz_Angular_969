@@ -166,11 +166,6 @@ html {
   box-sizing: border-box;
 }
 
-* {
-  padding: 0;
-  margin: 0;
-}
-
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
@@ -220,12 +215,6 @@ fieldset {
   border: 0;
 }
 
-button {
-  outline: none;
-  background: none;
-  border: none;
-}
-
 /* ==========================================================================
    #PAGE WRAPPER
    ========================================================================== */
@@ -266,6 +255,7 @@ h5 {
 h6 {
   font-size: 13px;
 }
+
 
 /* ==========================================================================
    #SPACING
@@ -319,7 +309,7 @@ h6 {
 }
 
 .m-b-55 {
-  margin-bottom: 55px;
+  margin-bottom: 10px;
 }
 
 /* ==========================================================================
@@ -343,67 +333,6 @@ h6 {
 
 .wrapper--w680 {
   max-width: 680px;
-}
-
-/* ==========================================================================
-   #BUTTON
-   ========================================================================== */
-.btn {
-  display: inline-block;
-  line-height: 50px;
-  padding: 0 50px;
-  -webkit-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-  cursor: pointer;
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #fff;
-  font-family: inherit;
-}
-
-.btn--radius {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
-.btn--radius-2 {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.btn--pill {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-}
-
-.btn--green {
-  background: #57b846;
-}
-
-.btn--green:hover {
-  background: #4dae3c;
-}
-
-.btn--blue {
-  background: #4272d7;
-}
-
-.btn--blue:hover {
-  background: #3868cd;
-}
-
-.btn--red {
-  background: #ff4b5a;
-}
-
-.btn--red:hover {
-  background: #eb3746;
 }
 
 /* ==========================================================================
@@ -698,9 +627,11 @@ input {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  background: #fff;
 }
 
 .card-5 {
+  background: #fff;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -711,6 +642,7 @@ input {
 
 .card-5 .card-heading {
   padding: 20px 0;
+  background: #1a1a1a;
   -webkit-border-top-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
   border-top-left-radius: 10px;

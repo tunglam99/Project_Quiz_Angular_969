@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../helper/auth-guard';
 import {ExamModule} from './exam.module';
 import {UpdateUserProfileComponent} from '../user/update-user-profile/update-user-profile.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ExamModule,
+    ReactiveFormsModule,
   ]
 })
 export class UserModule {

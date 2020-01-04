@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {RegisterComponent} from './user/register/register.component';
 import {LoginComponent} from './user/login/login.component';
 import {HomeComponent} from './user/home/home.component';
-import {AuthGuard} from './helper/auth-guard';
 import {RegisterSuccessComponent} from './user/register-success/register-success.component';
 import {ForgotPasswordComponent} from './user/forgot-password/forgot-password.component';
 import {ChangePasswordComponent} from './user/change-password/change-password.component';
