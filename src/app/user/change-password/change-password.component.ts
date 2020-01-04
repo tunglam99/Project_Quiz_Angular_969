@@ -32,7 +32,7 @@ export class ChangePasswordComponent implements OnInit {
     });
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const id = paramMap.get('id');
-      this.userService.userDetail(id).subscribe(next => {
+      this.userService.getUserProfile(id).subscribe(next => {
         this.user = next;
       }, () => {
         this.failMessage = 'Không tìm thấy user';

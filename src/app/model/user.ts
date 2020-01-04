@@ -2,14 +2,14 @@ import {Role} from './role';
 
 export interface User {
   id: number;
-  username: string;
-  password: string;
-  confirmPassword: string;
+  username?: string;
+  password?: string;
+  confirmPassword?: string;
   firstName?: string;
   lastName?: string;
   gender?: string;
-  email: string;
+  email?: string;
   phoneNumber?: string;
-  enabled: boolean;
+  enabled?: boolean;
   roles?: [Role];
 }
