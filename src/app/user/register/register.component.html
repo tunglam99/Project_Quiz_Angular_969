@@ -27,6 +27,20 @@
             </div>
           </div>
           <div class="form-row m-b-55">
+            <div class="name">Email</div>
+            <div class="value">
+              <div class="input-group">
+                <input class="input--style-5" type="email" formControlName="email">
+              </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+              Email phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">
+              Không đúng định dạng email
+            </div>
+          </div>
+          <div class="form-row m-b-55">
             <div class="name">Mật khẩu</div>
             <div class="value">
               <div class="input-group">
@@ -52,82 +66,6 @@
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="registerForm.value.password !== registerForm.value.confirmPassword && registerForm.value.confirmPassword != ''">
               Mật khẩu nhập lại không khớp.
-            </div>
-          </div>
-          <div class="form-row m-b-55">
-            <div class="name">Họ và tên</div>
-            <div class="value">
-              <div class="row row-space">
-                <div class="col-4">
-                  <div class="input-group-desc">
-                    <input class="input--style-5" type="text" formControlName="lastName">
-                    <label class="label--desc">Họ</label>
-                  </div>
-                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('lastName').hasError('required') && registerForm.get('lastName').touched">
-                    Ô này phải được điền
-                  </div>
-                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('lastName').hasError('minlength') && registerForm.get('lastName').touched">
-                    Nhập ít nhất 2 ký tự
-                  </div>
-                </div>
-                <div class="col-7">
-                  <div class="input-group-desc">
-                    <input class="input--style-5" type="text" formControlName="firstName">
-                    <label class="label--desc">Tên</label>
-                  </div>
-                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('firstName').hasError('required') && registerForm.get('firstName').touched">
-                    Tên người dùng phải được điền
-                  </div>
-                  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('firstName').hasError('minlength') && registerForm.get('firstName').touched">
-                    Tên người dùng phải có ít nhất 2 kí tự
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="name">Giới tính</div>
-            <div class="value">
-              <div class="form-row p-t-20">
-                <div class="p-t-15">
-                  <label class="radio-container m-r-55">Nam
-                    <input type="radio" checked="checked" formControlName="gender" value="Nam">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="radio-container">Nữ
-                    <input type="radio" formControlName="gender" value="Nữ">
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('gender').hasError('required') && registerForm.get('gender').touched">
-                Chọn giới tính
-              </div>
-            </div>
-          </div>
-          <div class="form-row m-b-55">
-            <div class="name">Email</div>
-            <div class="value">
-              <div class="input-group">
-                <input class="input--style-5" type="email" formControlName="email">
-              </div>
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
-              Email phải được điền
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">
-              Không đúng định dạng email
-            </div>
-          </div>
-          <div class="form-row m-b-55">
-            <div class="name">Điện thoại</div>
-            <div class="value">
-              <div class="input-group-desc">
-                <input class="input--style-5" type="text" formControlName="phoneNumber">
-              </div>
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('phoneNumber').hasError('required') && registerForm.get('phoneNumber').touched">
-              Số điện thoại phải được điền
             </div>
           </div>
           <div class="text-center">

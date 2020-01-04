@@ -5,11 +5,11 @@ export interface User {
   username: string;
   password: string;
   confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   enabled: boolean;
   roles?: [Role];
 }

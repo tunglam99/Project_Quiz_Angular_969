@@ -268,49 +268,6 @@ h6 {
 }
 
 /* ==========================================================================
-   #BACKGROUND
-   ========================================================================== */
-.bg-blue {
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
-}
-
-.bg-red {
-  background: #c4c735;
-  background: -webkit-linear-gradient(-135deg, #c8bd17, #d06eb4);
-  background: -o-linear-gradient(-135deg, #c879b1, #d0cc37);
-  background: -moz-linear-gradient(-135deg, #c874bd, #d0c529);
-  background: linear-gradient(-135deg, #c8ba77, #d076ab);
-}
-
-.bg-gra-01 {
-  background: #c4c735;
-  background: -webkit-linear-gradient(-135deg, #c8bd17, #d06eb4);
-  background: -o-linear-gradient(-135deg, #c879b1, #d0cc37);
-  background: -moz-linear-gradient(-135deg, #c874bd, #d0c529);
-  background: linear-gradient(-135deg, #c8ba77, #d076ab);
-}
-
-.bg-gra-02 {
-  background: #c4c735;
-  background: -webkit-linear-gradient(-135deg, #c8bd17, #d06eb4);
-  background: -o-linear-gradient(-135deg, #c879b1, #d0cc37);
-  background: -moz-linear-gradient(-135deg, #c874bd, #d0c529);
-  background: linear-gradient(-135deg, #c8ba77, #d076ab);
-}
-
-.bg-gra-03 {
-  background: #c4c735;
-  background: -webkit-linear-gradient(-135deg, #c8bd17, #d06eb4);
-  background: -o-linear-gradient(-135deg, #c879b1, #d0cc37);
-  background: -moz-linear-gradient(-135deg, #c874bd, #d0c529);
-  background: linear-gradient(-135deg, #c8ba77, #d076ab);
-}
-
-/* ==========================================================================
    #SPACING
    ========================================================================== */
 .p-t-100 {
@@ -741,11 +698,9 @@ input {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  background: #fff;
 }
 
 .card-5 {
-  background: #fff;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -756,7 +711,6 @@ input {
 
 .card-5 .card-heading {
   padding: 20px 0;
-  background: #1a1a1a;
   -webkit-border-top-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
   border-top-left-radius: 10px;

@@ -15,11 +15,7 @@ export class RegisterComponent implements OnInit {
     username: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    gender: new FormControl(true, Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phoneNumber: new FormControl('', Validators.required),
   });
 
   constructor(private userService: UserService,
@@ -35,11 +31,7 @@ export class RegisterComponent implements OnInit {
       username: this.registerForm.value.username,
       password: this.registerForm.value.password,
       confirmPassword: this.registerForm.value.confirmPassword,
-      firstName: this.registerForm.value.firstName,
-      lastName: this.registerForm.value.lastName,
-      gender: this.registerForm.value.gender,
       email: this.registerForm.value.email,
-      phoneNumber: this.registerForm.value.phoneNumber,
       enabled: false,
     };
     this.userService.register(user).subscribe(() => {
