@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../helper/auth-guard';
 import {ExamModule} from './exam.module';
+import {UpdateUserProfileComponent} from '../update-user-profile/update-user-profile.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    UpdateUserProfileComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ExamModule
+    ExamModule,
   ]
 })
 export class UserModule { }
