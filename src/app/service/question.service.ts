@@ -19,8 +19,8 @@ export class QuestionService {
     return this.http.get<Question[]>(API_URL + '/questions');
   }
 
-  listQuestionStatusIsTrue(): Observable<Question[]> {
-    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue');
+  listQuestionStatusIsTrue(category?: string): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue?category=' + category);
   }
 
   findAllQuestionByQuiz(id: number): Observable<Question[]> {
