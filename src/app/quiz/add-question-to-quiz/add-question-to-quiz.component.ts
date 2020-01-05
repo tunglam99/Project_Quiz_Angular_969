@@ -20,7 +20,6 @@ export class AddQuestionToQuizComponent implements OnInit {
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
               private activatedRoute: ActivatedRoute) {
-    this.getQuestionList();
   }
 
   ngOnInit() {
@@ -28,6 +27,7 @@ export class AddQuestionToQuizComponent implements OnInit {
       const id = +paramMap.get('id');
       this.quizService.getQuiz(id).subscribe(result => {
         this.quiz = result;
+        this.getQuestionList();
       }, error => {
         console.log(error);
       });
@@ -42,17 +42,9 @@ export class AddQuestionToQuizComponent implements OnInit {
     });
   }
 
-  getQuestionDetail(id: number) {
+  addQuestionToQuiz(id: number) {
     this.questionService.getQuestion(id).subscribe(result => {
       this.currentQuestion = result;
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  addQuestionToQuiz(questionId: number) {
-    this.getQuestionDetail(questionId);
-    if (this.currentQuestion.id != null) {
       const question: Question = {
         id: this.currentQuestion.id,
         content: this.currentQuestion.content,
@@ -63,11 +55,13 @@ export class AddQuestionToQuizComponent implements OnInit {
           id: this.quiz.id,
         }
       };
-      this.questionService.updateQuestion(questionId, question).subscribe(() => {
+      this.questionService.updateQuestion(id, question).subscribe(() => {
         this.getQuestionList();
       }, error => {
         console.log(error);
       });
-    }
+    }, error => {
+      console.log(error);
+    });
   }
 }
