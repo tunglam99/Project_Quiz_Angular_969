@@ -44,10 +44,9 @@ export class QuizDetailComponent implements OnInit {
     });
   }
 
-  removeQuestionFromQuiz(questionId: number) {
-    this.getQuestionDetail(questionId);
-    if (this.currentQuestion.id != null) {
-      console.log(this.currentQuestion);
+  removeQuestionFromQuiz(id: number) {
+    this.questionService.getQuestion(id).subscribe(result => {
+      this.currentQuestion = result;
       const question: Question = {
         id: this.currentQuestion.id,
         content: this.currentQuestion.content,
@@ -56,11 +55,13 @@ export class QuizDetailComponent implements OnInit {
         status: this.currentQuestion.status,
         quiz: null
       };
-      this.questionService.updateQuestion(questionId, question).subscribe(() => {
+      this.questionService.updateQuestion(id, question).subscribe(() => {
         this.getQuestionList();
       }, error => {
         console.log(error);
       });
-    }
+    }, error => {
+      console.log(error);
+    });
   }
 }
