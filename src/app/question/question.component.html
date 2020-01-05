@@ -467,6 +467,18 @@
         <div class="card">
           <div class="card-header">
             <span>Danh sách câu hỏi</span>
+            <form [formGroup]="searchForm" (ngSubmit)="searchQuestion(searchForm.value.content)">
+              <div class="form-row m-b-55">
+                <div class="value text-center">
+                  <select class="custom-select custom-select-sm" formControlName="content">
+                    <option [value]="null">Chọn danh mục</option>
+                    <option *ngFor="let category of categoryList"
+                            [value]="category.name">{{category.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <button>Tìm kiếm</button>
+            </form>
             <button type="button"
                     class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right"
                     *ngIf="!formCreateQuestionStatus" (click)="onClickCreate()">

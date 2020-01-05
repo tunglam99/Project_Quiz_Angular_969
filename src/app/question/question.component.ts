@@ -38,6 +38,9 @@ export class QuestionComponent implements OnInit {
     content: new FormControl(''),
     question: new FormControl('')
   });
+  searchForm: FormGroup = new FormGroup({
+    content: new FormControl(''),
+  });
   failMessage: string;
   formCreateQuestionStatus: boolean;
   formUpdateQuestionStatus: boolean;
@@ -216,6 +219,12 @@ export class QuestionComponent implements OnInit {
     });
   }
 
+  findAllQuestionByCategory(category: string) {
+    this.questionService.listQuestionStatusIsTrue(category).subscribe(result => {
+      this.questionStatusIsTrueList = result;
+    });
+  }
+
   getTypeOfQuestionList() {
     this.typeOfQuestionService.listTypeOfQuestion().subscribe(result => {
       this.typeOfQuestionList = result;
@@ -317,6 +326,15 @@ export class QuestionComponent implements OnInit {
     this.correctAnswerService.listCorrectAnswerByQuestion(id).subscribe(result => {
       this.correctAnswerList = result;
     });
+  }
+
+  searchQuestion(category: string) {
+    if (category != null) {
+      this.findAllQuestionByCategory(category);
+    } else {
+      this.getQuestionStatusIsTrue();
+    }
+    this.searchForm.reset();
   }
 }
 
