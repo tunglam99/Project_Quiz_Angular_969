@@ -19,11 +19,17 @@ export class QuestionService {
     return this.http.get<Question[]>(API_URL + '/questions');
   }
 
-  listQuestionStatusIsTrue(category?: string): Observable<Question[]> {
-    if (category !== undefined) {
-      return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue?category=' + category);
-    }
+  listQuestionStatusIsTrue(): Observable<Question[]> {
     return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue');
+  }
+
+  findAllQuestionByCategory(category?: string): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue?category=' + category);
+
+  }
+
+  findAllQuestionByTypeOfQuestion(typeOfQuestion?: string): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue?typeOfQuestion=' + typeOfQuestion);
   }
 
   findAllQuestionByQuiz(id: number): Observable<Question[]> {

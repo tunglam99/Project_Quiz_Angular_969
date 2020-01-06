@@ -467,17 +467,32 @@
         <div class="card">
           <div class="card-header">
             <span>Danh sách câu hỏi</span>
-            <form [formGroup]="searchForm" (ngSubmit)="searchQuestion(searchForm.value.content)">
-              <div class="form-row m-b-55">
-                <div class="value text-center">
-                  <select class="custom-select custom-select-sm" formControlName="content">
-                    <option [value]="null">Chọn danh mục</option>
-                    <option *ngFor="let category of categoryList"
-                            [value]="category.name">{{category.name}}</option>
-                  </select>
+            <br>
+            <form [formGroup]="searchForm"
+                  (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion)">
+              <div class="row">
+                <div class="form-row m-b-55 col-6">
+                  <div class="value text-center col-6">
+                    <select class="custom-select custom-select-sm" formControlName="category">
+                      <option [value]="null">Danh mục</option>
+                      <option *ngFor="let category of categoryList"
+                              [value]="category.name">{{category.name}}</option>
+                    </select>
+                  </div>
+                  <div class="value text-center col-6">
+                    <select class="custom-select custom-select-sm" formControlName="typeOfQuestion">
+                      <option [value]="null">Loại câu hỏi</option>
+                      <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                              [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <button class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light">
+                    <i class="fa fa-search"></i>Tìm kiếm
+                  </button>
                 </div>
               </div>
-              <button>Tìm kiếm</button>
             </form>
             <button type="button"
                     class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right"
