@@ -336,8 +336,6 @@ export class QuestionComponent implements OnInit {
   }
 
   searchQuestion(category: string, typeOfQuestion: string) {
-    console.log(category);
-    console.log(typeOfQuestion);
     if (this.searchForm.value.category != null) {
       this.findAllQuestionByCategory(category);
     } else if (this.searchForm.value.typeOfQuestion != null) {
