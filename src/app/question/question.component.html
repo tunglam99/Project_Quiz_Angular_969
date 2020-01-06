@@ -469,13 +469,13 @@
             <span>Danh sách câu hỏi</span>
             <br>
             <form [formGroup]="searchForm" class="example-form"
-                  (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion)">
+                  (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
               <mat-form-field class="example-full-width row">
-                <input class="input--style-5" type="text" placeholder="Tiêu đề" aria-label="Number" matInput [matAutocomplete]="auto"
-                       formControlName="content">
-                <mat-autocomplete #auto="matAutocomplete">
+                <input class="input--style-5" type="text" placeholder="Tiêu đề" aria-label="Assignee" matInput
+                       [formControl]="content" formControlName="content" [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let question of filteredQuestions | async" [value]="question">
-                    <span [innerHTML]="question"></span>
+                    <span [innerHTML]="question.content"></span>
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>

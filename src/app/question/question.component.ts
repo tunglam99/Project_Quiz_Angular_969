@@ -56,9 +56,9 @@ export class QuestionComponent implements OnInit {
   updateAnswerStatus: boolean;
   currentQuestionContent: string;
   currentAnswerContent: string;
-  filteredQuestions: Observable<string[]>;
-  questionTitleList: string[] = [];
+  filteredQuestions: Observable<Question[]>;
   content = new FormControl();
+
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
@@ -78,21 +78,23 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     this.questionService.listQuestionStatusIsTrue().subscribe(result => {
       this.questionStatusIsTrueList = result;
-      for (const question of this.questionStatusIsTrueList) {
-        this.questionTitleList.push(question.content);
-      }
       this.filteredQuestions = this.content.valueChanges
         .pipe(
           startWith(''),
-          map(value => this._filter(value))
+          map(value => typeof value === 'string' ? value : value.content),
+          map(content => content ? this._filter(content) : this.questionStatusIsTrueList.slice())
         );
     });
     this.searchForm.addControl('content', this.content);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.questionTitleList.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  displayFn(question?: Question): string | undefined {
+    return question ? question.content : undefined;
+  }
+
+  private _filter(content: string): Question[] {
+    const filterValue = content.toLowerCase();
+    return this.questionStatusIsTrueList.filter(option => option.content.toLowerCase().indexOf(filterValue) === 0);
   }
 
   onClickCreate() {
@@ -259,6 +261,14 @@ export class QuestionComponent implements OnInit {
     });
   }
 
+  findQuestionByContent(content: string) {
+    this.questionService.findQuestionByContent(content).subscribe(value => {
+      this.currentQuestion = value;
+      this.questionList = [];
+      this.questionList.push(this.currentQuestion);
+    });
+  }
+
   getTypeOfQuestionList() {
     this.typeOfQuestionService.listTypeOfQuestion().subscribe(result => {
       this.typeOfQuestionList = result;
@@ -362,7 +372,7 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  searchQuestion(category: string, typeOfQuestion: string) {
+  searchQuestion(category: string, typeOfQuestion: string, content) {
     if (this.searchForm.value.category != null && this.searchForm.value.typeOfQuestion != null) {
       this.findAllQuestionByTypeOfQuestionAndCategory(typeOfQuestion, category);
     } else {
@@ -370,6 +380,8 @@ export class QuestionComponent implements OnInit {
         this.findAllQuestionByCategory(category);
       } else if (this.searchForm.value.typeOfQuestion != null) {
         this.findAllQuestionByTypeOfQuestion(typeOfQuestion);
+      } else if (this.searchForm.value.content != null) {
+        this.findQuestionByContent(content);
       } else {
         this.getQuestionStatusIsTrue();
       }
