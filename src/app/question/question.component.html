@@ -468,8 +468,17 @@
           <div class="card-header">
             <span>Danh sách câu hỏi</span>
             <br>
-            <form [formGroup]="searchForm"
+            <form [formGroup]="searchForm" class="example-form"
                   (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion)">
+              <mat-form-field class="example-full-width row">
+                <input type="text" placeholder="Tiêu đề" aria-label="Number" matInput [matAutocomplete]="auto"
+                       formControlName="content">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let question of questionTitleList" [value]="question">
+                    <span [innerHTML]="question"></span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
               <div class="row">
                 <div class="form-row m-b-55 col-6">
                   <div class="value text-center col-6">

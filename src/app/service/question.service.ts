@@ -32,8 +32,8 @@ export class QuestionService {
     return this.http.get<Question[]>(API_URL + '/findAllQuestionByTypeOfQuestion?typeOfQuestion=' + typeOfQuestion);
   }
 
-  findAllQuestionByCategoryAndTypeOfQuestion(category: string, typeOfQuestion: string) {
-    return this.http.get<Question[]>(API_URL + '/findAllQuestionByTypeOfQuestionAndCategory?typeOfQuestion=' + typeOfQuestion + '&category=' + category);
+  findAllQuestionByCategoryAndTypeOfQuestion(typeOfQuestion: string, category: string) {
+    return this.http.get<Question[]>(API_URL + '/findAllByTypeOfQuestionAndCategory?typeOfQuestion=' + typeOfQuestion + '&category=' + category);
   }
 
   findAllQuestionByQuiz(id: number): Observable<Question[]> {

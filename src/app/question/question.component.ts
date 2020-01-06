@@ -12,6 +12,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CorrectAnswerService} from '../service/correct-answer.service';
 import {CorrectAnswer} from '../model/correct-answer';
 import {Sort} from '@angular/material';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-question',
@@ -39,6 +41,7 @@ export class QuestionComponent implements OnInit {
     question: new FormControl('')
   });
   searchForm: FormGroup = new FormGroup({
+    content: new FormControl(null),
     category: new FormControl(null),
     typeOfQuestion: new FormControl(null)
   });
@@ -54,7 +57,9 @@ export class QuestionComponent implements OnInit {
   updateAnswerStatus: boolean;
   currentQuestionContent: string;
   currentAnswerContent: string;
-
+  filteredQuestions: Observable<string[]>;
+  questionTitleList: string[] = [];
+  content = new FormControl();
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
@@ -72,6 +77,22 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.questionService.listQuestionStatusIsTrue().subscribe(result => {
+      this.questionStatusIsTrueList = result;
+      for (const question of this.questionStatusIsTrueList) {
+        this.questionTitleList.push(question.content);
+      }
+      this.filteredQuestions = this.content.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+    });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.questionTitleList.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   onClickCreate() {
