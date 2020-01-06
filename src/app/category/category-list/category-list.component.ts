@@ -71,6 +71,7 @@ export class CategoryListComponent implements OnInit {
       this.categoryForm.reset();
       this.categoryList.push(category);
       this.getCategoryList();
+      this.close();
       this.successMessage = 'Thành công';
     }, () => {
       this.flagMessage = 2;

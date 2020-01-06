@@ -67,6 +67,7 @@ export class QuizComponent implements OnInit {
       this.getQuizList();
       this.successMessage = 'Thành công';
       this.flagMessage = 1;
+      this.close();
     }, () => {
       this.flagMessage = 2;
       this.failMessage = 'Lỗi trong quá trình tạo mới';
