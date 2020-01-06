@@ -470,7 +470,7 @@
             <br>
             <form [formGroup]="searchForm" class="example-form"
                   (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion)">
-              <mat-form-field class="example-full-width row">
+              <mat-form-field class="example-full-width">
                 <input type="text" placeholder="Tiêu đề" aria-label="Number" matInput [matAutocomplete]="auto"
                        formControlName="content">
                 <mat-autocomplete #auto="matAutocomplete">
