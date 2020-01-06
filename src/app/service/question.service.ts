@@ -24,12 +24,12 @@ export class QuestionService {
   }
 
   findAllQuestionByCategory(category?: string): Observable<Question[]> {
-    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue?category=' + category);
+    return this.http.get<Question[]>(API_URL + '/findAllQuestionByCategory?category=' + category);
 
   }
 
   findAllQuestionByTypeOfQuestion(typeOfQuestion?: string): Observable<Question[]> {
-    return this.http.get<Question[]>(API_URL + '/questionStatusIsTrue?typeOfQuestion=' + typeOfQuestion);
+    return this.http.get<Question[]>(API_URL + '/findAllQuestionByTypeOfQuestion?typeOfQuestion=' + typeOfQuestion);
   }
 
   findAllQuestionByQuiz(id: number): Observable<Question[]> {
