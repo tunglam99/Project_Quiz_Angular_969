@@ -41,7 +41,6 @@ export class QuestionComponent implements OnInit {
     question: new FormControl('')
   });
   searchForm: FormGroup = new FormGroup({
-    content: new FormControl(null),
     category: new FormControl(null),
     typeOfQuestion: new FormControl(null)
   });
@@ -88,6 +87,7 @@ export class QuestionComponent implements OnInit {
           map(value => this._filter(value))
         );
     });
+    this.searchForm.addControl('content', this.content);
   }
 
   private _filter(value: string): string[] {
