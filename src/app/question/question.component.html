@@ -471,7 +471,7 @@
             <form [formGroup]="searchForm" class="example-form"
                   (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion)">
               <mat-form-field class="example-full-width row">
-                <input type="text" placeholder="Tiêu đề" aria-label="Number" matInput [matAutocomplete]="auto"
+                <input class="input--style-5" type="text" placeholder="Tiêu đề" aria-label="Number" matInput [matAutocomplete]="auto"
                        formControlName="content">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let question of filteredQuestions | async" [value]="question">
