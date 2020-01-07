@@ -4,6 +4,9 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {User} from '../../model/user';
 import {Subscription} from 'rxjs';
 import {FormControl, FormGroup} from '@angular/forms';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import {ImageService} from '../../service/image.service';
 
 @Component({
   selector: 'app-update-user-profile',
@@ -26,7 +29,9 @@ export class UpdateUserProfileComponent implements OnInit {
   });
 
   constructor(private userService: UserService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private storage: AngularFireStorage,
+              private imageService: ImageService) {
   }
 
   ngOnInit() {
@@ -55,15 +60,24 @@ export class UpdateUserProfileComponent implements OnInit {
           lastName: this.userForm.value.lastName,
           gender: this.userForm.value.gender,
           phoneNumber: this.userForm.value.phoneNumber,
-
+          avatar: this.userForm.value.avatar
         };
-        this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
-          this.userForm.reset();
-          this.successMessage = 'Cập nhật thông tin thành công';
-        }, error => {
-          this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
-          console.log(error);
-        });
+        const filePath = `images/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              user.avatar = url;
+              this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
+                console.log(user.avatar);
+                this.successMessage = 'Cập nhật thông tin thành công';
+              }, error => {
+                this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
+                console.log(error);
+              });
+            });
+          })
+        ).subscribe();
       }, error => {
         console.log(error);
       });

@@ -17,7 +17,7 @@
               <div class="name">Họ</div>
               <div class="value">
                 <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="lastName">
+                  <input class="input--style-5" type="text" formControlName="lastName" [value]="currentUser.lastName">
                 </div>
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="name">Tên</div>
               <div class="value">
                 <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="firstName">
+                  <input class="input--style-5" type="text" formControlName="firstName" [value]="currentUser.firstName">
                 </div>
               </div>
             </div>
@@ -33,7 +33,8 @@
               <div class="name">Số điện thoại</div>
               <div class="value">
                 <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="phoneNumber">
+                  <input class="input--style-5" type="text" formControlName="phoneNumber"
+                         [value]="currentUser.phoneNumber">
                 </div>
               </div>
             </div>
@@ -43,12 +44,13 @@
                 <div class="form-row p-t-20">
                   <div class="p-t-15">
                     <label class="radio-container m-r-55">Nam
-                      <input type="radio" checked="checked" formControlName="gender" value="Nam">
+                      <input type="radio" formControlName="gender" value="Nam"
+                             [checked]="currentUser.gender === 'Nam'">
                       <span class="checkmark"></span>
                     </label>
                     <label class="radio-container">Nữ
-                      <input type="radio" formControlName="gender" value="Nữ">
-                      <span class="checkmark"></span>
+                      <input type="radio" formControlName="gender" value="Nữ" [checked]="currentUser.gender === 'Nữ'">
+                      <span class=" checkmark"></span>
                     </label>
                   </div>
                 </div>
@@ -59,8 +61,11 @@
               <input type="file" formControlName="avatar" #fileUploader (change)="showPreview($event)">
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-3" *ngIf="currentUser.avatar===null">
             <img [src]="imgSrc" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
+          </div>
+          <div class="col-3" *ngIf="currentUser.avatar!==null">
+            <img [src]="currentUser.avatar" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
           </div>
           <div class="text-center">
             <button class="btn btn-primary waves-effect waves-light" type="submit">Cập nhật</button>
