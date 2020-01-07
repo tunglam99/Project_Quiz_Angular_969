@@ -16,13 +16,16 @@
                 <input class="input--style-5" type="text" formControlName="username">
               </div>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('username').hasError('required') && isSubmitted">
               Tên đăng nhập phải được điền
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('username').hasError('minlength') && registerForm.get('username').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('username').hasError('minlength') && isSubmitted">
               Tên đăng nhập phải có nhiều hơn 6 ký tự
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('username').hasError('maxlength') && registerForm.get('username').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('username').hasError('maxlength') && isSubmitted">
               Tên đăng nhập phải có ít hơn 12 ký tự
             </div>
           </div>
@@ -33,10 +36,12 @@
                 <input class="input--style-5" type="email" formControlName="email">
               </div>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('email').hasError('required') && isSubmitted">
               Email phải được điền
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('email').hasError('email') && isSubmitted">
               Không đúng định dạng email
             </div>
           </div>
@@ -47,13 +52,16 @@
                 <input class="input--style-5" type="password" formControlName="password">
               </div>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('password').hasError('required') && isSubmitted">
               Mật khẩu phải được điền
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('password').hasError('minlength') && isSubmitted">
               Mật khẩu phải có nhiều hơn 6 ký tự
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('password').hasError('maxlength') && isSubmitted">
               Mật khẩu phải có ít hơn 12 ký tự
             </div>
           </div>
@@ -64,7 +72,9 @@
                 <input class="input--style-5" type="password" formControlName="confirmPassword">
               </div>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="registerForm.value.password !== registerForm.value.confirmPassword && registerForm.value.confirmPassword != ''">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="isCorrectConfirmPassword(registerForm.value.password,registerForm.value.confirmPassword)
+                 && registerForm.get('confirmPassword').hasError('required') && isSubmitted">
               Mật khẩu nhập lại không khớp.
             </div>
           </div>
