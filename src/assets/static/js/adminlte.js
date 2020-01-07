@@ -1,5 +1,5 @@
 /*!
- * AdminLTE v3.0.2-pre (https://adminlte.io)
+ * AdminLTE v3.0.1 (https://adminlte.io)
  * Copyright 2014-2019 Colorlib <http://colorlib.com>
  * Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
  */
@@ -75,7 +75,7 @@
 
       var _proto = ControlSidebar.prototype;
 
-      _proto.collapse = function collapse() {
+      _proto.show = function show() {
         // Show the control sidebar
         if (this._config.controlsidebarSlide) {
           $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
@@ -88,11 +88,11 @@
           $('body').removeClass(ClassName.CONTROL_SIDEBAR_OPEN);
         }
 
-        var collapsedEvent = $.Event(Event.COLLAPSED);
-        $(this._element).trigger(collapsedEvent);
+        var expandedEvent = $.Event(Event.EXPANDED);
+        $(this._element).trigger(expandedEvent);
       };
 
-      _proto.show = function show() {
+      _proto.collapse = function collapse() {
         // Collapse the control sidebar
         if (this._config.controlsidebarSlide) {
           $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
@@ -107,19 +107,19 @@
           $('body').addClass(ClassName.CONTROL_SIDEBAR_OPEN);
         }
 
-        var expandedEvent = $.Event(Event.EXPANDED);
-        $(this._element).trigger(expandedEvent);
+        var collapsedEvent = $.Event(Event.COLLAPSED);
+        $(this._element).trigger(collapsedEvent);
       };
 
       _proto.toggle = function toggle() {
-        var shouldClose = $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE);
+        var shouldOpen = $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE);
 
-        if (shouldClose) {
-          // Close the control sidebar
-          this.collapse();
-        } else {
+        if (shouldOpen) {
           // Open the control sidebar
           this.show();
+        } else {
+          // Close the control sidebar
+          this.collapse();
         }
       } // Private
       ;
@@ -303,8 +303,6 @@
       CONTENT_HEADER: '.content-header',
       WRAPPER: '.wrapper',
       CONTROL_SIDEBAR: '.control-sidebar',
-      CONTROL_SIDEBAR_CONTENT: '.control-sidebar-content',
-      CONTROL_SIDEBAR_BTN: '[data-widget="control-sidebar"]',
       LAYOUT_FIXED: '.layout-fixed',
       FOOTER: '.main-footer',
       PUSHMENU_BTN: '[data-widget="pushmenu"]',
@@ -320,9 +318,7 @@
       NAVBAR_FIXED: 'layout-navbar-fixed',
       FOOTER_FIXED: 'layout-footer-fixed',
       LOGIN_PAGE: 'login-page',
-      REGISTER_PAGE: 'register-page',
-      CONTROL_SIDEBAR_SLIDE_OPEN: 'control-sidebar-slide-open',
-      CONTROL_SIDEBAR_OPEN: 'control-sidebar-open'
+      REGISTER_PAGE: 'register-page'
     };
     var Default = {
       scrollbarTheme: 'os-theme-light',
@@ -346,30 +342,17 @@
 
       var _proto = Layout.prototype;
 
-      _proto.fixLayoutHeight = function fixLayoutHeight(extra) {
-        if (extra === void 0) {
-          extra = null;
-        }
-
-        var control_sidebar = 0;
-
-        if ($('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || extra == 'control_sidebar') {
-          control_sidebar = $(Selector.CONTROL_SIDEBAR_CONTENT).height();
-        }
-
+      _proto.fixLayoutHeight = function fixLayoutHeight() {
         var heights = {
           window: $(window).height(),
           header: $(Selector.HEADER).length !== 0 ? $(Selector.HEADER).outerHeight() : 0,
           footer: $(Selector.FOOTER).length !== 0 ? $(Selector.FOOTER).outerHeight() : 0,
-          sidebar: $(Selector.SIDEBAR).length !== 0 ? $(Selector.SIDEBAR).height() : 0,
-          control_sidebar: control_sidebar
+          sidebar: $(Selector.SIDEBAR).length !== 0 ? $(Selector.SIDEBAR).height() : 0
         };
 
         var max = this._max(heights);
 
-        if (max == heights.control_sidebar) {
-          $(Selector.CONTENT).css('min-height', max);
-        } else if (max == heights.window) {
+        if (max == heights.window) {
           $(Selector.CONTENT).css('min-height', max - heights.header - heights.footer);
         } else {
           $(Selector.CONTENT).css('min-height', max - heights.header);
@@ -403,11 +386,6 @@
         $(Selector.PUSHMENU_BTN).on('collapsed.lte.pushmenu shown.lte.pushmenu', function () {
           _this.fixLayoutHeight();
         });
-        $(Selector.CONTROL_SIDEBAR_BTN).on('collapsed.lte.controlsidebar', function () {
-          _this.fixLayoutHeight();
-        }).on('expanded.lte.controlsidebar', function () {
-          _this.fixLayoutHeight('control_sidebar');
-        });
         $(window).resize(function () {
           _this.fixLayoutHeight();
         });
@@ -435,10 +413,6 @@
       ;
 
       Layout._jQueryInterface = function _jQueryInterface(config) {
-        if (config === void 0) {
-          config = '';
-        }
-
         return this.each(function () {
           var data = $(this).data(DATA_KEY);
 
@@ -449,8 +423,8 @@
             $(this).data(DATA_KEY, data);
           }
 
-          if (config === 'init' || config === '') {
-            data['_init']();
+          if (config === 'init') {
+            data[config]();
           }
         });
       };

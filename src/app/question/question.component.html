@@ -466,13 +466,13 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <span>Danh sách câu hỏi</span>
-            <br>
-            <form [formGroup]="searchForm" class="example-form"
+            <h3 class="card-title">Danh sách câu hỏi</h3>
+            <div class="card-tools">
+            <form [formGroup]="searchForm" class="card-tools"
                   (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
               <mat-form-field class="example-full-width row">
-                <input class="input--style-5" type="text" placeholder="Tiêu đề" aria-label="Assignee" matInput
-                       [formControl]="content" formControlName="content" [matAutocomplete]="auto">
+                <input type="text" name="table_search" class="form-control float-lg-right" placeholder="Tìm kiếm"
+                       matInput [formControl]="content" formControlName="content" [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let question of filteredQuestions | async" [value]="question">
                     <span [innerHTML]="question.content"></span>
@@ -496,8 +496,8 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-6">
-                  <button class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light">
+                <div class="input-group-append">
+                  <button class="btn btn-primary">
                     <i class="fa fa-search"></i>Tìm kiếm
                   </button>
                 </div>
@@ -509,8 +509,8 @@
               <span class="fa fa-plus"></span>
             </button>
           </div>
-          <div class="table-responsive">
-            <table matSort (matSortChange)="sortQuestion($event)" class="table table-striped table-bordered"
+          <div class="card-body table-responsive p-0" style="height: 300px;">
+            <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed"
                    id="example-2">
               <thead>
               <tr>
