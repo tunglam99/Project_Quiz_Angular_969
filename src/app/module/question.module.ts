@@ -7,6 +7,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AuthGuard} from '../helper/auth-guard';
 import {RichTextEditorAllModule} from '@syncfusion/ej2-angular-richtexteditor';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatSortModule} from '@angular/material';
 
 const routing: Routes = [{
   path: '',
@@ -25,7 +26,8 @@ const routing: Routes = [{
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FontAwesomeModule,
     RichTextEditorAllModule,
-    NgbModule
+    NgbModule,
+    MatSortModule
   ]
 })
 export class QuestionModule {

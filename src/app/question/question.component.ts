@@ -247,6 +247,12 @@ export class QuestionComponent implements OnInit {
     });
   }
 
+  findAllQuestionByContentAndTypeOfQuestionAndCategory(content: string, typeOfQuestion: string, category: string) {
+    this.questionService.findAllQuestionByContentAndTypeOfQuestionAndCategory(content, typeOfQuestion, category).subscribe(value => {
+      this.questionStatusIsTrueList = value;
+    });
+  }
+
   getTypeOfQuestionList() {
     this.typeOfQuestionService.listTypeOfQuestion().subscribe(result => {
       this.typeOfQuestionList = result;
@@ -350,8 +356,10 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  searchQuestion(category: string, typeOfQuestion: string, content) {
-    if (this.searchForm.value.category != null && this.searchForm.value.typeOfQuestion != null) {
+  searchQuestion(category: string, typeOfQuestion: string, content: string) {
+    if (this.searchForm.value.category != null && this.searchForm.value.typeOfQuestion != null && this.searchForm.value.content) {
+      this.findAllQuestionByContentAndTypeOfQuestionAndCategory(content, typeOfQuestion, category);
+    } else if (this.searchForm.value.category != null && this.searchForm.value.typeOfQuestion != null) {
       this.findAllQuestionByTypeOfQuestionAndCategory(typeOfQuestion, category);
     } else {
       if (this.searchForm.value.category != null) {
