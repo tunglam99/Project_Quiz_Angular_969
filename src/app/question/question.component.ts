@@ -42,7 +42,8 @@ export class QuestionComponent implements OnInit {
   });
   searchForm: FormGroup = new FormGroup({
     category: new FormControl(null),
-    typeOfQuestion: new FormControl(null)
+    typeOfQuestion: new FormControl(null),
+    content: new FormControl(null)
   });
   failMessage: string;
   formCreateQuestionStatus: boolean;
@@ -56,8 +57,6 @@ export class QuestionComponent implements OnInit {
   updateAnswerStatus: boolean;
   currentQuestionContent: string;
   currentAnswerContent: string;
-  filteredQuestions: Observable<Question[]>;
-  content = new FormControl();
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -76,25 +75,6 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.questionService.listQuestionStatusIsTrue().subscribe(result => {
-      this.questionStatusIsTrueList = result;
-      this.filteredQuestions = this.content.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => typeof value === 'string' ? value : value.content),
-          map(content => content ? this._filter(content) : this.questionStatusIsTrueList.slice())
-        );
-    });
-    this.searchForm.addControl('content', this.content);
-  }
-
-  displayFn(question?: Question): string | undefined {
-    return question ? question.content : undefined;
-  }
-
-  private _filter(content: string): Question[] {
-    const filterValue = content.toLowerCase();
-    return this.questionStatusIsTrueList.filter(option => option.content.toLowerCase().indexOf(filterValue) === 0);
   }
 
   onClickCreate() {
@@ -261,11 +241,9 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  findQuestionByContent(content: string) {
-    this.questionService.findQuestionByContent(content).subscribe(value => {
-      this.currentQuestion = value;
-      this.questionList = [];
-      this.questionList.push(this.currentQuestion);
+  findAllQuestionByContent(content: string) {
+    this.questionService.findAllQuestionByContent(content).subscribe(value => {
+      this.questionStatusIsTrueList = value;
     });
   }
 
@@ -381,7 +359,7 @@ export class QuestionComponent implements OnInit {
       } else if (this.searchForm.value.typeOfQuestion != null) {
         this.findAllQuestionByTypeOfQuestion(typeOfQuestion);
       } else if (this.searchForm.value.content != null) {
-        this.findQuestionByContent(content);
+        this.findAllQuestionByContent(content);
       } else {
         this.getQuestionStatusIsTrue();
       }

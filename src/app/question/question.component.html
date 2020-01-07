@@ -468,80 +468,71 @@
           <div class="card-header">
             <h3 class="card-title">Danh sách câu hỏi</h3>
             <div class="card-tools">
-            <form [formGroup]="searchForm" class="card-body"
-                  (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
-              <mat-form-field class="form-group row">
-                <input type="text" name="table_search" class="form-control float-lg-right" placeholder="Tìm kiếm"
-                       matInput [formControl]="content" formControlName="content" [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let question of filteredQuestions | async" [value]="question">
-                    <span [innerHTML]="question.content"></span>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <div class="row">
-                <div class="form-row m-b-55 col-6">
-                  <div class="value text-center col-6">
-                    <select class="custom-select custom-select-sm" formControlName="category">
-                      <option [value]="null">Danh mục</option>
-                      <option *ngFor="let category of categoryList"
-                              [value]="category.name">{{category.name}}</option>
-                    </select>
-                  </div>
-                  <div class="value text-center col-6">
-                    <select class="custom-select custom-select-sm" formControlName="typeOfQuestion">
-                      <option [value]="null">Loại câu hỏi</option>
-                      <option *ngFor="let typeOfQuestion of typeOfQuestionList"
-                              [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
-                    </select>
-                  </div>
+              <form role="form" [formGroup]="searchForm"
+                    (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
+                <div class="form-group row">
+                  <input type="text" class="form-control search" placeholder="Tìm kiếm" formControlName="content">
                 </div>
-                <div class="input-group-append">
+                <div class="form-group row">
+                  <select class="form-control-sm col-3" formControlName="category">
+                    <option [value]="null">Danh mục</option>
+                    <option *ngFor="let category of categoryList"
+                            [value]="category.name">{{category.name}}</option>
+                  </select>
+                  <select class="form-control-sm col-3" formControlName="typeOfQuestion">
+                    <option [value]="null">Loại câu hỏi</option>
+                    <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                            [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
+                  </select>
+                  <div class="col-6"></div>
+                </div>
+                <div class="form-group">
                   <button class="btn btn-sm btn-primary">
-                    <i class="fa fa-search"></i>Tìm kiếm
+                    <i class="fa fa-search"></i>
+                    Tìm kiếm
                   </button>
                 </div>
-              </div>
-            </form>
-            <button type="button"
-                    class="btn btn-sm btn-primary float-lg-right"
-                    *ngIf="!formCreateQuestionStatus" (click)="onClickCreate()">
-              <span class="fa fa-plus"></span>
-            </button>
-          </div>
-          <div class="card-body table-responsive p-0" style="height: 300px;">
-            <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed"
-                   id="example-2">
-              <thead>
-              <tr>
-                <th mat-sort-header="id" style="width: 10px">#</th>
-                <th mat-sort-header="content">Nội dung câu hỏi</th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let question of questionStatusIsTrueList">
-                <td>{{question.id}}</td>
-                <td [innerHTML]="question.content"></td>
-                <td>
-                  <div>
-                    <div class="btn-group btn-group-sm" style="float: none;">
-                      <button type="button" class="btn btn-xs btn-primary"
-                              style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button type="button" class="btn btn-xs btn-danger"
-                              style="float: none;margin: 5px;"
-                              (click)="showDeleteQuestionForm(question.id, deleteQuestionForm)">
-                        <i class="fa fa-trash"></i>
-                      </button>
+              </form>
+              <button type="button"
+                      class="btn btn-sm btn-primary float-lg-right"
+                      *ngIf="!formCreateQuestionStatus" (click)="onClickCreate()">
+                <span class="fa fa-plus"></span>
+              </button>
+            </div>
+            <div class="card-body table-responsive p-0" style="height: 300px;">
+              <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed"
+                     id="example-2">
+                <thead>
+                <tr>
+                  <th mat-sort-header="id" style="width: 10px">#</th>
+                  <th mat-sort-header="content">Nội dung câu hỏi</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let question of questionStatusIsTrueList">
+                  <td>{{question.id}}</td>
+                  <td [innerHTML]="question.content"></td>
+                  <td>
+                    <div>
+                      <div class="btn-group btn-group-sm" style="float: none;">
+                        <button type="button" class="btn btn-xs btn-primary"
+                                style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-xs btn-danger"
+                                style="float: none;margin: 5px;"
+                                (click)="showDeleteQuestionForm(question.id, deleteQuestionForm)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              </tbody>
-            </table>
+                  </td>
+                </tr>
+                <tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
