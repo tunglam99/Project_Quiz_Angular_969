@@ -10,54 +10,63 @@
       <div *ngIf="failMessage" class="alert alert-danger text-center">
         <p>{{failMessage}}</p>
       </div>
-      <div class="card-body">
-        <form [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
-          <div class="form-row m-b-55">
-            <div class="name">Họ</div>
-            <div class="value">
-              <div class="input-group">
-                <input class="input--style-5" type="text" formControlName="lastName">
-              </div>
-            </div>
-          </div>
-          <div class="form-row m-b-55 mt-4">
-            <div class="name">Tên</div>
-            <div class="value">
-              <div class="input-group">
-                <input class="input--style-5" type="text" formControlName="firstName">
-              </div>
-            </div>
-          </div>
-          <div class="form-row m-b-55 mt-4">
-            <div class="name">Số điện thoại</div>
-            <div class="value">
-              <div class="input-group">
-                <input class="input--style-5" type="text" formControlName="phoneNumber">
-              </div>
-            </div>
-          </div>
-          <div class="form-row m-b-55 mt-4">
-            <div class="name">Giới tính</div>
-            <div class="value">
-              <div class="form-row p-t-20">
-                <div class="p-t-15">
-                  <label class="radio-container m-r-55">Nam
-                    <input type="radio" checked="checked" formControlName="gender" value="Nam">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="radio-container">Nữ
-                    <input type="radio" formControlName="gender" value="Nữ">
-                    <span class="checkmark"></span>
-                  </label>
+      <form [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
+        <div class="card-body row">
+          <div class="col-9">
+            <div class="form-row m-b-55">
+              <div class="name">Họ</div>
+              <div class="value">
+                <div class="input-group">
+                  <input class="input--style-5" type="text" formControlName="lastName">
                 </div>
               </div>
             </div>
+            <div class="form-row m-b-55 mt-4">
+              <div class="name">Tên</div>
+              <div class="value">
+                <div class="input-group">
+                  <input class="input--style-5" type="text" formControlName="firstName">
+                </div>
+              </div>
+            </div>
+            <div class="form-row m-b-55 mt-4">
+              <div class="name">Số điện thoại</div>
+              <div class="value">
+                <div class="input-group">
+                  <input class="input--style-5" type="text" formControlName="phoneNumber">
+                </div>
+              </div>
+            </div>
+            <div class="form-row m-b-55 mt-4">
+              <div class="name">Giới tính</div>
+              <div class="value">
+                <div class="form-row p-t-20">
+                  <div class="p-t-15">
+                    <label class="radio-container m-r-55">Nam
+                      <input type="radio" checked="checked" formControlName="gender" value="Nam">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Nữ
+                      <input type="radio" formControlName="gender" value="Nữ">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row m-b-55 mt-4">
+              <label>Chọn ảnh đại diện</label>
+              <input type="file" formControlName="avatar" #fileUploader (change)="showPreview($event)">
+            </div>
+          </div>
+          <div class="col-3">
+            <img [src]="imgSrc" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
           </div>
           <div class="text-center">
             <button class="btn btn-primary waves-effect waves-light" type="submit">Cập nhật</button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

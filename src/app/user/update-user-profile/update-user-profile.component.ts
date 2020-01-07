@@ -13,6 +13,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class UpdateUserProfileComponent implements OnInit {
   currentUser: User;
   sub: Subscription;
+  imgSrc = '../../../assets/img/Placeholder.jpg';
+  selectedImage: any = null;
   failMessage = '';
   successMessage = '';
   userForm: FormGroup = new FormGroup({
@@ -66,5 +68,17 @@ export class UpdateUserProfileComponent implements OnInit {
         console.log(error);
       });
     });
+  }
+
+  showPreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    } else {
+      this.imgSrc = '../../../assets/img/Placeholder.jpg';
+      this.selectedImage = null;
+    }
   }
 }
