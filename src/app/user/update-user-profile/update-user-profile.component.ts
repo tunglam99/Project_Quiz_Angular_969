@@ -20,6 +20,7 @@ export class UpdateUserProfileComponent implements OnInit {
     lastName: new FormControl(''),
     gender: new FormControl(''),
     phoneNumber: new FormControl(''),
+    avatar: new FormControl('')
   });
 
   constructor(private userService: UserService,
@@ -52,6 +53,7 @@ export class UpdateUserProfileComponent implements OnInit {
           lastName: this.userForm.value.lastName,
           gender: this.userForm.value.gender,
           phoneNumber: this.userForm.value.phoneNumber,
+
         };
         this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
           this.userForm.reset();

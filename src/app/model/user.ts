@@ -11,5 +11,6 @@ export interface User {
   email?: string;
   phoneNumber?: string;
   enabled?: boolean;
+  avatar?: string;
   roles?: [Role];
 }
