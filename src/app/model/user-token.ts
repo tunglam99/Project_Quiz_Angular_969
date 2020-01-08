@@ -13,4 +13,5 @@ export interface UserToken {
   phoneNumber: string;
   enabled: boolean;
   roles: Role[];
+  avatar: string;
 }

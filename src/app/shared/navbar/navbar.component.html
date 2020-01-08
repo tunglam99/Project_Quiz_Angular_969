@@ -35,14 +35,22 @@
       <ul class="navbar-nav ml-auto" *ngIf="currentUser">
         <li class="nav-item" ngbDropdown>
           <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown2" role="button">
-            {{currentUser.username}}
+            <img [src]="currentUser.avatar" height="30" width="30" alt="Ảnh đại diện">
           </a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-right">
+            <a ngbDropdownItem [routerLink]="['/user/update-profile',currentUser.id]">
+              <i class="fa fa-user"></i> {{currentUser.username}}
+            </a>
+            <div class="dropdown-divider"></div>
             <a ngbDropdownItem [routerLink]="['/user/update-profile',currentUser.id]">
               <fa-icon [icon]="updateUserIcon" size="sm"></fa-icon>
               Cập nhật thông tin
             </a>
-            <a ngbDropdownItem routerLink="#" (click)="logout()"><i class="fa fa-sign-out fa-lg"></i>Đăng xuất</a>
+            <a ngbDropdownItem [routerLink]="['new-password',currentUser.id]">
+              <i class="fa fa-key"></i>
+              Đổi mật khẩu
+            </a>
+            <a ngbDropdownItem routerLink="#" (click)="logout()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
           </div>
         </li>
       </ul>
