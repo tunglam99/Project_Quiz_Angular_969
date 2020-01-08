@@ -17,7 +17,7 @@
               <div class="name">Họ</div>
               <div class="value">
                 <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="lastName" [value]="currentUser.lastName">
+                  <input class="input--style-5" type="text" formControlName="lastName" [value]="userLastName">
                 </div>
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="name">Tên</div>
               <div class="value">
                 <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="firstName" [value]="currentUser.firstName">
+                  <input class="input--style-5" type="text" formControlName="firstName" [value]="userFirstName">
                 </div>
               </div>
             </div>
@@ -34,7 +34,7 @@
               <div class="value">
                 <div class="input-group">
                   <input class="input--style-5" type="text" formControlName="phoneNumber"
-                         [value]="currentUser.phoneNumber">
+                         [value]="userPhoneNumber">
                 </div>
               </div>
             </div>
@@ -45,11 +45,11 @@
                   <div class="p-t-15">
                     <label class="radio-container m-r-55">Nam
                       <input type="radio" formControlName="gender" value="Nam"
-                             [checked]="currentUser.gender === 'Nam'">
+                             [checked]="userGender === 'Nam'">
                       <span class="checkmark"></span>
                     </label>
                     <label class="radio-container">Nữ
-                      <input type="radio" formControlName="gender" value="Nữ" [checked]="currentUser.gender === 'Nữ'">
+                      <input type="radio" formControlName="gender" value="Nữ" [checked]="userGender === 'Nữ'">
                       <span class=" checkmark"></span>
                     </label>
                   </div>
@@ -65,7 +65,7 @@
             <img [src]="imgSrc" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
           </div>
           <div class="col-3" *ngIf="currentUser.avatar!==null">
-            <img [src]="currentUser.avatar" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
+            <img [src]="userAvatarUrl" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
           </div>
           <div class="text-center">
             <button class="btn btn-primary waves-effect waves-light" type="submit">Cập nhật</button>

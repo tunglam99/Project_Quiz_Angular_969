@@ -6,7 +6,6 @@ import {Subscription} from 'rxjs';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {ImageService} from '../../service/image.service';
 
 @Component({
   selector: 'app-update-user-profile',
@@ -27,11 +26,15 @@ export class UpdateUserProfileComponent implements OnInit {
     phoneNumber: new FormControl(''),
     avatar: new FormControl('')
   });
+  userFirstName = '';
+  userLastName = '';
+  userGender = '';
+  userPhoneNumber = '';
+  userAvatarUrl = '';
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private storage: AngularFireStorage,
-              private imageService: ImageService) {
+              private storage: AngularFireStorage) {
   }
 
   ngOnInit() {
@@ -43,6 +46,11 @@ export class UpdateUserProfileComponent implements OnInit {
       const id = paramMap.get('id');
       this.userService.getUserProfile(id).subscribe(value => {
         this.currentUser = value;
+        this.userFirstName = this.currentUser.firstName;
+        this.userLastName = this.currentUser.lastName;
+        this.userGender = this.currentUser.gender;
+        this.userPhoneNumber = this.currentUser.phoneNumber;
+        this.userAvatarUrl = this.currentUser.avatar;
       }, error => {
         console.log(error);
       });
@@ -69,7 +77,6 @@ export class UpdateUserProfileComponent implements OnInit {
             fileRef.getDownloadURL().subscribe(url => {
               user.avatar = url;
               this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
-                console.log(user.avatar);
                 this.successMessage = 'Cập nhật thông tin thành công';
               }, error => {
                 this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
