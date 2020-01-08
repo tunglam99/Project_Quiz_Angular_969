@@ -61,10 +61,10 @@
               <input type="file" formControlName="avatar" #fileUploader (change)="showPreview($event)">
             </div>
           </div>
-          <div class="col-3" *ngIf="currentUser.avatar===null">
+          <div class="col-3" *ngIf="userAvatarUrl===null">
             <img [src]="imgSrc" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
           </div>
-          <div class="col-3" *ngIf="currentUser.avatar!==null">
+          <div class="col-3" *ngIf="userAvatarUrl!==null">
             <img [src]="userAvatarUrl" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
           </div>
           <div class="text-center">

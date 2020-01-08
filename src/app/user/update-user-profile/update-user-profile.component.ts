@@ -70,21 +70,29 @@ export class UpdateUserProfileComponent implements OnInit {
           phoneNumber: this.userForm.value.phoneNumber,
           avatar: this.userForm.value.avatar
         };
-        const filePath = `images/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(filePath);
-        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              user.avatar = url;
-              this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
-                this.successMessage = 'Cập nhật thông tin thành công';
-              }, error => {
-                this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
-                console.log(error);
+        if (this.selectedImage !== null) {
+          const filePath = `avatar/${this.currentUser.username}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+          const fileRef = this.storage.ref(filePath);
+          this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe(url => {
+                user.avatar = url;
+                this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
+                  this.successMessage = 'Cập nhật thông tin thành công';
+                }, error => {
+                  this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
+                  console.log(error);
+                });
               });
-            });
-          })
-        ).subscribe();
+            })
+          ).subscribe();
+        } else {
+          this.userService.updateUserProfile(this.currentUser.id, this.currentUser).subscribe(() => {
+            this.successMessage = 'Cập nhật thông tin thành công';
+          }, () => {
+            this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
+          });
+        }
       }, error => {
         console.log(error);
       });
