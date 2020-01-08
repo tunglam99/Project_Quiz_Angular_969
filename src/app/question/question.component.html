@@ -13,22 +13,24 @@
       <form role="form" [formGroup]="questionForm" (ngSubmit)="updateQuestion(questionCurrentId)"
             *ngIf="formCreateQuestionStatus">
         <div class="card-body">
-          <div class="form-group">
-            <label for="typeOfQuestion">Loại câu hỏi:</label>
-            <select class="custom-select custom-select-sm" id="typeOfQuestion"
-                    (click)="typeOfQuestionForm($event.target.value)"
-                    formControlName="typeOfQuestion">
-              <option [ngValue]="null" disabled>Chọn loại câu hỏi</option>
-              <option *ngFor="let typeOfQuestion of typeOfQuestionList"
-                      [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="category">Danh mục:</label>
-            <select class="custom-select custom-select-sm" id="category" formControlName="category">
-              <option [ngValue]="null" disabled>Chọn danh mục câu hỏi</option>
-              <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
-            </select>
+          <div class="form-group row">
+            <div class="col-6">
+              <label for="typeOfQuestion">Loại câu hỏi:</label>
+              <select class="custom-select custom-select-sm" id="typeOfQuestion"
+                      (click)="typeOfQuestionForm($event.target.value)"
+                      formControlName="typeOfQuestion">
+                <option [ngValue]="null" disabled>Chọn loại câu hỏi</option>
+                <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                        [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="category">Danh mục:</label>
+              <select class="custom-select custom-select-sm" id="category" formControlName="category">
+                <option [ngValue]="null" disabled>Chọn danh mục câu hỏi</option>
+                <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
             <label for="question">Câu hỏi:</label>
@@ -197,7 +199,7 @@
                 <div class="card-body" *ngIf="!updateAnswerStatus">
                   <div class="form-group row">
                     <div class="form-check col-10" *ngFor="let correctAnswer of correctAnswerList">
-                      <input class="form-check-input" type="radio" name="radio1" formControlName="content"
+                      <input class="form-check-input" type="radio" formControlName="content"
                              [value]="answer.content" [checked]="correctAnswer.content === answer.content">
                       <label class="form-check-label">{{answer.content}}</label>
                     </div>
@@ -219,7 +221,7 @@
                     <div class="card-body row">
                       <div class="form-group col-1">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="radio1" [attr.disabled]="false">
+                          <input class="form-check-input" type="radio" [attr.disabled]="false">
                           <label class="form-check-label">Radio</label>
                         </div>
                       </div>
@@ -246,7 +248,7 @@
               <div class="card-body">
                 <div class="form-group row">
                   <div class="form-check col-1">
-                    <input class="form-check-input" type="radio" name="radio1" [attr.disabled]="false">
+                    <input class="form-check-input" type="radio" [attr.disabled]="false">
                   </div>
                   <input type="text" class="form-control col-10" placeholder="câu trả lời" formControlName="content">
                   <div class="col-1">
@@ -298,34 +300,6 @@
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-        <div *ngIf="typeOfQuestionFlag==2">
-          <div class="form-row m-b-55" *ngFor="let answer of answerList">
-            <div class="name">
-              <label class="radio-container m-r-55">
-                <input type="checkbox" [value]="answer.content">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <div class="value row">
-              <div class="col-10">
-                <div class="input-group">
-                  <span>{{answer.content}}</span>
-                </div>
-              </div>
-              <div class="col-1">
-                <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                        style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
-                  class="fa fa-edit"></i></button>
-              </div>
-              <div class="col-1">
-                <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                        style="float: none;margin: 5px;"
-                        (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
-                  class="fa fa-times"></span></button>
-              </div>
-            </div>
           </div>
         </div>
         <div class="row">
@@ -409,12 +383,12 @@
                   <input type="text" class="form-control" placeholder="Tìm kiếm" formControlName="content">
                 </div>
                 <div class="form-group row">
-                  <select class="form-control-sm col-3" formControlName="category">
+                  <select class="form-control col-3" formControlName="category">
                     <option [value]="null">Danh mục</option>
                     <option *ngFor="let category of categoryList"
                             [value]="category.name">{{category.name}}</option>
                   </select>
-                  <select class="form-control-sm col-3" formControlName="typeOfQuestion">
+                  <select class="form-control col-3" formControlName="typeOfQuestion">
                     <option [value]="null">Loại câu hỏi</option>
                     <option *ngFor="let typeOfQuestion of typeOfQuestionList"
                             [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
