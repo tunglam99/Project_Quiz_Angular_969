@@ -1,5 +1,6 @@
 <br>
 <router-outlet></router-outlet>
+<br>
 <div class="mt-lg-4 container">
   <div *ngIf="formCreateQuestionStatus && !formUpdateQuestionStatus">
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
@@ -500,7 +501,7 @@
               </button>
             </div>
             <div class="card-body table-responsive p-0" style="height: 300px;">
-              <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed"
+              <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed table-hover"
                      id="example-2">
                 <thead>
                 <tr>
