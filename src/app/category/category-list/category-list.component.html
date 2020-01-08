@@ -1,5 +1,6 @@
 <br>
 <div class="container">
+  <br>
   <router-outlet></router-outlet>
   <div *ngIf="flagMessage == 1">
     <div data-growl="container"
@@ -19,7 +20,8 @@
          style="position: fixed; margin: 0px; z-index: 999999; display: inline-block; top: 30px; right: 30px;">
       <button type="button" class="close" data-growl="dismiss" style="display: block; z-index: 999998;"><span
         aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-      <span data-growl="icon"></span><span data-growl="title"> Thông báo: </span><span data-growl="message">{{failMessage}}</span><a
+      <span data-growl="icon"></span><span data-growl="title"> Thông báo: </span><span
+      data-growl="message">{{failMessage}}</span><a
       href="#" data-growl="url"></a></div>
   </div>
   <div class="mt-lg-4">
@@ -117,45 +119,42 @@
   <div class="mt-lg-4 container-lg">
     <div class="card">
       <div class="card-header">
-        <span>Danh mục câu hỏi</span>
-        <button type="button"
-                class="tabledit-edit-button btn btn-primary btn-sm waves-effect waves-light float-lg-right"
-                (click)="openVerticallyCentered(create)">
-                <span
-                  class="fa fa-plus"></span>
-        </button>
-      </div>
-      <div class="card-block">
-        <div class="table-responsive">
-          <table matSort (matSortChange)="sortCategory($event)" class="table table-striped table-bordered" id="example-2">
-            <thead>
-            <tr>
-              <th mat-sort-header="id">#</th>
-              <th mat-sort-header="name">Tên danh mục</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let category of categoryList">
-              <th scope="row">{{category.id}}</th>
-              <td class="tabledit-view-mode"><span class="tabledit-span">{{category.name}}</span>
-              </td>
-              <td style="white-space: nowrap; width: 1%;" class="tabledit-view-mode">
-                <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
-                  <div class="btn-group btn-group-sm" style="float: none;">
-                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                            style="float: none;margin: 5px;" (click)="updateCategoryForm(category.id,update)"><span
-                      class="fa fa-edit"></span></button>
-                    <button type="button" class="tabledit-delete-button btn btn-danger waves-effect waves-light"
-                            style="float: none;margin: 5px;" (click)="showDeleteCategoryForm(category.id,delete)"><span
-                      class="fa fa-trash"></span></button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+        <h3 class="card-title">Danh mục câu hỏi</h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-xs btn-primary float-lg-right" (click)="openVerticallyCentered(create)">
+            <i class="fa fa-plus"></i>
+          </button>
         </div>
+      </div>
+      <div class="card-body table-responsive p-0" style="height: 300px;">
+        <table matSort (matSortChange)="sortCategory($event)" class="table table-head-fixed table-hover"
+               id="example-2">
+          <thead>
+          <tr>
+            <th mat-sort-header="id" style="width: 10px">#</th>
+            <th mat-sort-header="name">Tên danh mục</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let category of categoryList">
+            <td>{{category.id}}</td>
+            <td>{{category.name}}</td>
+            <td>
+              <div>
+                <div class="btn-group btn-group-sm" style="float: none;">
+                  <button type="button" class="btn btn-xs btn-primary"
+                          style="float: none;margin: 5px;" (click)="updateCategoryForm(category.id,update)"><span
+                    class="fa fa-edit"></span></button>
+                  <button type="button" class="btn btn-xs btn-danger"
+                          style="float: none;margin: 5px;" (click)="showDeleteCategoryForm(category.id,delete)"><span
+                    class="fa fa-trash"></span></button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
