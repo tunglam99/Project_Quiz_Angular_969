@@ -106,7 +106,7 @@
               <div class="card-body" *ngFor="let answer of answerList">
                 <div class="form-group  row">
                   <div class="form-check col-10">
-                    <input class="form-check-input" type="radio" name="radio1" formControlName="content"
+                    <input class="form-check-input" type="checkbox" formControlName="content"
                            [value]="answer.content">
                     <label class="form-check-label">{{answer.content}}</label>
                   </div>
@@ -258,6 +258,47 @@
               </div>
             </form>
           </div>
+          <div *ngIf="typeOfQuestionFlag===2">
+            <form role="form" [formGroup]=correctAnswerForm>
+              <div class="card-body" *ngFor="let answer of answerList">
+                <div class="form-group  row">
+                  <div class="form-check col-10">
+                    <input class="form-check-input" type="checkbox" formControlName="content"
+                           [value]="answer.content">
+                    <label class="form-check-label">{{answer.content}}</label>
+                  </div>
+                  <div class="col-1">
+                    <button type="button" class="btn btn-xs btn-primary"
+                            style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                      class="fa fa-edit"></i></button>
+                  </div>
+                  <div class="col-1">
+                    <button type="button" class="btn btn-xs btn-danger"
+                            style="float: none;margin: 5px;"
+                            (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
+                      class="fa fa-times"></span></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <form role="form" [formGroup]="answerForm" (ngSubmit)="addAnswer()">
+              <div class="card-body row">
+                <div class="form-group col-1">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [attr.disabled]="false">
+                  </div>
+                </div>
+                <div class="form-group col-10">
+                  <input class="form-control" placeholder="câu trả lời" type="text" formControlName="content">
+                </div>
+                <div class="col-1">
+                  <button class="btn btn-xs btn-primary">
+                    <i class="fa fa-plus fa-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
         <div *ngIf="typeOfQuestionFlag==2">
           <div class="form-row m-b-55" *ngFor="let answer of answerList">
@@ -285,33 +326,6 @@
                   class="fa fa-times"></span></button>
               </div>
             </div>
-          </div>
-          <div class="form-row m-b-55">
-            <form [formGroup]="answerForm" (ngSubmit)="addAnswer()">
-              <div class="form-row m-b-55">
-                <div class="name col-1" *ngIf="typeOfQuestionFlag!==2">
-                  <label class="radio-container m-r-55">
-                    <input type="radio" [attr.disabled]="false">
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="name col-1" *ngIf="typeOfQuestionFlag===2">
-                  <div class="border-checkbox-group border-checkbox-group-success">
-                    <input class="border-checkbox" type="checkbox" [attr.disabled]="false">
-                  </div>
-                </div>
-                <div class="value col-10">
-                  <div class="input-group">
-                    <input class="input--style-5" placeholder="câu trả lời" type="text" formControlName="content">
-                  </div>
-                </div>
-                <div class="col-1">
-                  <button class="tabledit-edit-button btn btn-primary waves-effect waves-light">
-                    <i class="fa fa-plus fa-lg"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
         <div class="row">
