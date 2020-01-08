@@ -471,7 +471,7 @@
               <form role="form" [formGroup]="searchForm"
                     (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
                 <div class="form-group row">
-                  <input type="text" class="form-control search" placeholder="Tìm kiếm" formControlName="content">
+                  <input type="text" class="form-control" placeholder="Tìm kiếm" formControlName="content">
                 </div>
                 <div class="form-group row">
                   <select class="form-control-sm col-3" formControlName="category">
