@@ -112,13 +112,23 @@ export class AddQuestionToQuizComponent implements OnInit {
     });
   }
 
+  findAllQuestionByQuizIsNullAndCategoryAndTypeOfQuestion(category: string, typeOfQuestion: string) {
+    return this.questionService.findAllQuestionByQuizIsNullAndCategoryAndTypeOfQuestion(category, typeOfQuestion).subscribe(value => {
+      this.questionList = value;
+    });
+  }
+
   searchQuestion(category: string, typeOfQuestion: string, content: string) {
-    if (content != null) {
-      return this.findAllQuestionByQuizIsNullAndContentContaining(content);
-    } else if (category != null) {
-      return this.findAllQuestionByQuizIsNullAndCategory(category);
-    } else if (typeOfQuestion != null) {
-      return this.findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion);
+    if (category != null && typeOfQuestion != null) {
+      this.findAllQuestionByQuizIsNullAndCategoryAndTypeOfQuestion(category, typeOfQuestion);
+    } else {
+      if (content != null) {
+        return this.findAllQuestionByQuizIsNullAndContentContaining(content);
+      } else if (category != null) {
+        return this.findAllQuestionByQuizIsNullAndCategory(category);
+      } else if (typeOfQuestion != null) {
+        return this.findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion);
+      }
     }
     this.searchForm.reset();
   }
