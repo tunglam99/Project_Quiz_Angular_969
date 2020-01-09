@@ -1,77 +1,67 @@
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-  <div class="wrapper wrapper--w790">
-    <div class="card card-5">
-      <div class="card-heading">
-        <h2 class="title">Cập nhật thông tin</h2>
-      </div>
-      <div *ngIf="successMessage" class="alert alert-success text-center">
-        <p>{{successMessage}}</p>
-      </div>
-      <div *ngIf="failMessage" class="alert alert-danger text-center">
-        <p>{{failMessage}}</p>
-      </div>
-      <form [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
-        <div class="card-body row">
-          <div class="col-9">
-            <div class="form-row m-b-55">
-              <div class="name">Họ</div>
-              <div class="value">
-                <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="lastName" [value]="userLastName">
-                </div>
-              </div>
-            </div>
-            <div class="form-row m-b-55 mt-4">
-              <div class="name">Tên</div>
-              <div class="value">
-                <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="firstName" [value]="userFirstName">
-                </div>
-              </div>
-            </div>
-            <div class="form-row m-b-55 mt-4">
-              <div class="name">Số điện thoại</div>
-              <div class="value">
-                <div class="input-group">
-                  <input class="input--style-5" type="text" formControlName="phoneNumber"
-                         [value]="userPhoneNumber">
-                </div>
-              </div>
-            </div>
-            <div class="form-row m-b-55 mt-4">
-              <div class="name">Giới tính</div>
-              <div class="value">
-                <div class="form-row p-t-20">
-                  <div class="p-t-15">
-                    <label class="radio-container m-r-55">Nam
-                      <input type="radio" formControlName="gender" value="Nam"
-                             [checked]="userGender === 'Nam'">
-                      <span class="checkmark"></span>
-                    </label>
-                    <label class="radio-container">Nữ
-                      <input type="radio" formControlName="gender" value="Nữ" [checked]="userGender === 'Nữ'">
-                      <span class=" checkmark"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-row m-b-55 mt-4">
-              <label>Chọn ảnh đại diện</label>
-              <input type="file" formControlName="avatar" #fileUploader (change)="showPreview($event)">
+<div class = "mt-lg-4 container">
+  <br>
+  <br>
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Cập nhật thông tin</h3>
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success text-center">
+      <p>{{successMessage}}</p>
+    </div>
+    <div *ngIf="failMessage" class="alert alert-danger text-center">
+      <p>{{failMessage}}</p>
+    </div>
+    <form role="form" [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
+      <div class="card-body row">
+        <div class="col-9">
+          <div class="form-group">
+            <label for="lastName">Họ</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Họ" formControlName="lastName"
+                   [value]="userLastName">
+          </div>
+          <div class="form-group">
+            <label for="firstName">Tên</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Tên" formControlName="firstName"
+                   [value]="userFirstName">
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Số điện thoại</label>
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Số diện thoại"
+                   formControlName="phoneNumber" [value]="userPhoneNumber">
+          </div>
+          <div class="form-group">
+            <label for="gender">Giới tính</label>
+            <div class="form-check" id="gender">
+              <input class="form-check-input" type="radio" formControlName="gender" value="Nam"
+                     [checked]="userGender === 'Nam'">
+              <label class="form-check-label mr-lg-5">Nam</label>
+              <input class="form-check-input" type="radio" formControlName="gender" value="Nữ"
+                     [checked]="userGender === 'Nữ'">
+              <label class="form-check-label">Nữ</label>
             </div>
           </div>
-          <div class="col-3" *ngIf="userAvatarUrl===null">
-            <img [src]="imgSrc" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
-          </div>
-          <div class="col-3" *ngIf="userAvatarUrl!==null">
-            <img [src]="userAvatarUrl" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
-          </div>
-          <div class="text-center">
-            <button class="btn btn-primary waves-effect waves-light" type="submit">Cập nhật</button>
+          <div class="form-group">
+            <label for="avatar">Chọn ảnh đại diện</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="avatar" formControlName="avatar" #fileUploader
+                       (change)="showPreview($event)">
+                <label class="custom-file-label" for="avatar">Choose file</label>
+              </div>
+            </div>
           </div>
         </div>
-      </form>
-    </div>
+        <div class="col-3" *ngIf="userAvatarUrl===null">
+          <img [src]="imgSrc" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
+        </div>
+        <div class="col-3" *ngIf="userAvatarUrl!==null">
+          <img [src]="userAvatarUrl" height="125" width="100" alt="Ảnh đại diện" (click)="fileUploader.click()"/>
+        </div>
+        <div class="text-center ml-lg-3">
+          <button class="btn btn-primary" type="submit">Cập nhật</button>
+        </div>
+      </div>
+    </form>
   </div>
+
 </div>
