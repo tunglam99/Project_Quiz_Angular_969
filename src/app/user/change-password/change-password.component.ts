@@ -17,7 +17,6 @@ export class ChangePasswordComponent implements OnInit {
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
   });
   user: User;
-  token: string;
   sub: Subscription;
   failMessage = '';
   successMessage = '';
@@ -28,9 +27,6 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sub = this.activatedRoute.queryParams.subscribe(params => {
-      this.token = params.token;
-    });
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const id = paramMap.get('id');
       this.userService.getUserProfile(id).subscribe(next => {
@@ -53,11 +49,11 @@ export class ChangePasswordComponent implements OnInit {
       gender: this.user.gender,
       enabled: this.user.enabled,
       password: this.changePasswordForm.value.password,
-      confirmPassword: this.changePasswordForm.value.confirmPassword
+      confirmPassword: this.changePasswordForm.value.confirmPassword,
+      oldPassword: this.changePasswordForm.value.oldPassword
     };
-    this.userService.newPassword(currentUser, currentUser.id, this.token).subscribe(() => {
+    this.userService.changePassword(currentUser, currentUser.id).subscribe(() => {
       this.successMessage = 'Đổi mật khẩu thành công';
-      this.router.navigate(['login']);
     }, () => {
       this.failMessage = 'Mật khẩu nhập lại không khớp';
     });
