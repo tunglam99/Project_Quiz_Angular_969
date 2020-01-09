@@ -101,9 +101,17 @@ export class AddQuestionToQuizComponent implements OnInit {
     });
   }
 
+  findAllQuestionByQuizIsNullAndCategory(category: string) {
+    this.questionService.findAllQuestionByQuizIsNullAndCategory(category).subscribe(value => {
+      this.questionList = value;
+    });
+  }
+
   searchQuestion(category: string, typeOfQuestion: string, content: string) {
     if (content != null) {
       return this.findAllQuestionByQuizIsNullAndContentContaining(content);
+    } else if (category != null) {
+      return this.findAllQuestionByQuizIsNullAndCategory(category);
     }
     this.searchForm.reset();
   }
