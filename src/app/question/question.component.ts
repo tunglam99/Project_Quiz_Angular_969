@@ -12,8 +12,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CorrectAnswerService} from '../service/correct-answer.service';
 import {CorrectAnswer} from '../model/correct-answer';
 import {Sort} from '@angular/material';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-question',

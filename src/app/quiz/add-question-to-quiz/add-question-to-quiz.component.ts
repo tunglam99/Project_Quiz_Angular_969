@@ -6,6 +6,12 @@ import {Quiz} from '../../model/quiz';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Sort} from '@angular/material';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Category} from '../../model/category';
+import {Answer} from '../../model/answer';
+import {TypeOfQuestion} from '../../model/type-of-question';
+import {TypeOfQuestionService} from '../../service/type-of-question.service';
+import {CategoryService} from '../../service/category.service';
 
 @Component({
   selector: 'app-add-question-to-quiz',
@@ -14,13 +20,22 @@ import {Sort} from '@angular/material';
 })
 export class AddQuestionToQuizComponent implements OnInit {
   questionList: Question[] = [];
+  categoryList: Category[] = [];
+  typeOfQuestionList: TypeOfQuestion[] = [];
   quiz: Quiz;
   sub: Subscription;
   currentQuestion: Question;
+  searchForm: FormGroup = new FormGroup({
+    category: new FormControl(null),
+    typeOfQuestion: new FormControl(null),
+    content: new FormControl(null)
+  });
 
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private typeOfQuestionService: TypeOfQuestionService,
+              private categoryService: CategoryService) {
   }
 
   ngOnInit() {
@@ -29,6 +44,8 @@ export class AddQuestionToQuizComponent implements OnInit {
       this.quizService.getQuiz(id).subscribe(result => {
         this.quiz = result;
         this.getQuestionList();
+        this.getCategoryList();
+        this.getTypeOfQuestionList();
       }, error => {
         console.log(error);
       });
@@ -64,6 +81,22 @@ export class AddQuestionToQuizComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  getTypeOfQuestionList() {
+    this.typeOfQuestionService.listTypeOfQuestion().subscribe(result => {
+      this.typeOfQuestionList = result;
+    });
+  }
+
+  getCategoryList() {
+    this.categoryService.listCategory().subscribe(result => {
+      this.categoryList = result;
+    });
+  }
+
+  searchQuestion(category: string, typeOfQuestion: string, content: string) {
+    this.searchForm.reset();
   }
 
   sortQuestion(sort: Sort) {
