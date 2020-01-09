@@ -8,7 +8,6 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Sort} from '@angular/material';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Category} from '../../model/category';
-import {Answer} from '../../model/answer';
 import {TypeOfQuestion} from '../../model/type-of-question';
 import {TypeOfQuestionService} from '../../service/type-of-question.service';
 import {CategoryService} from '../../service/category.service';
@@ -107,11 +106,19 @@ export class AddQuestionToQuizComponent implements OnInit {
     });
   }
 
+  findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion: string) {
+    this.questionService.findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion).subscribe(value => {
+      this.questionList = value;
+    });
+  }
+
   searchQuestion(category: string, typeOfQuestion: string, content: string) {
     if (content != null) {
       return this.findAllQuestionByQuizIsNullAndContentContaining(content);
     } else if (category != null) {
       return this.findAllQuestionByQuizIsNullAndCategory(category);
+    } else if (typeOfQuestion != null) {
+      return this.findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion);
     }
     this.searchForm.reset();
   }
