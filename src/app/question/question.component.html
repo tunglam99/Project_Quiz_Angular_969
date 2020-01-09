@@ -38,7 +38,7 @@
           </div>
           <div *ngIf="typeOfQuestionFlag===1">
             <form role="form" [formGroup]="correctAnswerForm">
-              <div class="card-body"  *ngFor="let answer of answerList; index as i">
+              <div class="card-body" *ngFor="let answer of answerList; index as i">
                 <div *ngIf="!updateAnswerStatus">
                   <div class="form-group  row">
                     <div class="form-check col-10">
@@ -174,10 +174,10 @@
           <div class="form-group">
             <label for="typeOfQuestion1">Loại câu hỏi:</label>
             <select class="custom-select custom-select-sm" id="typeOfQuestion1"
-                    (click)="typeOfQuestionForm($event.target.value)"
-                    formControlName="typeOfQuestion">
+                    (click)="typeOfQuestionForm($event.target.value)" formControlName="typeOfQuestion">
               <option [ngValue]="null" disabled>Chọn loại câu hỏi</option>
               <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                      [selected]="currentQuestionTypeOfQuestion === typeOfQuestion.name"
                       [value]="typeOfQuestion.id">{{typeOfQuestion.name}}</option>
             </select>
           </div>
@@ -185,7 +185,8 @@
             <label for="category1">Danh mục:</label>
             <select class="custom-select custom-select-sm" id="category1" formControlName="category">
               <option [ngValue]="null" disabled>Chọn danh mục câu hỏi</option>
-              <option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
+              <option *ngFor="let category of categoryList" [value]="category.id"
+                      [selected]="currentQuestionCategory === category.name">{{category.name}}</option>
             </select>
           </div>
           <div class="form-group">
