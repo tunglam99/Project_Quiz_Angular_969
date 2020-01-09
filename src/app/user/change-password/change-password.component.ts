@@ -12,6 +12,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup({
+    oldPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
   });
