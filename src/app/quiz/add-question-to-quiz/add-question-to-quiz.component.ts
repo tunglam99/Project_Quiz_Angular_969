@@ -131,19 +131,25 @@ export class AddQuestionToQuizComponent implements OnInit {
   }
 
   searchQuestion(category: string, typeOfQuestion: string, content: string) {
-    if (category != null && typeOfQuestion != null) {
-      this.findAllQuestionByQuizIsNullAndCategoryAndTypeOfQuestion(category, typeOfQuestion);
-    } else if (category != null && content != null) {
-      this.findAllQuestionByQuizIsNullAndContentContainingAndCategory(content, category);
-    } else if (content != null && typeOfQuestion != null) {
-      this.findAllQuestionByQuizIsNullAndContentContainingAndTypeOfQuestion(content, typeOfQuestion);
+    if (category != null && typeOfQuestion != null && category != null) {
+      this.questionService.findAllQuestionByQuizIsNullAndContentContainingAndCategoryAndTypeOfQuestion(content, category, typeOfQuestion).subscribe(value => {
+        this.questionList = value;
+      });
     } else {
-      if (content != null) {
-        return this.findAllQuestionByQuizIsNullAndContentContaining(content);
-      } else if (category != null) {
-        return this.findAllQuestionByQuizIsNullAndCategory(category);
-      } else if (typeOfQuestion != null) {
-        return this.findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion);
+      if (category != null && typeOfQuestion != null) {
+        this.findAllQuestionByQuizIsNullAndCategoryAndTypeOfQuestion(category, typeOfQuestion);
+      } else if (category != null && content != null) {
+        this.findAllQuestionByQuizIsNullAndContentContainingAndCategory(content, category);
+      } else if (content != null && typeOfQuestion != null) {
+        this.findAllQuestionByQuizIsNullAndContentContainingAndTypeOfQuestion(content, typeOfQuestion);
+      } else {
+        if (content != null) {
+          return this.findAllQuestionByQuizIsNullAndContentContaining(content);
+        } else if (category != null) {
+          return this.findAllQuestionByQuizIsNullAndCategory(category);
+        } else if (typeOfQuestion != null) {
+          return this.findAllQuestionByQuizIsNullAndTypeOfQuestion(typeOfQuestion);
+        }
       }
     }
     this.searchForm.reset();
