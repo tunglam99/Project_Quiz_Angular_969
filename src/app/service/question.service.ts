@@ -72,6 +72,10 @@ export class QuestionService {
     return this.http.get<Question[]>(API_URL + '/findAllQuestionByQuizIsNullAndContentContainingAndCategory?content=' + content + '&category=' + category);
   }
 
+  findAllQuestionByQuizIsNullAndContentContainingAndTypeOfQuestion(content: string, typeOfQuestion: string): Observable<Question[]> {
+    return this.http.get<Question[]>(API_URL + '/findAllQuestionByQuizIsNullAndContentContainingAndTypeOfQuestion?content=' + content + '&typeOfQuestion=' + typeOfQuestion);
+  }
+
   findAllQuestionByQuiz(id: number): Observable<Question[]> {
     return this.http.get<Question[]>(API_URL + `/findAllQuestionByQuiz/${id}`);
   }
