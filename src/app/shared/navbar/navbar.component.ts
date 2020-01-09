@@ -3,6 +3,8 @@ import {UserToken} from '../../model/user-token';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
 import {faSpellCheck, faUserEdit} from '@fortawesome/free-solid-svg-icons';
+import {User} from '../../model/user';
+import {UserService} from '../../service/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,10 +17,13 @@ export class NavbarComponent {
   quizIcon = faSpellCheck;
   updateUserIcon = faUserEdit;
   hasRoleAdmin = false;
+  user: User;
+  avatarUserUrl: string;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private userService: UserService) {
     this.authenticationService.currentUser.subscribe(value => this.currentUser = value);
     if (this.currentUser) {
       const roleList = this.currentUser.roles;
@@ -28,6 +33,12 @@ export class NavbarComponent {
           break;
         }
       }
+      this.userService.getUserProfile(this.currentUser.id + '').subscribe(value => {
+        this.user = value;
+        this.avatarUserUrl = this.user.avatar;
+      }, error => {
+        console.log(error);
+      });
     }
   }
 
