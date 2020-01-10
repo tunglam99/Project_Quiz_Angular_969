@@ -22,9 +22,13 @@ export class QuizComponent implements OnInit {
   successMessage: string;
   currentQuiz: Quiz;
   flagMessage: number;
+  isEnableShowStartedDate: boolean;
+  isEnableShowEndedDate: boolean;
 
   constructor(private quizService: QuizService,
               private modalService: NgbModal) {
+    this.isEnableShowEndedDate = false;
+    this.isEnableShowStartedDate = false;
   }
 
   ngOnInit() {
@@ -113,6 +117,21 @@ export class QuizComponent implements OnInit {
   showDeleteQuizForm(id: number, content) {
     this.getQuizDetail(id);
     this.openVerticallyCentered(content);
+  }
+
+  changeShowDatePickerStartStatus() {
+    this.isEnableShowStartedDate = !this.isEnableShowStartedDate;
+    this.isEnableShowEndedDate = !this.isEnableShowStartedDate;
+  }
+
+  changeShowDatePickerEndStatus() {
+    this.isEnableShowEndedDate = !this.isEnableShowEndedDate;
+    this.isEnableShowStartedDate = !this.isEnableShowEndedDate;
+  }
+
+  changeShowDatePickerStatusToFalse() {
+    this.isEnableShowStartedDate = false;
+    this.isEnableShowEndedDate = false;
   }
 
   sortQuiz(sort: Sort) {
