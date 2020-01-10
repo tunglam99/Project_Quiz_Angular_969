@@ -75,6 +75,7 @@ export class QuizComponent implements OnInit {
       this.getQuizList();
       this.successMessage = 'Thành công';
       this.flagMessage = 1;
+      this.changeShowDatePickerStatusToFalse();
       this.close();
     }, () => {
       this.flagMessage = 2;
@@ -93,6 +94,7 @@ export class QuizComponent implements OnInit {
       this.quizForm.reset();
       this.getQuizList();
       this.successMessage = 'Thành công';
+      this.changeShowDatePickerStatusToFalse();
       this.close();
     }, () => {
       this.flagMessage = 3;

@@ -46,7 +46,7 @@
                 <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
               </div>
               <input type="text" class="form-control float-right" placeholder="mm/dd/yyyy"
-                     (click)="changeShowDatePickerStartStatus()">
+                     (click)="changeShowDatePickerStartStatus()" [value]="quizForm.value.startedDate">
             </div>
             <dl-date-time-picker *ngIf="isEnableShowStartedDate" startView="day" maxView="year" minView="minute"
                                  minuteStep="5" formControlName="startedDate">
@@ -59,7 +59,7 @@
                 <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
               </div>
               <input type="text" class="form-control float-right" placeholder="mm/dd/yyyy"
-                     (click)="changeShowDatePickerEndStatus()">
+                     [value]="quizForm.value.endedDate" (click)="changeShowDatePickerEndStatus()">
             </div>
           </div>
           <dl-date-time-picker *ngIf="isEnableShowEndedDate" startView="day" maxView="year" minView="minute"
