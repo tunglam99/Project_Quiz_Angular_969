@@ -13,7 +13,9 @@ import {Sort} from '@angular/material';
 export class QuizComponent implements OnInit {
   quizList: Quiz[];
   quizForm: FormGroup = new FormGroup({
-      name: new FormControl('')
+      name: new FormControl(''),
+      startedDate: new FormControl(''),
+      endedDate: new FormControl('')
     }
   );
   failMessage: string;
@@ -60,6 +62,8 @@ export class QuizComponent implements OnInit {
     const quiz: Quiz = {
       id: this.quizForm.value.id,
       name: this.quizForm.value.name,
+      startedDate: this.quizForm.value.startedDate,
+      endedDate: this.quizForm.value.endedDate
     };
     this.quizService.createQuiz(quiz).subscribe(() => {
       this.quizForm.reset();
@@ -77,7 +81,9 @@ export class QuizComponent implements OnInit {
   updateQuiz(id: number) {
     const quiz: Quiz = {
       id: this.currentQuiz.id,
-      name: this.quizForm.value.name
+      name: this.quizForm.value.name,
+      startedDate: this.quizForm.value.startedDate,
+      endedDate: this.quizForm.value.endedDate
     };
     this.quizService.updateQuiz(id, quiz).subscribe(() => {
       this.quizForm.reset();

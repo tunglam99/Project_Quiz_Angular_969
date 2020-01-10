@@ -31,6 +31,7 @@
     "animate": "^1.0.0",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
+    "daterangepicker": "^3.0.5",
     "firebase": "^7.6.1",
     "font-awesome": "^4.7.0",
     "hamburgers": "^1.1.3",
