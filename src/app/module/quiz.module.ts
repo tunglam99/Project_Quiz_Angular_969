@@ -9,6 +9,7 @@ import {RichTextEditorAllModule} from '@syncfusion/ej2-angular-richtexteditor';
 import {QuizDetailComponent} from '../quiz/quiz-detail/quiz-detail.component';
 import {AddQuestionToQuizComponent} from '../quiz/add-question-to-quiz/add-question-to-quiz.component';
 import {MatSortModule} from '@angular/material';
+import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 
 const routing: Routes = [{
   path: '',
@@ -37,7 +38,9 @@ const routing: Routes = [{
     ReactiveFormsModule,
     FontAwesomeModule,
     RichTextEditorAllModule,
-    MatSortModule
+    MatSortModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule
   ]
 })
 export class QuizModule {

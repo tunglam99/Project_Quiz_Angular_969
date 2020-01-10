@@ -4,7 +4,7 @@
 @import "~hamburgers/dist/hamburgers.min.css";
 @import "~select2/dist/css/select2.min.css";
 @import "~animate.css/animate.min.css";
-@import "~daterangepicker/daterangepicker.css";
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
