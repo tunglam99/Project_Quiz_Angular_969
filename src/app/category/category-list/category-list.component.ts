@@ -4,29 +4,34 @@ import {CategoryService} from '../../service/category.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Sort} from '@angular/material';
+import {NotificationService} from '../../service/notification.service';
+
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+
+const NOTIFICATION = 'Thông báo';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.css']
 })
+
 export class CategoryListComponent implements OnInit {
   categoryList: Category[];
   categoryForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required)
   });
-  failMessage: string;
-  successMessage: string;
-  flagMessage: number;
   currentCategory: Category;
   categoryName: string;
 
   constructor(private categoryService: CategoryService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
-    this.flagMessage = 0;
     this.getCategoryList();
   }
 
@@ -43,11 +48,11 @@ export class CategoryListComponent implements OnInit {
 
   deleteCategory(id: number) {
     this.categoryService.deleteCategory(id).subscribe(() => {
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       this.getCategoryList();
       this.close();
     }, () => {
-      this.flagMessage = 5;
-      this.failMessage = 'Lỗi khi xóa danh mục có id = ' + id;
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -56,7 +61,6 @@ export class CategoryListComponent implements OnInit {
   }
 
   close() {
-    this.flagMessage = 0;
     this.modalService.dismissAll('');
     this.categoryForm.reset();
   }
@@ -67,16 +71,14 @@ export class CategoryListComponent implements OnInit {
       name: this.categoryForm.value.name,
     };
     this.categoryService.createCategory(category).subscribe(() => {
-      this.flagMessage = 1;
       this.modalService.dismissAll('');
       this.categoryForm.reset();
       this.categoryList.push(category);
       this.getCategoryList();
       this.close();
-      this.successMessage = 'Thành công';
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
-      this.flagMessage = 2;
-      this.failMessage = 'Lỗi trong quá trình tạo mới';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -85,8 +87,7 @@ export class CategoryListComponent implements OnInit {
       this.currentCategory = result;
       this.categoryName = this.currentCategory.name;
     }, () => {
-      this.flagMessage = 4;
-      this.failMessage = 'Lỗi không tìm thấy danh mục có id = ' + id;
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -97,12 +98,12 @@ export class CategoryListComponent implements OnInit {
     };
     if (this.categoryForm.value.name !== '') {
       this.categoryService.updateCategory(category, id).subscribe(() => {
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
         this.categoryForm.reset();
         this.getCategoryList();
         this.close();
       }, () => {
-        this.flagMessage = 3;
-        this.failMessage = 'Lỗi trong quá trình cập nhật';
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
       return;
     }
@@ -113,11 +114,10 @@ export class CategoryListComponent implements OnInit {
         this.getCategoryList();
         this.close();
       }, () => {
-        this.flagMessage = 3;
-        this.failMessage = 'Lỗi trong quá trình cập nhật';
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     }, error => {
-      console.log(error);
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
