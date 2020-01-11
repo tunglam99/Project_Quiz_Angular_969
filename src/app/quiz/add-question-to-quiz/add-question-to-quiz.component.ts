@@ -11,6 +11,11 @@ import {Category} from '../../model/category';
 import {TypeOfQuestion} from '../../model/type-of-question';
 import {TypeOfQuestionService} from '../../service/type-of-question.service';
 import {CategoryService} from '../../service/category.service';
+import {NotificationService} from '../../service/notification.service';
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+const NOTIFICATION = 'Thông báo';
 
 @Component({
   selector: 'app-add-question-to-quiz',
@@ -34,7 +39,8 @@ export class AddQuestionToQuizComponent implements OnInit {
               private questionService: QuestionService,
               private activatedRoute: ActivatedRoute,
               private typeOfQuestionService: TypeOfQuestionService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -74,11 +80,12 @@ export class AddQuestionToQuizComponent implements OnInit {
       };
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.getQuestionList();
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       }, error => {
-        console.log(error);
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     }, error => {
-      console.log(error);
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
