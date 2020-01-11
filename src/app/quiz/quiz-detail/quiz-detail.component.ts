@@ -5,6 +5,12 @@ import {QuestionService} from '../../service/question.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Sort} from '@angular/material';
+import {NotificationService} from '../../service/notification.service';
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+const NOTIFICATION = 'Thông báo';
+
 
 @Component({
   selector: 'app-quiz-detail',
@@ -19,7 +25,8 @@ export class QuizDetailComponent implements OnInit {
 
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -50,11 +57,12 @@ export class QuizDetailComponent implements OnInit {
       };
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.getQuestionList();
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       }, error => {
-        console.log(error);
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     }, error => {
-      console.log(error);
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
