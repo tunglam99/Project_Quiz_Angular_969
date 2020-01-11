@@ -4,6 +4,11 @@ import {UserService} from '../../service/user.service';
 import {User} from '../../model/user';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {NotificationService} from '../../service/notification.service';
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+const NOTIFICATION = 'Thông báo';
 
 @Component({
   selector: 'app-change-password',
@@ -18,12 +23,10 @@ export class ChangePasswordComponent implements OnInit {
   });
   user: User;
   sub: Subscription;
-  failMessage = '';
-  successMessage = '';
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -32,7 +35,7 @@ export class ChangePasswordComponent implements OnInit {
       this.userService.getUserProfile(id).subscribe(next => {
         this.user = next;
       }, () => {
-        this.failMessage = 'Không tìm thấy user';
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     });
   }
@@ -53,9 +56,9 @@ export class ChangePasswordComponent implements OnInit {
       oldPassword: this.changePasswordForm.value.oldPassword
     };
     this.userService.changePassword(currentUser, currentUser.id).subscribe(() => {
-      this.successMessage = 'Đổi mật khẩu thành công';
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
-      this.failMessage = 'Mật khẩu nhập lại không khớp';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 }

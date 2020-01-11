@@ -11,7 +11,6 @@ const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
 const SUCCESS = 'Thành công';
 const NOTIFICATION = 'Thông báo';
 
-
 @Component({
   selector: 'app-quiz-detail',
   templateUrl: './quiz-detail.component.html',
