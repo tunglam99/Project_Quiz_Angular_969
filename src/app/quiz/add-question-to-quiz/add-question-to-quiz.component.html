@@ -50,13 +50,11 @@
           <td>{{question.id}}</td>
           <td [innerHTML]="question.content">></td>
           <td>
-            <div>
-              <div style="float: none;">
+              <div class="float-lg-right" style="float: none;">
                 <button type="button" class="btn btn-xs btn-primary" style="float: none;margin: 5px;">
                   <i class="fa fa-plus" (click)="addQuestionToQuiz(question.id)"></i>
                 </button>
               </div>
-            </div>
           </td>
         </tr>
         </tbody>

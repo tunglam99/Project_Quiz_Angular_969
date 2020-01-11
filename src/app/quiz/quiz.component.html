@@ -157,17 +157,15 @@
             <td>{{quiz.id}}</td>
             <td><a [routerLink]="['detail-quiz',quiz.id]">{{quiz.name}}</a></td>
             <td>
-              <div>
-                <div style="float: none;">
-                  <button type="button" class="btn btn-xs btn-primary" style="float: none;margin: 5px;"
-                          (click)="updateQuizForm(quiz.id,update)">
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button type="button" class="btn btn-xs btn-danger" style="float: none;margin: 5px;"
-                          (click)="showDeleteQuizForm(quiz.id,delete)">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </div>
+              <div class="float-lg-right" style="float: none;">
+                <button type="button" class="btn btn-xs btn-primary" style="float: none;margin: 5px;"
+                        (click)="updateQuizForm(quiz.id,update)">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-xs btn-danger" style="float: none;margin: 5px;"
+                        (click)="showDeleteQuizForm(quiz.id,delete)">
+                  <i class="fa fa-trash"></i>
+                </button>
               </div>
             </td>
           </tr>

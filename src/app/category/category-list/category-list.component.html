@@ -140,15 +140,13 @@
             <td>{{category.id}}</td>
             <td>{{category.name}}</td>
             <td>
-              <div>
-                <div style="float: none;">
-                  <button type="button" class="btn btn-xs btn-primary"
-                          style="float: none;margin: 5px;" (click)="updateCategoryForm(category.id,update)"><span
-                    class="fa fa-edit"></span></button>
-                  <button type="button" class="btn btn-xs btn-danger"
-                          style="float: none;margin: 5px;" (click)="showDeleteCategoryForm(category.id,delete)"><span
-                    class="fa fa-trash"></span></button>
-                </div>
+              <div class="float-lg-right" style="float: none;">
+                <button type="button" class="btn btn-xs btn-primary"
+                        style="float: none;margin: 5px;" (click)="updateCategoryForm(category.id,update)"><span
+                  class="fa fa-edit"></span></button>
+                <button type="button" class="btn btn-xs btn-danger"
+                        style="float: none;margin: 5px;" (click)="showDeleteCategoryForm(category.id,delete)"><span
+                  class="fa fa-trash"></span></button>
               </div>
             </td>
           </tr>

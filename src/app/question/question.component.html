@@ -400,33 +400,6 @@
                   </div>
                 </div>
               </form>
-              <!--              <form role="form" [formGroup]="searchForm"-->
-              <!--                    (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">-->
-              <!--                <div class="card-body">-->
-              <!--                  <div class="form-group">-->
-              <!--                    <input type="text" class="form-control" placeholder="Tìm kiếm" formControlName="content">-->
-              <!--                  </div>-->
-              <!--                  <div class="form-group row">-->
-              <!--                    <select class="form-control" formControlName="category">-->
-              <!--                      <option [value]="null">Danh mục</option>-->
-              <!--                      <option *ngFor="let category of categoryList"-->
-              <!--                              [value]="category.name">{{category.name}}</option>-->
-              <!--                    </select>-->
-              <!--                    <select class="form-control" formControlName="typeOfQuestion">-->
-              <!--                      <option [value]="null">Loại câu hỏi</option>-->
-              <!--                      <option *ngFor="let typeOfQuestion of typeOfQuestionList"-->
-              <!--                              [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>-->
-              <!--                    </select>-->
-              <!--                    <div class="col-6"></div>-->
-              <!--                  </div>-->
-              <!--                  <div class="form-group">-->
-              <!--                    <button class="btn btn-sm btn-primary">-->
-              <!--                      <i class="fa fa-search"></i>-->
-              <!--                      Tìm kiếm-->
-              <!--                    </button>-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!--              </form>-->
               <button type="button"
                       class="btn btn-sm btn-primary float-lg-right"
                       *ngIf="!formCreateQuestionStatus" (click)="onClickCreate()">
@@ -448,18 +421,16 @@
                   <td>{{question.id}}</td>
                   <td [innerHTML]="question.content"></td>
                   <td>
-                    <div>
-                      <div style="float: none;">
-                        <button type="button" class="btn btn-xs btn-primary"
-                                style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)">
-                          <i class="fa fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-xs btn-danger"
-                                style="float: none;margin: 5px;"
-                                (click)="showDeleteQuestionForm(question.id, deleteQuestionForm)">
-                          <i class="fa fa-trash"></i>
-                        </button>
-                      </div>
+                    <div class="float-lg-right" style="float: none;">
+                      <button type="button" class="btn btn-xs btn-primary"
+                              style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn btn-xs btn-danger"
+                              style="float: none;margin: 5px;"
+                              (click)="showDeleteQuestionForm(question.id, deleteQuestionForm)">
+                        <i class="fa fa-trash"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
