@@ -12,6 +12,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CorrectAnswerService} from '../service/correct-answer.service';
 import {CorrectAnswer} from '../model/correct-answer';
 import {Sort} from '@angular/material';
+import {NotificationService} from '../service/notification.service';
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+const NOTIFICATION = 'Thông báo';
 
 @Component({
   selector: 'app-question',
@@ -63,7 +68,8 @@ export class QuestionComponent implements OnInit {
               private categoryService: CategoryService,
               private answerService: AnswerService,
               private modalService: NgbModal,
-              private correctAnswerService: CorrectAnswerService) {
+              private correctAnswerService: CorrectAnswerService,
+              private notificationService: NotificationService) {
     this.formCreateQuestionStatus = false;
     this.formUpdateQuestionStatus = false;
     this.showCreateAnswerForm = false;
@@ -121,7 +127,7 @@ export class QuestionComponent implements OnInit {
       this.questionStatusIsTrueList.push(question);
       this.getQuestionList();
     }, () => {
-      this.failMessage = 'Tạo mới thất bại';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
     this.getAnswerList(this.questionCurrentId);
   }
@@ -163,8 +169,9 @@ export class QuestionComponent implements OnInit {
         this.formCreateQuestionStatus = false;
         this.questionForm.reset();
         this.getQuestionStatusIsTrue();
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       }, () => {
-        this.failMessage = 'Lỗi trong quá trình cập nhật';
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     });
 
@@ -177,7 +184,7 @@ export class QuestionComponent implements OnInit {
       this.currentQuestionCategory = this.currentQuestion.category.name;
       this.currentQuestionTypeOfQuestion = this.currentQuestion.typeOfQuestion.name;
     }, () => {
-      this.failMessage = 'Lỗi không tìm thấy câu hỏi có id = ' + id;
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -185,8 +192,9 @@ export class QuestionComponent implements OnInit {
     this.questionService.deleteQuestion(id).subscribe(() => {
       this.getQuestionStatusIsTrue();
       this.close();
-    }, error => {
-      console.log(error);
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+    }, () => {
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -298,8 +306,9 @@ export class QuestionComponent implements OnInit {
       this.getAnswerList(this.questionCurrentId);
       this.answerForm.reset();
       this.showCreateAnswerForm = false;
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
-      this.failMessage = 'Tạo câu trả lời thất bại';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -308,7 +317,7 @@ export class QuestionComponent implements OnInit {
       this.currentAnswer = result;
       this.currentAnswerContent = this.currentAnswer.content;
     }, error => {
-      console.log(error);
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -329,8 +338,9 @@ export class QuestionComponent implements OnInit {
       this.answerForm.reset();
       this.getAnswerList(this.questionCurrentId);
       this.updateAnswerStatus = false;
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
-      this.failMessage = 'Lỗi trong quá trình cập nhật';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -338,8 +348,9 @@ export class QuestionComponent implements OnInit {
     this.answerService.deleteAnswer(id).subscribe(() => {
       this.getAnswerList(this.questionCurrentId);
       this.modalService.dismissAll('');
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
-      this.failMessage = 'Lỗi khi xóa câu trả lời có id = ' + id;
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -361,6 +372,8 @@ export class QuestionComponent implements OnInit {
     };
     this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
       this.correctAnswerForm.reset();
+    }, error => {
+      console.log(error);
     });
   }
 
