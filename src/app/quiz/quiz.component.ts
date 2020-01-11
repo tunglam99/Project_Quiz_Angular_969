@@ -4,6 +4,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Quiz} from '../model/quiz';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Sort} from '@angular/material';
+import {NotificationService} from '../service/notification.service';
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+const NOTIFICATION = 'Thông báo';
 
 @Component({
   selector: 'app-quiz',
@@ -18,10 +23,7 @@ export class QuizComponent implements OnInit {
       endedDate: new FormControl('')
     }
   );
-  failMessage: string;
-  successMessage: string;
   currentQuiz: Quiz;
-  flagMessage: number;
   isEnableShowStartedDate: boolean;
   isEnableShowEndedDate: boolean;
   name: string;
@@ -29,13 +31,13 @@ export class QuizComponent implements OnInit {
   endedDate: Date;
 
   constructor(private quizService: QuizService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private notificationService: NotificationService) {
     this.isEnableShowEndedDate = false;
     this.isEnableShowStartedDate = false;
   }
 
   ngOnInit() {
-    this.flagMessage = 0;
     this.getQuizList();
   }
 
@@ -44,7 +46,6 @@ export class QuizComponent implements OnInit {
   }
 
   close() {
-    this.flagMessage = 0;
     this.modalService.dismissAll('');
     this.quizForm.reset();
   }
@@ -64,7 +65,7 @@ export class QuizComponent implements OnInit {
       this.startedDate = this.currentQuiz.startedDate;
       this.endedDate = this.currentQuiz.endedDate;
     }, () => {
-      this.failMessage = 'Lỗi không tìm thấy đề thi có id = ' + id;
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -79,13 +80,11 @@ export class QuizComponent implements OnInit {
       this.quizForm.reset();
       this.quizList.push(quiz);
       this.getQuizList();
-      this.successMessage = 'Thành công';
-      this.flagMessage = 1;
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       this.changeShowDatePickerStatusToFalse();
       this.close();
     }, () => {
-      this.flagMessage = 2;
-      this.failMessage = 'Lỗi trong quá trình tạo mới';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -99,12 +98,11 @@ export class QuizComponent implements OnInit {
     this.quizService.updateQuiz(id, quiz).subscribe(() => {
       this.quizForm.reset();
       this.getQuizList();
-      this.successMessage = 'Thành công';
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       this.changeShowDatePickerStatusToFalse();
       this.close();
     }, () => {
-      this.flagMessage = 3;
-      this.failMessage = 'Lỗi trong quá trình cập nhật';
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
@@ -116,9 +114,10 @@ export class QuizComponent implements OnInit {
   deleteQuiz(id: number) {
     this.quizService.deleteQuiz(id).subscribe(() => {
       this.getQuizList();
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
       this.close();
     }, () => {
-      this.failMessage = 'Lỗi khi xóa đề thi có id = ' + id;
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 

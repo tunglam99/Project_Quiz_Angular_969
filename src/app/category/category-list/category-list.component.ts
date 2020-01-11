@@ -6,10 +6,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Sort} from '@angular/material';
 import {NotificationService} from '../../service/notification.service';
 
-
 const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
 const SUCCESS = 'Thành công';
-
 const NOTIFICATION = 'Thông báo';
 
 @Component({
