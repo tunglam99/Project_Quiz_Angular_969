@@ -19,6 +19,7 @@ export class CategoryListComponent implements OnInit {
   successMessage: string;
   flagMessage: number;
   currentCategory: Category;
+  categoryName: string;
 
   constructor(private categoryService: CategoryService,
               private modalService: NgbModal) {
@@ -82,6 +83,7 @@ export class CategoryListComponent implements OnInit {
   getCategoryDetail(id: number) {
     this.categoryService.getCategory(id).subscribe(result => {
       this.currentCategory = result;
+      this.categoryName = this.currentCategory.name;
     }, () => {
       this.flagMessage = 4;
       this.failMessage = 'Lỗi không tìm thấy danh mục có id = ' + id;

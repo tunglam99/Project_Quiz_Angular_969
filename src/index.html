@@ -13,13 +13,20 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="assets/static/css/docs.css">
   <link rel="stylesheet" href="assets/static/css/highlighter.css">
+  <link rel="stylesheet" href="assets/static/toastr/toastr.min.css">
 </head>
 <body>
 <app-root></app-root>
 <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet"/>
 <script src="assets/static/js/jquery/jquery.js"></script>
 <script src="assets/static/js/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="assets/static/toastr/toastr.min.js"></script>
 <script src="assets/static/js/demo.js"></script>
 <script src="assets/static/js/adminlte.js"></script>
+<script type="text/javascript">
+  $('.toastrDefaultSuccess').click(function() {
+    toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+  });
+</script>
 </body>
 </html>
