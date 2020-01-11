@@ -93,13 +93,29 @@ export class CategoryListComponent implements OnInit {
       id: this.currentCategory.id,
       name: this.categoryForm.value.name
     };
-    this.categoryService.updateCategory(category, id).subscribe(() => {
-      this.categoryForm.reset();
-      this.getCategoryList();
-      this.close();
-    }, () => {
-      this.flagMessage = 3;
-      this.failMessage = 'Lỗi trong quá trình cập nhật';
+    if (this.categoryForm.value.name !== '') {
+      this.categoryService.updateCategory(category, id).subscribe(() => {
+        this.categoryForm.reset();
+        this.getCategoryList();
+        this.close();
+      }, () => {
+        this.flagMessage = 3;
+        this.failMessage = 'Lỗi trong quá trình cập nhật';
+      });
+      return;
+    }
+    this.categoryService.getCategory(id).subscribe(value => {
+      this.currentCategory = value;
+      this.categoryService.updateCategory(this.currentCategory, id).subscribe(() => {
+        this.categoryForm.reset();
+        this.getCategoryList();
+        this.close();
+      }, () => {
+        this.flagMessage = 3;
+        this.failMessage = 'Lỗi trong quá trình cập nhật';
+      });
+    }, error => {
+      console.log(error);
     });
   }
 
