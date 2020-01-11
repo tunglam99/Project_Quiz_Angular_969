@@ -86,17 +86,40 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="quizForm" (ngSubmit)="updateQuiz(currentQuiz.id)">
-          <div class="value">
+          <div class="form-group">
+            <label for="nameUpdate">Tên bài thi:</label>
+            <input class="form-control" type="text" formControlName="name" [value]="name" id="nameUpdate"
+                   (click)="changeShowDatePickerStatusToFalse()">
+          </div>
+          <div class="form-group">
+            <label>Thời gian bắt đầu:</label>
             <div class="input-group">
-              <div class="name">Tên bài thi:</div>
-              <input class="input--style-5 form-control"
-                     [value]="currentQuiz.name" type="text"
-                     formControlName="name">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+              </div>
+              <input type="text" class="form-control float-right" placeholder="mm/dd/yyyy"
+                     (click)="changeShowDatePickerStartStatus()" [value]="startedDate">
+            </div>
+            <dl-date-time-picker *ngIf="isEnableShowStartedDate" startView="day" maxView="year" minView="minute"
+                                 minuteStep="5" formControlName="startedDate">
+            </dl-date-time-picker>
+          </div>
+          <div class="form-group">
+            <label>Thời gian kết thúc:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+              </div>
+              <input type="text" class="form-control float-right" placeholder="mm/dd/yyyy"
+                     [value]="endedDate" (click)="changeShowDatePickerEndStatus()">
             </div>
           </div>
+          <dl-date-time-picker *ngIf="isEnableShowEndedDate" startView="day" maxView="year" minView="minute"
+                               minuteStep="5" formControlName="endedDate">
+          </dl-date-time-picker>
           <br>
           <div class="modal-footer">
-            <button type="submit" class="tabledit-edit-button btn btn-primary waves-effect waves-light">
+            <button type="submit" class="btn btn-primary waves-effect waves-light">
               <i class="fa fa-save fa-lg"></i>
               Lưu
             </button>

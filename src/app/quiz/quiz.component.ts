@@ -24,6 +24,9 @@ export class QuizComponent implements OnInit {
   flagMessage: number;
   isEnableShowStartedDate: boolean;
   isEnableShowEndedDate: boolean;
+  name: string;
+  startedDate: Date;
+  endedDate: Date;
 
   constructor(private quizService: QuizService,
               private modalService: NgbModal) {
@@ -57,6 +60,9 @@ export class QuizComponent implements OnInit {
   getQuizDetail(id: number) {
     this.quizService.getQuiz(id).subscribe(result => {
       this.currentQuiz = result;
+      this.name = this.currentQuiz.name;
+      this.startedDate = this.currentQuiz.startedDate;
+      this.endedDate = this.currentQuiz.endedDate;
     }, () => {
       this.failMessage = 'Lỗi không tìm thấy đề thi có id = ' + id;
     });
