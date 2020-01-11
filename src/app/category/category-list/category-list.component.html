@@ -41,9 +41,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div *ngIf="flagMessage == 3" class="alert alert-danger text-center">
-        <p>{{failMessage}}</p>
-      </div>
       <div class="modal-body">
         <form [formGroup]="categoryForm" (ngSubmit)="updateCategory(currentCategory.id)">
           <div class="value">
@@ -72,9 +69,6 @@
         <button type="button" class="close" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div *ngIf="flagMessage == 5" class="alert alert-danger text-center">
-        <p>{{failMessage}}</p>
       </div>
       <div class="modal-body">
         <form [formGroup]="categoryForm" (ngSubmit)="deleteCategory(currentCategory.id)">
