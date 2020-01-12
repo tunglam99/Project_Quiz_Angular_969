@@ -5,12 +5,6 @@
     <div class="card-header">
       <h3 class="card-title">Cập nhật thông tin</h3>
     </div>
-    <div *ngIf="successMessage" class="alert alert-success text-center">
-      <p>{{successMessage}}</p>
-    </div>
-    <div *ngIf="failMessage" class="alert alert-danger text-center">
-      <p>{{failMessage}}</p>
-    </div>
     <form role="form" [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
       <div class="card-body row">
         <div class="col-9">

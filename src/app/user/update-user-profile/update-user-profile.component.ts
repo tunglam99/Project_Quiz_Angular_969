@@ -6,6 +6,11 @@ import {Subscription} from 'rxjs';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {NotificationService} from '../../service/notification.service';
+
+const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
+const SUCCESS = 'Thành công';
+const NOTIFICATION = 'Thông báo';
 
 @Component({
   selector: 'app-update-user-profile',
@@ -17,8 +22,6 @@ export class UpdateUserProfileComponent implements OnInit {
   sub: Subscription;
   imgSrc = '../../../assets/img/Placeholder.jpg';
   selectedImage: any = null;
-  failMessage = '';
-  successMessage = '';
   userForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -34,7 +37,8 @@ export class UpdateUserProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -52,7 +56,7 @@ export class UpdateUserProfileComponent implements OnInit {
         this.userPhoneNumber = this.currentUser.phoneNumber;
         this.userAvatarUrl = this.currentUser.avatar;
       }, error => {
-        console.log(error);
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     });
   }
@@ -78,23 +82,22 @@ export class UpdateUserProfileComponent implements OnInit {
               fileRef.getDownloadURL().subscribe(url => {
                 user.avatar = url;
                 this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
-                  this.successMessage = 'Cập nhật thông tin thành công';
+                  this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
                 }, error => {
-                  this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
-                  console.log(error);
+                  this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
                 });
               });
             })
           ).subscribe();
         } else {
           this.userService.updateUserProfile(this.currentUser.id, this.currentUser).subscribe(() => {
-            this.successMessage = 'Cập nhật thông tin thành công';
+            this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
           }, () => {
-            this.failMessage = 'Xảy ra lỗi khi cập nhật thông tin cá nhân';
+            this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
           });
         }
-      }, error => {
-        console.log(error);
+      }, () => {
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
     });
   }
