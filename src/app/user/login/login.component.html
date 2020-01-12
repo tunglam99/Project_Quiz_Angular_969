@@ -1,55 +1,62 @@
-<div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login100">
-      <div class="login100-pic js-tilt" data-tilt>
-        <img src="https://colorlib.com/etc/lf/Login_v1/images/img-01.png" alt="IMG">
+<div class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a routerLink="/"><b>QUIZ 969</b></a>
+    </div>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Đăng nhập</p>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div *ngIf="error" class="alert alert-danger text-center">
+            <p>{{error}}</p>
+          </div>
+          <br>
+          <div class="input-group mb-3">
+            <input class="form-control" type="text" formControlName="username" placeholder="tên đăng nhập">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" formControlName="password" placeholder="mật khẩu">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+          </div>
+        </form>
+        <div class="social-auth-links text-center mb-3">
+          <p>- OR -</p>
+          <a href="#" class="btn btn-block btn-primary">
+            <i class="fa fa-facebook mr-2"></i> Đăng nhập với Facebook
+          </a>
+          <a href="#" class="btn btn-block btn-danger">
+            <i class="fa fa-google-plus mr-2"></i> Đăng nhập với Google+
+          </a>
+        </div>
+        <p class="mb-1">
+          <a routerLink="/forgot-password">Quên mật khẩu</a>
+        </p>
+        <p class="mb-0">
+          <a routerLink="/register" class="text-center">Tạo tài khoản mới</a>
+        </p>
       </div>
-      <form [formGroup]="loginForm" (ngSubmit)="login()" class="login100-form validate-form">
-					<span class="login100-form-title">
-						Đăng nhập
-					</span>
-        <div *ngIf="error" class="alert alert-danger text-center">
-          <p>{{error}}</p>
-        </div>
-        <br>
-        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-          <input class="input100 form-control" type="text" formControlName="username" placeholder="tên đăng nhập">
-          <span class="focus-input100"></span>
-          <span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-        </div>
-
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <input class="input100 form-control" type="password" formControlName="password" placeholder="mật khẩu">
-          <span class="focus-input100"></span>
-          <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-        </div>
-
-        <div class="container-login100-form-btn">
-          <button class="login100-form-btn">
-            Đăng nhập
-          </button>
-        </div>
-
-        <div class="text-center p-t-12">
-						<span class="txt1">
-							Quên
-						</span>
-          <a class="txt2" routerLink="/forgot-password">
-            Tài khoản / Mật khẩu?
-          </a>
-        </div>
-
-        <div class="text-center p-t-136">
-          <a class="txt2" routerLink="/register">
-            Tạo mới tài khoản
-            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-          </a>
-        </div>
-      </form>
     </div>
   </div>
 </div>
