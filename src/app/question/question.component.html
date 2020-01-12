@@ -377,67 +377,67 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Danh sách câu hỏi</h3>
-            <div class="card-tools">
-              <form class="form-inline ml-3" [formGroup]="searchForm"
-                    (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
-                <div class="input-group input-group-sm">
-                  <input class="form-control mr-3" type="search" placeholder="Tìm kiếm"
-                         aria-label="Search" formControlName="content">
-                  <select class="form-control mr-3" formControlName="category">
-                    <option [value]="null">Danh mục</option>
-                    <option *ngFor="let category of categoryList"
-                            [value]="category.name">{{category.name}}</option>
-                  </select>
-                  <select class="form-control mr-3" formControlName="typeOfQuestion">
-                    <option [value]="null">Loại câu hỏi</option>
-                    <option *ngFor="let typeOfQuestion of typeOfQuestionList"
-                            [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
-                  </select>
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                      Tìm kiếm <i class="fa fa-search"></i>
-                    </button>
-                  </div>
+            <form [formGroup]="searchForm"
+                  (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
+              <div class="input-group input-group-sm">
+                <input class="form-control mr-3 col-5" type="search" placeholder="Tìm kiếm"
+                       aria-label="Search" formControlName="content">
+                <select class="form-control mr-3 col-2" formControlName="category">
+                  <option [value]="null">Danh mục</option>
+                  <option *ngFor="let category of categoryList"
+                          [value]="category.name">{{category.name}}</option>
+                </select>
+                <select class="form-control mr-3 col-2" formControlName="typeOfQuestion">
+                  <option [value]="null">Loại câu hỏi</option>
+                  <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                          [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
+                </select>
+                <div class="input-group-append col-3">
+                  <button class="btn btn-primary" type="submit">
+                    Tìm kiếm <i class="fa fa-search"></i>
+                  </button>
                 </div>
-              </form>
+              </div>
+            </form>
+            <div class="card-tools">
               <button type="button"
                       class="btn btn-sm btn-primary float-lg-right"
                       *ngIf="!formCreateQuestionStatus" (click)="onClickCreate()">
                 <span class="fa fa-plus"></span>
               </button>
             </div>
-            <div class="card-body table-responsive p-0">
-              <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed table-hover"
-                     id="example-2">
-                <thead>
-                <tr>
-                  <th mat-sort-header="id" style="width: 10px">#</th>
-                  <th mat-sort-header="content">Nội dung câu hỏi</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let question of questionStatusIsTrueList">
-                  <td>{{question.id}}</td>
-                  <td [innerHTML]="question.content"></td>
-                  <td>
-                    <div class="float-lg-right" style="float: none;">
-                      <button type="button" class="btn btn-xs btn-primary"
-                              style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button type="button" class="btn btn-xs btn-danger"
-                              style="float: none;margin: 5px;"
-                              (click)="showDeleteQuestionForm(question.id, deleteQuestionForm)">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                </tbody>
-              </table>
-            </div>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed table-hover"
+                   id="example-2">
+              <thead>
+              <tr>
+                <th mat-sort-header="id" style="width: 10px">#</th>
+                <th mat-sort-header="content">Nội dung câu hỏi</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let question of questionStatusIsTrueList">
+                <td>{{question.id}}</td>
+                <td [innerHTML]="question.content"></td>
+                <td>
+                  <div class="float-lg-right" style="float: none;">
+                    <button type="button" class="btn btn-xs btn-primary"
+                            style="float: none;margin: 5px;" (click)="onClickUpdate(question.id)">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-xs btn-danger"
+                            style="float: none;margin: 5px;"
+                            (click)="showDeleteQuestionForm(question.id, deleteQuestionForm)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
