@@ -19,6 +19,7 @@ import {SharedModule} from './module/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {environment} from '../environments/environment';
 import {ToastrModule} from 'ngx-toastr';
+import { RecoverPasswordComponent } from './user/recover-password/recover-password.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {ToastrModule} from 'ngx-toastr';
     RegisterSuccessComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
+    RecoverPasswordComponent,
   ],
   imports: [
     BrowserModule,

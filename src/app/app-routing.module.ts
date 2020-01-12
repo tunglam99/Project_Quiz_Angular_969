@@ -6,6 +6,7 @@ import {HomeComponent} from './user/home/home.component';
 import {RegisterSuccessComponent} from './user/register-success/register-success.component';
 import {ForgotPasswordComponent} from './user/forgot-password/forgot-password.component';
 import {ChangePasswordComponent} from './user/change-password/change-password.component';
+import {RecoverPasswordComponent} from './user/recover-password/recover-password.component';
 
 const routes: Routes = [{
   path: '',
@@ -22,6 +23,9 @@ const routes: Routes = [{
 }, {
   path: 'forgot-password',
   component: ForgotPasswordComponent
+},{
+  path: 'recover-password',
+  component: RecoverPasswordComponent
 }, {
   path: 'new-password/:id',
   component: ChangePasswordComponent
