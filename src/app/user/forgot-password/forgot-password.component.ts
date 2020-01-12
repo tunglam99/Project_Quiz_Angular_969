@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class ForgotPasswordComponent implements OnInit {
   failMessage: string;
   forgotPasswordForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('')
   });
 
   constructor(private userService: UserService,
