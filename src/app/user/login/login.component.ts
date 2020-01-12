@@ -40,9 +40,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           localStorage.setItem('ACCESS_TOKEN', data.accessToken);
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.returnUrl]).finally(() => {
+            location.reload();
+          });
         },
-        error => {
+        () => {
           this.error = 'Sai tên đăng nhập hoặc mật khẩu';
           this.loading = false;
         });
