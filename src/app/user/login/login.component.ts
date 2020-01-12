@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../../service/authentication.service';
+import {AuthService, FacebookLoginProvider, SocialUser} from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,13 @@ export class LoginComponent implements OnInit {
   error = '';
   loading = false;
   submitted = false;
+  socialUser: SocialUser;
+  loggedIn: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private authService: AuthService) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
@@ -29,8 +33,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/';
+    this.authService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.loggedIn = (user != null);
+      console.log(this.socialUser);
+    });
   }
 
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
 
   login() {
     this.submitted = true;

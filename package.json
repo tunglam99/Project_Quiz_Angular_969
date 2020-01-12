@@ -30,6 +30,7 @@
     "@syncfusion/ej2-angular-richtexteditor": "^17.3.29",
     "angular-bootstrap-datetimepicker": "^4.0.2",
     "angular-toastr": "^2.1.1",
+    "angularx-social-login": "^2.2.1",
     "animate": "^1.0.0",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
