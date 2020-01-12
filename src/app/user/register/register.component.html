@@ -1,70 +1,102 @@
-<div class="mt-lg-4 container">
-  <br>
-  <br>
-  <div class="card card-primary">
-    <div class="card-header">
-      <h2 class="card-title">Đăng ký tài khoản</h2>
+<div class="hold-transition register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a routerLink="/"><b>QUIZ 969</b></a>
     </div>
-    <form role="form" [formGroup]="registerForm" (ngSubmit)="register()">
-      <div class="card-body">
-        <div class="form-group">
-          <label for="username">Tên đăng nhập</label>
-          <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập" formControlName="username">
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('username').hasError('required') && isSubmitted">
-            Tên đăng nhập phải được điền
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="login-box-msg">Đăng ký tài khoản</p>
+        <form role="form" [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Tên đăng nhập" formControlName="username">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-user"></span>
+              </div>
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('username').hasError('required') && isSubmitted">
+              Tên đăng nhập phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('username').hasError('minlength') && isSubmitted">
+              Tên đăng nhập phải có nhiều hơn 6 ký tự
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('username').hasError('maxlength') && isSubmitted">
+              Tên đăng nhập phải có ít hơn 12 ký tự
+            </div>
           </div>
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('username').hasError('minlength') && isSubmitted">
-            Tên đăng nhập phải có nhiều hơn 6 ký tự
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-envelope"></span>
+              </div>
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('email').hasError('required') && isSubmitted">
+              Email phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('email').hasError('email') && isSubmitted">
+              Không đúng định dạng email
+            </div>
           </div>
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('username').hasError('maxlength') && isSubmitted">
-            Tên đăng nhập phải có ít hơn 12 ký tự
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('password').hasError('required') && isSubmitted">
+              Mật khẩu phải được điền
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('password').hasError('minlength') && isSubmitted">
+              Mật khẩu phải có nhiều hơn 6 ký tự
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="registerForm.get('password').hasError('maxlength') && isSubmitted">
+              Mật khẩu phải có ít hơn 12 ký tự
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Nhập email">
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('email').hasError('required') && isSubmitted">
-            Email phải được điền
-          </div>
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('email').hasError('email') && isSubmitted">
-            Không đúng định dạng email
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Mật khẩu</label>
-          <input type="password" class="form-control" id="password" placeholder="Mật khẩu" formControlName="password">
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('password').hasError('required') && isSubmitted">
-            Mật khẩu phải được điền
-          </div>
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('password').hasError('minlength') && isSubmitted">
-            Mật khẩu phải có nhiều hơn 6 ký tự
-          </div>
-          <div class="alert alert-danger" role="alert"
-               *ngIf="registerForm.get('password').hasError('maxlength') && isSubmitted">
-            Mật khẩu phải có ít hơn 12 ký tự
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="confirmPassword">Nhập lại mật khẩu</label>
-          <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu"
-                 formControlName="confirmPassword">
-          <div class="alert alert-danger" role="alert"
-               *ngIf="isCorrectConfirmPassword(registerForm.value.password,registerForm.value.confirmPassword)
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" formControlName="confirmPassword">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="isCorrectConfirmPassword(registerForm.value.password,registerForm.value.confirmPassword)
                  && registerForm.get('confirmPassword').hasError('required') && isSubmitted">
-            Mật khẩu nhập lại không khớp.
+              Mật khẩu nhập lại không khớp.
+            </div>
           </div>
+          <div class="row">
+            <div class="col-8">
+            </div>
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+          </div>
+        </form>
+        <div class="social-auth-links text-center">
+          <p>- OR -</p>
+          <a href="#" class="btn btn-block btn-primary">
+            <i class="fa fa-facebook mr-2"></i>
+            Đăng ký với tài khoản Facebook
+          </a>
+          <a href="#" class="btn btn-block btn-danger">
+            <i class="fa fa-google-plus mr-2"></i>
+            Đăng ký với tài khoản Google+
+          </a>
         </div>
-        <div class="form-group">
-          <button class="btn btn-xs btn-primary" type="submit">Đăng ký</button>
-        </div>
+        <a routerLink="/login" class="text-center">Tôi đã có tài khoản</a>
       </div>
-    </form>
+    </div>
   </div>
 </div>
