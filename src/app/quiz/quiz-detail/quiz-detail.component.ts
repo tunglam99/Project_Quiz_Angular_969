@@ -6,6 +6,10 @@ import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Sort} from '@angular/material';
 import {NotificationService} from '../../service/notification.service';
+import {User} from '../../model/user';
+import {UserService} from '../../service/user.service';
+import {Quiz} from '../../model/quiz';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
 const SUCCESS = 'Thành công';
@@ -21,11 +25,24 @@ export class QuizDetailComponent implements OnInit {
   quizId: number;
   sub: Subscription;
   currentQuestion: Question;
+  userList: User[];
+  currentQuiz: Quiz;
+  currentUser: User;
 
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
               private activatedRoute: ActivatedRoute,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private userService: UserService,
+              private modalService: NgbModal) {
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, {centered: true});
+  }
+
+  close() {
+    this.modalService.dismissAll('');
   }
 
   ngOnInit() {
@@ -33,6 +50,7 @@ export class QuizDetailComponent implements OnInit {
       this.quizId = +paramMap.get('id');
       this.getQuestionList();
     });
+    this.getUserList();
   }
 
   getQuestionList() {
@@ -57,11 +75,35 @@ export class QuizDetailComponent implements OnInit {
       this.questionService.updateQuestion(id, question).subscribe(() => {
         this.getQuestionList();
         this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-      }, error => {
+      }, () => {
         this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
-    }, error => {
+    }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+    });
+  }
+
+  getUserList() {
+    this.userService.getUserList().subscribe(value => {
+      this.userList = value;
+    });
+  }
+
+  addParticipant(id: number) {
+    this.quizService.getQuiz(this.quizId).subscribe(value => {
+      this.currentQuiz = value;
+      this.userService.getUserProfile(id + '').subscribe(value1 => {
+        this.currentUser = value1;
+        for (const user of this.currentQuiz.participants) {
+          if (this.currentUser.id === user.id) {
+            // this.notificationService.showError('<h5> Đã thêm </h5>', NOTIFICATION);
+            return;
+          }
+        }
+        this.quizService.joinQuiz(this.currentUser, this.quizId).subscribe(() => {
+          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+        });
+      });
     });
   }
 

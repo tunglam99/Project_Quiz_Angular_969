@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Quiz} from '../model/quiz';
+import {User} from '../model/user';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -36,5 +37,9 @@ export class QuizService {
 
   deleteQuiz(id: number): Observable<Quiz> {
     return this.http.delete<Quiz>(API_URL + `/quizzes/${id}`);
+  }
+
+  joinQuiz(user: User, quizId: number): Observable<Quiz> {
+    return this.http.post<Quiz>(API_URL + `/join/${quizId}`, user);
   }
 }
