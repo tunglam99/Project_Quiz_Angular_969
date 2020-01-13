@@ -26,6 +26,10 @@ export class QuizService {
     return this.http.get<Quiz>(API_URL + `/quizzes/${id}`);
   }
 
+  doExam(id: number): Observable<Quiz> {
+    return this.http.get<Quiz>(API_URL + `/doExam/${id}`);
+  }
+
   updateQuiz(id: number, quiz: Quiz): Observable<Quiz> {
     return this.http.put<Quiz>(API_URL + `/quizzes/${id}`, quiz);
   }

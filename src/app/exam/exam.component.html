@@ -10,7 +10,8 @@
           <tr>
             <th>#</th>
             <th>Tên đề thi</th>
-            <th></th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
           </tr>
           </thead>
           <tbody>
@@ -19,6 +20,8 @@
             <td class="tabledit-view-mode">
               <a [routerLink]="['do-exam',quiz.id]" class="tabledit-span">{{quiz.name}}</a>
             </td>
+            <td>{{quiz.startedDate}}</td>
+            <td>{{quiz.endedDate}}</td>
           </tr>
           </tbody>
         </table>

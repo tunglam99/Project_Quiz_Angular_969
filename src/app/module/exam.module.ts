@@ -4,6 +4,7 @@ import {ExamComponent} from '../exam/exam.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../helper/auth-guard';
 import {DoExamComponent} from '../exam/do-exam/do-exam.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const routing: Routes = [{
   path: '',
@@ -20,10 +21,11 @@ const routing: Routes = [{
     ExamComponent,
     DoExamComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routing)
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routing),
+        ReactiveFormsModule
+    ]
 })
 export class ExamModule {
 }
