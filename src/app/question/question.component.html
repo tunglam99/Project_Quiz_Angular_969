@@ -378,27 +378,27 @@
           <div class="card-header">
             <h3 class="card-title">Danh sách câu hỏi</h3>
             <form [formGroup]="searchForm"
-                  (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
-              <div class="input-group input-group-sm">
-                <input class="form-control mr-3 col-5" type="search" placeholder="Tìm kiếm"
-                       aria-label="Search" formControlName="content">
-                <select class="form-control mr-3 col-2" formControlName="category">
-                  <option [value]="null">Danh mục</option>
-                  <option *ngFor="let category of categoryList"
-                          [value]="category.name">{{category.name}}</option>
-                </select>
-                <select class="form-control mr-3 col-2" formControlName="typeOfQuestion">
-                  <option [value]="null">Loại câu hỏi</option>
-                  <option *ngFor="let typeOfQuestion of typeOfQuestionList"
-                          [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
-                </select>
-                <div class="input-group-append col-3">
-                  <button class="btn btn-primary" type="submit">
-                    Tìm kiếm <i class="fa fa-search"></i>
-                  </button>
-                </div>
+                         (ngSubmit)="searchQuestion(searchForm.value.category, searchForm.value.typeOfQuestion, searchForm.value.content)">
+            <div class="input-group input-group-sm">
+              <input class="form-control mr-3 col-5" type="search" placeholder="Tìm kiếm"
+                     aria-label="Search" formControlName="content">
+              <select class="form-control mr-3 col-2" formControlName="category">
+                <option [value]="null">Danh mục</option>
+                <option *ngFor="let category of categoryList"
+                        [value]="category.name">{{category.name}}</option>
+              </select>
+              <select class="form-control mr-3 col-2" formControlName="typeOfQuestion">
+                <option [value]="null">Loại câu hỏi</option>
+                <option *ngFor="let typeOfQuestion of typeOfQuestionList"
+                        [value]="typeOfQuestion.name">{{typeOfQuestion.name}}</option>
+              </select>
+              <div class="input-group-append col-3">
+                <button class="btn btn-primary" type="submit">
+                  Tìm kiếm <i class="fa fa-search"></i>
+                </button>
               </div>
-            </form>
+            </div>
+          </form>
             <div class="card-tools">
               <button type="button"
                       class="btn btn-sm btn-primary float-lg-right"
