@@ -176,7 +176,6 @@ export class QuestionComponent implements OnInit {
         });
         return;
       } else {
-        console.log(this.currentQuestion);
         this.questionService.updateQuestion(id, this.currentQuestion).subscribe(() => {
           this.formUpdateQuestionStatus = false;
           this.formCreateQuestionStatus = false;

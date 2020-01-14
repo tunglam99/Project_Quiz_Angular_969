@@ -91,9 +91,9 @@ export class QuizComponent implements OnInit {
   updateQuiz(id: number) {
     const quiz: Quiz = {
       id: this.currentQuiz.id,
-      name: this.quizForm.value.name,
-      startedDate: this.quizForm.value.startedDate,
-      endedDate: this.quizForm.value.endedDate
+      name: this.quizForm.value.name === null ? this.currentQuiz.name : this.quizForm.value.name,
+      startedDate: this.quizForm.value.startedDate === null ? this.currentQuiz.startedDate : this.quizForm.value.startedDate,
+      endedDate: this.quizForm.value.endedDate === null ? this.currentQuiz.endedDate : this.quizForm.value.endedDate
     };
     this.quizService.updateQuiz(id, quiz).subscribe(() => {
       this.quizForm.reset();
