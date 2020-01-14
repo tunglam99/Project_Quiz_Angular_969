@@ -96,7 +96,6 @@ export class QuizDetailComponent implements OnInit {
         this.currentUser = value1;
         for (const user of this.currentQuiz.participants) {
           if (this.currentUser.id === user.id) {
-            // this.notificationService.showError('<h5> Đã thêm </h5>', NOTIFICATION);
             return;
           }
         }

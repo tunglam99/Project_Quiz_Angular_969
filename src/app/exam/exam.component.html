@@ -15,7 +15,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let quiz of quizList">
+          <tr *ngFor="let quiz of quizListByUser">
             <th scope="row">{{quiz.id}}</th>
             <td class="tabledit-view-mode">
               <a [routerLink]="['do-exam',quiz.id]" class="tabledit-span">{{quiz.name}}</a>
