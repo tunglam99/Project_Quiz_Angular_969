@@ -7,7 +7,6 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AnswerService} from '../../service/answer.service';
 import {Answer} from '../../model/answer';
 import {FormControl, FormGroup} from '@angular/forms';
-import {CorrectAnswerService} from '../../service/correct-answer.service';
 import {NotificationService} from '../../service/notification.service';
 
 @Component({
@@ -26,6 +25,7 @@ export class DoExamComponent implements OnInit {
     question: new FormControl('')
   });
   isCorrectTime: boolean;
+  questionIndex = 0;
 
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
@@ -38,7 +38,19 @@ export class DoExamComponent implements OnInit {
   ngOnInit() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.quizId = +paramMap.get('id');
-      this.getQuestionList();
+      this.questionService.findAllQuestionByQuiz(this.quizId).subscribe(result => {
+        this.questionList = result;
+        for (const question of this.questionList) {
+          this.answerService.listAnswerByQuestion(question.id).subscribe(value => {
+            this.answerList = value;
+            question.answers = this.answerList;
+          }, error => {
+            console.log(error);
+          });
+        }
+      }, error => {
+        console.log(error);
+      });
       this.quizService.doExam(this.quizId).subscribe(value => {
         this.quizName = value.name;
         this.isCorrectTime = true;
@@ -49,22 +61,11 @@ export class DoExamComponent implements OnInit {
     });
   }
 
-  getQuestionList() {
-    this.questionService.findAllQuestionByQuiz(this.quizId).subscribe(result => {
-      this.questionList = result;
-      for (const question of this.questionList) {
-        this.getAnswerList(question.id);
-      }
-    }, error => {
-      console.log(error);
-    });
+  next() {
+    this.questionIndex ++;
   }
 
-  getAnswerList(questionId: number) {
-    this.answerService.listAnswerByQuestion(questionId).subscribe(value => {
-      this.answerList = value;
-    }, error => {
-      console.log(error);
-    });
+  previous() {
+    this.questionIndex --;
   }
 }

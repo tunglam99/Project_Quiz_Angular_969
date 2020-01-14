@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../helper/auth-guard';
 import {QuizComponent} from '../quiz/quiz.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -10,19 +9,20 @@ import {QuizDetailComponent} from '../quiz/quiz-detail/quiz-detail.component';
 import {AddQuestionToQuizComponent} from '../quiz/add-question-to-quiz/add-question-to-quiz.component';
 import {MatSortModule} from '@angular/material';
 import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
+import {AdminAuthGuard} from '../helper/admin-auth-guard';
 
 const routing: Routes = [{
   path: '',
   component: QuizComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AdminAuthGuard]
 }, {
   path: 'detail-quiz/:id',
   component: QuizDetailComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AdminAuthGuard]
 }, {
   path: 'detail-quiz/:id/add-question-to-quiz',
   component: AddQuestionToQuizComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AdminAuthGuard]
 }];
 
 @NgModule({

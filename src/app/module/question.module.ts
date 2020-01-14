@@ -4,15 +4,15 @@ import {RouterModule, Routes} from '@angular/router';
 import {QuestionComponent} from '../question/question.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {AuthGuard} from '../helper/auth-guard';
 import {RichTextEditorAllModule} from '@syncfusion/ej2-angular-richtexteditor';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSortModule} from '@angular/material';
+import {AdminAuthGuard} from '../helper/admin-auth-guard';
 
 const routing: Routes = [{
   path: '',
   component: QuestionComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AdminAuthGuard]
 }];
 
 @NgModule({

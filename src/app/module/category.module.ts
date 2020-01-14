@@ -5,13 +5,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AuthGuard} from '../helper/auth-guard';
 import {MatSortModule} from '@angular/material';
+import {AdminAuthGuard} from '../helper/admin-auth-guard';
 
 const routing: Routes = [{
   path: '',
   component: CategoryListComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AdminAuthGuard]
 }];
 
 @NgModule({

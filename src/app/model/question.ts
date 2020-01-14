@@ -5,4 +5,5 @@ export interface Question {
   typeOfQuestion?: any;
   category?: any;
   quiz?: any;
+  answers?: any[];
 }
