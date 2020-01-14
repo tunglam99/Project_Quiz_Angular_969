@@ -126,10 +126,10 @@ export class QuestionComponent implements OnInit {
     this.questionService.createQuestion(question).subscribe(() => {
       this.questionStatusIsTrueList.push(question);
       this.getQuestionList();
+      this.getAnswerList(this.questionCurrentId);
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
-    this.getAnswerList(this.questionCurrentId);
   }
 
   saveQuestionForm() {
@@ -164,15 +164,29 @@ export class QuestionComponent implements OnInit {
       if (!this.formUpdateQuestionStatus) {
         this.addCorrectAnswer();
       }
-      this.questionService.updateQuestion(id, question).subscribe(() => {
-        this.formUpdateQuestionStatus = false;
-        this.formCreateQuestionStatus = false;
-        this.questionForm.reset();
-        this.getQuestionStatusIsTrue();
-        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-      }, () => {
-        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-      });
+      if (this.questionForm.value.content !== null) {
+        this.questionService.updateQuestion(id, question).subscribe(() => {
+          this.formUpdateQuestionStatus = false;
+          this.formCreateQuestionStatus = false;
+          this.questionForm.reset();
+          this.getQuestionStatusIsTrue();
+          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+        }, () => {
+          this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+        });
+        return;
+      } else {
+        console.log(this.currentQuestion);
+        this.questionService.updateQuestion(id, this.currentQuestion).subscribe(() => {
+          this.formUpdateQuestionStatus = false;
+          this.formCreateQuestionStatus = false;
+          this.questionForm.reset();
+          this.getQuestionStatusIsTrue();
+          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+        }, () => {
+          this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+        });
+      }
     });
 
   }
