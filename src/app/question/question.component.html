@@ -43,8 +43,8 @@
                   <div class="form-group  row">
                     <div class="form-check col-10">
                       <input class="form-check-input" type="radio" formControlName="content"
-                             [value]="answer.content">
-                      <label class="form-check-label">{{answer.content}}</label>
+                             [value]="answer.content" id="answer{{i}}">
+                      <label class="form-check-label" for="answer{{i}}">{{answer.content}}</label>
                     </div>
                     <div class="col-1">
                       <button type="button" class="btn btn-xs btn-primary"
