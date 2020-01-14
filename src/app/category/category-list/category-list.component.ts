@@ -92,29 +92,14 @@ export class CategoryListComponent implements OnInit {
   updateCategory(id: number) {
     const category: Category = {
       id: this.currentCategory.id,
-      name: this.categoryForm.value.name
+      name: this.categoryForm.value.name === null ? this.currentCategory.name : this.categoryForm.value.name
     };
-    if (this.categoryForm.value.name !== '') {
-      this.categoryService.updateCategory(category, id).subscribe(() => {
-        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-        this.categoryForm.reset();
-        this.getCategoryList();
-        this.close();
-      }, () => {
-        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-      });
-      return;
-    }
-    this.categoryService.getCategory(id).subscribe(value => {
-      this.currentCategory = value;
-      this.categoryService.updateCategory(this.currentCategory, id).subscribe(() => {
-        this.categoryForm.reset();
-        this.getCategoryList();
-        this.close();
-      }, () => {
-        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-      });
-    }, error => {
+    this.categoryService.updateCategory(category, id).subscribe(() => {
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+      this.categoryForm.reset();
+      this.getCategoryList();
+      this.close();
+    }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
