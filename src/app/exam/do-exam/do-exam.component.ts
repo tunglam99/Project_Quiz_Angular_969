@@ -28,7 +28,7 @@ export class DoExamComponent implements OnInit {
   isCorrectTime: boolean;
   questionIndex = 0;
   isSubmitted: boolean;
-  numberOfCorrectAnswer = 0;
+  numberOfCorrectQuestion = 0;
   point = 0;
 
   constructor(private quizService: QuizService,
@@ -79,7 +79,7 @@ export class DoExamComponent implements OnInit {
       };
       for (const correctAnswer of listCorrectAnswer) {
         if (answer.content === correctAnswer.content) {
-          this.numberOfCorrectAnswer++;
+          this.numberOfCorrectQuestion++;
         }
       }
       if (this.questionIndex > this.questionList.length - 1) {
@@ -88,8 +88,8 @@ export class DoExamComponent implements OnInit {
           this.questionService.findAllQuestionByQuiz(this.quizId).subscribe(result => {
             this.questionList = result;
             console.log(this.questionList.length);
-            console.log(this.numberOfCorrectAnswer);
-            this.point += this.numberOfCorrectAnswer / this.questionList.length * 10;
+            console.log(this.numberOfCorrectQuestion);
+            this.point += this.numberOfCorrectQuestion / this.questionList.length * 10;
           });
         });
         this.isSubmitted = true;

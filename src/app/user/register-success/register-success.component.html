@@ -1,9 +1,19 @@
-<br>
-<div class="alert alert-success" role="alert" *ngIf="flag">
-  Tài khoản đã được xác thực thành công!
-  <a routerLink="/login">Nhấn vào đây để đến trang đăng nhập</a>
-</div>
-<div *ngIf="!flag">
-  Bạn đã đăng ký thành công!
-  <a href="https://mail.google.com/" target="_blank">Chuyển hướng đến Gmail</a>
+<div class="hold-transition register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a routerLink="/"><b>QUIZ 969</b></a>
+    </div>
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="login-box-msg" *ngIf="flag">Tài khoản đã được xác thực thành công!</p>
+        <div class="alert alert-success" role="alert" *ngIf="flag">
+          <a routerLink="/login">Nhấn vào đây để đến trang đăng nhập</a>
+        </div>
+        <p class="login-box-msg" *ngIf="!flag">Bạn đã đăng ký thành công!</p>
+        <div class="alert alert-success" role="alert" *ngIf="!flag">
+          <a href="https://mail.google.com/" target="_blank">Chuyển hướng đến Gmail</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
