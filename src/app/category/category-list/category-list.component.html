@@ -110,7 +110,7 @@
           <tbody>
           <tr *ngFor="let category of categoryList">
             <td>{{category.id}}</td>
-            <td>{{category.name}}</td>
+            <td><a [routerLink]="['category-detail',category.id]">{{category.name}}</a></td>
             <td>
               <div class="float-lg-right" style="float: none;">
                 <button type="button" class="btn btn-xs btn-primary"

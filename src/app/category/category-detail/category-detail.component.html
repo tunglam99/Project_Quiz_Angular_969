@@ -1,0 +1,29 @@
+<br>
+<router-outlet></router-outlet>
+<br>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <h3>Danh sách câu hỏi</h3>
+      </div>
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table matSort (matSortChange)="sortQuestion($event)" class="table table-head-fixed table-hover">
+        <thead>
+        <tr>
+          <th mat-sort-header="id" style="width: 10px">#</th>
+          <th mat-sort-header="content">Câu hỏi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let question of questionList">
+          <td>{{question.id}}</td>
+          <td [innerHTML]="question.content">></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
