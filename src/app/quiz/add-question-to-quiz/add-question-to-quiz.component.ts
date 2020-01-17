@@ -45,6 +45,10 @@ export class AddQuestionToQuizComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getQuiz();
+  }
+
+  getQuiz() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const id = +paramMap.get('id');
       this.quizService.getQuiz(id).subscribe(result => {
@@ -69,28 +73,36 @@ export class AddQuestionToQuizComponent implements OnInit {
   addQuestionToQuiz(questionId: number) {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const quidId = +paramMap.get('id');
-      this.questionService.getQuestion(questionId).subscribe(value => {
-        this.currentQuestion = value;
-        const question: Question = {
-          id: this.currentQuestion.id,
-          content: this.currentQuestion.content,
-          typeOfQuestion: this.currentQuestion.typeOfQuestion,
-          category: this.currentQuestion.category,
-          status: this.currentQuestion.status,
-          quiz: {
-            id: quidId,
-          }
-        };
-        this.questionService.updateQuestion(questionId, question).subscribe(() => {
-          this.getQuestionList();
-          this.router.navigate(['/admin/quiz-management/detail-quiz/' + quidId]);
-          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-        }, error => {
-          this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-        });
-      }, error => {
-        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-      });
+      this.getQuestionAndUpdate(questionId, quidId);
+    });
+  }
+
+  getQuestionAndUpdate(questionId, quidId) {
+    this.questionService.getQuestion(questionId).subscribe(value => {
+      this.currentQuestion = value;
+      const question: Question = {
+        id: this.currentQuestion.id,
+        content: this.currentQuestion.content,
+        typeOfQuestion: this.currentQuestion.typeOfQuestion,
+        category: this.currentQuestion.category,
+        status: this.currentQuestion.status,
+        quiz: {
+          id: quidId,
+        }
+      };
+      this.updateQuestion(questionId, question, quidId);
+    }, () => {
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+    });
+  }
+
+  updateQuestion(questionId: number, question: Question, quidId: number) {
+    this.questionService.updateQuestion(questionId, question).subscribe(() => {
+      this.getQuestionList();
+      this.router.navigate(['/admin/quiz-management/detail-quiz/' + quidId]);
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+    }, () => {
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
