@@ -329,7 +329,7 @@ export class QuestionComponent implements OnInit {
     this.answerService.getAnswer(id).subscribe(result => {
       this.currentAnswer = result;
       this.currentAnswerContent = this.currentAnswer.content;
-    }, error => {
+    }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
@@ -383,6 +383,10 @@ export class QuestionComponent implements OnInit {
         id: this.questionCurrentId
       }
     };
+    const correctAnswerValue = (document.getElementById('correctAnswerValue') as HTMLInputElement).value;
+    if (this.typeOfQuestionFlag === 2) {
+      correctAnswer.content = correctAnswerValue;
+    }
     this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
       this.correctAnswerForm.reset();
     }, error => {
