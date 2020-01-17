@@ -4,7 +4,7 @@ import {QuizService} from '../../service/quiz.service';
 import {QuestionService} from '../../service/question.service';
 import {Quiz} from '../../model/quiz';
 import {Subscription} from 'rxjs';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Sort} from '@angular/material';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Category} from '../../model/category';
@@ -40,7 +40,8 @@ export class AddQuestionToQuizComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private typeOfQuestionService: TypeOfQuestionService,
               private categoryService: CategoryService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -65,27 +66,31 @@ export class AddQuestionToQuizComponent implements OnInit {
     });
   }
 
-  addQuestionToQuiz(id: number) {
-    this.questionService.getQuestion(id).subscribe(result => {
-      this.currentQuestion = result;
-      const question: Question = {
-        id: this.currentQuestion.id,
-        content: this.currentQuestion.content,
-        typeOfQuestion: this.currentQuestion.typeOfQuestion,
-        category: this.currentQuestion.category,
-        status: this.currentQuestion.status,
-        quiz: {
-          id: this.quiz.id,
-        }
-      };
-      this.questionService.updateQuestion(id, question).subscribe(() => {
-        this.getQuestionList();
-        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+  addQuestionToQuiz(questionId: number) {
+    this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      const quidId = +paramMap.get('id');
+      this.questionService.getQuestion(questionId).subscribe(value => {
+        this.currentQuestion = value;
+        const question: Question = {
+          id: this.currentQuestion.id,
+          content: this.currentQuestion.content,
+          typeOfQuestion: this.currentQuestion.typeOfQuestion,
+          category: this.currentQuestion.category,
+          status: this.currentQuestion.status,
+          quiz: {
+            id: quidId,
+          }
+        };
+        this.questionService.updateQuestion(questionId, question).subscribe(() => {
+          this.getQuestionList();
+          this.router.navigate(['/admin/quiz-management/detail-quiz/' + quidId]);
+          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+        }, error => {
+          this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+        });
       }, error => {
         this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
-    }, error => {
-      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
