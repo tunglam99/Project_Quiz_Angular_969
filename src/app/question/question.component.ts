@@ -386,14 +386,28 @@ export class QuestionComponent implements OnInit {
     if (this.typeOfQuestionFlag === 2) {
       this.answerService.listAnswerByQuestion(correctAnswer.question.id).subscribe(value => {
         for (let i = 0; i < value.length; i++) {
-          const checked = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).checked;
-          if (checked === true) {
-            correctAnswer.content = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).value;
-            this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
-              this.correctAnswerForm.reset();
-            }, error => {
-              console.log(error);
-            });
+          if (this.formCreateQuestionStatus) {
+            const checked = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).checked;
+            if (checked === true) {
+              correctAnswer.content = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).value;
+              this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+                this.correctAnswerForm.reset();
+              }, error => {
+                console.log(error);
+              });
+            }
+          }
+          if (this.formUpdateQuestionStatus) {
+            this.getCorrectAnswerList(correctAnswer.question.id);
+            const checked = (document.getElementById('updateCorrectAnswerValue_' + i) as HTMLInputElement).checked;
+            if (checked === true) {
+              correctAnswer.content = (document.getElementById('updateCorrectAnswerValue_' + i) as HTMLInputElement).value;
+              this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+                this.correctAnswerForm.reset();
+              }, error => {
+                console.log(error);
+              });
+            }
           }
         }
       });

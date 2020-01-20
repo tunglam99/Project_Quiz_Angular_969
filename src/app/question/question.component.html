@@ -263,11 +263,12 @@
           </div>
           <div *ngIf="typeOfQuestionFlag===2">
             <form role="form" [formGroup]=correctAnswerForm>
-              <div class="card-body" *ngFor="let answer of answerList">
+              <div class="card-body" *ngFor="let answer of answerList; index as i">
                 <div class="form-group  row">
-                  <div class="form-check col-10">
-                    <input class="form-check-input" type="checkbox" formControlName="content"
-                           [value]="answer.content">
+                  <div class="form-check col-10" *ngFor="let correctAnswer of correctAnswerList">
+                    <input class="form-check-input" id="updateCorrectAnswerValue_{{i}}"
+                           type="checkbox" (click)="addCorrectAnswer()" [value]="answer.content"
+                           [checked]="correctAnswer.content === answer.content">
                     <label class="form-check-label">{{answer.content}}</label>
                   </div>
                   <div class="col-1">
