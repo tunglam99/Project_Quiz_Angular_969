@@ -231,10 +231,11 @@
               <div *ngFor="let answer of answerList; index as i">
                 <div class="card-body" *ngIf="!updateAnswerStatus">
                   <div class="form-group row">
-                    <div class="form-check col-10" *ngFor="let correctAnswer of correctAnswerList">
-                      <input class="form-check-input" type="radio" formControlName="content"
+                    <div class="custom-control custom-radio col-10" *ngFor="let correctAnswer of correctAnswerList">
+                      <input class="custom-control-input" id="radioUpdateForm{{i}}" type="radio"
+                             formControlName="content"
                              [value]="answer.content" [checked]="correctAnswer.content === answer.content">
-                      <label class="form-check-label">{{answer.content}}</label>
+                      <label for="radioUpdateForm{{i}}" class="custom-control-label">{{answer.content}}</label>
                     </div>
                     <div class="col-1">
                       <button type="button" class="btn btn-xs btn-primary"
@@ -253,13 +254,14 @@
                   <form role="form" [formGroup]="answerForm">
                     <div class="card-body row">
                       <div class="form-group col-1">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" [attr.disabled]="false">
-                          <label class="form-check-label">Radio</label>
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" id="radioUpdateAnswer1" type="radio"
+                                 [attr.disabled]="false">
+                          <label for="radioUpdateAnswer1" class="custom-control-label"></label>
                         </div>
                       </div>
                       <div class="form-group col-9">
-                        <input type="email" class="form-control" [value]="answer.content"
+                        <input type="text" class="form-control" [value]="answer.content"
                                formControlName="content">
                       </div>
                       <div class="col-1">
@@ -280,8 +282,10 @@
             <form role="form" [formGroup]="answerForm" (ngSubmit)="addAnswer()">
               <div class="card-body">
                 <div class="form-group row">
-                  <div class="form-check col-1">
-                    <input class="form-check-input" type="radio" [attr.disabled]="false">
+                  <div class="custom-control custom-radio col-1">
+                    <input class="custom-control-input" id="radioUpdateQuestionForm" type="radio"
+                           [attr.disabled]="false">
+                    <label for="radioUpdateQuestionForm" class="custom-control-label"></label>
                   </div>
                   <input type="text" class="form-control col-10" placeholder="đáp án" formControlName="content">
                   <div class="col-1">
@@ -295,33 +299,64 @@
           </div>
           <div *ngIf="typeOfQuestionFlag===2">
             <form role="form" [formGroup]=correctAnswerForm>
-              <div class="card-body" *ngFor="let answer of answerList; index as i">
-                <div class="form-group  row">
-                  <div class="form-check col-10" *ngFor="let correctAnswer of correctAnswerList">
-                    <input class="form-check-input" id="updateCorrectAnswerValue_{{i}}"
-                           type="checkbox" (click)="addCorrectAnswer()" [value]="answer.content"
-                           [checked]="correctAnswer.content === answer.content">
-                    <label class="form-check-label">{{answer.content}}</label>
+              <div *ngFor="let answer of answerList; index as i">
+                <div class="card-body" *ngIf="!updateAnswerStatus">
+                  <div class="form-group row" >
+                    <div class="custom-control custom-checkbox col-10" *ngFor="let correctAnswer of correctAnswerList">
+                      <input class="custom-control-input" id="updateCorrectAnswerValue_{{i}}"
+                             type="checkbox" (click)="addCorrectAnswer()" [value]="answer.content"
+                             [checked]="correctAnswer.content === answer.content">
+                      <label for="updateCorrectAnswerValue_{{i}}" class="custom-control-label">{{answer.content}}</label>
+                    </div>
+                    <div class="col-1">
+                      <button type="button" class="btn btn-xs btn-primary"
+                              style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
+                        class="fa fa-edit"></i></button>
+                    </div>
+                    <div class="col-1">
+                      <button type="button" class="btn btn-xs btn-danger"
+                              style="float: none;margin: 5px;"
+                              (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
+                        class="fa fa-times"></span></button>
+                    </div>
                   </div>
-                  <div class="col-1">
-                    <button type="button" class="btn btn-xs btn-primary"
-                            style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><i
-                      class="fa fa-edit"></i></button>
-                  </div>
-                  <div class="col-1">
-                    <button type="button" class="btn btn-xs btn-danger"
-                            style="float: none;margin: 5px;"
-                            (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
-                      class="fa fa-times"></span></button>
-                  </div>
+                </div>
+                <div *ngIf="updateAnswerStatus">
+                  <form role="form" [formGroup]="answerForm">
+                    <div class="card-body row">
+                      <div class="form-group col-1">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" id="checkboxUpdateAnswer1" type="checkbox"
+                                 [attr.disabled]="false">
+                          <label for="checkboxUpdateAnswer1" class="custom-control-label"></label>
+                        </div>
+                      </div>
+                      <div class="form-group col-9">
+                        <input type="text" class="form-control" [value]="answer.content"
+                               formControlName="content">
+                      </div>
+                      <div class="col-1">
+                        <button type="button" class="btn btn-xs btn-primary"
+                                style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
+                          class="fa fa-save"></i></button>
+                      </div>
+                      <div class="col-1">
+                        <button type="button" class="btn btn-xs btn-danger"
+                                style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
+                          class="fa fa-close"></span></button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </form>
             <form role="form" [formGroup]="answerForm" (ngSubmit)="addAnswer()">
               <div class="card-body row">
                 <div class="form-group col-1">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" [attr.disabled]="false">
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="checkBoxQuestionUpdate" type="checkbox"
+                           [attr.disabled]="false">
+                    <label for="checkBoxQuestionUpdate" class="custom-control-label"></label>
                   </div>
                 </div>
                 <div class="form-group col-10">
