@@ -71,7 +71,7 @@
                         </div>
                       </div>
                       <div class="form-group col-9">
-                        <input type="email" class="form-control" [value]="answer.content"
+                        <input type="text" class="form-control" [value]="answer.content"
                                formControlName="content">
                       </div>
                       <div class="col-1">
@@ -126,6 +126,33 @@
                             style="float: none;margin: 5px;"
                             (click)="showDeleteAnswerForm(answer.id,deleteAnswerForm)"><span
                       class="fa fa-times"></span></button>
+                  </div>
+                  <div *ngIf="updateAnswerStatus">
+                    <form role="form" [formGroup]="answerForm">
+                      <div class="card-body row">
+                        <div class="form-group col-1">
+                          <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="checkboxAnswer" type="radio"
+                                   [attr.disabled]="false">
+                            <label for="checkboxAnswer" class="custom-control-label"></label>
+                          </div>
+                        </div>
+                        <div class="form-group col-9">
+                          <input type="text" class="form-control" [value]="answer.content"
+                                 formControlName="content">
+                        </div>
+                        <div class="col-1">
+                          <button type="button" class="btn btn-xs btn-primary"
+                                  style="float: none;margin: 5px;" (click)="updateAnswer(answer.id)"><i
+                            class="fa fa-save"></i></button>
+                        </div>
+                        <div class="col-1">
+                          <button type="button" class="btn btn-xs btn-danger"
+                                  style="float: none;margin: 5px;" (click)="updateAnswerForm(answer.id)"><span
+                            class="fa fa-close"></span></button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
