@@ -10,6 +10,8 @@ const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
 const SUCCESS = 'Thành công';
 const NOTIFICATION = 'Thông báo';
 
+declare var $;
+
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
@@ -31,6 +33,7 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.getCategoryList();
+    $('#aaa').show();
   }
 
   showDeleteCategoryForm(id: number, content) {
