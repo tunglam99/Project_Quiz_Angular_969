@@ -161,7 +161,7 @@ export class QuestionComponent implements OnInit {
           }
         };
       }
-      if (!this.formUpdateQuestionStatus) {
+      if (this.typeOfQuestionFlag === 1) {
         this.addCorrectAnswer();
       }
       if (this.questionForm.value.content !== null) {
@@ -383,15 +383,27 @@ export class QuestionComponent implements OnInit {
         id: this.questionCurrentId
       }
     };
-    const correctAnswerValue = (document.getElementById('correctAnswerValue') as HTMLInputElement).value;
     if (this.typeOfQuestionFlag === 2) {
-      correctAnswer.content = correctAnswerValue;
+      this.answerService.listAnswerByQuestion(correctAnswer.question.id).subscribe(value => {
+        for (let i = 0; i < value.length; i++) {
+          const checked = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).checked;
+          if (checked === true) {
+            correctAnswer.content = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).value;
+            this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+              this.correctAnswerForm.reset();
+            }, error => {
+              console.log(error);
+            });
+          }
+        }
+      });
+    } else {
+      this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+        this.correctAnswerForm.reset();
+      }, error => {
+        console.log(error);
+      });
     }
-    this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
-      this.correctAnswerForm.reset();
-    }, error => {
-      console.log(error);
-    });
   }
 
   getCorrectAnswerList(id: number) {
