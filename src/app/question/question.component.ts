@@ -62,6 +62,7 @@ export class QuestionComponent implements OnInit {
   currentAnswerContent: string;
   currentQuestionCategory: string;
   currentQuestionTypeOfQuestion: string;
+  isClosed: boolean;
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -134,9 +135,11 @@ export class QuestionComponent implements OnInit {
 
   saveQuestionForm() {
     this.questionStatus = true;
+    this.isClosed = false;
   }
 
   closeQuestionForm() {
+    this.isClosed = true;
     this.questionStatus = false;
   }
 
@@ -168,8 +171,12 @@ export class QuestionComponent implements OnInit {
         this.formUpdateQuestionStatus = false;
         this.formCreateQuestionStatus = false;
         this.questionForm.reset();
+        this.close();
         this.getQuestionStatusIsTrue();
-        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+        console.log(this.isClosed);
+        if (!this.isClosed) {
+          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+        }
       }, () => {
         this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
       });
