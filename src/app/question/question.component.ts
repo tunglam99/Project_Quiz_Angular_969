@@ -340,20 +340,20 @@ export class QuestionComponent implements OnInit {
   }
 
   updateAnswer(id: number) {
-    const answer: Answer = {
-      id: this.currentAnswer.id,
-      content: this.answerForm.value.content,
-      question: {
-        id: this.questionCurrentId
-      }
-    };
-    this.answerService.updateAnswer(answer, id).subscribe(() => {
-      this.answerForm.reset();
-      this.getAnswerList(this.questionCurrentId);
-      this.updateAnswerStatus = false;
-      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-    }, () => {
-      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+    this.answerService.getAnswer(id).subscribe(value => {
+      const answer: Answer = {
+        id: value.id,
+        content: this.answerForm.value.content === null ? value.content : this.answerForm.value.content,
+        question: value.question
+      };
+      this.answerService.updateAnswer(answer, id).subscribe(() => {
+        this.answerForm.reset();
+        this.getAnswerList(answer.question.id);
+        this.updateAnswerStatus = false;
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+      }, () => {
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+      });
     });
   }
 
