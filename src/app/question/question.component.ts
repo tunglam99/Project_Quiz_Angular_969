@@ -152,40 +152,27 @@ export class QuestionComponent implements OnInit {
         question = {
           status: this.questionStatus,
           id: this.currentQuestion.id,
-          content: this.questionForm.value.content,
+          content: this.questionForm.value.content === null ? this.currentQuestion.content : this.questionForm.value.content,
           category: {
-            id: this.questionForm.value.category
+            id: this.questionForm.value.category === null ? this.currentQuestion.category.id : this.questionForm.value.category
           },
           typeOfQuestion: {
-            id: this.questionForm.value.typeOfQuestion
+            id: this.questionForm.value.typeOfQuestion === null ? this.currentQuestion.typeOfQuestion.id : this.questionForm.value.typeOfQuestion
           }
         };
       }
       if (this.typeOfQuestionFlag === 1) {
         this.addCorrectAnswer();
       }
-      if (this.questionForm.value.content !== null) {
-        this.questionService.updateQuestion(id, question).subscribe(() => {
-          this.formUpdateQuestionStatus = false;
-          this.formCreateQuestionStatus = false;
-          this.questionForm.reset();
-          this.getQuestionStatusIsTrue();
-          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-        }, () => {
-          this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-        });
-        return;
-      } else {
-        this.questionService.updateQuestion(id, this.currentQuestion).subscribe(() => {
-          this.formUpdateQuestionStatus = false;
-          this.formCreateQuestionStatus = false;
-          this.questionForm.reset();
-          this.getQuestionStatusIsTrue();
-          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-        }, () => {
-          this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
-        });
-      }
+      this.questionService.updateQuestion(id, question).subscribe(() => {
+        this.formUpdateQuestionStatus = false;
+        this.formCreateQuestionStatus = false;
+        this.questionForm.reset();
+        this.getQuestionStatusIsTrue();
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+      }, () => {
+        this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
+      });
     });
 
   }
@@ -342,9 +329,11 @@ export class QuestionComponent implements OnInit {
   updateAnswer(id: number) {
     this.answerService.getAnswer(id).subscribe(value => {
       const answer: Answer = {
-        id: value.id,
+        id: this.currentAnswer.id,
         content: this.answerForm.value.content === null ? value.content : this.answerForm.value.content,
-        question: value.question
+        question: {
+          id: value.question.id
+        }
       };
       this.answerService.updateAnswer(answer, id).subscribe(() => {
         this.answerForm.reset();
