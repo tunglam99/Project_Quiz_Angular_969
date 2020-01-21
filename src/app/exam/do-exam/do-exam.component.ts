@@ -44,12 +44,16 @@ export class DoExamComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getQuizDetail();
+    $('#aaa').show();
+  }
+
+  getQuizDetail() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.quizId = +paramMap.get('id');
       this.getQuestionListByQuiz(this.quizId);
       this.doExam(this.quizId);
     });
-    $('#aaa').show();
   }
 
   getAnswerListByQuestion(question: Question) {
@@ -100,12 +104,7 @@ export class DoExamComponent implements OnInit {
       if (this.questionIndex > this.questionList.length - 1) {
         this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
           this.quizId = +paramMap.get('id');
-          this.questionService.findAllQuestionByQuiz(this.quizId).subscribe(result => {
-            this.questionList = result;
-            console.log(this.questionList.length);
-            console.log(this.numberOfCorrectQuestion);
-            this.point += this.numberOfCorrectQuestion / this.questionList.length * 10;
-          });
+          this.calculatePoint(this.quizId);
         });
         this.isSubmitted = true;
         this.questionIndex = 0;
@@ -115,5 +114,12 @@ export class DoExamComponent implements OnInit {
 
   previous() {
     this.questionIndex--;
+  }
+
+  calculatePoint(quizId: number) {
+    this.questionService.findAllQuestionByQuiz(quizId).subscribe(result => {
+      this.questionList = result;
+      this.point += this.numberOfCorrectQuestion / this.questionList.length * 10;
+    });
   }
 }
