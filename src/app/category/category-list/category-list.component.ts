@@ -33,7 +33,6 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.getCategoryList();
-    $('#aaa').show();
   }
 
   showDeleteCategoryForm(id: number, content) {

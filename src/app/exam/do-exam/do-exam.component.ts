@@ -10,6 +10,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {NotificationService} from '../../service/notification.service';
 import {CorrectAnswerService} from '../../service/correct-answer.service';
 
+declare var $;
+
 @Component({
   selector: 'app-do-exam',
   templateUrl: './do-exam.component.html',
@@ -44,26 +46,39 @@ export class DoExamComponent implements OnInit {
   ngOnInit() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.quizId = +paramMap.get('id');
-      this.questionService.findAllQuestionByQuiz(this.quizId).subscribe(result => {
-        this.questionList = result;
-        for (const question of this.questionList) {
-          this.answerService.listAnswerByQuestion(question.id).subscribe(value => {
-            this.answerList = value;
-            question.answers = this.answerList;
-          }, error => {
-            console.log(error);
-          });
-        }
-      }, error => {
-        console.log(error);
-      });
-      this.quizService.doExam(this.quizId).subscribe(value => {
-        this.quizName = value.name;
-        this.isCorrectTime = true;
-      }, () => {
-        this.notificationService.showError('<h5>Chưa đến giờ thi</h5>', 'Thông báo');
-        this.router.navigate(['/user/exam']);
-      });
+      this.getQuestionListByQuiz(this.quizId);
+      this.doExam(this.quizId);
+    });
+    $('#aaa').show();
+  }
+
+  getAnswerListByQuestion(question: Question) {
+    this.answerService.listAnswerByQuestion(question.id).subscribe(value => {
+      this.answerList = value;
+      question.answers = this.answerList;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getQuestionListByQuiz(quizId: number) {
+    this.questionService.findAllQuestionByQuiz(quizId).subscribe(result => {
+      this.questionList = result;
+      for (const question of this.questionList) {
+        this.getAnswerListByQuestion(question);
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  doExam(quizId: number) {
+    this.quizService.doExam(quizId).subscribe(value => {
+      this.quizName = value.name;
+      this.isCorrectTime = true;
+    }, () => {
+      this.notificationService.showError('<h5>Chưa đến giờ thi</h5>', 'Thông báo');
+      this.router.navigate(['/user/exam']);
     });
   }
 
