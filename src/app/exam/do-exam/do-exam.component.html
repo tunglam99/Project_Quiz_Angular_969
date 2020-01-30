@@ -24,19 +24,28 @@
                   <span id="question" [innerHTML]="question.content"></span>
                   <div *ngIf="question.typeOfQuestion.id === 1">
                     <p>Chọn đáp án chính xác nhất</p>
+                    <form role="form" [formGroup]="answerForm">
+                      <div class="form-group" *ngFor="let answer of question.answers; index as j">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" formControlName="content"
+                                 [value]="answer.content" id="answer{{j}}">
+                          <label for="answer{{j}}" class="custom-control-label">{{answer.content}}</label>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                   <div *ngIf="question.typeOfQuestion.id === 2">
                     <p>Chọn các đáp án chính xác</p>
-                  </div>
-                  <form role="form" [formGroup]="answerForm">
-                    <div class="form-group" *ngFor="let answer of question.answers; index as j">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" formControlName="content"
-                               [value]="answer.content" id="answer{{j}}">
-                        <label for="answer{{j}}" class="form-check-label">{{answer.content}}</label>
+                    <form role="form" [formGroup]="answerForm">
+                      <div class="form-group" *ngFor="let answer of question.answers; index as j">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" formControlName="content"
+                                 [value]="answer.content" id="answerCheckbox{{j}}">
+                          <label for="answerCheckbox{{j}}" class="custom-control-label">{{answer.content}}</label>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" (click)="previous()" *ngIf="i!==0">Previous</button>
