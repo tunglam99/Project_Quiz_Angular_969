@@ -32,7 +32,7 @@ export class DoExamComponent implements OnInit {
   isSubmitted: boolean;
   numberOfCorrectQuestion = 0;
   point = 0;
-  checkboxContent = '';
+  checkboxContent = new Set();
   checked: boolean;
 
   constructor(private quizService: QuizService,
@@ -91,8 +91,10 @@ export class DoExamComponent implements OnInit {
   click(questionId) {
     this.answerService.listAnswerByQuestion(questionId).subscribe(value => {
       for (let i = 0; i < value.length; i++) {
-        this.checkboxContent = (document.getElementById('answerCheckbox' + i) as HTMLInputElement).value;
         this.checked = (document.getElementById('answerCheckbox' + i) as HTMLInputElement).checked;
+        if (this.checked) {
+          this.checkboxContent.add((document.getElementById('answerCheckbox' + i) as HTMLInputElement).value);
+        }
       }
     });
   }
@@ -109,14 +111,25 @@ export class DoExamComponent implements OnInit {
       };
       this.questionService.getQuestion(questionId).subscribe(question => {
         if (question.typeOfQuestion.id === 2) {
+          let count = 0;
           console.log(this.checkboxContent);
-          if (this.checked === true) {
-            answer.content = this.checkboxContent;
+          for (const checkboxAnswer of this.checkboxContent) {
+            for (const correctAnswer of listCorrectAnswer) {
+              if (checkboxAnswer === correctAnswer.content) {
+                count++;
+              }
+            }
           }
-        }
-        for (const correctAnswer of listCorrectAnswer) {
-          if (answer.content === correctAnswer.content) {
+          if (count === listCorrectAnswer.length) {
             this.numberOfCorrectQuestion++;
+          } else {
+            this.numberOfCorrectQuestion += count / listCorrectAnswer.length;
+          }
+        } else {
+          for (const correctAnswer of listCorrectAnswer) {
+            if (answer.content === correctAnswer.content) {
+              this.numberOfCorrectQuestion++;
+            }
           }
         }
         if (this.questionIndex > this.questionList.length - 1) {
