@@ -63,6 +63,7 @@ export class QuestionComponent implements OnInit {
   currentQuestionCategory: string;
   currentQuestionTypeOfQuestion: string;
   isClosed: boolean;
+  checkboxCorrectAnswerList = new Set();
 
   constructor(private questionService: QuestionService,
               private typeOfQuestionService: TypeOfQuestionService,
@@ -385,24 +386,32 @@ export class QuestionComponent implements OnInit {
           if (this.formCreateQuestionStatus) {
             const checked = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).checked;
             if (checked === true) {
-              correctAnswer.content = (document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).value;
-              this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
-                this.correctAnswerForm.reset();
-              }, error => {
-                console.log(error);
-              });
+              this.checkboxCorrectAnswerList.add((document.getElementById('correctAnswerValue_' + i) as HTMLInputElement).value);
+              for (const checkboxCorrectAnswer of this.checkboxCorrectAnswerList) {
+                correctAnswer.content = checkboxCorrectAnswer.toString();
+                this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+                  this.correctAnswerForm.reset();
+                  this.checkboxCorrectAnswerList = new Set<any>();
+                }, error => {
+                  console.log(error);
+                });
+              }
             }
           }
           if (this.formUpdateQuestionStatus) {
             this.getCorrectAnswerList(correctAnswer.question.id);
             const checked = (document.getElementById('updateCorrectAnswerValue_' + i) as HTMLInputElement).checked;
             if (checked === true) {
-              correctAnswer.content = (document.getElementById('updateCorrectAnswerValue_' + i) as HTMLInputElement).value;
-              this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
-                this.correctAnswerForm.reset();
-              }, error => {
-                console.log(error);
-              });
+              this.checkboxCorrectAnswerList.add((document.getElementById('updateCorrectAnswerValue_' + i) as HTMLInputElement).value);
+              for (const checkboxCorrectAnswer of this.checkboxCorrectAnswerList) {
+                correctAnswer.content = checkboxCorrectAnswer.toString();
+                this.correctAnswerService.createCorrectAnswer(correctAnswer).subscribe(() => {
+                  this.correctAnswerForm.reset();
+                  this.checkboxCorrectAnswerList = new Set<any>();
+                }, error => {
+                  console.log(error);
+                });
+              }
             }
           }
         }
