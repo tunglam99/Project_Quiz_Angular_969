@@ -39,9 +39,9 @@
                     <form role="form" [formGroup]="answerForm">
                       <div class="form-group" *ngFor="let answer of question.answers; index as j">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" formControlName="content"
-                                 [value]="answer.content" id="answerCheckbox{{j}}">
-                          <label for="answerCheckbox{{j}}" class="custom-control-label">{{answer.content}}</label>
+                          <input class="custom-control-input" id="answerCheckbox{{j}}"
+                                 type="checkbox" (click)="click(question.id)" [value]="answer.content">
+                          <label class="custom-control-label" for="answerCheckbox{{j}}">{{answer.content}}</label>
                         </div>
                       </div>
                     </form>

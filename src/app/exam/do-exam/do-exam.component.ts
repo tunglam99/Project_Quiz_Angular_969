@@ -32,6 +32,8 @@ export class DoExamComponent implements OnInit {
   isSubmitted: boolean;
   numberOfCorrectQuestion = 0;
   point = 0;
+  checkboxContent = '';
+  checked: boolean;
 
   constructor(private quizService: QuizService,
               private questionService: QuestionService,
@@ -86,6 +88,15 @@ export class DoExamComponent implements OnInit {
     });
   }
 
+  click(questionId) {
+    this.answerService.listAnswerByQuestion(questionId).subscribe(value => {
+      for (let i = 0; i < value.length; i++) {
+        this.checkboxContent = (document.getElementById('answerCheckbox' + i) as HTMLInputElement).value;
+        this.checked = (document.getElementById('answerCheckbox' + i) as HTMLInputElement).checked;
+      }
+    });
+  }
+
   next(questionId) {
     this.questionIndex++;
     this.correctAnswerService.listCorrectAnswerByQuestion(questionId).subscribe(listCorrectAnswer => {
@@ -96,19 +107,28 @@ export class DoExamComponent implements OnInit {
           id: questionId
         }
       };
-      for (const correctAnswer of listCorrectAnswer) {
-        if (answer.content === correctAnswer.content) {
-          this.numberOfCorrectQuestion++;
+      this.questionService.getQuestion(questionId).subscribe(question => {
+        if (question.typeOfQuestion.id === 2) {
+          console.log(this.checkboxContent);
+          if (this.checked === true) {
+            answer.content = this.checkboxContent;
+          }
         }
-      }
-      if (this.questionIndex > this.questionList.length - 1) {
-        this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-          this.quizId = +paramMap.get('id');
-          this.calculatePoint(this.quizId);
-        });
-        this.isSubmitted = true;
-        this.questionIndex = 0;
-      }
+        for (const correctAnswer of listCorrectAnswer) {
+          if (answer.content === correctAnswer.content) {
+            this.numberOfCorrectQuestion++;
+          }
+        }
+        if (this.questionIndex > this.questionList.length - 1) {
+          this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+            this.quizId = +paramMap.get('id');
+            this.calculatePoint(this.quizId);
+          });
+          this.isSubmitted = true;
+          this.questionIndex = 0;
+        }
+        this.answerForm.reset();
+      });
     });
   }
 
