@@ -32,6 +32,9 @@ export class ExamDetailComponent implements OnInit {
   examForm: FormGroup = new FormGroup({
     quiz: new FormControl()
   });
+  name: string;
+  startedDate: Date;
+  quizName: string;
 
   constructor(private quizService: QuizService,
               private examService: ExamService,
@@ -52,6 +55,15 @@ export class ExamDetailComponent implements OnInit {
   ngOnInit() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.examId = +paramMap.get('id');
+      this.examService.getExam(this.examId).subscribe(exam => {
+        this.name = exam.name;
+        this.startedDate = exam.startedDate;
+        if (exam.id !== null) {
+          this.quizService.getQuiz(exam.id).subscribe(quiz => {
+            this.quizName = quiz.name;
+          });
+        }
+      });
     });
     this.getUserList();
     this.getQuizList();
@@ -79,10 +91,16 @@ export class ExamDetailComponent implements OnInit {
             return;
           }
         }
-        this.quizService.joinQuiz(this.currentUser, this.examId).subscribe(() => {
-          this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-        });
+        this.joinQuiz(this.currentUser, this.examId);
       });
+    });
+  }
+
+  joinQuiz(currentUser, examId) {
+    this.quizService.joinQuiz(currentUser, examId).subscribe(() => {
+      this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+    }, () => {
+      this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
   }
 
