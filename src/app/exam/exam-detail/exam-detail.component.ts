@@ -58,8 +58,8 @@ export class ExamDetailComponent implements OnInit {
       this.examService.getExam(this.examId).subscribe(exam => {
         this.name = exam.name;
         this.startedDate = exam.startedDate;
-        if (exam.id !== null) {
-          this.quizService.getQuiz(exam.id).subscribe(quiz => {
+        if (exam.quiz.id !== null) {
+          this.quizService.getQuiz(exam.quiz.id).subscribe(quiz => {
             this.quizName = quiz.name;
           });
         }
