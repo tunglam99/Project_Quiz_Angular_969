@@ -16,6 +16,11 @@
             <label for="name">Tên bài thi:</label>
             <input class="form-control" type="text" formControlName="name" id="name">
           </div>
+          <div class="form-group">
+            <label for="minutes">Thời gian làm bài:</label>
+            <input class="form-control" type="number" formControlName="minutes" placeholder="thời gian (phút)"
+                   id="minutes" min="0">
+          </div>
           <br>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -41,6 +46,11 @@
             <label for="nameUpdate">Tên bài thi:</label>
             <input class="form-control" type="text" formControlName="name" [value]="name" id="nameUpdate">
           </div>
+          <div class="form-group">
+            <label for="minutesUpdate">Thời gian làm bài:</label>
+            <input class="form-control" type="number" formControlName="minutes" [value]="minutes"
+                   placeholder="thời gian (phút)" id="minutesUpdate" min="0">
+          </div>
           <br>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -65,6 +75,10 @@
           <div class="form-group">
             <label>Tên bài thi: </label>
             <span>{{currentQuiz.name}}</span>
+          </div>
+          <div class="form-group">
+            <label>Thời gian làm bài: </label>
+            <span>{{currentQuiz.minutes}} phút</span>
           </div>
           <br>
           <div class="modal-footer">

@@ -18,13 +18,13 @@ const NOTIFICATION = 'Thông báo';
 export class QuizComponent implements OnInit {
   quizList: Quiz[];
   quizForm: FormGroup = new FormGroup({
-      name: new FormControl('')
+      name: new FormControl(''),
+      minutes: new FormControl('')
     }
   );
   currentQuiz: Quiz;
-  isEnableShowStartedDate: boolean;
-  isEnableShowEndedDate: boolean;
   name: string;
+  minutes: number;
 
   constructor(private quizService: QuizService,
               private modalService: NgbModal,
@@ -65,6 +65,7 @@ export class QuizComponent implements OnInit {
     const quiz: Quiz = {
       id: this.quizForm.value.id,
       name: this.quizForm.value.name,
+      minutes: this.quizForm.value.minutes
     };
     this.quizService.createQuiz(quiz).subscribe(() => {
       this.quizForm.reset();
@@ -81,6 +82,7 @@ export class QuizComponent implements OnInit {
     const quiz: Quiz = {
       id: this.currentQuiz.id,
       name: this.quizForm.value.name === null ? this.currentQuiz.name : this.quizForm.value.name,
+      minutes: this.quizForm.value.minutes === null ? this.currentQuiz.minutes : this.quizForm.value.minutes
     };
     this.quizService.updateQuiz(id, quiz).subscribe(() => {
       this.quizForm.reset();
