@@ -4,7 +4,7 @@ export interface Exam {
   id: number;
   name: string;
   startedDate: Date;
-  minutes: Date;
+  minutes: number;
   participants?: [User];
   quiz?: any;
 }

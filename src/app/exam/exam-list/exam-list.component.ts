@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Quiz} from '../../model/quiz';
 import {FormControl, FormGroup} from '@angular/forms';
-import {QuizService} from '../../service/quiz.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NotificationService} from '../../service/notification.service';
 import {Sort} from '@angular/material';
@@ -30,7 +28,7 @@ export class ExamListComponent implements OnInit {
   isEnableShowEndedDate: boolean;
   name: string;
   startedDate: Date;
-  minutes: Date;
+  minutes: number;
 
   constructor(private examService: ExamService,
               private modalService: NgbModal,

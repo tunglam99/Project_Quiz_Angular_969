@@ -6,9 +6,10 @@ import {QuizModule} from './quiz.module';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminAuthGuard} from '../helper/admin-auth-guard';
 import {ExamListComponent} from '../exam/exam-list/exam-list.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {MatSortModule} from '@angular/material';
+import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -48,7 +49,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     DlDateTimePickerModule,
     MatSortModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgbTimepickerModule,
+    FormsModule
   ]
 })
 export class AdminModule {
