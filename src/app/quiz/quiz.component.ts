@@ -18,23 +18,17 @@ const NOTIFICATION = 'Thông báo';
 export class QuizComponent implements OnInit {
   quizList: Quiz[];
   quizForm: FormGroup = new FormGroup({
-      name: new FormControl(''),
-      startedDate: new FormControl(''),
-      endedDate: new FormControl('')
+      name: new FormControl('')
     }
   );
   currentQuiz: Quiz;
   isEnableShowStartedDate: boolean;
   isEnableShowEndedDate: boolean;
   name: string;
-  startedDate: Date;
-  endedDate: Date;
 
   constructor(private quizService: QuizService,
               private modalService: NgbModal,
               private notificationService: NotificationService) {
-    this.isEnableShowEndedDate = false;
-    this.isEnableShowStartedDate = false;
   }
 
   ngOnInit() {
@@ -62,8 +56,6 @@ export class QuizComponent implements OnInit {
     this.quizService.getQuiz(id).subscribe(result => {
       this.currentQuiz = result;
       this.name = this.currentQuiz.name;
-      this.startedDate = this.currentQuiz.startedDate;
-      this.endedDate = this.currentQuiz.endedDate;
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
@@ -73,15 +65,12 @@ export class QuizComponent implements OnInit {
     const quiz: Quiz = {
       id: this.quizForm.value.id,
       name: this.quizForm.value.name,
-      startedDate: this.quizForm.value.startedDate,
-      endedDate: this.quizForm.value.endedDate
     };
     this.quizService.createQuiz(quiz).subscribe(() => {
       this.quizForm.reset();
       this.quizList.push(quiz);
       this.getQuizList();
       this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-      this.changeShowDatePickerStatusToFalse();
       this.close();
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
@@ -92,14 +81,11 @@ export class QuizComponent implements OnInit {
     const quiz: Quiz = {
       id: this.currentQuiz.id,
       name: this.quizForm.value.name === null ? this.currentQuiz.name : this.quizForm.value.name,
-      startedDate: this.quizForm.value.startedDate === null ? this.currentQuiz.startedDate : this.quizForm.value.startedDate,
-      endedDate: this.quizForm.value.endedDate === null ? this.currentQuiz.endedDate : this.quizForm.value.endedDate
     };
     this.quizService.updateQuiz(id, quiz).subscribe(() => {
       this.quizForm.reset();
       this.getQuizList();
       this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
-      this.changeShowDatePickerStatusToFalse();
       this.close();
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
@@ -124,21 +110,6 @@ export class QuizComponent implements OnInit {
   showDeleteQuizForm(id: number, content) {
     this.getQuizDetail(id);
     this.openVerticallyCentered(content);
-  }
-
-  changeShowDatePickerStartStatus() {
-    this.isEnableShowStartedDate = !this.isEnableShowStartedDate;
-    this.isEnableShowEndedDate = !this.isEnableShowStartedDate;
-  }
-
-  changeShowDatePickerEndStatus() {
-    this.isEnableShowEndedDate = !this.isEnableShowEndedDate;
-    this.isEnableShowStartedDate = !this.isEnableShowEndedDate;
-  }
-
-  changeShowDatePickerStatusToFalse() {
-    this.isEnableShowStartedDate = false;
-    this.isEnableShowEndedDate = false;
   }
 
   sortQuiz(sort: Sort) {
