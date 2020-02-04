@@ -21,9 +21,9 @@
           Câu hỏi</a>
       </li>
       <li class="nav-item" *ngIf="hasRoleAdmin">
-        <a class="nav-link" routerLink="/admin/quiz-management">
+        <a class="nav-link" routerLink="/admin/exam-management">
           <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
-          Đề thi</a>
+          Đợt thi</a>
       </li>
       <li class="nav-item" *ngIf="!hasRoleAdmin">
         <a class="nav-link" routerLink="/user/exam">

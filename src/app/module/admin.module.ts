@@ -5,6 +5,10 @@ import {QuestionModule} from './question.module';
 import {QuizModule} from './quiz.module';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminAuthGuard} from '../helper/admin-auth-guard';
+import {ExamListComponent} from '../exam/exam-list/exam-list.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
+import {MatSortModule} from '@angular/material';
 
 const routes: Routes = [
   {
@@ -24,16 +28,26 @@ const routes: Routes = [
     canActivate: [AdminAuthGuard],
     canActivateChild: [AdminAuthGuard],
     loadChildren: () => import('./category.module').then(mod => mod.CategoryModule)
+  },
+  {
+    path: 'exam-management',
+    component: ExamListComponent,
+    canActivate: [AdminAuthGuard]
   }
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ExamListComponent
+  ],
   imports: [
     CommonModule,
     CategoryModule,
     QuestionModule,
     QuizModule,
+    ReactiveFormsModule,
+    DlDateTimePickerModule,
+    MatSortModule,
     RouterModule.forChild(routes)
   ]
 })
