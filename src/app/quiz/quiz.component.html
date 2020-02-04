@@ -110,6 +110,7 @@
           <tr>
             <th mat-sort-header="id" style="width: 10px">#</th>
             <th mat-sort-header="name">Tên đề thi</th>
+            <th>Thời gian làm bài</th>
             <th></th>
           </tr>
           </thead>
@@ -117,6 +118,7 @@
           <tr *ngFor="let quiz of quizList">
             <td>{{quiz.id}}</td>
             <td><a [routerLink]="['detail-quiz',quiz.id]">{{quiz.name}}</a></td>
+            <td>{{quiz.minutes}} phút</td>
             <td>
               <div class="float-lg-right" style="float: none;">
                 <button type="button" class="btn btn-xs btn-primary" style="float: none;margin: 5px;"
