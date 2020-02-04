@@ -27,7 +27,6 @@ export class ExamListComponent implements OnInit {
   isEnableShowStartedDate: boolean;
   name: string;
   startedDate: Date;
-  minutes: number;
 
   constructor(private examService: ExamService,
               private modalService: NgbModal,
@@ -61,7 +60,6 @@ export class ExamListComponent implements OnInit {
       this.currentExam = result;
       this.name = this.currentExam.name;
       this.startedDate = this.currentExam.startedDate;
-      this.minutes = this.currentExam.minutes;
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
     });
@@ -72,7 +70,6 @@ export class ExamListComponent implements OnInit {
       id: this.examForm.value.id,
       name: this.examForm.value.name,
       startedDate: this.examForm.value.startedDate,
-      minutes: this.examForm.value.minutes
     };
     this.examService.createExam(exam).subscribe(() => {
       this.examForm.reset();
@@ -91,7 +88,6 @@ export class ExamListComponent implements OnInit {
       id: this.currentExam.id,
       name: this.examForm.value.name === null ? this.currentExam.name : this.examForm.value.name,
       startedDate: this.examForm.value.startedDate === null ? this.currentExam.startedDate : this.examForm.value.startedDate,
-      minutes: this.examForm.value.minutes === null ? this.currentExam.minutes : this.examForm.value.minutes
     };
     this.examService.updateExam(id, exam).subscribe(() => {
       this.examForm.reset();
@@ -146,7 +142,6 @@ export class ExamListComponent implements OnInit {
         }
         case 'name': {
           return compare(a.name, b.name, isAsc);
-
         }
         default: {
           return 0;

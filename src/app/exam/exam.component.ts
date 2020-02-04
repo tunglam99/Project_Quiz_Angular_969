@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {QuizService} from '../service/quiz.service';
-import {Quiz} from '../model/quiz';
 import {AuthenticationService} from '../service/authentication.service';
 import {UserToken} from '../model/user-token';
+import {Exam} from '../model/exam';
+import {ExamService} from '../service/exam.service';
 
 @Component({
   selector: 'app-exam',
@@ -10,11 +10,11 @@ import {UserToken} from '../model/user-token';
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-  quizList: Quiz[] = [];
+  examList: Exam[] = [];
   currentUser: UserToken;
-  quizListByUser: Quiz[] = [];
+  examListByUser: Exam[] = [];
 
-  constructor(private quizService: QuizService,
+  constructor(private examService: ExamService,
               private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(value => {
       this.currentUser = value;
@@ -26,12 +26,12 @@ export class ExamComponent implements OnInit {
   }
 
   getQuizList() {
-    this.quizService.listQuiz().subscribe(result => {
-      this.quizList = result;
-      for (const quiz of this.quizList) {
-        for (const user of quiz.participants) {
+    this.examService.listExam().subscribe(result => {
+      this.examList = result;
+      for (const exam of this.examList) {
+        for (const user of exam.participants) {
           if (user.id === this.currentUser.id) {
-            this.quizListByUser.push(quiz);
+            this.examListByUser.push(exam);
           }
         }
       }

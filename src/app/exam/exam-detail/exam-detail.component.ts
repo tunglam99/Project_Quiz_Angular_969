@@ -91,7 +91,6 @@ export class ExamDetailComponent implements OnInit {
       const exam: Exam = {
         id: value.id,
         name: value.name,
-        minutes: value.minutes,
         participants: value.participants,
         startedDate: value.startedDate,
         quiz: {
