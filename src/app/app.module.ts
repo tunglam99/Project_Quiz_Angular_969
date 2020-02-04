@@ -21,7 +21,6 @@ import {environment} from '../environments/environment';
 import {ToastrModule} from 'ngx-toastr';
 import {RecoverPasswordComponent} from './user/recover-password/recover-password.component';
 import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angularx-social-login';
-import { CategoryDetailComponent } from './category/category-detail/category-detail.component';
 import {MatSortModule} from '@angular/material';
 
 const config = new AuthServiceConfig([
