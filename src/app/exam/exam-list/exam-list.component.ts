@@ -25,7 +25,6 @@ export class ExamListComponent implements OnInit {
   );
   currentExam: Exam;
   isEnableShowStartedDate: boolean;
-  isEnableShowEndedDate: boolean;
   name: string;
   startedDate: Date;
   minutes: number;
@@ -33,7 +32,6 @@ export class ExamListComponent implements OnInit {
   constructor(private examService: ExamService,
               private modalService: NgbModal,
               private notificationService: NotificationService) {
-    this.isEnableShowEndedDate = false;
     this.isEnableShowStartedDate = false;
   }
 
@@ -128,17 +126,10 @@ export class ExamListComponent implements OnInit {
 
   changeShowDatePickerStartStatus() {
     this.isEnableShowStartedDate = !this.isEnableShowStartedDate;
-    this.isEnableShowEndedDate = !this.isEnableShowStartedDate;
-  }
-
-  changeShowDatePickerEndStatus() {
-    this.isEnableShowEndedDate = !this.isEnableShowEndedDate;
-    this.isEnableShowStartedDate = !this.isEnableShowEndedDate;
   }
 
   changeShowDatePickerStatusToFalse() {
     this.isEnableShowStartedDate = false;
-    this.isEnableShowEndedDate = false;
   }
 
   sortExam(sort: Sort) {

@@ -85,13 +85,10 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
               </div>
-              <input type="text" class="form-control float-right" placeholder="mm/dd/yyyy"
-                     [value]="minutes" (click)="changeShowDatePickerEndStatus()">
+              <input type="text" class="form-control float-right" placeholder="thời gian làm bài (phút)"
+                     [value]="minutes" formControlName="minutes">
             </div>
           </div>
-          <dl-date-time-picker *ngIf="isEnableShowEndedDate" startView="day" maxView="year" minView="minute"
-                               minuteStep="5" formControlName="endedDate">
-          </dl-date-time-picker>
           <br>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary waves-effect waves-light">
