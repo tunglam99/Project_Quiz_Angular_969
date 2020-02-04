@@ -16,6 +16,7 @@ export class CategoryDetailComponent implements OnInit {
   sub: Subscription;
   currentCategory: Category;
   questionList: Question[] = [];
+  name: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private categoryService: CategoryService,
@@ -24,6 +25,7 @@ export class CategoryDetailComponent implements OnInit {
       const id = +paramMap.get('id');
       this.categoryService.getCategory(id).subscribe(result => {
         this.currentCategory = result;
+        this.name = result.name;
         this.questionService.findAllQuestionByCategory(this.currentCategory.name).subscribe(value => {
           this.questionList = value;
         });
