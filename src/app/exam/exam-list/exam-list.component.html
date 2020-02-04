@@ -150,7 +150,7 @@
           <tbody>
           <tr *ngFor="let exam of examList">
             <td>{{exam.id}}</td>
-            <td>{{exam.name}}</td>
+            <td><a [routerLink]="['exam-detail',exam.id]">{{exam.name}}</a></td>
             <td>
               <div class="float-lg-right" style="float: none;">
                 <button type="button" class="btn btn-xs btn-primary" style="float: none;margin: 5px;"

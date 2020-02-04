@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {MatSortModule} from '@angular/material';
 import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import {ExamDetailComponent} from '../exam/exam-detail/exam-detail.component';
 
 const routes: Routes = [
   {
@@ -34,12 +35,18 @@ const routes: Routes = [
     path: 'exam-management',
     component: ExamListComponent,
     canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'exam-management/exam-detail/:id',
+    component: ExamDetailComponent,
+    canActivate: [AdminAuthGuard]
   }
 ];
 
 @NgModule({
   declarations: [
-    ExamListComponent
+    ExamListComponent,
+    ExamDetailComponent,
   ],
   imports: [
     CommonModule,
