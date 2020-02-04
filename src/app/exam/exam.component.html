@@ -1,7 +1,7 @@
 <div class="mt-lg-4">
   <div class="card">
     <div class="card-header">
-      <span>Danh sách đề thi</span>
+      <span>Danh sách đợt thi</span>
     </div>
     <div class="card-block">
       <div class="table-responsive">
@@ -9,19 +9,17 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Tên đề thi</th>
+            <th>Tên đợt thi</th>
             <th>Ngày bắt đầu</th>
-            <th>Ngày kết thúc</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let quiz of quizListByUser">
-            <th scope="row">{{quiz.id}}</th>
+          <tr *ngFor="let exam of examListByUser">
+            <th scope="row">{{exam.id}}</th>
             <td class="tabledit-view-mode">
-              <a [routerLink]="['do-exam',quiz.id]" class="tabledit-span">{{quiz.name}}</a>
+              <a [routerLink]="['do-exam',exam.id]" class="tabledit-span">{{exam.name}}</a>
             </td>
-            <td>{{quiz.startedDate}}</td>
-            <td>{{quiz.endedDate}}</td>
+            <td>{{exam.startedDate}}</td>
           </tr>
           </tbody>
         </table>
