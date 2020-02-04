@@ -9,7 +9,7 @@ import {ExamListComponent} from '../exam/exam-list/exam-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {MatSortModule} from '@angular/material';
-import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbPopoverModule, NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {ExamDetailComponent} from '../exam/exam-detail/exam-detail.component';
 
 const routes: Routes = [
@@ -48,18 +48,19 @@ const routes: Routes = [
     ExamListComponent,
     ExamDetailComponent,
   ],
-  imports: [
-    CommonModule,
-    CategoryModule,
-    QuestionModule,
-    QuizModule,
-    ReactiveFormsModule,
-    DlDateTimePickerModule,
-    MatSortModule,
-    RouterModule.forChild(routes),
-    NgbTimepickerModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        CategoryModule,
+        QuestionModule,
+        QuizModule,
+        ReactiveFormsModule,
+        DlDateTimePickerModule,
+        MatSortModule,
+        RouterModule.forChild(routes),
+        NgbTimepickerModule,
+        FormsModule,
+        NgbPopoverModule
+    ]
 })
 export class AdminModule {
 }

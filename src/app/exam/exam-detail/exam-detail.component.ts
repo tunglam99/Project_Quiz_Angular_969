@@ -8,7 +8,7 @@ import {QuestionService} from '../../service/question.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {NotificationService} from '../../service/notification.service';
 import {UserService} from '../../service/user.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import {Exam} from '../../model/exam';
 import {ExamService} from '../../service/exam.service';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -34,14 +34,19 @@ export class ExamDetailComponent implements OnInit {
   });
   name: string;
   startedDate: Date;
+  participants: any[] = [];
   quizName: string;
+  quizMinutes: number;
 
   constructor(private quizService: QuizService,
               private examService: ExamService,
               private activatedRoute: ActivatedRoute,
               private notificationService: NotificationService,
               private userService: UserService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private config: NgbPopoverConfig) {
+    config.placement = 'right';
+    config.triggers = 'hover';
   }
 
   openVerticallyCentered(content) {
@@ -58,9 +63,11 @@ export class ExamDetailComponent implements OnInit {
       this.examService.getExam(this.examId).subscribe(exam => {
         this.name = exam.name;
         this.startedDate = exam.startedDate;
+        this.participants = exam.participants;
         if (exam.quiz.id !== null) {
           this.quizService.getQuiz(exam.quiz.id).subscribe(quiz => {
             this.quizName = quiz.name;
+            this.quizMinutes = quiz.minutes;
           });
         }
       });
