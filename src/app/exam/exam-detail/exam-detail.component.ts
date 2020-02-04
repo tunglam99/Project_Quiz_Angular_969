@@ -11,6 +11,7 @@ import {UserService} from '../../service/user.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Exam} from '../../model/exam';
 import {ExamService} from '../../service/exam.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 const FAIL = 'Có lỗi xảy ra trong quá trình thực hiện';
 const SUCCESS = 'Thành công';
@@ -27,6 +28,10 @@ export class ExamDetailComponent implements OnInit {
   userList: User[];
   currentExam: Exam;
   currentUser: User;
+  quizList: Quiz[];
+  examForm: FormGroup = new FormGroup({
+    quiz: new FormControl()
+  });
 
   constructor(private quizService: QuizService,
               private examService: ExamService,
@@ -49,6 +54,13 @@ export class ExamDetailComponent implements OnInit {
       this.examId = +paramMap.get('id');
     });
     this.getUserList();
+    this.getQuizList();
+  }
+
+  getQuizList() {
+    this.quizService.listQuiz().subscribe(value => {
+      this.quizList = value;
+    });
   }
 
   getUserList() {
@@ -74,4 +86,24 @@ export class ExamDetailComponent implements OnInit {
     });
   }
 
+  addQuizToExam(examId) {
+    this.examService.getExam(examId).subscribe(value => {
+      const exam: Exam = {
+        id: value.id,
+        name: value.name,
+        minutes: value.minutes,
+        participants: value.participants,
+        startedDate: value.startedDate,
+        quiz: {
+          id: this.examForm.value.quiz
+        }
+      };
+      this.examService.updateExam(examId, exam).subscribe(() => {
+        this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+      }, () => {
+        this.notificationService.showError('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
+      });
+    });
+    this.close();
+  }
 }

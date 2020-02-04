@@ -27,6 +27,32 @@
       </div>
     </ng-template>
   </div>
+  <div class="mt-lg-4">
+    <ng-template #addQuizForm let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title1">Chọn bài thi</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="examForm" (ngSubmit)="addQuizToExam(currentExam.id)">
+        <div class="modal-body">
+          <div class="form-group" *ngFor="let quiz of quizList">
+            <div class="custom-control custom-radio">
+              <input class="custom-control-input" type="radio" id="customRadio1">
+              <label for="customRadio1" class="custom-control-label">{{quiz.name}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary waves-effect waves-light">
+            <i class="fa fa-save fa-lg"></i>
+            Lưu
+          </button>
+        </div>
+      </form>
+    </ng-template>
+  </div>
   <div class="card">
     <div class="card-header">
       <div class="card-title">
@@ -37,12 +63,13 @@
         </button>
       </div>
       <br>
-      <a routerLink="add-question-to-quiz">
-        <button type="button"
-                class="btn btn-xs btn-primary float-lg-right">
-          <span class="fa fa-plus"></span>
-        </button>
-      </a>
+      <button type="button"
+              class="btn btn-xs btn-primary float-lg-right" (click)="openVerticallyCentered(addQuizForm)">
+        <span class="fa fa-plus"></span>
+      </button>
+    </div>
+    <div>
+
     </div>
   </div>
 </div>
