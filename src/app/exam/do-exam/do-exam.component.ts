@@ -11,6 +11,9 @@ import {NotificationService} from '../../service/notification.service';
 import {CorrectAnswerService} from '../../service/correct-answer.service';
 import {ExamService} from '../../service/exam.service';
 import {CountdownComponent} from 'ngx-countdown';
+import {Result} from '../../model/result';
+import {AuthenticationService} from '../../service/authentication.service';
+import {ResultService} from '../../service/result.service';
 
 declare var $;
 
@@ -40,6 +43,7 @@ export class DoExamComponent implements OnInit {
   point = 0;
   checkboxContent = new Set();
   checked: boolean;
+  currentUser: any;
 
   constructor(private quizService: QuizService,
               private examService: ExamService,
@@ -48,7 +52,9 @@ export class DoExamComponent implements OnInit {
               private correctAnswerService: CorrectAnswerService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private authenticationService: AuthenticationService,
+              private resultService: ResultService) {
     this.isSubmitted = false;
   }
 
@@ -126,7 +132,6 @@ export class DoExamComponent implements OnInit {
       this.questionService.getQuestion(questionId).subscribe(question => {
         if (question.typeOfQuestion.id === 2) {
           let count = 0;
-          console.log(this.checkboxContent);
           for (const checkboxAnswer of this.checkboxContent) {
             for (const correctAnswer of listCorrectAnswer) {
               if (checkboxAnswer === correctAnswer.content) {
@@ -162,9 +167,27 @@ export class DoExamComponent implements OnInit {
   }
 
   calculatePoint(quizId: number) {
-    this.questionService.findAllQuestionByQuiz(quizId).subscribe(result => {
-      this.questionList = result;
+    this.questionService.findAllQuestionByQuiz(quizId).subscribe(questionList => {
+      this.questionList = questionList;
       this.point += this.numberOfCorrectQuestion / this.questionList.length * 10;
+      this.authenticationService.currentUser.subscribe(user => {
+        this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+          this.examId = +paramMap.get('id');
+          this.currentUser = user;
+          const result: Result = {
+            point: this.point,
+            user: {
+              id: this.currentUser.id
+            },
+            exam: {
+              id: this.examId
+            }
+          };
+          this.resultService.createResult(result).subscribe(() => {
+          }, () => {
+          });
+        });
+      });
     });
   }
 

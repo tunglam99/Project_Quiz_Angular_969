@@ -19,18 +19,10 @@ export class ResultService {
   }
 
   createResult(result: Result): Observable<Result> {
-    return this.http.post<Result>(API_URL + '/results', result);
-  }
-
-  updateResult(id: number, result: Result): Observable<Result> {
-    return this.http.put<Result>(API_URL + '/results', result);
+    return this.http.post<Result>(API_URL + `/results`, result);
   }
 
   getResult(id: number): Observable<Result> {
-    return this.http.get<Result>(API_URL + '/results');
-  }
-
-  deleteResult(id: number): Observable<Result> {
-    return this.http.delete<Result>(API_URL + '/results');
+    return this.http.get<Result>(API_URL + `/results/${id}`);
   }
 }
