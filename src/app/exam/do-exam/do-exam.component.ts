@@ -148,12 +148,7 @@ export class DoExamComponent implements OnInit {
         }
         if (this.questionIndex > this.questionList.length - 1) {
           this.counter.pause();
-          this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-            this.examId = +paramMap.get('id');
-            this.examService.getExam(this.examId).subscribe(exam => {
-              this.calculatePoint(exam.quiz.id);
-            });
-          });
+          this.getExam();
           this.isSubmitted = true;
           this.questionIndex = 0;
         }
@@ -175,16 +170,20 @@ export class DoExamComponent implements OnInit {
 
   onTimerFinished($event) {
     if ($event.left === 0) {
-      alert('Đã hết thời gian làm bài')
+      alert('Đã hết thời gian làm bài');
       this.questionIndex = this.questionList.length;
-      this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-        this.examId = +paramMap.get('id');
-        this.examService.getExam(this.examId).subscribe(exam => {
-          this.calculatePoint(exam.quiz.id);
-        });
-      });
+      this.getExam();
       this.isSubmitted = true;
       this.questionIndex = 0;
     }
+  }
+
+  getExam() {
+    this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.examId = +paramMap.get('id');
+      this.examService.getExam(this.examId).subscribe(exam => {
+        this.calculatePoint(exam.quiz.id);
+      });
+    });
   }
 }
