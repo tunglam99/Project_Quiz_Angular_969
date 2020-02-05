@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Question} from '../../model/question';
 import {Subscription} from 'rxjs';
 import {QuizService} from '../../service/quiz.service';
@@ -10,6 +10,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {NotificationService} from '../../service/notification.service';
 import {CorrectAnswerService} from '../../service/correct-answer.service';
 import {ExamService} from '../../service/exam.service';
+import {CountdownComponent} from 'ngx-countdown';
 
 declare var $;
 
@@ -19,6 +20,7 @@ declare var $;
   styleUrls: ['./do-exam.component.css']
 })
 export class DoExamComponent implements OnInit {
+  @ViewChild('countdown', {static: false}) counter: CountdownComponent;
   questionList: Question[] = [];
   answerList: Answer[] = [];
   quizId: number;
@@ -26,6 +28,7 @@ export class DoExamComponent implements OnInit {
   sub: Subscription;
   quizName: string;
   examName: string;
+  minutes: number;
   answerForm: FormGroup = new FormGroup({
     content: new FormControl(''),
     question: new FormControl('')
@@ -62,6 +65,7 @@ export class DoExamComponent implements OnInit {
         this.quizService.getQuiz(exam.quiz.id).subscribe(quiz => {
           this.quizName = quiz.name;
           this.quizId = quiz.id;
+          this.minutes = quiz.minutes;
           this.getQuestionListByQuiz(quiz.id);
           this.doExam(this.examId);
         });
@@ -143,6 +147,7 @@ export class DoExamComponent implements OnInit {
           }
         }
         if (this.questionIndex > this.questionList.length - 1) {
+          this.counter.pause();
           this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
             this.examId = +paramMap.get('id');
             this.examService.getExam(this.examId).subscribe(exam => {
@@ -166,5 +171,20 @@ export class DoExamComponent implements OnInit {
       this.questionList = result;
       this.point += this.numberOfCorrectQuestion / this.questionList.length * 10;
     });
+  }
+
+  onTimerFinished($event) {
+    if ($event.left === 0) {
+      alert('Đã hết thời gian làm bài')
+      this.questionIndex = this.questionList.length;
+      this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+        this.examId = +paramMap.get('id');
+        this.examService.getExam(this.examId).subscribe(exam => {
+          this.calculatePoint(exam.quiz.id);
+        });
+      });
+      this.isSubmitted = true;
+      this.questionIndex = 0;
+    }
   }
 }

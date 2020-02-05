@@ -8,7 +8,15 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1>Đợt thi {{examName}}</h1>
-              <h2>Đề thi {{quizName}}</h2>
+              <br>
+              <h4>Đề thi {{quizName}}</h4>
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+              <br>
+              <h2>
+                <countdown #countdown [config]="{leftTime: minutes*60}" (event)="onTimerFinished($event)">$!m!:$!s!</countdown>
+              </h2>
             </div>
           </div>
         </div>

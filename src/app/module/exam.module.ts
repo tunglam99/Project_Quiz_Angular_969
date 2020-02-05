@@ -7,6 +7,7 @@ import {DoExamComponent} from '../exam/do-exam/do-exam.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {MatSortModule} from '@angular/material';
+import {CountdownModule} from 'ngx-countdown';
 
 const routing: Routes = [{
   path: '',
@@ -28,7 +29,8 @@ const routing: Routes = [{
     RouterModule.forChild(routing),
     ReactiveFormsModule,
     DlDateTimePickerModule,
-    MatSortModule
+    MatSortModule,
+    CountdownModule
   ]
 })
 export class ExamModule {
