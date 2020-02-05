@@ -7,8 +7,9 @@ import {AuthenticationService} from '../service/authentication.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TutorAuthGuard implements CanActivate, CanActivateChild, CanLoad{
+export class TutorAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   currentUser: UserToken;
+
   constructor(private router: Router,
               private userService: UserService,
               private authService: AuthenticationService) {
@@ -33,15 +34,16 @@ export class TutorAuthGuard implements CanActivate, CanActivateChild, CanLoad{
         return true;
       } else {
         this.authService.logout();
-        this.router.navigate(['/', 'tutor'], { queryParams: {login: true}, queryParamsHandling: 'merge' } );
+        this.router.navigate(['/', 'tutor'], {queryParams: {login: true}, queryParamsHandling: 'merge'});
         return false;
       }
     } else {
       // not logged in so redirect to login page with the return url
-      this.router.navigate(['/', 'tutor', 'login'], { queryParams: { returnUrl: state.url } });
+      this.router.navigate(['/', 'tutor', 'login'], {queryParams: {returnUrl: state.url}});
       return false;
     }
   }
+
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.currentUser) {
       const roleList = this.currentUser.roles;
@@ -55,10 +57,11 @@ export class TutorAuthGuard implements CanActivate, CanActivateChild, CanLoad{
       return hasRoleTutor;
     } else {
       // not logged in so redirect to login page with the return url
-      this.router.navigate(['/', 'tutor', 'login'], { queryParams: { returnUrl: state.url } });
+      this.router.navigate(['/', 'tutor', 'login'], {queryParams: {returnUrl: state.url}});
       return false;
     }
   }
+
   canLoad(route: Route, segments: UrlSegment[]) {
     return true;
   }

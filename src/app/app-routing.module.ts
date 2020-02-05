@@ -23,7 +23,7 @@ const routes: Routes = [{
 }, {
   path: 'forgot-password',
   component: ForgotPasswordComponent
-},{
+}, {
   path: 'recover-password',
   component: RecoverPasswordComponent
 }, {
@@ -35,6 +35,9 @@ const routes: Routes = [{
 }, {
   path: 'user',
   loadChildren: () => import('./module/user.module').then(mod => mod.UserModule)
+}, {
+  path: 'tutor',
+  loadChildren: () => import('./module/tutor.module').then(mod => mod.TutorModule)
 }, {
   path: '**',
   redirectTo: ''

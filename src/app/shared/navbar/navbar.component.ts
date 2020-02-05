@@ -17,6 +17,8 @@ export class NavbarComponent {
   quizIcon = faSpellCheck;
   updateUserIcon = faUserEdit;
   hasRoleAdmin = false;
+  hasRoleTutor = false;
+  hasRoleUser = false;
   user: User;
   avatarUserUrl: string;
 
@@ -30,7 +32,10 @@ export class NavbarComponent {
       for (const role of roleList) {
         if (role.authority === 'ROLE_ADMIN') {
           this.hasRoleAdmin = true;
-          break;
+        } else if (role.authority === 'ROLE_TUTOR') {
+          this.hasRoleTutor = true;
+        } else {
+          this.hasRoleUser = true;
         }
       }
       this.userService.getUserProfile(this.currentUser.id + '').subscribe(value => {

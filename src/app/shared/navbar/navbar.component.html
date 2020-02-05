@@ -10,18 +10,18 @@
 <!--          <i class="fa fa-home fa-lg"></i>-->
 <!--          Trang chủ<span class="sr-only">(current)</span></a>-->
 <!--      </li>-->
-      <li class="nav-item mr-sm-3" *ngIf="hasRoleAdmin">
-        <a class="nav-link" routerLink="/admin/category-management">
+      <li class="nav-item mr-sm-3" *ngIf="hasRoleTutor">
+        <a class="nav-link" routerLink="/tutor/category-management">
           <i class="fa fa-list"></i>
           Danh mục</a>
       </li>
-      <li class="nav-item mr-sm-3" *ngIf="hasRoleAdmin">
-        <a class="nav-link" routerLink="/admin/question-management">
+      <li class="nav-item mr-sm-3" *ngIf="hasRoleTutor">
+        <a class="nav-link" routerLink="/tutor/question-management">
           <i class="fa fa-question fa-lg"></i>
           Câu hỏi</a>
       </li>
-      <li class="nav-item mr-sm-3" *ngIf="hasRoleAdmin">
-        <a class="nav-link" routerLink="/admin/quiz-management">
+      <li class="nav-item mr-sm-3" *ngIf="hasRoleTutor">
+        <a class="nav-link" routerLink="/tutor/quiz-management">
           <i class="fa fa-book fa-lg"></i>
           Đề thi</a>
       </li>
@@ -30,7 +30,7 @@
           <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
           Đợt thi</a>
       </li>
-      <li class="nav-item" *ngIf="!hasRoleAdmin">
+      <li class="nav-item" *ngIf="hasRoleUser">
         <a class="nav-link" routerLink="/user/exam">
           <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
           Vào thi</a>

@@ -6,17 +6,17 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSortModule} from '@angular/material';
-import {AdminAuthGuard} from '../helper/admin-auth-guard';
 import {CategoryDetailComponent} from '../category/category-detail/category-detail.component';
+import {TutorAuthGuard} from '../helper/tutor-auth-guard';
 
 const routing: Routes = [{
   path: '',
   component: CategoryListComponent,
-  canActivate: [AdminAuthGuard]
+  canActivate: [TutorAuthGuard]
 }, {
   path: 'category-detail/:id',
   component: CategoryDetailComponent,
-  canActivate: [AdminAuthGuard]
+  canActivate: [TutorAuthGuard]
 }];
 
 @NgModule({

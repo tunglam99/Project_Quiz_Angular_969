@@ -9,20 +9,20 @@ import {QuizDetailComponent} from '../quiz/quiz-detail/quiz-detail.component';
 import {AddQuestionToQuizComponent} from '../quiz/add-question-to-quiz/add-question-to-quiz.component';
 import {MatSortModule} from '@angular/material';
 import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
-import {AdminAuthGuard} from '../helper/admin-auth-guard';
+import {TutorAuthGuard} from '../helper/tutor-auth-guard';
 
 const routing: Routes = [{
   path: '',
   component: QuizComponent,
-  canActivate: [AdminAuthGuard]
+  canActivate: [TutorAuthGuard]
 }, {
   path: 'detail-quiz/:id',
   component: QuizDetailComponent,
-  canActivate: [AdminAuthGuard]
+  canActivate: [TutorAuthGuard]
 }, {
   path: 'detail-quiz/:id/add-question-to-quiz',
   component: AddQuestionToQuizComponent,
-  canActivate: [AdminAuthGuard]
+  canActivate: [TutorAuthGuard]
 }];
 
 @NgModule({

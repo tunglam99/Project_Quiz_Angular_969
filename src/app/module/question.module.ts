@@ -7,12 +7,12 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {RichTextEditorAllModule} from '@syncfusion/ej2-angular-richtexteditor';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSortModule} from '@angular/material';
-import {AdminAuthGuard} from '../helper/admin-auth-guard';
+import {TutorAuthGuard} from '../helper/tutor-auth-guard';
 
 const routing: Routes = [{
   path: '',
   component: QuestionComponent,
-  canActivate: [AdminAuthGuard]
+  canActivate: [TutorAuthGuard]
 }];
 
 @NgModule({
