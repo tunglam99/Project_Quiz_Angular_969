@@ -1,7 +1,9 @@
+<br>
+<br>
 <div class="mt-lg-4 container">
   <div class="card">
     <div class="card-header">
-      <span>Danh sách đợt thi</span>
+      <span>Kết quả các đợt thi</span>
     </div>
     <div class="card-block">
       <div class="table-responsive">
@@ -10,16 +12,14 @@
           <tr>
             <th>#</th>
             <th>Tên đợt thi</th>
-            <th>Ngày bắt đầu</th>
+            <th>Điểm</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let exam of examListByUser">
-            <th scope="row">{{exam.id}}</th>
-            <td class="tabledit-view-mode">
-              <a [routerLink]="['do-exam',exam.id]" class="tabledit-span">{{exam.name}}</a>
-            </td>
-            <td>{{exam.startedDate}}</td>
+          <tr *ngFor="let result of resultList">
+            <th scope="row">{{result.id}}</th>
+            <td class="tabledit-view-mode">{{result.exam.name}}</td>
+            <td>{{result.point}}</td>
           </tr>
           </tbody>
         </table>

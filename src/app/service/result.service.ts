@@ -14,6 +14,10 @@ export class ResultService {
   constructor(private http: HttpClient) {
   }
 
+  getResultListByUser(user: string): Observable<Result[]> {
+    return this.http.get<Result[]>(API_URL + '/findAllResultByUser?user=' + user);
+  }
+
   getResultList(): Observable<Result[]> {
     return this.http.get<Result[]>(API_URL + '/results');
   }
