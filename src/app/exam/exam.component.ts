@@ -18,14 +18,14 @@ export class ExamComponent implements OnInit {
               private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(value => {
       this.currentUser = value;
-      this.getQuizList();
+      this.getExamList();
     });
   }
 
   ngOnInit() {
   }
 
-  getQuizList() {
+  getExamList() {
     this.examService.listExam().subscribe(result => {
       this.examList = result;
       for (const exam of this.examList) {

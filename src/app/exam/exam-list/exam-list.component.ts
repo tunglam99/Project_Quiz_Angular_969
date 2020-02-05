@@ -88,6 +88,9 @@ export class ExamListComponent implements OnInit {
       id: this.currentExam.id,
       name: this.examForm.value.name === null ? this.currentExam.name : this.examForm.value.name,
       startedDate: this.examForm.value.startedDate === null ? this.currentExam.startedDate : this.examForm.value.startedDate,
+      quiz: {
+        id: this.currentExam.quiz.id
+      }
     };
     this.examService.updateExam(id, exam).subscribe(() => {
       this.examForm.reset();

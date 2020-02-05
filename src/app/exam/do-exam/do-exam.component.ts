@@ -9,6 +9,7 @@ import {Answer} from '../../model/answer';
 import {FormControl, FormGroup} from '@angular/forms';
 import {NotificationService} from '../../service/notification.service';
 import {CorrectAnswerService} from '../../service/correct-answer.service';
+import {ExamService} from '../../service/exam.service';
 
 declare var $;
 
@@ -21,8 +22,10 @@ export class DoExamComponent implements OnInit {
   questionList: Question[] = [];
   answerList: Answer[] = [];
   quizId: number;
+  examId: number;
   sub: Subscription;
   quizName: string;
+  examName: string;
   answerForm: FormGroup = new FormGroup({
     content: new FormControl(''),
     question: new FormControl('')
@@ -36,6 +39,7 @@ export class DoExamComponent implements OnInit {
   checked: boolean;
 
   constructor(private quizService: QuizService,
+              private examService: ExamService,
               private questionService: QuestionService,
               private answerService: AnswerService,
               private correctAnswerService: CorrectAnswerService,
@@ -52,9 +56,16 @@ export class DoExamComponent implements OnInit {
 
   getQuizDetail() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      this.quizId = +paramMap.get('id');
-      this.getQuestionListByQuiz(this.quizId);
-      this.doExam(this.quizId);
+      this.examId = +paramMap.get('id');
+      this.examService.getExam(this.examId).subscribe(exam => {
+        this.examName = exam.name;
+        this.quizService.getQuiz(exam.quiz.id).subscribe(quiz => {
+          this.quizName = quiz.name;
+          this.quizId = quiz.id;
+          this.getQuestionListByQuiz(quiz.id);
+          this.doExam(quiz.id);
+        });
+      });
     });
   }
 
@@ -78,8 +89,8 @@ export class DoExamComponent implements OnInit {
     });
   }
 
-  doExam(quizId: number) {
-    this.quizService.doExam(quizId).subscribe(value => {
+  doExam(examId: number) {
+    this.examService.doExam(examId).subscribe(value => {
       this.quizName = value.name;
       this.isCorrectTime = true;
     }, () => {

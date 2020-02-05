@@ -98,13 +98,13 @@ export class ExamDetailComponent implements OnInit {
             return;
           }
         }
-        this.joinQuiz(this.currentUser, this.examId);
+        this.joinExam(this.currentUser, this.examId);
       });
     });
   }
 
-  joinQuiz(currentUser, examId) {
-    this.quizService.joinQuiz(currentUser, examId).subscribe(() => {
+  joinExam(currentUser, examId) {
+    this.examService.joinExam(currentUser, examId).subscribe(() => {
       this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);

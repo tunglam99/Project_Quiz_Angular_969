@@ -27,19 +27,11 @@ export class QuizService {
     return this.http.get<Quiz>(API_URL + `/quizzes/${id}`);
   }
 
-  doExam(id: number): Observable<Quiz> {
-    return this.http.get<Quiz>(API_URL + `/doExam/${id}`);
-  }
-
   updateQuiz(id: number, quiz: Quiz): Observable<Quiz> {
     return this.http.put<Quiz>(API_URL + `/quizzes/${id}`, quiz);
   }
 
   deleteQuiz(id: number): Observable<Quiz> {
     return this.http.delete<Quiz>(API_URL + `/quizzes/${id}`);
-  }
-
-  joinQuiz(user: User, quizId: number): Observable<Quiz> {
-    return this.http.post<Quiz>(API_URL + `/join/${quizId}`, user);
   }
 }
