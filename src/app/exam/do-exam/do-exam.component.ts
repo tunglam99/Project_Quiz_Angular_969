@@ -50,11 +50,11 @@ export class DoExamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getQuizDetail();
+    this.getExamDetail();
     $('#aaa').show();
   }
 
-  getQuizDetail() {
+  getExamDetail() {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.examId = +paramMap.get('id');
       this.examService.getExam(this.examId).subscribe(exam => {
@@ -63,7 +63,7 @@ export class DoExamComponent implements OnInit {
           this.quizName = quiz.name;
           this.quizId = quiz.id;
           this.getQuestionListByQuiz(quiz.id);
-          this.doExam(quiz.id);
+          this.doExam(this.examId);
         });
       });
     });
@@ -90,8 +90,7 @@ export class DoExamComponent implements OnInit {
   }
 
   doExam(examId: number) {
-    this.examService.doExam(examId).subscribe(value => {
-      this.quizName = value.name;
+    this.examService.doExam(examId).subscribe(() => {
       this.isCorrectTime = true;
     }, () => {
       this.notificationService.showError('<h5>Chưa đến giờ thi</h5>', 'Thông báo');
@@ -145,8 +144,10 @@ export class DoExamComponent implements OnInit {
         }
         if (this.questionIndex > this.questionList.length - 1) {
           this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-            this.quizId = +paramMap.get('id');
-            this.calculatePoint(this.quizId);
+            this.examId = +paramMap.get('id');
+            this.examService.getExam(this.examId).subscribe(exam => {
+              this.calculatePoint(exam.quiz.id);
+            });
           });
           this.isSubmitted = true;
           this.questionIndex = 0;
