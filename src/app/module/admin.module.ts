@@ -9,21 +9,25 @@ import {MatSortModule} from '@angular/material';
 import {NgbPopoverModule, NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {ExamDetailComponent} from '../exam/exam-detail/exam-detail.component';
 import {ExamResultComponent} from '../exam/exam-result/exam-result.component';
+import {ExamResultDetailComponent} from '../exam/exam-result-detail/exam-result-detail.component';
 
 const routes: Routes = [
   {
     path: 'exam-management',
     component: ExamListComponent,
     canActivate: [AdminAuthGuard]
-  },
-  {
+  }, {
     path: 'exam-management/exam-detail/:id',
     component: ExamDetailComponent,
     canActivate: [AdminAuthGuard]
-  },
-  {
+  }, {
     path: 'exam-result',
     component: ExamResultComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'exam-result/exam-detail/:id',
+    component: ExamResultDetailComponent,
     canActivate: [AdminAuthGuard]
   }
 ];
@@ -32,7 +36,8 @@ const routes: Routes = [
   declarations: [
     ExamListComponent,
     ExamDetailComponent,
-    ExamResultComponent
+    ExamResultComponent,
+    ExamResultDetailComponent
   ],
   imports: [
     CommonModule,

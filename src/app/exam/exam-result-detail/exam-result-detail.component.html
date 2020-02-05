@@ -3,7 +3,7 @@
 <div class="mt-lg-4 container">
   <div class="card">
     <div class="card-header">
-      <span>Danh sách đợt thi</span>
+      <span>Danh sách kết quả đợt thi {{examName}}</span>
     </div>
     <div class="card-block">
       <div class="table-responsive">
@@ -11,17 +11,17 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Tên đợt thi</th>
-            <th>Ngày bắt đầu</th>
+            <th>Họ</th>
+            <th>Tên</th>
+            <th>Điểm</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let exam of examListByUser">
-            <th scope="row">{{exam.id}}</th>
-            <td class="tabledit-view-mode">
-              <a [routerLink]="['do-exam',exam.id]" class="tabledit-span">{{exam.name}}</a>
-            </td>
-            <td>{{exam.startedDate}}</td>
+          <tr *ngFor="let result of resultList">
+            <th scope="row">{{result.user.id}}</th>
+            <td class="tabledit-view-mode">{{result.user.lastName}}</td>
+            <td>{{result.user.firstName}}</td>
+            <td>{{result.point}}</td>
           </tr>
           </tbody>
         </table>

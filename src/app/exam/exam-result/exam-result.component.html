@@ -1,3 +1,5 @@
+<br>
+<br>
 <div class="mt-lg-4 container">
   <div class="card">
     <div class="card-header">
@@ -17,7 +19,7 @@
           <tr *ngFor="let exam of examList">
             <th scope="row">{{exam.id}}</th>
             <td class="tabledit-view-mode">
-              <a [routerLink]="['do-exam',exam.id]" class="tabledit-span">{{exam.name}}</a>
+              <a [routerLink]="['exam-detail',exam.id]" class="tabledit-span">{{exam.name}}</a>
             </td>
             <td>{{exam.startedDate}}</td>
           </tr>
