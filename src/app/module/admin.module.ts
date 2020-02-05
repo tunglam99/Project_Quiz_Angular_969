@@ -1,5 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {CategoryModule} from './category.module';
+import {QuestionModule} from './question.module';
+import {QuizModule} from './quiz.module';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminAuthGuard} from '../helper/admin-auth-guard';
 import {ExamListComponent} from '../exam/exam-list/exam-list.component';
@@ -39,16 +42,19 @@ const routes: Routes = [
     ExamResultComponent,
     ExamResultDetailComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    DlDateTimePickerModule,
-    MatSortModule,
-    RouterModule.forChild(routes),
-    NgbTimepickerModule,
-    FormsModule,
-    NgbPopoverModule
-  ]
+    imports: [
+        CommonModule,
+        CategoryModule,
+        QuestionModule,
+        QuizModule,
+        ReactiveFormsModule,
+        DlDateTimePickerModule,
+        MatSortModule,
+        RouterModule.forChild(routes),
+        NgbTimepickerModule,
+        FormsModule,
+        NgbPopoverModule
+    ]
 })
 export class AdminModule {
 }
