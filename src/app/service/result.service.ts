@@ -18,6 +18,10 @@ export class ResultService {
     return this.http.get<Result[]>(API_URL + '/findAllResultByUser?user=' + user);
   }
 
+  getResultListByExam(exam: string): Observable<Result[]> {
+    return this.http.get<Result[]>(API_URL + '/findAllResultByExam?exam=' + exam);
+  }
+
   getResultList(): Observable<Result[]> {
     return this.http.get<Result[]>(API_URL + '/results');
   }

@@ -8,6 +8,7 @@ import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {MatSortModule} from '@angular/material';
 import {NgbPopoverModule, NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {ExamDetailComponent} from '../exam/exam-detail/exam-detail.component';
+import {ExamResultComponent} from '../exam/exam-result/exam-result.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'exam-management/exam-detail/:id',
     component: ExamDetailComponent,
     canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'exam-result',
+    component: ExamResultComponent,
+    canActivate: [AdminAuthGuard]
   }
 ];
 
@@ -26,17 +32,18 @@ const routes: Routes = [
   declarations: [
     ExamListComponent,
     ExamDetailComponent,
+    ExamResultComponent
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        DlDateTimePickerModule,
-        MatSortModule,
-        RouterModule.forChild(routes),
-        NgbTimepickerModule,
-        FormsModule,
-        NgbPopoverModule
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DlDateTimePickerModule,
+    MatSortModule,
+    RouterModule.forChild(routes),
+    NgbTimepickerModule,
+    FormsModule,
+    NgbPopoverModule
+  ]
 })
 export class AdminModule {
 }
