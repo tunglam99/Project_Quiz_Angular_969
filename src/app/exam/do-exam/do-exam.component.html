@@ -1,5 +1,25 @@
 <br>
 <br>
+<div class="mt-lg-4">
+  <ng-template #timeUp let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Time Up!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Hết giờ làm bài</p>
+      <br>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary waves-effect waves-light" (click)="close()">
+          <i class="fa fa-close fa-lg"></i>
+          Đóng
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>
 <div class="hold-transition layout-boxed">
   <div class="wrapper">
     <div class="content-wrapper">
@@ -15,7 +35,8 @@
             <div class="col-sm-2">
               <br>
               <h2>
-                <countdown #countdown [config]="{leftTime: minutes*60}" (event)="onTimerFinished($event)">$!m!:$!s!</countdown>
+                <countdown #countdown [config]="{leftTime: minutes*60}" (event)="onTimerFinished($event)">$!m!:$!s!
+                </countdown>
               </h2>
             </div>
           </div>

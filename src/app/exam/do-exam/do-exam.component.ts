@@ -14,6 +14,8 @@ import {CountdownComponent} from 'ngx-countdown';
 import {Result} from '../../model/result';
 import {AuthenticationService} from '../../service/authentication.service';
 import {ResultService} from '../../service/result.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 declare var $;
 
@@ -24,6 +26,7 @@ declare var $;
 })
 export class DoExamComponent implements OnInit {
   @ViewChild('countdown', {static: false}) counter: CountdownComponent;
+  @ViewChild('timeUp', {static: false}) timeUp: NgbModalRef;
   questionList: Question[] = [];
   answerList: Answer[] = [];
   quizId: number;
@@ -54,7 +57,8 @@ export class DoExamComponent implements OnInit {
               private router: Router,
               private notificationService: NotificationService,
               private authenticationService: AuthenticationService,
-              private resultService: ResultService) {
+              private resultService: ResultService,
+              private modalService: NgbModal) {
     this.isSubmitted = false;
   }
 
@@ -193,7 +197,7 @@ export class DoExamComponent implements OnInit {
 
   onTimerFinished($event) {
     if ($event.left === 0) {
-      alert('Đã hết thời gian làm bài');
+      this.openVerticallyCentered(this.timeUp);
       this.questionIndex = this.questionList.length;
       this.getExam();
       this.isSubmitted = true;
@@ -208,5 +212,13 @@ export class DoExamComponent implements OnInit {
         this.calculatePoint(exam.quiz.id);
       });
     });
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, {centered: true});
+  }
+
+  close() {
+    this.modalService.dismissAll('');
   }
 }
