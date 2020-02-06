@@ -4,7 +4,7 @@ import {StudentClassComponent} from '../student-class/student-class.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminAuthGuard} from '../helper/admin-auth-guard';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatSortModule} from '@angular/material/typings/sort';
+import {MatSortModule} from '@angular/material';
 
 const routing: Routes = [{
   path: '',
@@ -21,6 +21,7 @@ const routing: Routes = [{
     CommonModule,
     RouterModule.forChild(routing),
     ReactiveFormsModule,
+    MatSortModule,
     MatSortModule
   ]
 })
