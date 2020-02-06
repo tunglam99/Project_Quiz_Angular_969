@@ -1,1 +1,40 @@
-<p>student-class-detail works!</p>
+<br>
+<router-outlet></router-outlet>
+<br>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <h3>Danh sách học viên lớp {{name}}</h3>
+      </div>
+      <br>
+      <button class="btn btn-xs btn-primary float-lg-right">
+        <span class="fa fa-user-plus"></span>
+      </button>
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-head-fixed table-hover">
+        <thead>
+        <tr>
+          <th style="width: 10px">#</th>
+          <th>Họ và tên</th>
+          <th>Giới tính</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let student of studentList">
+          <td>{{student.id}}</td>
+          <td>{{student.lastName}} {{student.firstName}}</td>
+          <td>{{student.gender}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -16,6 +16,7 @@ export class StudentClassDetailComponent implements OnInit {
   studentList: User[] = [];
   currentClass: StudentClass;
   name: string;
+  classId: number;
 
   constructor(private userService: UserService,
               private studentClassService: StudentClassService,
@@ -41,7 +42,23 @@ export class StudentClassDetailComponent implements OnInit {
     this.studentClassService.getClass(id).subscribe(studentClass => {
       this.currentClass = studentClass;
       this.name = studentClass.name;
+      this.classId = studentClass.id;
       this.findAllUserByClass(studentClass);
     });
   }
+
+  // addStudent(id: number) {
+  //   this.studentClassService.getClass(this.classId).subscribe(studentClass => {
+  //     this.currentClass = studentClass;
+  //     this.userService.getUserProfile(id + '').subscribe(student => {
+  //       this.currentUser = student;
+  //       for (const user of this.currentExam.participants) {
+  //         if (this.currentUser.id === user.id) {
+  //           return;
+  //         }
+  //       }
+  //       this.joinExam(this.currentUser, this.examId);
+  //     });
+  //   });
+  // }
 }
