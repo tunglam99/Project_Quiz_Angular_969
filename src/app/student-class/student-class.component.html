@@ -102,7 +102,7 @@
           <tbody>
           <tr *ngFor="let studentClass of classes">
             <td>{{studentClass.id}}</td>
-            <td><a [routerLink]="['category-detail',studentClass.id]">{{studentClass.name}}</a></td>
+            <td><a [routerLink]="['class-detail',studentClass.id]">{{studentClass.name}}</a></td>
             <td>
               <div class="float-lg-right" style="float: none;">
                 <button type="button" class="btn btn-xs btn-primary"

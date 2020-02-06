@@ -50,4 +50,8 @@ export class UserService {
   getUserList(): Observable<User[]> {
     return this.http.get<User[]>(API_URL + '/users');
   }
+
+  getUserListByClass(name: string): Observable<User[]> {
+    return this.http.get<User[]>(API_URL + '/usersByClass?studentClass=' + name);
+  }
 }
