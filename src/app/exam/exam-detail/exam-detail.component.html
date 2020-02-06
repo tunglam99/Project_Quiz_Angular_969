@@ -49,7 +49,7 @@
         <div class="modal-footer">
           <button class="btn btn-primary waves-effect waves-light">
             <i class="fa fa-save fa-lg"></i>
-            Lưu
+            Xác nhận
           </button>
         </div>
       </form>
@@ -58,17 +58,8 @@
   <div class="card">
     <div class="card-header">
       <div class="card-title">
-        <h3>Chi tiết đợt thi {{name}}</h3>
-        <br>
-        <button class="btn btn-xs btn-primary" (click)="openVerticallyCentered(addParticipantForm)">
-          <span class="fa fa-user-plus"></span>
-        </button>
+        <h3>Chi tiết kỳ thi {{name}}</h3>
       </div>
-      <br>
-      <button type="button"
-              class="btn btn-xs btn-primary float-lg-right" (click)="openVerticallyCentered(addQuizForm)">
-        <span class="fa fa-plus"></span>
-      </button>
     </div>
     <div class="card-body">
       <div class="form-group">
@@ -80,9 +71,17 @@
       <div class="form-group">
         <label ngbPopover="Thời gian {{quizMinutes}} phút"
                popoverTitle="Đề thi {{quizName}}">Đề thi: {{quizName}}</label>
+        <button type="button" class="btn btn-xs btn-primary ml-3"
+                (click)="openVerticallyCentered(addQuizForm)">
+          <span *ngIf="quizName==null" class="fa fa-plus"></span>
+          <span *ngIf="quizName!=null" class="fa fa-edit"></span>
+        </button>
       </div>
       <div class="form-group">
         <label>Số người dự thi: {{participants.length}} người</label>
+        <button class="btn btn-xs btn-primary ml-3" (click)="openVerticallyCentered(addParticipantForm)">
+          <span class="fa fa-user-plus"></span>
+        </button>
       </div>
     </div>
   </div>
