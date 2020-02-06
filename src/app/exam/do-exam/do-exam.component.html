@@ -27,17 +27,23 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Đợt thi {{examName}}</h1>
+              <h1>Kỳ thi {{examName}}</h1>
               <br>
-              <h4>Đề thi {{quizName}}</h4>
+              <h3>Đề thi {{quizName}}</h3>
+              <br>
+              <h5>Thời gian {{minutes}} phút</h5>
             </div>
-            <div class="col-sm-4"></div>
-            <div class="col-sm-2">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
               <br>
-              <h2>
+              <br>
+              <br>
+              <br>
+              <br>
+              <h4>Thời gian còn lại:
                 <countdown #countdown [config]="{leftTime: minutes*60}" (event)="onTimerFinished($event)">$!m!:$!s!
                 </countdown>
-              </h2>
+              </h4>
             </div>
           </div>
         </div>
