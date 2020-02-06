@@ -23,19 +23,27 @@ export class CategoryDetailComponent implements OnInit {
               private questionService: QuestionService) {
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const id = +paramMap.get('id');
-      this.categoryService.getCategory(id).subscribe(result => {
-        this.currentCategory = result;
-        this.name = result.name;
-        this.questionService.findAllQuestionByCategory(this.currentCategory.name).subscribe(value => {
-          this.questionList = value;
-        });
-      }, error => {
-        console.log(error);
-      });
+      this.getCategory(id);
     });
   }
 
   ngOnInit() {
+  }
+
+  getAllQuestionByCategory(category: Category) {
+    this.questionService.findAllQuestionByCategory(category.name).subscribe(value => {
+      this.questionList = value;
+    });
+  }
+
+  getCategory(id: number) {
+    this.categoryService.getCategory(id).subscribe(category => {
+      this.currentCategory = category;
+      this.name = category.name;
+      this.getAllQuestionByCategory(category);
+    }, error => {
+      console.log(error);
+    });
   }
 
   sortQuestion(sort: Sort) {
