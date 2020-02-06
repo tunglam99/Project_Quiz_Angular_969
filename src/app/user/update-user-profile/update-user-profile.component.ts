@@ -68,11 +68,11 @@ export class UpdateUserProfileComponent implements OnInit {
         this.currentUser = value;
         const user: User = {
           id: this.currentUser.id,
-          firstName: this.userForm.value.firstName,
-          lastName: this.userForm.value.lastName,
-          gender: this.userForm.value.gender,
-          phoneNumber: this.userForm.value.phoneNumber,
-          avatar: this.userForm.value.avatar
+          firstName: this.userForm.value.firstName === '' ? value.firstName : this.userForm.value.firstName,
+          lastName: this.userForm.value.lastName === '' ? value.lastName : this.userForm.value.lastName,
+          gender: this.userForm.value.gender === '' ? value.gender : this.userForm.value.gender,
+          phoneNumber: this.userForm.value.phoneNumber === '' ? value.phoneNumber : this.userForm.value.phoneNumber,
+          avatar: this.userForm.value.avatar === '' ? value.avatar : this.userForm.value.avatar
         };
         if (this.selectedImage !== null) {
           const filePath = `avatar/${this.currentUser.username}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
@@ -90,7 +90,7 @@ export class UpdateUserProfileComponent implements OnInit {
             })
           ).subscribe();
         } else {
-          this.userService.updateUserProfile(this.currentUser.id, this.currentUser).subscribe(() => {
+          this.userService.updateUserProfile(this.currentUser.id, user).subscribe(() => {
             this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
           }, () => {
             this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);
