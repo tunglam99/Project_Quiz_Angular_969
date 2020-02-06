@@ -27,11 +27,15 @@ const routes: Routes = [
     path: 'exam-result',
     component: ExamResultComponent,
     canActivate: [AdminAuthGuard]
-  },
-  {
+  }, {
     path: 'exam-result/exam-detail/:id',
     component: ExamResultDetailComponent,
     canActivate: [AdminAuthGuard]
+  }, {
+    path: 'class-management',
+    canActivate: [AdminAuthGuard],
+    canActivateChild: [AdminAuthGuard],
+    loadChildren: () => import('./student-class.module').then(mod => mod.StudentClassModule)
   }
 ];
 
@@ -42,19 +46,19 @@ const routes: Routes = [
     ExamResultComponent,
     ExamResultDetailComponent
   ],
-    imports: [
-        CommonModule,
-        CategoryModule,
-        QuestionModule,
-        QuizModule,
-        ReactiveFormsModule,
-        DlDateTimePickerModule,
-        MatSortModule,
-        RouterModule.forChild(routes),
-        NgbTimepickerModule,
-        FormsModule,
-        NgbPopoverModule
-    ]
+  imports: [
+    CommonModule,
+    CategoryModule,
+    QuestionModule,
+    QuizModule,
+    ReactiveFormsModule,
+    DlDateTimePickerModule,
+    MatSortModule,
+    RouterModule.forChild(routes),
+    NgbTimepickerModule,
+    FormsModule,
+    NgbPopoverModule
+  ]
 })
 export class AdminModule {
 }
