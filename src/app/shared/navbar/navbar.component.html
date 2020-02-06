@@ -5,11 +5,11 @@
   </button>
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-<!--      <li class="nav-item active mr-sm-3">-->
-<!--        <a class="nav-link" routerLink="">-->
-<!--          <i class="fa fa-home fa-lg"></i>-->
-<!--          Trang chủ<span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
+      <!--      <li class="nav-item active mr-sm-3">-->
+      <!--        <a class="nav-link" routerLink="">-->
+      <!--          <i class="fa fa-home fa-lg"></i>-->
+      <!--          Trang chủ<span class="sr-only">(current)</span></a>-->
+      <!--      </li>-->
       <li class="nav-item mr-sm-3" *ngIf="hasRoleTutor">
         <a class="nav-link" routerLink="/tutor/category-management">
           <i class="fa fa-list"></i>
@@ -29,6 +29,11 @@
         <a class="nav-link" routerLink="/admin/exam-management">
           <fa-icon [icon]="quizIcon" size="lg"></fa-icon>
           Đợt thi</a>
+      </li>
+      <li class="nav-item" *ngIf="hasRoleAdmin">
+        <a class="nav-link" routerLink="/admin/class-management">
+          <i class="fa fa-graduation-cap fa-lg"></i>
+          Lớp học</a>
       </li>
       <li class="nav-item" *ngIf="hasRoleUser">
         <a class="nav-link" routerLink="/user/exam">
