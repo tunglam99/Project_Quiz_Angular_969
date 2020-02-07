@@ -22,8 +22,8 @@ export class ResultService {
     return this.http.get<Result[]>(API_URL + '/findAllResultByExam?exam=' + exam);
   }
 
-  getResultList(): Observable<Result[]> {
-    return this.http.get<Result[]>(API_URL + '/results');
+  getResultByExamAndUser(exam: string, user: string): Observable<Result> {
+    return this.http.get<Result>(API_URL + '/findResultByExamAndUser?exam=' + exam + '&user=' + user);
   }
 
   createResult(result: Result): Observable<Result> {
