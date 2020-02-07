@@ -72,13 +72,15 @@ export class DoExamComponent implements OnInit {
       this.examId = +paramMap.get('id');
       this.examService.getExam(this.examId).subscribe(exam => {
         this.examName = exam.name;
-        this.quizService.getQuiz(exam.quiz.id).subscribe(quiz => {
-          this.quizName = quiz.name;
-          this.quizId = quiz.id;
-          this.minutes = quiz.minutes;
-          this.getQuestionListByQuiz(quiz.id);
-          this.doExam(this.examId);
+        this.authenticationService.currentUser.subscribe(user => {
+          this.resultService.getResultByExamAndUser(exam.name, user.username).subscribe(value => {
+            if (value != null) {
+              alert('Bạn đã tham gia kỳ thi này');
+              this.router.navigate(['/user/exam']);
+            }
+          });
         });
+        this.getQuiz(exam.quiz.id);
       });
     });
   }
@@ -220,5 +222,15 @@ export class DoExamComponent implements OnInit {
 
   close() {
     this.modalService.dismissAll('');
+  }
+
+  getQuiz(id) {
+    this.quizService.getQuiz(id).subscribe(quiz => {
+      this.quizName = quiz.name;
+      this.quizId = quiz.id;
+      this.minutes = quiz.minutes;
+      this.getQuestionListByQuiz(quiz.id);
+      this.doExam(this.examId);
+    });
   }
 }
