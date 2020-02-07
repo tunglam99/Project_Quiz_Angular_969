@@ -8,7 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {MatSortModule} from '@angular/material';
 import {CountdownModule} from 'ngx-countdown';
-import {UserResultComponent} from '../user/user-result/user-result.component';
+import {UserResultComponent} from '../exam/user-result/user-result.component';
 
 const routing: Routes = [{
   path: '',

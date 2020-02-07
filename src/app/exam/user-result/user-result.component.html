@@ -16,8 +16,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let result of resultList">
-            <th scope="row">{{result.id}}</th>
+          <tr *ngFor="let result of resultList; index as i">
+            <th scope="row">{{i + 1}}</th>
             <td class="tabledit-view-mode">{{result.exam.name}}</td>
             <td>{{result.point}}</td>
           </tr>

@@ -26,8 +26,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let question of questionList">
-          <td>{{question.id}}</td>
+        <tr *ngFor="let question of questionList; index as i">
+          <td>{{i + 1}}</td>
           <td [innerHTML]="question.content"></td>
           <td>
             <div class="float-lg-right" style="float: none;">

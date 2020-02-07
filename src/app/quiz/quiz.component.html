@@ -115,8 +115,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let quiz of quizList">
-            <td>{{quiz.id}}</td>
+          <tr *ngFor="let quiz of quizList; index as i">
+            <td>{{i + 1}}</td>
             <td><a [routerLink]="['detail-quiz',quiz.id]">{{quiz.name}}</a></td>
             <td>{{quiz.minutes}} phút</td>
             <td>

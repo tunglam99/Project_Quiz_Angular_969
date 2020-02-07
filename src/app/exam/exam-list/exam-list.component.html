@@ -133,8 +133,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let exam of examList">
-            <td>{{exam.id}}</td>
+          <tr *ngFor="let exam of examList; index as i">
+            <td>{{i + 1}}</td>
             <td><a [routerLink]="['exam-detail',exam.id]">{{exam.name}}</a></td>
             <td>{{exam.startedDate}}</td>
             <td>

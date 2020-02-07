@@ -99,7 +99,7 @@ export class AddQuestionToQuizComponent implements OnInit {
   updateQuestion(questionId: number, question: Question, quidId: number) {
     this.questionService.updateQuestion(questionId, question).subscribe(() => {
       this.getQuestionList();
-      this.router.navigate(['/admin/quiz-management/detail-quiz/' + quidId]);
+      this.router.navigate(['/tutor/quiz-management/detail-quiz/' + quidId]);
       this.notificationService.showSuccess('<h5>' + SUCCESS + '</h5>', NOTIFICATION);
     }, () => {
       this.notificationService.showError('<h5>' + FAIL + '</h5>', NOTIFICATION);

@@ -16,8 +16,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let exam of examListByUser">
-            <th scope="row">{{exam.id}}</th>
+          <tr *ngFor="let exam of examListByUser; index as i">
+            <th scope="row">{{i + 1}}</th>
             <td class="tabledit-view-mode">
               <a [routerLink]="['do-exam',exam.id]" class="tabledit-span">{{exam.name}}</a>
             </td>

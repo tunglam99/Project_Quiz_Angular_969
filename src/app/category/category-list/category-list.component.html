@@ -108,8 +108,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let category of categoryList">
-            <td>{{category.id}}</td>
+          <tr *ngFor="let category of categoryList; index as i">
+            <td>{{i + 1}}</td>
             <td><a [routerLink]="['category-detail',category.id]">{{category.name}}</a></td>
             <td>
               <div class="float-lg-right" style="float: none;">

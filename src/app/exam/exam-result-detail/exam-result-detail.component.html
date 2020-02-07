@@ -17,8 +17,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let result of resultList">
-            <th scope="row">{{result.user.id}}</th>
+          <tr *ngFor="let result of resultList; index as i">
+            <th scope="row">{{i + 1}}</th>
             <td class="tabledit-view-mode">{{result.user.lastName}}</td>
             <td>{{result.user.firstName}}</td>
             <td>{{result.point}}</td>
